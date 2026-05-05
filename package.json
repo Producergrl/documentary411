@@ -1,0 +1,9 @@
+{
+  "name": "documentary411",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@netlify/functions": "^2.8.0",
+    "stripe": "^17.0.0"
+  }
+}
