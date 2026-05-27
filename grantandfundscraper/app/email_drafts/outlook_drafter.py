@@ -65,7 +65,7 @@ def run_oauth_flow() -> tuple[bool, str]:
                 self.send_header("Content-Type", "text/html")
                 self.end_headers()
                 self.wfile.write(
-                    b"<h2>GrantScout: Outlook connected! You can close this tab.</h2>"
+                    b"<h2>GrantAndFundScraper: Outlook connected! You can close this tab.</h2>"
                 )
             else:
                 error_holder["error"] = params.get("error_description", ["Unknown error"])[0]

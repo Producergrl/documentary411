@@ -1,8 +1,8 @@
 """
 Local config read/write. All user data stays on this machine.
 File location:
-  Mac:     ~/Library/Application Support/GrantScout/config.json
-  Windows: %APPDATA%/GrantScout/config.json
+  Mac:     ~/Library/Application Support/GrantAndFundScraper/config.json
+  Windows: %APPDATA%/GrantAndFundScraper/config.json
 """
 
 import json
@@ -43,7 +43,7 @@ def _config_dir() -> Path:
         base = Path(os.environ.get("APPDATA", Path.home()))
     else:
         base = Path.home() / ".config"
-    return base / "GrantScout"
+    return base / "GrantAndFundScraper"
 
 
 def _config_path() -> Path:
@@ -51,7 +51,7 @@ def _config_path() -> Path:
 
 
 def _log_path() -> Path:
-    return _config_dir() / "grantscout.log"
+    return _config_dir() / "grantandfundscraper.log"
 
 
 def log_path() -> Path:
@@ -105,6 +105,6 @@ def spreadsheet_default_path(film_title: str) -> Path:
     safe_title = "".join(
         c if c.isalnum() or c in (" ", "_", "-") else "_" for c in film_title
     ).strip()
-    folder = Path.home() / "Documents" / "GrantScout"
+    folder = Path.home() / "Documents" / "GrantAndFundScraper"
     folder.mkdir(parents=True, exist_ok=True)
     return folder / f"{safe_title}_Funders.xlsx"

@@ -31,7 +31,7 @@ _QUERY_TEMPLATES = [
 
 _HEADERS = {
     "User-Agent": (
-        "Mozilla/5.0 (compatible; GrantScout/1.0; +https://documentary411.org)"
+        "Mozilla/5.0 (compatible; GrantAndFundScraper/1.0; +https://documentary411.org)"
     )
 }
 

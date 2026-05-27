@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}GrantScout — Setup{% endblock %}
+{% block title %}Grant &amp; Fund Scraper — Setup{% endblock %}
 
 {% block content %}
 
@@ -11,7 +11,7 @@
 
 {# ─── Step 1: License ────────────────────────────────────────────────────── #}
 {% if step == 1 %}
-<h1>Welcome to GrantScout</h1>
+<h1>Welcome to Grant &amp; Fund Scraper</h1>
 <p>Enter your license key from your Gumroad purchase email to activate.</p>
 
 <div class="card">
@@ -29,7 +29,7 @@
     </div>
     <p class="hint" style="margin-top:12px;">
       No key? <a href="https://documentary411.org" target="_blank" rel="noopener"
-        style="color:var(--gold);">Purchase GrantScout &rarr;</a>
+        style="color:var(--gold);">Purchase Grant &amp; Fund Scraper &rarr;</a>
     </p>
   </form>
 </div>
@@ -87,7 +87,7 @@
 {# ─── Step 3: Anthropic API key ──────────────────────────────────────────── #}
 {% if step == 3 %}
 <h1>Connect your AI key</h1>
-<p>GrantScout uses Claude (by Anthropic) to write your outreach emails.
+<p>Grant &amp; Fund Scraper uses Claude (by Anthropic) to write your outreach emails.
    You supply your own key — it costs fractions of a cent per email and
    your key is stored only on this computer.</p>
 
@@ -117,7 +117,7 @@
 {# ─── Step 4: Connect email ──────────────────────────────────────────────── #}
 {% if step == 4 %}
 <h1>Connect your email</h1>
-<p>GrantScout deposits draft emails directly into your drafts folder — it never sends anything.
+<p>Grant &amp; Fund Scraper deposits draft emails directly into your drafts folder — it never sends anything.
    Authorize once and it works automatically on every run.</p>
 
 <div class="card">
@@ -135,7 +135,7 @@
     </div>
     <p class="hint" style="margin-top:14px;">
       Clicking either button will open your browser to the Google or Microsoft
-      sign-in page. GrantScout only requests permission to create drafts —
+      sign-in page. Grant &amp; Fund Scraper only requests permission to create drafts —
       it cannot read, send, or delete your email.
     </p>
     {% if error %}

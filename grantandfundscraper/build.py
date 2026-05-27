@@ -37,7 +37,7 @@ def _check_file(path: Path) -> None:
 
 def main() -> None:
     system = platform.system()
-    print(f"Building GrantScout for {system}…\n")
+    print(f"Building GrantAndFundScraper for {system}…\n")
 
     # Validate build-time secrets
     gumroad_id        = _require_env("GUMROAD_PRODUCT_ID")
@@ -69,7 +69,7 @@ def main() -> None:
         sys.executable, "-m", "PyInstaller",
         "--onefile",
         "--windowed",
-        "--name", "GrantScout",
+        "--name", "GrantAndFundScraper",
         "--clean",
     ]
 
@@ -106,9 +106,9 @@ os.environ.setdefault('FLASK_SECRET_KEY', {flask_secret!r})
     if result.returncode == 0:
         print("\nBuild succeeded.")
         if system == "Darwin":
-            print("Output: dist/GrantScout  (or dist/GrantScout.app)")
+            print("Output: dist/GrantAndFundScraper  (or dist/GrantAndFundScraper.app)")
         else:
-            print("Output: dist/GrantScout.exe")
+            print("Output: dist/GrantAndFundScraper.exe")
     else:
         print("\nBuild FAILED. Check output above.")
         sys.exit(1)

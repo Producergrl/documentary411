@@ -1,5 +1,5 @@
 """
-All Flask routes for GrantScout.
+All Flask routes for GrantAndFundScraper.
 """
 
 import logging

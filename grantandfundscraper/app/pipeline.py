@@ -1,5 +1,5 @@
 """
-The core GrantScout pipeline. Called when the user clicks "Run GrantScout".
+The core GrantAndFundScraper pipeline. Called when the user clicks "Run GrantAndFundScraper".
 Runs search → dedup → spreadsheet → personalize emails → deposit drafts.
 Thread-safe status updates via a module-level status dict.
 """

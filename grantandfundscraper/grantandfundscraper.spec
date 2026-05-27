@@ -1,8 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# PyInstaller spec for GrantScout.
+# PyInstaller spec for GrantAndFundScraper.
 # Use build.py to invoke this correctly with build-time secrets injected.
-# Direct invocation: pyinstaller grantscout.spec
+# Direct invocation: pyinstaller grantandfundscraper.spec
 #
 # NOTE: When using build.py, this spec is not used directly — build.py passes
 # all arguments via CLI. This spec is provided as a reference / alternative.
@@ -58,7 +58,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='GrantScout',
+    name='GrantAndFundScraper',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -84,9 +84,9 @@ exe = EXE(
 if sys.platform == 'darwin':
     app = BUNDLE(
         exe,
-        name='GrantScout.app',
+        name='GrantAndFundScraper.app',
         icon=str(ROOT / 'assets' / 'icon.icns'),
-        bundle_identifier='org.documentary411.grantscout',
+        bundle_identifier='org.documentary411.grantandfundscraper',
         info_plist={
             'NSHighResolutionCapable': True,
             'LSUIElement': False,
