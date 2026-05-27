@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}GrantScout — Results{% endblock %}
+
+{% block head %}
+<style>
+  .result-hero {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+  .big-number {
+    font-family: var(--serif);
+    font-size: 72px;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .result-label {
+    font-size: 14px;
+    color: var(--text2);
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 28px 0;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 28px;
+    text-align: center;
+    min-width: 140px;
+  }
+  .stat-num  { font-family: var(--serif); font-size: 32px; color: var(--gold); display: block; }
+  .stat-lbl  { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .07em; margin-top: 3px; display: block; }
+
+  .contact-list {
+    list-style: none;
+    margin-top: 20px;
+  }
+  .contact-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-list .org { color: var(--text); font-weight: 500; }
+  .contact-list a    { font-size: 11px; color: var(--gold); text-decoration: none; }
+  .contact-list a:hover { color: var(--gold2); }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 36px;
+  }
+  .no-results-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 36px;
+    text-align: center;
+    margin-top: 32px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% if no_new %}
+  <div class="no-results-box">
+    <h2 style="margin-bottom:12px;">No new contacts this run</h2>
+    <p>Your spreadsheet is already up to date. Try running again tomorrow
+       or broaden your cause area in Settings to surface new organizations.</p>
+    <div class="cta-row">
+      <a href="/dashboard" class="btn btn-primary">Back to Dashboard</a>
+      <a href="/settings" class="btn btn-secondary">Edit Cause Area</a>
+    </div>
+  </div>
+{% else %}
+
+<div class="result-hero">
+  <span class="big-number">{{ results.new_contacts }}</span>
+  <span class="result-label">new funder contact{{ 's' if results.new_contacts != 1 else '' }} found</span>
+</div>
+
+<div class="stats-row">
+  <div class="stat-pill">
+    <span class="stat-num">{{ results.drafts_created }}</span>
+    <span class="stat-lbl">Draft{{ 's' if results.drafts_created != 1 else '' }} created</span>
+  </div>
+  <div class="stat-pill">
+    <span class="stat-num">{{ results.new_contacts }}</span>
+    <span class="stat-lbl">Added to spreadsheet</span>
+  </div>
+</div>
+
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:24px;">
+  <h2 style="margin-bottom:4px;">New Organizations</h2>
+  <p style="margin-bottom:0;">Starred rows added to your spreadsheet. Draft emails are waiting in your
+     {{ cfg.email_provider | capitalize if cfg.email_provider else 'email' }} drafts folder.</p>
+
+  {% if results.contact_list %}
+  <ul class="contact-list">
+    {% for contact in results.contact_list %}
+    <li>
+      <span class="org">{{ contact.org_name }}</span>
+      {% if contact.website %}
+      <a href="{{ contact.website }}" target="_blank" rel="noopener">Visit &rarr;</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+<div class="cta-row">
+  <a href="/open-spreadsheet" class="btn btn-primary">Open My Spreadsheet &rarr;</a>
+  <a href="/dashboard" class="btn btn-secondary">Run Again</a>
+</div>
+
+{% endif %}
+
+{% endblock %}

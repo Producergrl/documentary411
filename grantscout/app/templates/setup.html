@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}GrantScout — Setup{% endblock %}
+
+{% block content %}
+
+<div class="step-bar">
+  {% for i in range(1, 5) %}
+    <div class="step-dot {% if i == step %}active{% elif i < step %}done{% endif %}"></div>
+  {% endfor %}
+</div>
+
+{# ─── Step 1: License ────────────────────────────────────────────────────── #}
+{% if step == 1 %}
+<h1>Welcome to GrantScout</h1>
+<p>Enter your license key from your Gumroad purchase email to activate.</p>
+
+<div class="card">
+  <form method="POST" action="/setup/1">
+    <label for="license_key">Gumroad License Key</label>
+    <input type="text" id="license_key" name="license_key"
+           placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" required>
+
+    {% if error %}
+    <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    <div style="margin-top:24px;">
+      <button type="submit" class="btn btn-primary">Activate License &rarr;</button>
+    </div>
+    <p class="hint" style="margin-top:12px;">
+      No key? <a href="https://documentary411.org" target="_blank" rel="noopener"
+        style="color:var(--gold);">Purchase GrantScout &rarr;</a>
+    </p>
+  </form>
+</div>
+{% endif %}
+
+{# ─── Step 2: Film details ───────────────────────────────────────────────── #}
+{% if step == 2 %}
+<h1>Tell us about your film</h1>
+<p>This information personalizes your outreach emails and directs the funder search.</p>
+
+<div class="card">
+  <form method="POST" action="/setup/2">
+
+    <label for="full_name">Your Full Name</label>
+    <input type="text" id="full_name" name="full_name"
+           value="{{ values.full_name or '' }}" placeholder="Kerry David" required>
+    {% if errors and errors.full_name %}
+      <p class="hint" style="color:var(--red);">{{ errors.full_name }}</p>
+    {% endif %}
+
+    <label for="email">Your Email Address</label>
+    <input type="email" id="email" name="email"
+           value="{{ values.email or '' }}" placeholder="you@yourfilm.com">
+
+    <label for="film_title">Film Title</label>
+    <input type="text" id="film_title" name="film_title"
+           value="{{ values.film_title or '' }}" placeholder="Open Secret" required>
+    {% if errors and errors.film_title %}
+      <p class="hint" style="color:var(--red);">{{ errors.film_title }}</p>
+    {% endif %}
+
+    <label for="logline">One-Line Logline</label>
+    <textarea id="logline" name="logline"
+              placeholder="A school district that protected predators over children for decades — and the community that refused to look away.">{{ values.logline or '' }}</textarea>
+
+    <label for="cause_area">Cause Area</label>
+    <input type="text" id="cause_area" name="cause_area"
+           value="{{ values.cause_area or '' }}"
+           placeholder="e.g. child safety, climate justice, veteran mental health" required>
+    <p class="hint">Be specific. This phrase drives your funder search.</p>
+    {% if errors and errors.cause_area %}
+      <p class="hint" style="color:var(--red);">{{ errors.cause_area }}</p>
+    {% endif %}
+
+    <div style="margin-top:24px;">
+      <button type="submit" class="btn btn-primary">Save &amp; Continue &rarr;</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+
+{# ─── Step 3: Anthropic API key ──────────────────────────────────────────── #}
+{% if step == 3 %}
+<h1>Connect your AI key</h1>
+<p>GrantScout uses Claude (by Anthropic) to write your outreach emails.
+   You supply your own key — it costs fractions of a cent per email and
+   your key is stored only on this computer.</p>
+
+<div class="card">
+  <form method="POST" action="/setup/3">
+    <label for="anthropic_api_key">Anthropic API Key</label>
+    <input type="password" id="anthropic_api_key" name="anthropic_api_key"
+           placeholder="sk-ant-..." autocomplete="off" required>
+    <p class="hint">
+      Get a free key in two minutes at
+      <a href="https://console.anthropic.com" target="_blank" rel="noopener"
+         style="color:var(--gold);">console.anthropic.com</a>.
+      Your key is never transmitted to Documentary411.
+    </p>
+
+    {% if error %}
+    <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    <div style="margin-top:24px;">
+      <button type="submit" class="btn btn-primary">Verify &amp; Continue &rarr;</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+
+{# ─── Step 4: Connect email ──────────────────────────────────────────────── #}
+{% if step == 4 %}
+<h1>Connect your email</h1>
+<p>GrantScout deposits draft emails directly into your drafts folder — it never sends anything.
+   Authorize once and it works automatically on every run.</p>
+
+<div class="card">
+  {% if connected %}
+    <div class="success-box">
+      &#10003; {{ provider | capitalize }} is connected. You're all set.
+    </div>
+    <div style="margin-top:24px;">
+      <a href="/setup/complete" class="btn btn-primary">Go to Dashboard &rarr;</a>
+    </div>
+  {% else %}
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;">
+      <a href="/setup/connect-gmail" class="btn btn-secondary">Connect Gmail</a>
+      <a href="/setup/connect-outlook" class="btn btn-secondary">Connect Outlook</a>
+    </div>
+    <p class="hint" style="margin-top:14px;">
+      Clicking either button will open your browser to the Google or Microsoft
+      sign-in page. GrantScout only requests permission to create drafts —
+      it cannot read, send, or delete your email.
+    </p>
+    {% if error %}
+    <div class="error-box">{{ error }}</div>
+    {% endif %}
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
