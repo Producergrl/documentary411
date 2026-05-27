@@ -65,11 +65,14 @@
     <textarea id="logline" name="logline"
               placeholder="A school district that protected predators over children for decades — and the community that refused to look away.">{{ values.logline or '' }}</textarea>
 
-    <label for="cause_area">Cause Area</label>
+    <label for="cause_area">Search Terms</label>
     <input type="text" id="cause_area" name="cause_area"
            value="{{ values.cause_area or '' }}"
-           placeholder="e.g. child safety, climate justice, veteran mental health" required>
-    <p class="hint">Be specific. This phrase drives your funder search.</p>
+           placeholder="e.g. child safety, child protection, abuse prevention" required>
+    <p class="hint">
+      Separate multiple topics with commas. Each term runs its own search,
+      so more terms find more funders. Start specific — you can always add more later.
+    </p>
     {% if errors and errors.cause_area %}
       <p class="hint" style="color:var(--red);">{{ errors.cause_area }}</p>
     {% endif %}

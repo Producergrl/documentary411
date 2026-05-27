@@ -58,7 +58,16 @@
 {% endif %}
 
 <h1>{{ cfg.film_title or "Your Film" }}</h1>
-<p>{{ cfg.cause_area or "" }}</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+  {% for term in (cfg.cause_area or '').split(',') %}
+    {% if term.strip() %}
+    <span style="font-size:11px;padding:3px 10px;background:var(--gold-dim);
+                 color:var(--gold);border:1px solid var(--gold-bdr);border-radius:2px;">
+      {{ term.strip() }}
+    </span>
+    {% endif %}
+  {% endfor %}
+</div>
 
 <div class="run-card">
   <div class="run-title">Ready to find funders</div>
