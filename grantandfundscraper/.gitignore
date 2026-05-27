@@ -14,6 +14,7 @@ build/
 .env.local
 
 # Real OAuth credentials — NEVER commit these
+client_secrets.json
 client_secrets_real.json
 *_real.json
 
