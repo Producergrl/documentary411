@@ -1,47 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Grant &amp; Fund Scraper — Setup{% endblock %}
+{% block title %}Grant & Fund Scraper — Setup{% endblock %}
 
 {% block content %}
 
 <div class="step-bar">
-  {% for i in range(1, 5) %}
+  {% for i in range(1, 4) %}
     <div class="step-dot {% if i == step %}active{% elif i < step %}done{% endif %}"></div>
   {% endfor %}
 </div>
 
-{# ─── Step 1: License ────────────────────────────────────────────────────── #}
+{# ─── Step 1: Film details ───────────────────────────────────────────────── #}
 {% if step == 1 %}
 <h1>Welcome to Grant &amp; Fund Scraper</h1>
-<p>Enter your license key from your Gumroad purchase email to activate.</p>
+<p>Tell us about your film — this drives the funder search and personalizes every email.</p>
 
 <div class="card">
   <form method="POST" action="/setup/1">
-    <label for="license_key">Gumroad License Key</label>
-    <input type="text" id="license_key" name="license_key"
-           placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" required>
-
-    {% if error %}
-    <div class="error-box">{{ error }}</div>
-    {% endif %}
-
-    <div style="margin-top:24px;">
-      <button type="submit" class="btn btn-primary">Activate License &rarr;</button>
-    </div>
-    <p class="hint" style="margin-top:12px;">
-      No key? <a href="https://documentary411.org" target="_blank" rel="noopener"
-        style="color:var(--gold);">Purchase Grant &amp; Fund Scraper &rarr;</a>
-    </p>
-  </form>
-</div>
-{% endif %}
-
-{# ─── Step 2: Film details ───────────────────────────────────────────────── #}
-{% if step == 2 %}
-<h1>Tell us about your film</h1>
-<p>This information personalizes your outreach emails and directs the funder search.</p>
-
-<div class="card">
-  <form method="POST" action="/setup/2">
 
     <label for="full_name">Your Full Name</label>
     <input type="text" id="full_name" name="full_name"
@@ -70,8 +44,8 @@
            value="{{ values.cause_area or '' }}"
            placeholder="e.g. child safety, child protection, abuse prevention" required>
     <p class="hint">
-      Separate multiple topics with commas. Each term runs its own search,
-      so more terms find more funders. Start specific — you can always add more later.
+      Separate multiple topics with commas. Each term runs its own search —
+      more terms find more funders. Start specific, add more any time in Settings.
     </p>
     {% if errors and errors.cause_area %}
       <p class="hint" style="color:var(--red);">{{ errors.cause_area }}</p>
@@ -84,23 +58,23 @@
 </div>
 {% endif %}
 
-{# ─── Step 3: Anthropic API key ──────────────────────────────────────────── #}
-{% if step == 3 %}
+{# ─── Step 2: Anthropic API key ──────────────────────────────────────────── #}
+{% if step == 2 %}
 <h1>Connect your AI key</h1>
-<p>Grant &amp; Fund Scraper uses Claude (by Anthropic) to write your outreach emails.
-   You supply your own key — it costs fractions of a cent per email and
-   your key is stored only on this computer.</p>
+<p>Grant &amp; Fund Scraper uses Claude (by Anthropic) to write personalized outreach
+   emails for every funder it finds. You supply your own key — it costs fractions
+   of a cent per email and is stored only on this computer.</p>
 
 <div class="card">
-  <form method="POST" action="/setup/3">
+  <form method="POST" action="/setup/2">
     <label for="anthropic_api_key">Anthropic API Key</label>
     <input type="password" id="anthropic_api_key" name="anthropic_api_key"
            placeholder="sk-ant-..." autocomplete="off" required>
     <p class="hint">
-      Get a free key in two minutes at
+      Get your free key at
       <a href="https://console.anthropic.com" target="_blank" rel="noopener"
-         style="color:var(--gold);">console.anthropic.com</a>.
-      Your key is never transmitted to Documentary411.
+         style="color:var(--gold);">console.anthropic.com</a> — takes two minutes.
+      Your key is never transmitted to anyone.
     </p>
 
     {% if error %}
@@ -114,11 +88,11 @@
 </div>
 {% endif %}
 
-{# ─── Step 4: Connect email ──────────────────────────────────────────────── #}
-{% if step == 4 %}
+{# ─── Step 3: Connect email ──────────────────────────────────────────────── #}
+{% if step == 3 %}
 <h1>Connect your email</h1>
-<p>Grant &amp; Fund Scraper deposits draft emails directly into your drafts folder — it never sends anything.
-   Authorize once and it works automatically on every run.</p>
+<p>Grant &amp; Fund Scraper deposits draft emails directly into your drafts folder.
+   It never sends anything — you review and send each one yourself.</p>
 
 <div class="card">
   {% if connected %}
@@ -134,8 +108,8 @@
       <a href="/setup/connect-outlook" class="btn btn-secondary">Connect Outlook</a>
     </div>
     <p class="hint" style="margin-top:14px;">
-      Clicking either button will open your browser to the Google or Microsoft
-      sign-in page. Grant &amp; Fund Scraper only requests permission to create drafts —
+      Clicking either button opens your browser to the Google or Microsoft sign-in page.
+      Grant &amp; Fund Scraper only requests permission to create drafts —
       it cannot read, send, or delete your email.
     </p>
     {% if error %}

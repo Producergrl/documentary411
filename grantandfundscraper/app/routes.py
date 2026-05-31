@@ -1,5 +1,7 @@
 """
 All Flask routes for GrantAndFundScraper.
+Setup is 3 steps: film details → Anthropic key → connect email.
+No license key screen — the Gumroad/Lemon Squeezy download link is the gate.
 """
 
 import logging
@@ -14,12 +16,9 @@ from flask import (
     render_template,
     request,
     url_for,
-    flash,
-    current_app,
 )
 
 import app.config as config
-from app.license import validate as validate_license
 from app.email_drafts.personalizer import test_api_key
 from app.email_drafts import gmail_drafter, outlook_drafter
 from app import pipeline
@@ -34,8 +33,7 @@ logger = logging.getLogger(__name__)
 
 def _setup_complete(cfg: dict) -> bool:
     return bool(
-        cfg.get("license_activated")
-        and cfg.get("full_name")
+        cfg.get("full_name")
         and cfg.get("film_title")
         and cfg.get("cause_area")
         and cfg.get("anthropic_api_key")
@@ -50,15 +48,16 @@ def _setup_complete(cfg: dict) -> bool:
 @bp.route("/")
 def index():
     cfg = config.load()
-    if not cfg.get("license_activated"):
-        return redirect(url_for("main.setup_step", step=1))
     if not _setup_complete(cfg):
-        return redirect(url_for("main.setup_step", step=2))
+        return redirect(url_for("main.setup_step", step=1))
     return redirect(url_for("main.dashboard"))
 
 
 # ---------------------------------------------------------------------------
-# Setup wizard
+# Setup wizard — 3 steps
+# Step 1: Film details
+# Step 2: Anthropic API key
+# Step 3: Connect email
 # ---------------------------------------------------------------------------
 
 @bp.route("/setup/<int:step>", methods=["GET", "POST"])
@@ -67,22 +66,10 @@ def setup_step(step: int):
 
     if step == 1:
         if request.method == "POST":
-            key = (request.form.get("license_key") or "").strip()
-            ok, msg = validate_license(key)
-            if ok:
-                config.update(license_key=key, license_activated=True)
-                return redirect(url_for("main.setup_step", step=2))
-            return render_template("setup.html", step=1, error=msg)
-        return render_template("setup.html", step=1)
-
-    if step == 2:
-        if not cfg.get("license_activated"):
-            return redirect(url_for("main.setup_step", step=1))
-        if request.method == "POST":
-            full_name = (request.form.get("full_name") or "").strip()
-            email = (request.form.get("email") or "").strip()
+            full_name  = (request.form.get("full_name")  or "").strip()
+            email      = (request.form.get("email")      or "").strip()
             film_title = (request.form.get("film_title") or "").strip()
-            logline = (request.form.get("logline") or "").strip()
+            logline    = (request.form.get("logline")    or "").strip()
             cause_area = (request.form.get("cause_area") or "").strip()
 
             errors = {}
@@ -94,7 +81,7 @@ def setup_step(step: int):
                 errors["cause_area"] = "Required."
 
             if errors:
-                return render_template("setup.html", step=2, errors=errors,
+                return render_template("setup.html", step=1, errors=errors,
                                        values=request.form)
 
             spreadsheet_path = str(config.spreadsheet_default_path(film_title))
@@ -106,29 +93,25 @@ def setup_step(step: int):
                 cause_area=cause_area,
                 spreadsheet_path=spreadsheet_path,
             )
-            return redirect(url_for("main.setup_step", step=3))
-        return render_template("setup.html", step=2, values=cfg)
+            return redirect(url_for("main.setup_step", step=2))
+        return render_template("setup.html", step=1, values=cfg)
 
-    if step == 3:
-        if not cfg.get("license_activated"):
-            return redirect(url_for("main.setup_step", step=1))
+    if step == 2:
         if request.method == "POST":
             api_key = (request.form.get("anthropic_api_key") or "").strip()
             ok, msg = test_api_key(api_key)
             if ok:
                 config.update(anthropic_api_key=api_key)
-                return redirect(url_for("main.setup_step", step=4))
-            return render_template("setup.html", step=3, error=msg)
-        return render_template("setup.html", step=3)
+                return redirect(url_for("main.setup_step", step=3))
+            return render_template("setup.html", step=2, error=msg)
+        return render_template("setup.html", step=2)
 
-    if step == 4:
-        if not cfg.get("license_activated"):
-            return redirect(url_for("main.setup_step", step=1))
+    if step == 3:
         provider = cfg.get("email_provider", "")
         connected = bool(provider and (
             cfg.get("gmail_access_token") or cfg.get("outlook_access_token")
         ))
-        return render_template("setup.html", step=4,
+        return render_template("setup.html", step=3,
                                provider=provider, connected=connected)
 
     return redirect(url_for("main.dashboard"))
@@ -138,16 +121,16 @@ def setup_step(step: int):
 def connect_gmail():
     ok, msg = gmail_drafter.run_oauth_flow()
     if ok:
-        return redirect(url_for("main.setup_step", step=4))
-    return render_template("setup.html", step=4, error=msg)
+        return redirect(url_for("main.setup_step", step=3))
+    return render_template("setup.html", step=3, error=msg)
 
 
 @bp.route("/setup/connect-outlook")
 def connect_outlook():
     ok, msg = outlook_drafter.run_oauth_flow()
     if ok:
-        return redirect(url_for("main.setup_step", step=4))
-    return render_template("setup.html", step=4, error=msg)
+        return redirect(url_for("main.setup_step", step=3))
+    return render_template("setup.html", step=3, error=msg)
 
 
 @bp.route("/setup/complete")
@@ -164,7 +147,6 @@ def dashboard():
     cfg = config.load()
     if not _setup_complete(cfg):
         return redirect(url_for("main.index"))
-
     error = request.args.get("error", "")
     return render_template("dashboard.html", cfg=cfg, error=error)
 
@@ -178,19 +160,16 @@ def run():
     cfg = config.load()
     if not _setup_complete(cfg):
         return redirect(url_for("main.index"))
-
     started = pipeline.start_pipeline_thread()
     if not started:
         return redirect(url_for("main.dashboard") + "?error=already_running")
-
     return render_template("dashboard.html", cfg=cfg, running=True)
 
 
 @bp.route("/status")
 def status():
     """Polled every 2 s by the dashboard during a run."""
-    s = pipeline.get_status()
-    return jsonify(s)
+    return jsonify(pipeline.get_status())
 
 
 # ---------------------------------------------------------------------------
@@ -207,12 +186,12 @@ def results():
 
 
 # ---------------------------------------------------------------------------
-# Settings (re-enter setup for any field)
+# Settings
 # ---------------------------------------------------------------------------
 
 @bp.route("/settings")
 def settings():
-    return redirect(url_for("main.setup_step", step=2))
+    return redirect(url_for("main.setup_step", step=1))
 
 
 # ---------------------------------------------------------------------------
