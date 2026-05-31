@@ -1,5 +1,5 @@
 """
-All Flask routes for GrantAndFundScraper.
+All Flask routes for AIGrantAndFundResearcher.
 Setup is 3 steps: film details → Anthropic key → connect email.
 No license key screen — the Gumroad/Lemon Squeezy download link is the gate.
 """

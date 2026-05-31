@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Grant & Fund Scraper — Setup{% endblock %}
+{% block title %}AI Grant & Fund Researcher — Setup{% endblock %}
 
 {% block content %}
 
@@ -11,7 +11,7 @@
 
 {# ─── Step 1: Film details ───────────────────────────────────────────────── #}
 {% if step == 1 %}
-<h1>Welcome to Grant &amp; Fund Scraper</h1>
+<h1>Welcome to AI Grant &amp; Fund Researcher</h1>
 <p>Tell us about your film — this drives the funder search and personalizes every email.</p>
 
 <div class="card">
@@ -61,9 +61,9 @@
 {# ─── Step 2: Anthropic API key ──────────────────────────────────────────── #}
 {% if step == 2 %}
 <h1>Connect your AI key</h1>
-<p>Grant &amp; Fund Scraper uses Claude (by Anthropic) to write personalized outreach
-   emails for every funder it finds. You supply your own key — it costs fractions
-   of a cent per email and is stored only on this computer.</p>
+<p>AI Grant &amp; Fund Researcher uses Claude (by Anthropic) to write personalized
+   outreach emails for every funder it finds. You supply your own key — it costs
+   fractions of a cent per email and is stored only on this computer.</p>
 
 <div class="card">
   <form method="POST" action="/setup/2">
@@ -91,8 +91,8 @@
 {# ─── Step 3: Connect email ──────────────────────────────────────────────── #}
 {% if step == 3 %}
 <h1>Connect your email</h1>
-<p>Grant &amp; Fund Scraper deposits draft emails directly into your drafts folder.
-   It never sends anything — you review and send each one yourself.</p>
+<p>AI Grant &amp; Fund Researcher deposits draft emails directly into your drafts
+   folder. It never sends anything — you review and send each one yourself.</p>
 
 <div class="card">
   {% if connected %}
@@ -109,7 +109,7 @@
     </div>
     <p class="hint" style="margin-top:14px;">
       Clicking either button opens your browser to the Google or Microsoft sign-in page.
-      Grant &amp; Fund Scraper only requests permission to create drafts —
+      AI Grant &amp; Fund Researcher only requests permission to create drafts —
       it cannot read, send, or delete your email.
     </p>
     {% if error %}

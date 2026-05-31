@@ -1,5 +1,5 @@
 """
-Build and update the GrantAndFundScraper .xlsx funder spreadsheet.
+Build and update the AIGrantAndFundResearcher .xlsx funder spreadsheet.
 New rows are starred (★) and highlighted gold. All rows sorted A–Z by org name.
 """
 

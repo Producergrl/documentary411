@@ -1,5 +1,5 @@
 """
-GrantAndFundScraper entry point.
+AIGrantAndFundResearcher entry point.
 Starts the Flask server on localhost:5000 and opens the user's browser.
 """
 
@@ -74,7 +74,7 @@ def main() -> None:
     _configure_logging()
 
     logger = logging.getLogger(__name__)
-    logger.info("GrantAndFundScraper starting")
+    logger.info("AIGrantAndFundResearcher starting")
 
     # Import here so logging is configured first
     from app import create_app

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Grant &amp; Fund Scraper — Dashboard{% endblock %}
+{% block title %}AI Grant &amp; Fund Researcher — Dashboard{% endblock %}
 
 {% block head %}
 <style>
@@ -72,14 +72,14 @@
 <div class="run-card">
   <div class="run-title">Ready to find funders</div>
   <p class="run-sub">
-    Grant &amp; Fund Scraper will search the web for mission-aligned funders, update your
+    AI Grant &amp; Fund Researcher will search the web for mission-aligned funders, update your
     spreadsheet, and deposit personalized draft emails in your
     {{ cfg.email_provider | capitalize if cfg.email_provider else "email" }} drafts.
   </p>
 
   <form id="run-form" method="POST" action="/run">
     <button type="submit" id="run-btn" class="btn btn-primary btn-big run-btn">
-      Run Grant &amp; Fund Scraper
+      Run AI Grant &amp; Fund Researcher
     </button>
   </form>
 
@@ -155,7 +155,7 @@
           clearInterval(pollInterval);
           polling = false;
           runBtn.disabled = false;
-          runBtn.textContent = 'Run Grant &amp; Fund Scraper';
+          runBtn.textContent = 'Run AI Grant &amp; Fund Researcher';
           statusMsg.innerHTML =
             '<span style="color:var(--red);">&#9888; ' + data.error + '</span>';
           return;
