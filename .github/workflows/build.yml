@@ -1,0 +1,97 @@
+name: Build — Mac & Windows
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'aigrantandfundresearcher/**'
+  workflow_dispatch:   # allows manual trigger from GitHub UI
+
+jobs:
+  build-mac:
+    name: Build Mac .app
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        working-directory: aigrantandfundresearcher
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Write client_secrets.json
+        working-directory: aigrantandfundresearcher
+        env:
+          CLIENT_SECRETS: ${{ secrets.GOOGLE_CLIENT_SECRETS_JSON }}
+        run: echo "$CLIENT_SECRETS" > client_secrets.json
+
+      - name: Build Mac app
+        working-directory: aigrantandfundresearcher
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          MICROSOFT_CLIENT_ID: ${{ secrets.MICROSOFT_CLIENT_ID }}
+          MICROSOFT_TENANT_ID: common
+          GUMROAD_PRODUCT_ID: ${{ secrets.GUMROAD_PRODUCT_ID }}
+          FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
+        run: python build.py
+
+      - name: Zip the .app
+        working-directory: aigrantandfundresearcher/dist
+        run: |
+          zip -r AIGrantAndFundResearcher-Mac.zip AIGrantAndFundResearcher.app
+
+      - name: Upload Mac artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AIGrantAndFundResearcher-Mac
+          path: aigrantandfundresearcher/dist/AIGrantAndFundResearcher-Mac.zip
+          retention-days: 30
+
+  build-windows:
+    name: Build Windows .exe
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        working-directory: aigrantandfundresearcher
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Write client_secrets.json
+        working-directory: aigrantandfundresearcher
+        env:
+          CLIENT_SECRETS: ${{ secrets.GOOGLE_CLIENT_SECRETS_JSON }}
+        run: echo "$env:CLIENT_SECRETS" | Out-File -FilePath client_secrets.json -Encoding utf8
+        shell: pwsh
+
+      - name: Build Windows exe
+        working-directory: aigrantandfundresearcher
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          MICROSOFT_CLIENT_ID: ${{ secrets.MICROSOFT_CLIENT_ID }}
+          MICROSOFT_TENANT_ID: common
+          GUMROAD_PRODUCT_ID: ${{ secrets.GUMROAD_PRODUCT_ID }}
+          FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
+        run: python build.py
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AIGrantAndFundResearcher-Windows
+          path: aigrantandfundresearcher/dist/AIGrantAndFundResearcher.exe
+          retention-days: 30
