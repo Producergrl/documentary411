@@ -46,6 +46,35 @@
   .action-links { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; justify-content: center; }
   .action-links a { font-size: 12px; color: var(--text3); text-decoration: none; }
   .action-links a:hover { color: var(--gold); }
+
+  /* Auto-run card */
+  .autorun-card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px 24px; margin-top: 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    flex-wrap: wrap;
+  }
+  .autorun-left  { display: flex; flex-direction: column; gap: 2px; }
+  .autorun-title { font-size: 12px; font-weight: 600; color: var(--text); letter-spacing: .04em; text-transform: uppercase; }
+  .autorun-next  { font-size: 13px; color: var(--text2); }
+  .autorun-note  { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* Toggle switch */
+  .toggle-wrap   { display: flex; align-items: center; gap: 10px; }
+  .toggle-label  { font-size: 12px; color: var(--text2); white-space: nowrap; }
+  .toggle        { position: relative; display: inline-block; width: 42px; height: 24px; }
+  .toggle input  { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute; cursor: pointer; inset: 0;
+    background: var(--border); border-radius: 24px; transition: .25s;
+  }
+  .toggle-slider:before {
+    content: ""; position: absolute;
+    width: 18px; height: 18px; left: 3px; bottom: 3px;
+    background: var(--text3); border-radius: 50%; transition: .25s;
+  }
+  .toggle input:checked + .toggle-slider           { background: var(--gold-bdr); }
+  .toggle input:checked + .toggle-slider:before    { transform: translateX(18px); background: var(--gold); }
 </style>
 {% endblock %}
 
@@ -92,6 +121,29 @@
   </div>
 </div>
 
+<!-- Auto-run card -->
+<div class="autorun-card" id="autorun-card">
+  <div class="autorun-left">
+    <span class="autorun-title">&#9201; Auto-run</span>
+    <span class="autorun-next" id="autorun-next">
+      {% if schedule_enabled %}{{ schedule_next }}{% else %}Auto-run disabled{% endif %}
+    </span>
+    <span class="autorun-note">App must be open at the scheduled time.</span>
+  </div>
+  <div class="toggle-wrap">
+    <span class="toggle-label" id="toggle-label">{{ "ON" if schedule_enabled else "OFF" }}</span>
+    <form method="POST" action="/schedule-toggle" id="toggle-form" style="display:inline;">
+      <input type="hidden" name="enabled" id="toggle-enabled-input"
+             value="{{ '1' if schedule_enabled else '0' }}">
+      <label class="toggle" title="Toggle nightly auto-run">
+        <input type="checkbox" id="toggle-cb" {{ 'checked' if schedule_enabled else '' }}
+               onchange="submitToggle(this)">
+        <span class="toggle-slider"></span>
+      </label>
+    </form>
+  </div>
+</div>
+
 <div class="meta-row">
   <div class="meta-item">
     <div class="meta-label">Filmmaker</div>
@@ -121,6 +173,24 @@
 </div>
 
 <script>
+  // Auto-run toggle
+  function submitToggle(cb) {
+    document.getElementById('toggle-enabled-input').value = cb.checked ? '1' : '0';
+    document.getElementById('toggle-label').textContent   = cb.checked ? 'ON' : 'OFF';
+    document.getElementById('autorun-next').textContent   = cb.checked ? 'Loading…' : 'Auto-run disabled';
+    if (cb.checked) {
+      // Fetch updated next-run time after a brief delay for the server to reschedule
+      setTimeout(() => {
+        fetch('/schedule-status')
+          .then(r => r.json())
+          .then(d => {
+            document.getElementById('autorun-next').textContent = d.next_run;
+          });
+      }, 400);
+    }
+    document.getElementById('toggle-form').submit();
+  }
+
   const runForm   = document.getElementById('run-form');
   const runBtn    = document.getElementById('run-btn');
   const statusMsg = document.getElementById('status-msg');

@@ -28,4 +28,9 @@ def create_app() -> Flask:
     from app.routes import bp
     app.register_blueprint(bp)
 
+    # Start nightly scheduler (skip in the Flask reloader parent process)
+    if not app.debug or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        from app import scheduler
+        scheduler.start()
+
     return app

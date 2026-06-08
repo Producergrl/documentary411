@@ -39,6 +39,10 @@ _DEFAULTS: dict[str, Any] = {
     "outlook_token_expiry": "",
     "spreadsheet_path": "",
     "last_run_at": "",
+    # Auto-run scheduler
+    "schedule_enabled": True,
+    "schedule_hour": 2,
+    "schedule_minute": 0,
 }
 
 

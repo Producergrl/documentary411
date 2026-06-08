@@ -21,7 +21,7 @@ from flask import (
 import app.config as config
 from app.email_drafts.personalizer import test_api_key
 from app.email_drafts import gmail_drafter, outlook_drafter
-from app import pipeline
+from app import pipeline, scheduler
 
 bp = Blueprint("main", __name__)
 logger = logging.getLogger(__name__)
@@ -162,7 +162,13 @@ def dashboard():
     if not _setup_complete(cfg):
         return redirect(url_for("main.index"))
     error = request.args.get("error", "")
-    return render_template("dashboard.html", cfg=cfg, error=error)
+    return render_template(
+        "dashboard.html",
+        cfg=cfg,
+        error=error,
+        schedule_enabled=scheduler.is_enabled(),
+        schedule_next=scheduler.get_next_run_display(),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -184,6 +190,23 @@ def run():
 def status():
     """Polled every 2 s by the dashboard during a run."""
     return jsonify(pipeline.get_status())
+
+
+@bp.route("/schedule-status")
+def schedule_status():
+    """Called by the dashboard to refresh the auto-run display."""
+    return jsonify({
+        "enabled":  scheduler.is_enabled(),
+        "next_run": scheduler.get_next_run_display(),
+    })
+
+
+@bp.route("/schedule-toggle", methods=["POST"])
+def schedule_toggle():
+    """Toggle the nightly auto-run on or off."""
+    enabled = request.form.get("enabled") == "1"
+    scheduler.toggle(enabled)
+    return redirect(url_for("main.dashboard"))
 
 
 # ---------------------------------------------------------------------------
