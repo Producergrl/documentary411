@@ -79,6 +79,22 @@ def main() -> None:
     for ad in add_data:
         cmd += ["--add-data", ad]
 
+    hidden_imports = [
+        "flask", "jinja2", "werkzeug", "anthropic", "openpyxl",
+        "google.auth", "google.auth.transport.requests",
+        "google_auth_oauthlib.flow",
+        "googleapiclient.discovery", "googleapiclient.errors",
+        "duckduckgo_search", "bs4", "lxml", "lxml.etree",
+        "requests", "pytz",
+        "docx", "docx.shared", "docx.enum.text",
+        "apscheduler", "apscheduler.schedulers.background",
+        "apscheduler.triggers.cron", "apscheduler.triggers.date",
+        "apscheduler.jobstores.base", "apscheduler.executors.pool",
+        "apscheduler.executors.base",
+    ]
+    for hi in hidden_imports:
+        cmd += ["--hidden-import", hi]
+
     # Inject build-time env vars via --add-binary is not clean —
     # instead we write them as PyInstaller runtime hooks via --runtime-hook.
     # We generate a small hook file on the fly.

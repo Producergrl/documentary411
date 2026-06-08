@@ -20,6 +20,7 @@ client_secrets_real.json
 
 # PyInstaller artifacts
 _build_env_hook.py
+AIGrantAndFundResearcher.spec
 *.pyc
 
 # macOS
