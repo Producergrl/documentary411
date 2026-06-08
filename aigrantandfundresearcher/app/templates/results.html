@@ -1,75 +1,29 @@
 {% extends "base.html" %}
-{% block title %}AI Grant Grant &amp; Fund Scraperamp; Fund Researcher — Results{% endblock %}
+{% block title %}AI Grant & Fund Researcher — Results{% endblock %}
 
 {% block head %}
 <style>
-  .result-hero {
-    text-align: center;
-    padding: 40px 0 32px;
-  }
-  .big-number {
-    font-family: var(--serif);
-    font-size: 72px;
-    color: var(--gold);
-    line-height: 1;
-    display: block;
-    margin-bottom: 8px;
-  }
-  .result-label {
-    font-size: 14px;
-    color: var(--text2);
-  }
+  .result-hero { text-align:center; padding:40px 0 32px; }
+  .big-number  { font-family:var(--serif); font-size:72px; color:var(--gold); line-height:1; display:block; margin-bottom:8px; }
+  .result-label{ font-size:14px; color:var(--text2); }
 
-  .stats-row {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin: 28px 0;
-    flex-wrap: wrap;
-  }
-  .stat-pill {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 28px;
-    text-align: center;
-    min-width: 140px;
-  }
-  .stat-num  { font-family: var(--serif); font-size: 32px; color: var(--gold); display: block; }
-  .stat-lbl  { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .07em; margin-top: 3px; display: block; }
+  .stats-row   { display:flex; gap:20px; justify-content:center; margin:28px 0; flex-wrap:wrap; }
+  .stat-pill   { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:16px 28px; text-align:center; min-width:140px; }
+  .stat-num    { font-family:var(--serif); font-size:32px; color:var(--gold); display:block; }
+  .stat-lbl    { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.07em; margin-top:3px; display:block; }
 
-  .contact-list {
-    list-style: none;
-    margin-top: 20px;
-  }
-  .contact-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  .contact-list li:last-child { border-bottom: none; }
-  .contact-list .org { color: var(--text); font-weight: 500; }
-  .contact-list a    { font-size: 11px; color: var(--gold); text-decoration: none; }
-  .contact-list a:hover { color: var(--gold2); }
+  .contact-list { list-style:none; margin-top:20px; }
+  .contact-list li { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; }
+  .contact-list li:last-child { border-bottom:none; }
+  .contact-list .org { color:var(--text); font-weight:500; }
+  .contact-list a    { font-size:11px; color:var(--gold); text-decoration:none; }
+  .contact-list a:hover { color:var(--gold2); }
 
-  .cta-row {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 36px;
-  }
-  .no-results-box {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 36px;
-    text-align: center;
-    margin-top: 32px;
-  }
+  .cta-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:36px; }
+  .no-results-box { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:36px; text-align:center; margin-top:32px; }
+
+  .loe-banner { background:var(--gold-dim); border:1px solid var(--gold-bdr); border-radius:6px; padding:14px 18px; margin-top:16px; font-size:13px; color:var(--text); display:flex; align-items:center; gap:12px; }
+  .loe-banner a { color:var(--gold); text-decoration:none; font-weight:600; white-space:nowrap; }
 </style>
 {% endblock %}
 
@@ -95,8 +49,14 @@
 <div class="stats-row">
   <div class="stat-pill">
     <span class="stat-num">{{ results.drafts_created }}</span>
-    <span class="stat-lbl">Draft{{ 's' if results.drafts_created != 1 else '' }} created</span>
+    <span class="stat-lbl">Email draft{{ 's' if results.drafts_created != 1 else '' }}</span>
   </div>
+  {% if results.loes_created %}
+  <div class="stat-pill">
+    <span class="stat-num">{{ results.loes_created }}</span>
+    <span class="stat-lbl">Letter{{ 's' if results.loes_created != 1 else '' }} of Enquiry</span>
+  </div>
+  {% endif %}
   <div class="stat-pill">
     <span class="stat-num">{{ results.new_contacts }}</span>
     <span class="stat-lbl">Added to spreadsheet</span>
@@ -105,8 +65,15 @@
 
 <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:24px;">
   <h2 style="margin-bottom:4px;">New Organizations</h2>
-  <p style="margin-bottom:0;">Starred rows added to your spreadsheet. Draft emails are waiting in your
+  <p>Starred rows added to your spreadsheet. Outreach emails are waiting in your
      {{ cfg.email_provider | capitalize if cfg.email_provider else 'email' }} drafts folder.</p>
+
+  {% if results.loes_created %}
+  <div class="loe-banner">
+    <span>&#128196; {{ results.loes_created }} Letter{{ 's' if results.loes_created != 1 else '' }} of Enquiry saved as Word documents.</span>
+    <a href="/open-letters">Open Letters Folder &rarr;</a>
+  </div>
+  {% endif %}
 
   {% if results.contact_list %}
   <ul class="contact-list">
@@ -124,7 +91,10 @@
 
 <div class="cta-row">
   <a href="/open-spreadsheet" class="btn btn-primary">Open My Spreadsheet &rarr;</a>
-  <a href="/dashboard" class="btn btn-secondary">Run Again</a>
+  {% if results.loes_created %}
+  <a href="/open-letters" class="btn btn-secondary">Open Letters Folder</a>
+  {% endif %}
+  <a href="/dashboard" class="btn btn-ghost">Run Again</a>
 </div>
 
 {% endif %}

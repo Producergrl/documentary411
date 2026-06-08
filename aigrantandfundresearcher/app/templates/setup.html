@@ -4,12 +4,12 @@
 {% block content %}
 
 <div class="step-bar">
-  {% for i in range(1, 4) %}
+  {% for i in range(1, 5) %}
     <div class="step-dot {% if i == step %}active{% elif i < step %}done{% endif %}"></div>
   {% endfor %}
 </div>
 
-{# ─── Step 1: Film details ───────────────────────────────────────────────── #}
+{# ─── Step 1: Film basics ────────────────────────────────────────────────── #}
 {% if step == 1 %}
 <h1>Welcome to AI Grant &amp; Fund Researcher</h1>
 <p>Tell us about your film — this drives the funder search and personalizes every email.</p>
@@ -45,7 +45,7 @@
            placeholder="e.g. child safety, child protection, abuse prevention" required>
     <p class="hint">
       Separate multiple topics with commas. Each term runs its own search —
-      more terms find more funders. Start specific, add more any time in Settings.
+      more terms find more funders. Add more any time in Settings.
     </p>
     {% if errors and errors.cause_area %}
       <p class="hint" style="color:var(--red);">{{ errors.cause_area }}</p>
@@ -58,15 +58,60 @@
 </div>
 {% endif %}
 
-{# ─── Step 2: Anthropic API key ──────────────────────────────────────────── #}
+{# ─── Step 2: Project details for LOE ───────────────────────────────────── #}
 {% if step == 2 %}
-<h1>Connect your AI key</h1>
-<p>AI Grant &amp; Fund Researcher uses Claude (by Anthropic) to write personalized
-   outreach emails for every funder it finds. You supply your own key — it costs
-   fractions of a cent per email and is stored only on this computer.</p>
+<h1>About you &amp; your project</h1>
+<p>This information is used to write your Letter of Enquiry — a formal funding
+   request document generated for each new organization alongside your outreach email.</p>
 
 <div class="card">
   <form method="POST" action="/setup/2">
+
+    <label for="filmmaker_bio">Your Filmmaker Bio</label>
+    <textarea id="filmmaker_bio" name="filmmaker_bio"
+              placeholder="Award-winning filmmaker and founder of..."
+              style="min-height:120px;">{{ values.filmmaker_bio or '' }}</textarea>
+    <p class="hint">2–4 sentences. Include your most relevant credits and experience.</p>
+
+    <label for="total_budget">Total Film Budget</label>
+    <input type="text" id="total_budget" name="total_budget"
+           value="{{ values.total_budget or '' }}" placeholder="e.g. $520,000">
+
+    <label for="amount_seeking">Amount You Are Seeking</label>
+    <input type="text" id="amount_seeking" name="amount_seeking"
+           value="{{ values.amount_seeking or '' }}" placeholder="e.g. $150,000">
+
+    <label for="funding_increments">Minimum Funding Increment (optional)</label>
+    <input type="text" id="funding_increments" name="funding_increments"
+           value="{{ values.funding_increments or '' }}"
+           placeholder="e.g. $10,000 — leave blank if not applicable">
+
+    <label for="distribution_plan">Distribution Plan</label>
+    <textarea id="distribution_plan" name="distribution_plan"
+              placeholder="e.g. Theatrical via Regal Cinemas, streaming, educational license across 50,000 schools, PPV, venue-to-venue community screenings">{{ values.distribution_plan or '' }}</textarea>
+
+    <label for="completion_date">Expected Completion Date</label>
+    <input type="text" id="completion_date" name="completion_date"
+           value="{{ values.completion_date or '' }}" placeholder="e.g. September 2026">
+
+    <div style="margin-top:24px;display:flex;gap:12px;align-items:center;">
+      <button type="submit" class="btn btn-primary">Save &amp; Continue &rarr;</button>
+      <a href="/setup/3" style="font-size:12px;color:var(--text3);">Skip for now</a>
+    </div>
+  </form>
+</div>
+{% endif %}
+
+{# ─── Step 3: Anthropic API key ──────────────────────────────────────────── #}
+{% if step == 3 %}
+<h1>Connect your AI key</h1>
+<p>AI Grant &amp; Fund Researcher uses Claude (by Anthropic) to write personalized
+   outreach emails and Letters of Enquiry for every funder it finds. You supply
+   your own key — it costs fractions of a cent per document and is stored only
+   on this computer.</p>
+
+<div class="card">
+  <form method="POST" action="/setup/3">
     <label for="anthropic_api_key">Anthropic API Key</label>
     <input type="password" id="anthropic_api_key" name="anthropic_api_key"
            placeholder="sk-ant-..." autocomplete="off" required>
@@ -88,11 +133,12 @@
 </div>
 {% endif %}
 
-{# ─── Step 3: Connect email ──────────────────────────────────────────────── #}
-{% if step == 3 %}
+{# ─── Step 4: Connect email ──────────────────────────────────────────────── #}
+{% if step == 4 %}
 <h1>Connect your email</h1>
-<p>AI Grant &amp; Fund Researcher deposits draft emails directly into your drafts
-   folder. It never sends anything — you review and send each one yourself.</p>
+<p>AI Grant &amp; Fund Researcher deposits draft outreach emails directly into
+   your drafts folder. It never sends anything — you review and send each one yourself.
+   Letters of Enquiry are saved as Word documents in your Documents folder.</p>
 
 <div class="card">
   {% if connected %}

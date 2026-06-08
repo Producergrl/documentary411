@@ -22,6 +22,13 @@ _DEFAULTS: dict[str, Any] = {
     "film_title": "",
     "logline": "",
     "cause_area": "",
+    # Filmmaker profile — used for Letter of Enquiry generation
+    "filmmaker_bio": "",
+    "total_budget": "",
+    "amount_seeking": "",
+    "funding_increments": "",
+    "distribution_plan": "",
+    "completion_date": "",
     "email_provider": "",
     "anthropic_api_key": "",
     "gmail_access_token": "",
@@ -108,3 +115,13 @@ def spreadsheet_default_path(film_title: str) -> Path:
     folder = Path.home() / "Documents" / "AIGrantAndFundResearcher"
     folder.mkdir(parents=True, exist_ok=True)
     return folder / f"{safe_title}_Funders.xlsx"
+
+
+def loe_folder(film_title: str) -> Path:
+    """Return the folder where Letter of Enquiry .docx files are saved."""
+    safe_title = "".join(
+        c if c.isalnum() or c in (" ", "_", "-") else "_" for c in film_title
+    ).strip()
+    folder = Path.home() / "Documents" / "AIGrantAndFundResearcher" / f"{safe_title}_Letters"
+    folder.mkdir(parents=True, exist_ok=True)
+    return folder

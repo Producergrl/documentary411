@@ -12,7 +12,7 @@ from pathlib import Path
 import app.config as config
 from app.scraper import funder_search, deduplicator
 from app.spreadsheet import builder as spreadsheet_builder
-from app.email_drafts import personalizer
+from app.email_drafts import personalizer, loe_generator
 from app.email_drafts import gmail_drafter, outlook_drafter
 
 logger = logging.getLogger(__name__)
@@ -119,14 +119,18 @@ def _run(cfg: dict) -> None:
         _set_status(error=f"Could not update your spreadsheet: {e}")
         return
 
-    # 5. Personalize + deposit drafts
+    # 5. Personalize emails + generate LOEs + deposit drafts
     drafts_created = 0
+    loes_created = 0
+    loe_folder = config.loe_folder(cfg.get("film_title", "MyFilm"))
+    has_loe_fields = bool(cfg.get("filmmaker_bio") and cfg.get("amount_seeking"))
+
     for i, funder in enumerate(new_funders, start=1):
         _set_status(
-            f"Writing email {i} of {len(new_funders)}: {funder.org_name}..."
+            f"Writing outreach email {i} of {len(new_funders)}: {funder.org_name}..."
         )
 
-        # Generate email via Claude
+        # Generate outreach email via Claude
         try:
             email_data = personalizer.build_email(
                 full_name=cfg.get("full_name", ""),
@@ -142,42 +146,53 @@ def _run(cfg: dict) -> None:
             return
         except Exception as e:
             logger.exception("Email personalization failed for %s", funder.org_name)
-            continue  # Skip this contact, keep going
+            continue
 
-        # Deposit draft
-        to_address = funder.email or ""
-        subject = email_data["subject"]
-        body = email_data["body"]
-
+        # Deposit email draft
         try:
             if email_provider == "gmail":
-                gmail_drafter.create_draft(to_address, subject, body)
+                gmail_drafter.create_draft(funder.email or "", email_data["subject"], email_data["body"])
             else:
-                outlook_drafter.create_draft(to_address, subject, body)
+                outlook_drafter.create_draft(funder.email or "", email_data["subject"], email_data["body"])
             drafts_created += 1
         except RuntimeError as e:
-            # Auth failure — surface it immediately
             _set_status(error=str(e))
             return
         except Exception as e:
             logger.exception("Draft deposit failed for %s", funder.org_name)
-            # Don't abort the whole run for one failed draft
+
+        # Generate Letter of Enquiry if filmmaker profile is filled in
+        if has_loe_fields:
+            _set_status(
+                f"Writing Letter of Enquiry {i} of {len(new_funders)}: {funder.org_name}..."
+            )
+            try:
+                loe_generator.save_loe_docx(
+                    cfg=cfg,
+                    org_name=funder.org_name,
+                    org_mission=funder.mission or funder.org_name,
+                    contact_person=funder.contact_person,
+                    anthropic_api_key=anthropic_key,
+                    output_folder=loe_folder,
+                )
+                loes_created += 1
+            except Exception as e:
+                logger.exception("LOE generation failed for %s", funder.org_name)
+                # Non-fatal — keep going
 
     _save_run_summary(cfg, spreadsheet_path, new_funders, drafts_created)
 
     contact_list = [
         {"org_name": f.org_name, "website": f.website} for f in new_funders
     ]
-    _set_status(
-        done=True,
-        message="",
-    )
-    # Store results for the results page
+    _set_status(done=True, message="")
     with _status_lock:
         _status["results"] = {
             "new_contacts": len(new_funders),
             "contact_list": contact_list,
             "drafts_created": drafts_created,
+            "loes_created": loes_created,
+            "loe_folder": str(loe_folder),
             "spreadsheet_path": str(spreadsheet_path),
         }
 

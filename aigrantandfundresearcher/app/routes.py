@@ -1,7 +1,7 @@
 """
 All Flask routes for AIGrantAndFundResearcher.
-Setup is 3 steps: film details → Anthropic key → connect email.
-No license key screen — the Gumroad/Lemon Squeezy download link is the gate.
+Setup is 4 steps: film basics → project details → Anthropic key → connect email.
+No license key screen — the download link is the gate.
 """
 
 import logging
@@ -54,10 +54,11 @@ def index():
 
 
 # ---------------------------------------------------------------------------
-# Setup wizard — 3 steps
-# Step 1: Film details
-# Step 2: Anthropic API key
-# Step 3: Connect email
+# Setup wizard — 4 steps
+# Step 1: Film basics
+# Step 2: Project details (for LOE generation)
+# Step 3: Anthropic API key
+# Step 4: Connect email
 # ---------------------------------------------------------------------------
 
 @bp.route("/setup/<int:step>", methods=["GET", "POST"])
@@ -98,20 +99,33 @@ def setup_step(step: int):
 
     if step == 2:
         if request.method == "POST":
+            config.update(
+                filmmaker_bio     =(request.form.get("filmmaker_bio")      or "").strip(),
+                total_budget      =(request.form.get("total_budget")       or "").strip(),
+                amount_seeking    =(request.form.get("amount_seeking")     or "").strip(),
+                funding_increments=(request.form.get("funding_increments") or "").strip(),
+                distribution_plan =(request.form.get("distribution_plan")  or "").strip(),
+                completion_date   =(request.form.get("completion_date")    or "").strip(),
+            )
+            return redirect(url_for("main.setup_step", step=3))
+        return render_template("setup.html", step=2, values=cfg)
+
+    if step == 3:
+        if request.method == "POST":
             api_key = (request.form.get("anthropic_api_key") or "").strip()
             ok, msg = test_api_key(api_key)
             if ok:
                 config.update(anthropic_api_key=api_key)
-                return redirect(url_for("main.setup_step", step=3))
-            return render_template("setup.html", step=2, error=msg)
-        return render_template("setup.html", step=2)
+                return redirect(url_for("main.setup_step", step=4))
+            return render_template("setup.html", step=3, error=msg)
+        return render_template("setup.html", step=3)
 
-    if step == 3:
+    if step == 4:
         provider = cfg.get("email_provider", "")
         connected = bool(provider and (
             cfg.get("gmail_access_token") or cfg.get("outlook_access_token")
         ))
-        return render_template("setup.html", step=3,
+        return render_template("setup.html", step=4,
                                provider=provider, connected=connected)
 
     return redirect(url_for("main.dashboard"))
@@ -121,16 +135,16 @@ def setup_step(step: int):
 def connect_gmail():
     ok, msg = gmail_drafter.run_oauth_flow()
     if ok:
-        return redirect(url_for("main.setup_step", step=3))
-    return render_template("setup.html", step=3, error=msg)
+        return redirect(url_for("main.setup_step", step=4))
+    return render_template("setup.html", step=4, error=msg)
 
 
 @bp.route("/setup/connect-outlook")
 def connect_outlook():
     ok, msg = outlook_drafter.run_oauth_flow()
     if ok:
-        return redirect(url_for("main.setup_step", step=3))
-    return render_template("setup.html", step=3, error=msg)
+        return redirect(url_for("main.setup_step", step=4))
+    return render_template("setup.html", step=4, error=msg)
 
 
 @bp.route("/setup/complete")
@@ -209,4 +223,22 @@ def open_spreadsheet():
             subprocess.Popen(["explorer", path])
         else:
             subprocess.Popen(["xdg-open", path])
+    return redirect(url_for("main.dashboard"))
+
+
+# ---------------------------------------------------------------------------
+# Open Letters folder in Finder / Explorer
+# ---------------------------------------------------------------------------
+
+@bp.route("/open-letters")
+def open_letters():
+    cfg = config.load()
+    film_title = cfg.get("film_title", "MyFilm")
+    folder = config.loe_folder(film_title)
+    if sys.platform == "darwin":
+        subprocess.Popen(["open", str(folder)])
+    elif sys.platform == "win32":
+        subprocess.Popen(["explorer", str(folder)])
+    else:
+        subprocess.Popen(["xdg-open", str(folder)])
     return redirect(url_for("main.dashboard"))
