@@ -40,11 +40,14 @@ def main() -> None:
     print(f"Building AIGrantAndFundResearcher for {system}…\n")
 
     # Validate build-time secrets
-    gumroad_id        = _require_env("GUMROAD_PRODUCT_ID")
+    # Required: Google OAuth (for Gmail drafts)
     google_client_id  = _require_env("GOOGLE_CLIENT_ID")
     google_secret     = _require_env("GOOGLE_CLIENT_SECRET")
-    ms_client_id      = _require_env("MICROSOFT_CLIENT_ID")
+    # Optional: Microsoft (Outlook) — can add later; placeholder is fine
+    ms_client_id      = os.environ.get("MICROSOFT_CLIENT_ID", "") or "placeholder"
     ms_tenant_id      = os.environ.get("MICROSOFT_TENANT_ID", "common")
+    # Optional: Lemon Squeezy product ID — not used at runtime
+    gumroad_id        = os.environ.get("GUMROAD_PRODUCT_ID", "") or "placeholder"
     flask_secret      = os.environ.get("FLASK_SECRET_KEY") or os.urandom(32).hex()
 
     _check_file(ROOT / "client_secrets.json")
