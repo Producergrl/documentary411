@@ -29,6 +29,7 @@ def build_email(
     mission: str,
     contact_person: str,
     anthropic_api_key: str,
+    film_website: str = "",
 ) -> dict[str, str]:
     """
     Generate a personalized draft email for one funder.
@@ -50,7 +51,8 @@ def build_email(
         f"The contact is {org_name}, whose mission is: {mission}. "
         f"Write one paragraph (2 to 3 sentences) that speaks directly to how this film "
         f"aligns with their specific mission. Then add a standard closing paragraph "
-        f"inviting them to learn more and visit OpenSecretTheFilm.com. "
+        f"inviting them to learn more"
+        + (f" and visit {film_website}" if film_website else "") + ". "
         f"Sign off as {full_name}."
     )
 
@@ -81,13 +83,10 @@ def build_email(
 
     subject = f"{film_title} — A Documentary Aligned With Your Mission"
 
-    body = "\n\n".join([
-        salutation,
-        ai_body,
-        "--\n"
-        f"{full_name}\n"
-        "OpenSecretTheFilm.com",
-    ])
+    sig_lines = ["--", full_name]
+    if film_website:
+        sig_lines.append(film_website)
+    body = "\n\n".join([salutation, ai_body, "\n".join(sig_lines)])
 
     return {"subject": subject, "body": body}
 

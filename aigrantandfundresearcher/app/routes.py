@@ -67,11 +67,12 @@ def setup_step(step: int):
 
     if step == 1:
         if request.method == "POST":
-            full_name  = (request.form.get("full_name")  or "").strip()
-            email      = (request.form.get("email")      or "").strip()
-            film_title = (request.form.get("film_title") or "").strip()
-            logline    = (request.form.get("logline")    or "").strip()
-            cause_area = (request.form.get("cause_area") or "").strip()
+            full_name    = (request.form.get("full_name")    or "").strip()
+            email        = (request.form.get("email")        or "").strip()
+            film_title   = (request.form.get("film_title")   or "").strip()
+            logline      = (request.form.get("logline")      or "").strip()
+            cause_area   = (request.form.get("cause_area")   or "").strip()
+            film_website = (request.form.get("film_website") or "").strip()
 
             errors = {}
             if not full_name:
@@ -92,6 +93,7 @@ def setup_step(step: int):
                 film_title=film_title,
                 logline=logline,
                 cause_area=cause_area,
+                film_website=film_website,
                 spreadsheet_path=spreadsheet_path,
             )
             return redirect(url_for("main.setup_step", step=2))

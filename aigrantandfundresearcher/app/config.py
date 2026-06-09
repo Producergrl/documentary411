@@ -23,6 +23,7 @@ _DEFAULTS: dict[str, Any] = {
     "logline": "",
     "cause_area": "",
     # Filmmaker profile — used for Letter of Enquiry generation
+    "film_website": "",
     "filmmaker_bio": "",
     "total_budget": "",
     "amount_seeking": "",

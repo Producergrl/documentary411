@@ -51,6 +51,12 @@
       <p class="hint" style="color:var(--red);">{{ errors.cause_area }}</p>
     {% endif %}
 
+    <label for="film_website">Film or Project Website (optional)</label>
+    <input type="text" id="film_website" name="film_website"
+           value="{{ values.film_website or '' }}"
+           placeholder="e.g. YourFilm.com">
+    <p class="hint">Included in your email signatures and Letters of Enquiry.</p>
+
     <div style="margin-top:24px;">
       <button type="submit" class="btn btn-primary">Save &amp; Continue &rarr;</button>
     </div>

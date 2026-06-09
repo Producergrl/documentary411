@@ -59,6 +59,8 @@ def generate_loe(
         f" Contributions are also welcomed in increments of {increments}."
         if increments else ""
     )
+    film_website  = cfg.get("film_website", "")
+    website_line  = f" and website {film_website}" if film_website else ""
 
     prompt = f"""Write a formal Letter of Enquiry on behalf of {full_name} for the documentary film '{film_title}'.
 
@@ -79,7 +81,7 @@ Write the letter in 5 paragraphs:
 2. A compelling description of the film, its investigation, and why it matters right now.
 3. A specific paragraph connecting this film's mission directly to {org_name}'s stated mission — be precise, not generic.
 4. The funding ask: what {amount_seeking} will accomplish, the distribution reach, and the community impact.
-5. A confident closing inviting next steps, providing the filmmaker's contact and website OpenSecretTheFilm.com.
+5. A confident closing inviting next steps, providing the filmmaker's contact information{website_line}.
 
 Do not include the salutation or sign-off — those will be added separately.
 Do not add headers or labels to each paragraph."""
@@ -180,9 +182,11 @@ def _build_docx(cfg: dict, org_name: str, body_text: str) -> Document:
     title_run.font.color.rgb = RGBColor(0x6B, 0x63, 0x58)
 
     contact_para = doc.add_paragraph()
-    contact_run = contact_para.add_run(
-        f"{cfg.get('email', '')}  |  OpenSecretTheFilm.com"
-    )
+    website      = cfg.get("film_website", "")
+    contact_line = cfg.get("email", "")
+    if website:
+        contact_line = f"{contact_line}  |  {website}" if contact_line else website
+    contact_run  = contact_para.add_run(contact_line)
     contact_run.font.size = Pt(10)
     contact_run.font.color.rgb = RGBColor(0x6B, 0x63, 0x58)
 

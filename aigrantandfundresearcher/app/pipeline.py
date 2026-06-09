@@ -140,6 +140,7 @@ def _run(cfg: dict) -> None:
                 mission=funder.mission or funder.org_name,
                 contact_person=funder.contact_person,
                 anthropic_api_key=anthropic_key,
+                film_website=cfg.get("film_website", ""),
             )
         except ValueError as e:
             _set_status(error=str(e))
