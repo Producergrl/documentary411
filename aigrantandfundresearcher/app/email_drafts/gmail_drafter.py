@@ -81,7 +81,7 @@ def run_oauth_flow() -> tuple[bool, str]:
     if not secrets_path.exists():
         return False, (
             "Google OAuth credentials are missing. "
-            "Please contact support at documentary411.org."
+            "Please contact support at documentary411.com."
         )
 
     try:

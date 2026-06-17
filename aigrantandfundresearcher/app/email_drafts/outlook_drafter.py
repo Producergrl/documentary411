@@ -38,7 +38,7 @@ def run_oauth_flow() -> tuple[bool, str]:
     if not client_id:
         return False, (
             "Microsoft OAuth credentials are missing. "
-            "Please contact support at documentary411.org."
+            "Please contact support at documentary411.com."
         )
 
     state = secrets.token_urlsafe(16)
