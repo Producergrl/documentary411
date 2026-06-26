@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-gumroad-field="name">Sitch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            sitch: {
+              50:  '#fdf4ff',
+              100: '#fae8ff',
+              200: '#f5d0fe',
+              300: '#f0abfc',
+              400: '#e879f9',
+              500: '#d946ef',
+              600: '#c026d3',
+              700: '#a21caf',
+              800: '#86198f',
+              900: '#701a75',
+            },
+          },
+          fontFamily: {
+            display: ['"Segoe UI"', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'float':     'float 3s ease-in-out infinite',
+            'float2':    'float 4s ease-in-out infinite 0.5s',
+            'float3':    'float 3.5s ease-in-out infinite 1s',
+            'glow':      'glow 2s ease-in-out infinite alternate',
+            'slide-up':  'slideUp 0.6s ease-out forwards',
+            'fade-in':   'fadeIn 0.8s ease-out forwards',
+            'spin-slow': 'spin 8s linear infinite',
+          },
+          keyframes: {
+            float:   { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            glow:    { '0%': { textShadow: '0 0 10px #e879f9, 0 0 20px #e879f9' }, '100%': { textShadow: '0 0 20px #e879f9, 0 0 60px #e879f9, 0 0 100px #e879f9' } },
+            slideUp: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn:  { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+          },
+        },
+      },
+    };
+
+    // Detect + persist dark mode
+    (function () {
+      const saved = localStorage.getItem('sitch-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+  <style>
+    /* Gradient backgrounds */
+    .hero-bg {
+      background: radial-gradient(ellipse at 60% 0%, rgba(217,70,239,0.25) 0%, transparent 60%),
+                  radial-gradient(ellipse at 0% 80%, rgba(99,102,241,0.2) 0%, transparent 60%),
+                  #09090b;
+    }
+    .dark .hero-bg { background: radial-gradient(ellipse at 60% 0%, rgba(217,70,239,0.3) 0%, transparent 60%),
+                  radial-gradient(ellipse at 0% 80%, rgba(99,102,241,0.25) 0%, transparent 60%),
+                  #09090b; }
+
+    /* Card tiles */
+    .card-tile {
+      background: linear-gradient(135deg, var(--tile-a), var(--tile-b));
+      border-radius: 16px;
+      aspect-ratio: 3/4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .card-tile::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 60%;
+      height: 60%;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .card-tile-a { --tile-a: #7c3aed; --tile-b: #d946ef; }
+    .card-tile-b { --tile-a: #0891b2; --tile-b: #6d28d9; }
+    .card-tile-c { --tile-a: #db2777; --tile-b: #7c3aed; }
+    .card-tile-d { --tile-a: #059669; --tile-b: #0891b2; }
+
+    /* Noise texture overlay */
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Buy button pulse */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(217,70,239,0.6); }
+      70% { box-shadow: 0 0 0 20px rgba(217,70,239,0); }
+      100% { box-shadow: 0 0 0 0 rgba(217,70,239,0); }
+    }
+    .btn-buy { animation: pulse-ring 2.5s infinite; }
+    .btn-buy:hover { animation: none; transform: scale(1.05); }
+
+    /* Emoji card deck display */
+    .deck-wrap { position: relative; width: 160px; height: 220px; }
+    .deck-wrap .c1 { position: absolute; transform: rotate(-8deg) translate(-20px, 10px); }
+    .deck-wrap .c2 { position: absolute; transform: rotate(4deg) translate(20px, 5px); }
+    .deck-wrap .c3 { position: absolute; transform: rotate(0deg); z-index: 2; }
+
+    /* Feature icon blobs */
+    .blob { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    .font-display { letter-spacing: -0.03em; }
+  </style>
+</head>
+
+<body class="bg-zinc-950 text-zinc-100 min-h-screen overflow-x-hidden">
+
+  <!-- ─── NAV ─────────────────────────────────────────── -->
+  <nav class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-800/60">
+    <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+      <span class="font-black text-2xl tracking-tight bg-gradient-to-r from-sitch-400 to-purple-400 bg-clip-text text-transparent">Sitch</span>
+      <div class="flex items-center gap-3">
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
+          aria-label="Toggle dark mode"
+        >
+          <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+          </svg>
+          <svg id="icon-moon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+        <a data-gumroad-action="buy"
+           class="btn-buy cursor-pointer px-4 py-2 rounded-xl font-bold text-sm bg-gradient-to-r from-sitch-500 to-purple-500 text-white shadow-lg transition-all duration-200">
+          Get Sitch →
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────── -->
+  <section class="hero-bg noise relative pt-28 pb-20 px-5 min-h-screen flex flex-col justify-center overflow-hidden">
+
+    <!-- Background orbs -->
+    <div class="absolute top-20 right-0 w-96 h-96 bg-sitch-700/20 rounded-full blur-3xl pointer-events-none animate-float"></div>
+    <div class="absolute bottom-0 left-10 w-64 h-64 bg-indigo-700/20 rounded-full blur-3xl pointer-events-none animate-float2"></div>
+
+    <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Left: copy -->
+      <div class="space-y-7 animate-slide-up">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sitch-900/60 border border-sitch-700/40 text-sitch-300 text-sm font-medium">
+          <span class="w-2 h-2 rounded-full bg-sitch-400 animate-pulse"></span>
+          The social card game for real life
+        </div>
+
+        <h1 class="font-display font-black text-6xl sm:text-7xl xl:text-8xl leading-none tracking-tight">
+          <span class="bg-gradient-to-r from-sitch-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent animate-glow"
+                data-gumroad-field="name">Sitch</span>
+          <span class="block text-zinc-100 text-4xl sm:text-5xl xl:text-6xl mt-2">Handle any<br/>situation.</span>
+        </h1>
+
+        <p class="text-zinc-300 text-xl leading-relaxed max-w-lg" data-gumroad-field="description">
+          The card game that puts you in impossible situations — and finds out exactly who you are.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a data-gumroad-action="buy"
+             class="btn-buy cursor-pointer inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg bg-gradient-to-r from-sitch-500 to-purple-600 text-white shadow-2xl shadow-sitch-900/50 transition-all duration-200">
+            <span>Get Sitch</span>
+            <span class="text-white/80 text-base font-normal" data-gumroad-field="price"></span>
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+          <span class="text-zinc-500 text-sm">Instant download · No app needed</span>
+        </div>
+
+        <!-- Social proof row -->
+        <div class="flex items-center gap-6 pt-2">
+          <div class="flex -space-x-2">
+            <!-- Avatar circles with gradient initials -->
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-orange-400 border-2 border-zinc-950 flex items-center justify-center text-xs font-bold text-white">K</div>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 border-2 border-zinc-950 flex items-center justify-center text-xs font-bold text-white">M</div>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-teal-400 border-2 border-zinc-950 flex items-center justify-center text-xs font-bold text-white">J</div>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-sitch-400 border-2 border-zinc-950 flex items-center justify-center text-xs font-bold text-white">+</div>
+          </div>
+          <p class="text-zinc-400 text-sm">Loved by game nights everywhere</p>
+        </div>
+      </div>
+
+      <!-- Right: card deck visual -->
+      <div class="hidden lg:flex justify-center items-center">
+        <div class="relative w-80 h-96 flex items-center justify-center">
+          <!-- Floating cards -->
+          <div class="absolute card-tile card-tile-b w-52 h-72 animate-float"
+               style="transform: rotate(-12deg) translate(-50px, 20px);">
+            <span class="text-5xl mb-3">🤔</span>
+            <span class="text-base">Would you rather…</span>
+          </div>
+          <div class="absolute card-tile card-tile-c w-52 h-72 animate-float3"
+               style="transform: rotate(8deg) translate(50px, -10px);">
+            <span class="text-5xl mb-3">😬</span>
+            <span class="text-base">Hot take incoming…</span>
+          </div>
+          <div class="absolute card-tile card-tile-a w-52 h-72 animate-float2" style="z-index:3;">
+            <span class="text-6xl mb-4">🎴</span>
+            <span class="text-xl font-black">SITCH</span>
+            <span class="text-sm opacity-80 mt-1">What's your move?</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-zinc-600 text-xs animate-bounce">
+      <span>scroll</span>
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ─── WHAT IS SITCH ─────────────────────────────────── -->
+  <section class="py-24 px-5 bg-zinc-900">
+    <div class="max-w-4xl mx-auto text-center reveal">
+      <h2 class="font-display font-black text-4xl sm:text-5xl mb-6">
+        What's the <span class="bg-gradient-to-r from-sitch-400 to-purple-400 bg-clip-text text-transparent">Sitch?</span>
+      </h2>
+      <p class="text-zinc-300 text-xl leading-relaxed max-w-2xl mx-auto mb-12">
+        Sitch is a fast-paced card game built for the moments that matter — game night, road trips, first dates, friend groups who think they know each other. Spoiler: they don't.
+      </p>
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="reveal bg-zinc-800/50 border border-zinc-700/50 rounded-2xl p-7 text-left">
+          <div class="w-12 h-12 blob bg-gradient-to-br from-sitch-500 to-purple-600 flex items-center justify-center text-2xl mb-4">🃏</div>
+          <h3 class="font-bold text-lg mb-2">Draw a card</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">Each card drops you into a situation. No fluff, no filler — just the good stuff.</p>
+        </div>
+        <div class="reveal bg-zinc-800/50 border border-zinc-700/50 rounded-2xl p-7 text-left" style="transition-delay:0.1s">
+          <div class="w-12 h-12 blob bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-2xl mb-4">🗣️</div>
+          <h3 class="font-bold text-lg mb-2">Own your answer</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">No right or wrong. Just who you really are when things get real.</p>
+        </div>
+        <div class="reveal bg-zinc-800/50 border border-zinc-700/50 rounded-2xl p-7 text-left" style="transition-delay:0.2s">
+          <div class="w-12 h-12 blob bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center text-2xl mb-4">😂</div>
+          <h3 class="font-bold text-lg mb-2">Chaos ensues</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">Debates, confessions, revelations. Every game goes somewhere unexpected.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOW TO PLAY ───────────────────────────────────── -->
+  <section class="py-24 px-5 bg-zinc-950">
+    <div class="max-w-5xl mx-auto">
+      <div class="reveal text-center mb-14">
+        <h2 class="font-display font-black text-4xl sm:text-5xl mb-4">
+          How to play
+        </h2>
+        <p class="text-zinc-400 text-lg">Zero setup. Full chaos. Great memories.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="reveal flex flex-col items-center text-center p-6 rounded-2xl bg-gradient-to-b from-sitch-900/40 to-transparent border border-sitch-800/30">
+          <div class="text-4xl font-black text-sitch-400 mb-3">01</div>
+          <h4 class="font-bold text-base mb-2">Gather your crew</h4>
+          <p class="text-zinc-500 text-sm">2–10 players. The more chaotic, the better.</p>
+        </div>
+        <div class="reveal flex flex-col items-center text-center p-6 rounded-2xl bg-gradient-to-b from-purple-900/40 to-transparent border border-purple-800/30" style="transition-delay:0.1s">
+          <div class="text-4xl font-black text-purple-400 mb-3">02</div>
+          <h4 class="font-bold text-base mb-2">Deal the cards</h4>
+          <p class="text-zinc-500 text-sm">Download, print, or play digitally — your call.</p>
+        </div>
+        <div class="reveal flex flex-col items-center text-center p-6 rounded-2xl bg-gradient-to-b from-indigo-900/40 to-transparent border border-indigo-800/30" style="transition-delay:0.2s">
+          <div class="text-4xl font-black text-indigo-400 mb-3">03</div>
+          <h4 class="font-bold text-base mb-2">Read the sitch</h4>
+          <p class="text-zinc-500 text-sm">Flip a card and drop everyone into the scenario.</p>
+        </div>
+        <div class="reveal flex flex-col items-center text-center p-6 rounded-2xl bg-gradient-to-b from-cyan-900/40 to-transparent border border-cyan-800/30" style="transition-delay:0.3s">
+          <div class="text-4xl font-black text-cyan-400 mb-3">04</div>
+          <h4 class="font-bold text-base mb-2">See who cracks</h4>
+          <p class="text-zinc-500 text-sm">No points. Just pure vibes, laughs, and real talk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── QUOTE / TESTIMONIALS ─────────────────────────── -->
+  <section class="py-24 px-5 bg-zinc-900 overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal text-center mb-12">
+        <h2 class="font-display font-black text-4xl sm:text-5xl mb-4">People are obsessed</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="reveal bg-zinc-800/60 border border-zinc-700/40 rounded-2xl p-6">
+          <div class="text-sitch-400 text-4xl leading-none mb-3">"</div>
+          <p class="text-zinc-300 text-sm leading-relaxed mb-4">We played Sitch at our friend's birthday and ended up talking for 4 hours straight. This game hits different.</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-sitch-400 to-purple-600 flex items-center justify-center text-sm font-bold">T</div>
+            <div>
+              <div class="text-sm font-semibold">Taylor M.</div>
+              <div class="text-xs text-zinc-500">Game Night Host</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal bg-zinc-800/60 border border-zinc-700/40 rounded-2xl p-6" style="transition-delay:0.1s">
+          <div class="text-purple-400 text-4xl leading-none mb-3">"</div>
+          <p class="text-zinc-300 text-sm leading-relaxed mb-4">Brought Sitch on a road trip with coworkers I barely knew. By the end we were best friends. Highly recommend.</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-sm font-bold">J</div>
+            <div>
+              <div class="text-sm font-semibold">Jordan L.</div>
+              <div class="text-xs text-zinc-500">Product Designer</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal bg-zinc-800/60 border border-zinc-700/40 rounded-2xl p-6" style="transition-delay:0.2s">
+          <div class="text-cyan-400 text-4xl leading-none mb-3">"</div>
+          <p class="text-zinc-300 text-sm leading-relaxed mb-4">My family has played this every holiday for the last year. It's the only time my dad laughs until he cries.</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-cyan-500 flex items-center justify-center text-sm font-bold">A</div>
+            <div>
+              <div class="text-sm font-semibold">Alex R.</div>
+              <div class="text-xs text-zinc-500">Family Chaos Manager</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── INCLUDES ─────────────────────────────────────── -->
+  <section class="py-24 px-5 bg-zinc-950">
+    <div class="max-w-4xl mx-auto">
+      <div class="reveal text-center mb-12">
+        <h2 class="font-display font-black text-4xl sm:text-5xl mb-4">What's inside</h2>
+        <p class="text-zinc-400 text-lg">Everything you need. Nothing you don't.</p>
+      </div>
+
+      <div class="reveal grid sm:grid-cols-2 gap-4">
+        <div class="flex items-start gap-4 p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <div class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-sitch-500 to-purple-600 flex items-center justify-center text-lg">📦</div>
+          <div>
+            <h4 class="font-semibold mb-1">Full card deck (printable PDF)</h4>
+            <p class="text-zinc-500 text-sm">Print at home or a copy shop. Fits on standard cardstock.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <div class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-lg">📱</div>
+          <div>
+            <h4 class="font-semibold mb-1">Digital play version</h4>
+            <p class="text-zinc-500 text-sm">Works on any device. No app needed — just open and play.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <div class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center text-lg">🎯</div>
+          <div>
+            <h4 class="font-semibold mb-1">House rules guide</h4>
+            <p class="text-zinc-500 text-sm">Customize the experience for your crew — mild to wild.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <div class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-lg">♾️</div>
+          <div>
+            <h4 class="font-semibold mb-1">Free updates forever</h4>
+            <p class="text-zinc-500 text-sm">New card packs and expansions drop straight to your inbox.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FINAL CTA ─────────────────────────────────────── -->
+  <section class="py-28 px-5 relative overflow-hidden" style="background: radial-gradient(ellipse at 50% 50%, rgba(217,70,239,0.2) 0%, #09090b 70%);">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-sitch-500/50 to-transparent"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto text-center reveal">
+      <div class="text-6xl mb-6">🎴</div>
+      <h2 class="font-display font-black text-5xl sm:text-6xl mb-5 leading-tight">
+        Ready to find out<br/>
+        <span class="bg-gradient-to-r from-sitch-300 to-purple-300 bg-clip-text text-transparent">who you really are?</span>
+      </h2>
+      <p class="text-zinc-400 text-lg mb-10">
+        One download. Infinite game nights.<br/>No batteries. No excuses.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a data-gumroad-action="buy"
+           class="btn-buy cursor-pointer inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-black text-xl bg-gradient-to-r from-sitch-500 to-purple-600 text-white shadow-2xl shadow-sitch-900/60 transition-all duration-200 w-full sm:w-auto justify-center">
+          Get Sitch — <span data-gumroad-field="price"></span>
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      </div>
+
+      <p class="text-zinc-600 text-sm mt-6">Secure checkout by Gumroad · Instant download · 30-day guarantee</p>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────── -->
+  <footer class="bg-zinc-950 border-t border-zinc-800/60 py-10 px-5">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="font-black text-xl bg-gradient-to-r from-sitch-400 to-purple-400 bg-clip-text text-transparent">Sitch</span>
+      <p class="text-zinc-600 text-sm text-center">The social card game for real life. Instant download.</p>
+      <a data-gumroad-action="buy" class="cursor-pointer text-sitch-400 hover:text-sitch-300 text-sm font-semibold transition-colors">
+        Get it now →
+      </a>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPTS ───────────────────────────────────────── -->
+  <script>
+    // Dark mode toggle
+    const toggle = document.getElementById('theme-toggle');
+    const sun = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+
+    function applyTheme(dark) {
+      document.documentElement.classList.toggle('dark', dark);
+      sun.classList.toggle('hidden', !dark);
+      moon.classList.toggle('hidden', dark);
+      localStorage.setItem('sitch-theme', dark ? 'dark' : 'light');
+    }
+
+    // Init icon state
+    const isDark = document.documentElement.classList.contains('dark');
+    applyTheme(isDark);
+
+    toggle.addEventListener('click', function () {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+
+    // Smooth scroll on nav links
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
