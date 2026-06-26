@@ -10,569 +10,529 @@
       darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            fire: {
-              50:  '#fff7ed',
-              100: '#ffedd5',
-              200: '#fed7aa',
-              300: '#fdba74',
-              400: '#fb923c',
-              500: '#f97316',
-              600: '#ea580c',
-              700: '#c2410c',
-              800: '#9a3412',
-              900: '#7c2d12',
-            },
-            ember: {
-              DEFAULT: '#cc1a00',
-              dark:    '#991400',
-              light:   '#ff3319',
-            },
-            gold: {
-              DEFAULT: '#f5a623',
-              light:   '#ffd700',
-              dark:    '#c47d0e',
-            },
-          },
           animation: {
-            'flame':     'flame 2s ease-in-out infinite alternate',
-            'float':     'float 3s ease-in-out infinite',
-            'float2':    'float 4s ease-in-out infinite 0.7s',
-            'float3':    'float 3.5s ease-in-out infinite 1.4s',
-            'shimmer':   'shimmer 2.5s linear infinite',
-            'pulse-glow':'pulseGlow 2s ease-in-out infinite',
+            'float':    'float 3.5s ease-in-out infinite',
+            'float2':   'float 4.2s ease-in-out infinite 0.8s',
+            'shimmer':  'shimmer 3s linear infinite',
+            'fade-up':  'fadeUp 0.6s ease-out forwards',
           },
           keyframes: {
-            flame:     { '0%':   { filter: 'drop-shadow(0 0 8px #f97316) drop-shadow(0 0 20px #ea580c)' },
-                         '100%': { filter: 'drop-shadow(0 0 20px #fbbf24) drop-shadow(0 0 40px #f97316)' } },
-            float:     { '0%,100%': { transform: 'translateY(0)' },     '50%': { transform: 'translateY(-14px)' } },
-            shimmer:   { '0%': { backgroundPosition: '-200% center' }, '100%': { backgroundPosition: '200% center' } },
-            pulseGlow: { '0%,100%': { boxShadow: '0 0 20px rgba(249,115,22,0.4), 0 0 40px rgba(220,38,38,0.2)' },
-                         '50%':    { boxShadow: '0 0 40px rgba(249,115,22,0.8), 0 0 80px rgba(220,38,38,0.4)' } },
+            float:   { '0%,100%': { transform: 'translateY(0)' },    '50%': { transform: 'translateY(-12px)' } },
+            shimmer: { '0%': { backgroundPosition: '-200% center' }, '100%': { backgroundPosition: '200% center' } },
+            fadeUp:  { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
           },
         },
       },
     };
-    (function(){
-      const s = localStorage.getItem('sitch-theme');
-      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    (function () {
+      var s = localStorage.getItem('st'), d = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
     })();
   </script>
   <style>
-    /* ── Layout & reset ── */
     *, *::before, *::after { box-sizing: border-box; }
     body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; margin: 0; }
 
-    /* ── Hero gradient ── */
+    /* ── Hero ── */
     .hero-bg {
-      background: radial-gradient(ellipse 120% 80% at 50% -10%, #ff8c00 0%, #e83e00 40%, #b01c00 70%, #1a0500 100%);
-    }
-    .dark .hero-bg {
-      background: radial-gradient(ellipse 120% 80% at 50% -10%, #c46000 0%, #991400 40%, #6b0e00 70%, #0d0200 100%);
+      background: linear-gradient(160deg, #7c0a00 0%, #c42800 30%, #e85500 60%, #f97316 100%);
     }
 
-    /* ── Gold shimmer text ── */
-    .gold-shimmer {
-      background: linear-gradient(90deg, #c47d0e 0%, #ffd700 30%, #f5a623 50%, #ffd700 70%, #c47d0e 100%);
+    /* ── Gold shimmer ── */
+    .gold {
+      background: linear-gradient(90deg, #b8860b 0%, #ffd700 30%, #f5a623 50%, #ffd700 70%, #b8860b 100%);
       background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
+      -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: shimmer 3s linear infinite;
     }
 
     /* ── Buy button ── */
-    .btn-buy {
-      background: linear-gradient(135deg, #cc1a00 0%, #ff3319 40%, #ff6600 100%);
-      border: 2px solid rgba(255,215,0,0.5);
-      box-shadow: 0 4px 24px rgba(200,30,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 18px 36px; border-radius: 14px;
+      font-weight: 900; font-size: 1.15rem; color: #fff; cursor: pointer;
+      background: linear-gradient(135deg, #991400 0%, #cc2200 40%, #ff4500 100%);
+      border: 2px solid rgba(255,215,0,0.45);
+      box-shadow: 0 6px 28px rgba(180,30,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
     }
-    .btn-buy:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 40px rgba(200,30,0,0.7), 0 0 60px rgba(249,115,22,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
-    }
-    .btn-buy:active { transform: translateY(0) scale(0.99); }
+    .btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 48px rgba(180,30,0,0.7); }
+    .btn:active { transform: scale(0.99); }
+    .btn-lg { padding: 22px 52px; font-size: 1.3rem; border-radius: 18px; }
 
-    /* ── Card scenario tiles ── */
-    .scenario-card {
-      border-radius: 14px;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-      color: white;
-      font-weight: 700;
-    }
-    .scenario-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    /* ── Section divider flame shape ── */
-    .flame-divider {
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-    }
-    .flame-divider svg { display: block; width: 100%; }
-
-    /* ── Scroll reveal ── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.on { opacity: 1; transform: translateY(0); }
 
-    /* ── Feature icon ── */
-    .feat-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
-      flex-shrink: 0;
+    /* ── Age badge ── */
+    .age-card {
+      border-radius: 16px; padding: 22px 18px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      transition: background 0.2s, transform 0.2s;
     }
+    .age-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
 
-    /* ── Star rating ── */
-    .stars { color: #ffd700; letter-spacing: 2px; }
+    /* ── Scenario card ── */
+    .sc {
+      border-radius: 16px; padding: 22px; color: #fff; font-weight: 600; font-size: 0.92rem; line-height: 1.6;
+      position: relative; overflow: hidden;
+    }
+    .sc::before { content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%); pointer-events: none; }
 
-    /* ── Light mode overrides ── */
-    html:not(.dark) .light-card { background: #fff7ed; border-color: #fed7aa; }
-    html:not(.dark) body { background: #fff7ed; color: #1c0a00; }
-    html:not(.dark) .section-alt { background: #fff; }
-    html:not(.dark) .section-main { background: #fff7ed; }
+    /* ── Stat ── */
+    .stat { text-align: center; }
+    .stat-num { font-size: 2.8rem; font-weight: 900; line-height: 1; }
+
+    /* ── Check list ── */
+    .check { display: flex; gap: 12px; align-items: flex-start; }
+    .check-icon { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; }
+
+    /* ── Light mode ── */
+    html:not(.dark) body { background: #fff8f0; color: #1a0800; }
+    html:not(.dark) .dark-section { background: #fff; }
+    html:not(.dark) .age-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); color: #1a0800; }
+    html:not(.dark) .age-card:hover { background: rgba(0,0,0,0.06); }
+    html:not(.dark) .light-text { color: #3a1500; }
+    html:not(.dark) .light-muted { color: #7a4a30; }
   </style>
 </head>
 
 <body class="bg-stone-950 text-white overflow-x-hidden">
 
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  NAVBAR                          ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <nav class="fixed top-0 inset-x-0 z-50 bg-black/60 backdrop-blur-md border-b border-orange-900/40">
-    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-      <!-- Logo wordmark -->
-      <div class="flex items-center gap-2">
-        <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 2 L36 10 L36 28 L20 38 L4 28 L4 10 Z" fill="#cc1a00" stroke="#ffd700" stroke-width="1.5"/>
-          <path d="M20 6 L32 13 L32 27 L20 34 L8 27 L8 13 Z" fill="#991400"/>
-          <path d="M16 22 C14 18 17 14 19 12 C18 16 20 17 21 15 C22 20 25 20 24 24 C23 27 21 28 20 28 C18 28 17 26 16 22Z" fill="#ff6600"/>
-          <path d="M18 24 C17 22 18.5 19 20 18 C19.5 20 21 20.5 21.5 19 C22 22 23 22 22.5 24.5 C22 26.5 21 27 20 27 C19 27 18.5 26 18 24Z" fill="#ffd700"/>
-        </svg>
-        <span class="font-black text-lg tracking-tight text-white">SITCH <span class="text-orange-400 text-xs font-bold uppercase tracking-widest">Family Edition</span></span>
-      </div>
-      <div class="flex items-center gap-3">
-        <button id="theme-toggle" class="p-2 rounded-lg text-orange-300 hover:text-white hover:bg-orange-900/40 transition-colors" aria-label="Toggle light/dark">
-          <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
-          <svg id="icon-moon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-        </button>
-        <a data-gumroad-action="buy" class="btn-buy cursor-pointer px-5 py-2 rounded-xl font-black text-sm text-white tracking-wide">
-          Get It Now →
-        </a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  HERO                            ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <section class="hero-bg relative pt-24 pb-0 overflow-hidden">
-
-    <!-- Ambient glow blobs -->
-    <div class="absolute top-10 left-1/4 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-20 right-1/4 w-56 h-56 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-10 items-center pt-6 pb-16">
-
-      <!-- LEFT: Copy -->
-      <div class="space-y-7">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 border border-orange-500/30 text-orange-300 text-sm font-semibold tracking-wide uppercase">
-          <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
-          Family Edition · Ages 8+
-        </div>
-
-        <div>
-          <!-- Big logo SVG -->
-          <svg class="w-80 sm:w-96 animate-float" viewBox="0 0 420 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#ff6600"/>
-                <stop offset="100%" stop-color="#991400"/>
-              </linearGradient>
-              <linearGradient id="textGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#ff6633"/>
-                <stop offset="40%" stop-color="#cc0000"/>
-                <stop offset="100%" stop-color="#7a0000"/>
-              </linearGradient>
-              <linearGradient id="textShine" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-              <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
-                <stop offset="0%" stop-color="#ff3300"/>
-                <stop offset="50%" stop-color="#ff9900"/>
-                <stop offset="100%" stop-color="#ffee00"/>
-              </linearGradient>
-              <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
-
-            <!-- Shield -->
-            <g transform="translate(10,10)">
-              <!-- Outer shield -->
-              <path d="M60 0 L110 20 L110 75 L60 100 L10 75 L10 20 Z" fill="url(#shieldGrad)" stroke="#ffd700" stroke-width="2"/>
-              <!-- Inner shield -->
-              <path d="M60 8 L102 26 L102 72 L60 94 L18 72 L18 26 Z" fill="#1a0000" opacity="0.7"/>
-              <!-- Inner emblem shield -->
-              <path d="M60 22 L82 33 L82 60 L60 72 L38 60 L38 33 Z" fill="#2d0a00" stroke="#cc4400" stroke-width="1.5"/>
-              <!-- Flame -->
-              <path d="M52 58 C48 50 52 40 57 34 C55 42 60 44 62 40 C64 50 70 50 68 58 C66 66 63 70 60 70 C57 70 54 66 52 58Z" fill="url(#flameGrad)" filter="url(#glow)"/>
-              <path d="M56 62 C54 57 57 51 59 47 C58 52 61 53 62 50 C63 55 66 55 65 61 C64 65 62 67 60 67 C58 67 57 65 56 62Z" fill="#ffee00" opacity="0.9"/>
-            </g>
-
-            <!-- SITCH text -->
-            <text x="130" y="78" font-family="'Arial Black', 'Impact', sans-serif" font-size="80" font-weight="900" fill="url(#textGrad)" letter-spacing="2">SITCH</text>
-            <text x="130" y="78" font-family="'Arial Black', 'Impact', sans-serif" font-size="80" font-weight="900" fill="url(#textShine)" letter-spacing="2">SITCH</text>
-            <!-- 3D shadow layers -->
-            <text x="133" y="81" font-family="'Arial Black', 'Impact', sans-serif" font-size="80" font-weight="900" fill="#4a0000" opacity="0.4" letter-spacing="2" style="z-index:-1">SITCH</text>
-
-            <!-- FAMILY EDITION banner -->
-            <rect x="130" y="90" width="278" height="32" rx="5" fill="#cc1a00"/>
-            <rect x="130" y="90" width="278" height="32" rx="5" fill="url(#textShine)" opacity="0.3"/>
-            <text x="269" y="112" font-family="'Arial Black', system-ui, sans-serif" font-size="16" font-weight="900" fill="#ffd700" text-anchor="middle" letter-spacing="3">FAMILY EDITION</text>
-          </svg>
-        </div>
-
-        <div class="space-y-2">
-          <h1 class="font-black text-3xl sm:text-4xl xl:text-5xl leading-tight text-white drop-shadow-lg">
-            Are you smart<br/>under pressure?
-          </h1>
-          <p class="text-orange-200 text-lg font-semibold tracking-wide">A game of choice &amp; consequence</p>
-        </div>
-
-        <p class="text-orange-100/80 text-lg leading-relaxed max-w-lg" data-gumroad-field="description">
-          The family card game where every scenario tests your thinking — and reveals exactly who you are when it counts.
-        </p>
-
-        <!-- CTA group -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
-          <a data-gumroad-action="buy"
-             class="btn-buy animate-pulse-glow cursor-pointer inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-xl text-white shadow-2xl w-full sm:w-auto justify-center">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8M7 13l-1-5M17 13l1.6 8M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
-            Get Sitch — <span data-gumroad-field="price"></span>
-          </a>
-          <div class="flex items-center gap-3 text-sm text-orange-300">
-            <svg class="w-4 h-4 flex-shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            Instant download · Print &amp; play today
-          </div>
-        </div>
-
-        <!-- Stars -->
-        <div class="flex items-center gap-2">
-          <span class="stars text-lg">★★★★★</span>
-          <span class="text-orange-200 text-sm font-semibold">Loved by families everywhere</span>
-        </div>
-      </div>
-
-      <!-- RIGHT: Floating scenario cards -->
-      <div class="hidden lg:flex justify-center items-end h-[460px] relative pb-0">
-
-        <!-- Card back left -->
-        <div class="absolute scenario-card w-48 animate-float2"
-             style="background:linear-gradient(135deg,#7c2d12,#c2410c); transform:rotate(-10deg) translate(-80px, 30px); box-shadow:0 12px 40px rgba(0,0,0,0.5);">
-          <div class="text-4xl mb-3">🤔</div>
-          <div class="text-sm leading-snug">You find $500 cash on the ground…</div>
-          <div class="absolute bottom-3 right-3 text-orange-300/60 text-xs font-bold uppercase tracking-widest">Sitch</div>
-        </div>
-
-        <!-- Card back right -->
-        <div class="absolute scenario-card w-48 animate-float3"
-             style="background:linear-gradient(135deg,#991400,#ea580c); transform:rotate(7deg) translate(75px, 20px); box-shadow:0 12px 40px rgba(0,0,0,0.5);">
-          <div class="text-4xl mb-3">😬</div>
-          <div class="text-sm leading-snug">Your best friend asks your honest opinion about their idea…</div>
-          <div class="absolute bottom-3 right-3 text-orange-300/60 text-xs font-bold uppercase tracking-widest">Sitch</div>
-        </div>
-
-        <!-- Front card -->
-        <div class="absolute scenario-card w-56 animate-float z-10"
-             style="background:linear-gradient(135deg,#cc1a00,#ff4500,#ff8c00); box-shadow:0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(249,115,22,0.3); transform:translateY(-20px);">
-          <div class="text-center">
-            <div class="text-5xl mb-3">🔥</div>
-            <div class="text-lg font-black mb-1">THE SITCH</div>
-            <div class="text-sm opacity-80 leading-snug mb-4">Your team is counting on you. You know a shortcut but it's risky…</div>
-            <div class="text-xs bg-black/20 rounded-lg py-1 px-2 font-bold tracking-wide">WHAT'S YOUR MOVE?</div>
-          </div>
-        </div>
-
-        <!-- Deck base shadow -->
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-56 h-6 bg-black/40 blur-xl rounded-full"></div>
-      </div>
-    </div>
-
-    <!-- Flame divider into next section -->
-    <div class="flame-divider">
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 60 L0 30 Q80 0 160 25 Q240 50 320 20 Q400 0 480 30 Q560 55 640 20 Q720 0 800 28 Q880 50 960 18 Q1040 0 1120 25 Q1200 48 1280 20 Q1360 0 1440 30 L1440 60 Z" fill="#1c0805"/>
+<!-- ══ NAV ══════════════════════════════════════ -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-black/70 backdrop-blur-md border-b border-orange-900/30">
+  <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <!-- Shield flame icon -->
+      <svg width="26" height="26" viewBox="0 0 40 46" fill="none">
+        <path d="M20 1L38 9V25C38 35 20 45 20 45C20 45 2 35 2 25V9L20 1Z" fill="#cc2200" stroke="#ffd700" stroke-width="1.5"/>
+        <path d="M20 7L33 14V26C33 33 20 41 20 41C20 41 7 33 7 26V14L20 7Z" fill="#7c0a00"/>
+        <path d="M16 30C13 24 16 17 19 14C17 19 21 20 22 17C24 23 28 23 27 28C25.5 33 22 35 20 35C18 35 17 33 16 30Z" fill="#ff6600"/>
+        <path d="M18 32C17 29 18.5 25 20 23C19.5 26 21.5 27 22 24.5C23 28 25 28 24.5 31C24 33.5 22 35 20 35C19 35 18.5 34 18 32Z" fill="#ffd700"/>
       </svg>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  WHAT IS SITCH?                  ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <section class="bg-stone-950 py-24 px-5">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal text-center mb-14">
-        <h2 class="font-black text-4xl sm:text-5xl text-white mb-4">
-          What is <span class="gold-shimmer">Sitch?</span>
-        </h2>
-        <p class="text-stone-400 text-xl max-w-2xl mx-auto leading-relaxed">
-          Sitch drops every player into a real-life scenario — then the pressure is on. Do you play it safe or go bold? There's no hiding who you really are.
-        </p>
-      </div>
-
-      <div class="grid sm:grid-cols-3 gap-6">
-        <div class="reveal bg-gradient-to-b from-stone-900 to-stone-900/50 border border-stone-800 rounded-2xl p-7">
-          <div class="feat-icon bg-gradient-to-br from-red-700 to-orange-600 mb-5">🃏</div>
-          <h3 class="font-black text-lg mb-2 text-white">Draw a scenario</h3>
-          <p class="text-stone-400 text-sm leading-relaxed">Each card puts you in a situation — dilemmas, decisions, and moments that test your values, creativity, and nerve.</p>
-        </div>
-        <div class="reveal bg-gradient-to-b from-stone-900 to-stone-900/50 border border-stone-800 rounded-2xl p-7" style="transition-delay:.1s">
-          <div class="feat-icon bg-gradient-to-br from-orange-600 to-amber-500 mb-5">⚡</div>
-          <h3 class="font-black text-lg mb-2 text-white">Think fast</h3>
-          <p class="text-stone-400 text-sm leading-relaxed">The clock is ticking. Your instincts are on trial. What you say next reveals more about you than you expect.</p>
-        </div>
-        <div class="reveal bg-gradient-to-b from-stone-900 to-stone-900/50 border border-stone-800 rounded-2xl p-7" style="transition-delay:.2s">
-          <div class="feat-icon bg-gradient-to-br from-amber-500 to-yellow-500 mb-5">🏆</div>
-          <h3 class="font-black text-lg mb-2 text-white">Own the outcome</h3>
-          <p class="text-stone-400 text-sm leading-relaxed">There's no right answer — only yours. Debate, laugh, and discover things about each other you never expected.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  SAMPLE SCENARIOS                ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <section style="background:linear-gradient(180deg,#1c0805 0%, #0d0200 100%);" class="py-24 px-5">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal text-center mb-12">
-        <h2 class="font-black text-4xl sm:text-5xl text-white mb-3">Sample scenarios</h2>
-        <p class="text-orange-300 text-lg">A taste of the pressure you're about to face.</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="reveal scenario-card" style="background:linear-gradient(135deg,#7c2d12 0%,#c2410c 100%); transition-delay:.0s">
-          <div class="text-3xl mb-3">🤫</div>
-          <p class="text-sm leading-relaxed mb-3">Your friend tells you a secret about a surprise party — then accidentally invites the guest of honour to the group chat. Do you say something?</p>
-          <div class="text-xs bg-black/25 rounded-lg py-1 px-2 font-bold text-orange-200 inline-block">Choice &amp; Consequence</div>
-        </div>
-        <div class="reveal scenario-card" style="background:linear-gradient(135deg,#9a3412 0%,#ea580c 100%); transition-delay:.1s">
-          <div class="text-3xl mb-3">🧠</div>
-          <p class="text-sm leading-relaxed mb-3">You're in a quiz final. Your teammate whispers the wrong answer with total confidence. You know the right one. Do you correct them out loud?</p>
-          <div class="text-xs bg-black/25 rounded-lg py-1 px-2 font-bold text-orange-200 inline-block">Smart Under Pressure</div>
-        </div>
-        <div class="reveal scenario-card" style="background:linear-gradient(135deg,#7c2d12 0%,#f97316 100%); transition-delay:.2s">
-          <div class="text-3xl mb-3">💰</div>
-          <p class="text-sm leading-relaxed mb-3">You find a wallet with $200 cash and an ID inside. No card reader nearby. You need money for groceries. What do you actually do?</p>
-          <div class="text-xs bg-black/25 rounded-lg py-1 px-2 font-bold text-orange-200 inline-block">Values on the Line</div>
-        </div>
-        <div class="reveal scenario-card" style="background:linear-gradient(135deg,#431407 0%,#c2410c 100%); transition-delay:.3s">
-          <div class="text-3xl mb-3">🏃</div>
-          <p class="text-sm leading-relaxed mb-3">Your team is about to lose the relay race. You're the last runner. You could fake an injury to avoid the embarrassment. Do you?</p>
-          <div class="text-xs bg-black/25 rounded-lg py-1 px-2 font-bold text-orange-200 inline-block">Family Edition</div>
-        </div>
-        <div class="reveal scenario-card" style="background:linear-gradient(135deg,#7c2d12 0%,#b45309 100%); transition-delay:.4s">
-          <div class="text-3xl mb-3">🎂</div>
-          <p class="text-sm leading-relaxed mb-3">You're given credit for an idea that was actually your sibling's. Your boss is right there. Do you speak up or accept the praise?</p>
-          <div class="text-xs bg-black/25 rounded-lg py-1 px-2 font-bold text-orange-200 inline-block">Integrity Check</div>
-        </div>
-        <div class="reveal scenario-card sm:col-span-2 lg:col-span-1" style="background:linear-gradient(135deg,#cc1a00 0%,#ff6600 60%,#ffd700 100%); transition-delay:.5s">
-          <div class="text-center py-4">
-            <div class="text-5xl mb-3">🔥</div>
-            <p class="text-base font-black mb-2">100+ more scenarios inside</p>
-            <p class="text-sm opacity-80 mb-4">Enough for months of game nights</p>
-            <a data-gumroad-action="buy" class="btn-buy cursor-pointer inline-block px-5 py-2.5 rounded-xl font-black text-sm text-white">
-              Get Sitch Now →
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  HOW TO PLAY                     ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <section class="bg-stone-950 py-24 px-5">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal text-center mb-14">
-        <h2 class="font-black text-4xl sm:text-5xl text-white mb-3">How to play</h2>
-        <p class="text-stone-400 text-lg">Open the box. Start the chaos. That's it.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="reveal flex flex-col items-center text-center gap-3" style="transition-delay:.0s">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-700 to-orange-600 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-red-900/40">01</div>
-          <h4 class="font-black text-white">Gather the family</h4>
-          <p class="text-stone-500 text-sm">2–10 players. Ages 8 and up.</p>
-        </div>
-        <div class="reveal flex flex-col items-center text-center gap-3" style="transition-delay:.1s">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-600 to-amber-500 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-orange-900/40">02</div>
-          <h4 class="font-black text-white">Deal the cards</h4>
-          <p class="text-stone-500 text-sm">Print at home or read from any screen.</p>
-        </div>
-        <div class="reveal flex flex-col items-center text-center gap-3" style="transition-delay:.2s">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-amber-900/40">03</div>
-          <h4 class="font-black text-white">Name the sitch</h4>
-          <p class="text-stone-500 text-sm">Read a card aloud. Now everyone's in it.</p>
-        </div>
-        <div class="reveal flex flex-col items-center text-center gap-3" style="transition-delay:.3s">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-400 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-yellow-900/40">04</div>
-          <h4 class="font-black text-white">See who cracks</h4>
-          <p class="text-stone-500 text-sm">No points. Just pressure, laughs, and the truth.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  TESTIMONIALS                    ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <section style="background:linear-gradient(180deg,#0d0200 0%,#1a0500 100%);" class="py-24 px-5">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal text-center mb-12">
-        <h2 class="font-black text-4xl sm:text-5xl text-white mb-2">Families are obsessed</h2>
-        <div class="stars text-2xl mt-2">★★★★★</div>
-      </div>
-      <div class="grid sm:grid-cols-3 gap-5">
-        <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-6">
-          <div class="stars mb-3">★★★★★</div>
-          <p class="text-stone-300 text-sm leading-relaxed mb-5">"We played Sitch at Thanksgiving and it was the first time in years we didn't just talk about the weather. Everyone had opinions. It got real. We loved it."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-red-600 to-orange-500 flex items-center justify-center font-black text-sm text-white">S</div>
-            <div><div class="text-sm font-bold text-white">Sandra K.</div><div class="text-xs text-stone-500">Mom of 3, Texas</div></div>
-          </div>
-        </div>
-        <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-6" style="transition-delay:.1s">
-          <div class="stars mb-3">★★★★★</div>
-          <p class="text-stone-300 text-sm leading-relaxed mb-5">"My 10-year-old asked to play every night this week. The scenarios are clever enough for adults but totally age-appropriate. Perfect balance."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center font-black text-sm text-white">D</div>
-            <div><div class="text-sm font-bold text-white">David R.</div><div class="text-xs text-stone-500">Dad, Chicago</div></div>
-          </div>
-        </div>
-        <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-6" style="transition-delay:.2s">
-          <div class="stars mb-3">★★★★★</div>
-          <p class="text-stone-300 text-sm leading-relaxed mb-5">"Used Sitch at a youth group and the kids were more engaged than anything I've tried in two years. Genuinely impressive how deep the conversations got."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-yellow-400 flex items-center justify-center font-black text-sm text-white">M</div>
-            <div><div class="text-sm font-bold text-white">Michelle T.</div><div class="text-xs text-stone-500">Youth Group Leader</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  WHAT'S INCLUDED                 ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <section class="bg-stone-950 py-24 px-5">
-    <div class="max-w-4xl mx-auto">
-      <div class="reveal text-center mb-12">
-        <h2 class="font-black text-4xl sm:text-5xl text-white mb-3">Everything in the box</h2>
-        <p class="text-stone-400 text-lg">One download. Instant access. Play today.</p>
-      </div>
-      <div class="reveal grid sm:grid-cols-2 gap-4">
-        <div class="flex gap-4 bg-stone-900 border border-stone-800 rounded-2xl p-5 items-start">
-          <div class="feat-icon bg-gradient-to-br from-red-700 to-orange-600 text-2xl">📦</div>
-          <div><h4 class="font-black text-white mb-1">100+ Scenario Cards</h4><p class="text-stone-400 text-sm">Print-ready PDF — crisp on any cardstock.</p></div>
-        </div>
-        <div class="flex gap-4 bg-stone-900 border border-stone-800 rounded-2xl p-5 items-start">
-          <div class="feat-icon bg-gradient-to-br from-orange-600 to-amber-500 text-2xl">📱</div>
-          <div><h4 class="font-black text-white mb-1">Digital Play Version</h4><p class="text-stone-400 text-sm">Works on any phone or tablet. No app download needed.</p></div>
-        </div>
-        <div class="flex gap-4 bg-stone-900 border border-stone-800 rounded-2xl p-5 items-start">
-          <div class="feat-icon bg-gradient-to-br from-amber-500 to-yellow-500 text-2xl">📖</div>
-          <div><h4 class="font-black text-white mb-1">House Rules Guide</h4><p class="text-stone-400 text-sm">Customize the pressure level for any crowd or age.</p></div>
-        </div>
-        <div class="flex gap-4 bg-stone-900 border border-stone-800 rounded-2xl p-5 items-start">
-          <div class="feat-icon bg-gradient-to-br from-yellow-500 to-green-500 text-2xl">♾️</div>
-          <div><h4 class="font-black text-white mb-1">Free Updates Forever</h4><p class="text-stone-400 text-sm">New expansion packs delivered straight to your inbox.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  FINAL CTA                       ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <section style="background:radial-gradient(ellipse at 50% 0%,#7c2d12 0%,#0d0200 70%);" class="py-28 px-5 relative overflow-hidden">
-    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-orange-600/40 to-transparent"></div>
-
-    <!-- Decorative fire orbs -->
-    <div class="absolute left-10 top-20 w-64 h-64 bg-red-700/10 rounded-full blur-3xl pointer-events-none animate-float"></div>
-    <div class="absolute right-10 bottom-20 w-48 h-48 bg-orange-600/10 rounded-full blur-3xl pointer-events-none animate-float2"></div>
-
-    <div class="max-w-3xl mx-auto text-center reveal">
-      <div class="text-6xl mb-6 animate-float">🔥</div>
-      <h2 class="font-black text-5xl sm:text-6xl text-white leading-tight mb-5">
-        Ready to find out<br/>
-        <span class="gold-shimmer">who you really are?</span>
-      </h2>
-      <p class="text-stone-400 text-xl mb-10 leading-relaxed">
-        One download. Print and play in minutes.<br/>No batteries. No excuses. Just the sitch.
-      </p>
-      <a data-gumroad-action="buy"
-         class="btn-buy animate-pulse-glow cursor-pointer inline-flex items-center justify-center gap-3 px-12 py-5 rounded-2xl font-black text-2xl text-white w-full sm:w-auto">
-        Get Sitch — <span data-gumroad-field="price"></span>
-        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-      </a>
-      <p class="text-stone-600 text-sm mt-6">Secure checkout · Instant download · 30-day guarantee</p>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  FOOTER                          ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <footer class="bg-black border-t border-stone-900 py-10 px-5">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        <span class="font-black text-xl text-white">SITCH</span>
-        <span class="text-orange-500 text-xs font-bold uppercase tracking-widest ml-2">Family Edition</span>
+        <span class="font-black text-white tracking-tight">SITCH</span>
+        <span class="text-orange-400 text-xs font-bold ml-1.5 tracking-widest uppercase">Family Edition</span>
       </div>
-      <p class="text-stone-600 text-sm text-center">Are you smart under pressure? · A game of choice &amp; consequence</p>
-      <a data-gumroad-action="buy" class="cursor-pointer text-orange-400 hover:text-orange-300 text-sm font-bold transition-colors">
-        Get it now →
-      </a>
     </div>
-  </footer>
+    <div class="flex items-center gap-3">
+      <button id="theme-toggle" aria-label="Toggle theme" class="p-2 rounded-lg text-orange-400 hover:bg-orange-900/30 transition-colors">
+        <svg id="i-sun" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        <svg id="i-moon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+      <a data-gumroad-action="buy" class="btn" style="padding:10px 20px;font-size:0.9rem;border-radius:10px;">Get Sitch →</a>
+    </div>
+  </div>
+</nav>
 
-  <!-- ╔══════════════════════════════════╗ -->
-  <!-- ║  SCRIPTS                         ║ -->
-  <!-- ╚══════════════════════════════════╝ -->
-  <script>
-    // ── Dark/light toggle ──
-    const toggle = document.getElementById('theme-toggle');
-    const sunIcon = document.getElementById('icon-sun');
-    const moonIcon = document.getElementById('icon-moon');
+<!-- ══ HERO ══════════════════════════════════════ -->
+<section class="hero-bg relative pt-20 pb-0 overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0);background-size:32px 32px;"></div>
 
-    function applyTheme(dark) {
-      document.documentElement.classList.toggle('dark', dark);
-      sunIcon.classList.toggle('hidden', !dark);
-      moonIcon.classList.toggle('hidden', dark);
-      localStorage.setItem('sitch-theme', dark ? 'dark' : 'light');
-    }
-    applyTheme(document.documentElement.classList.contains('dark'));
-    toggle.addEventListener('click', function () {
-      applyTheme(!document.documentElement.classList.contains('dark'));
-    });
+  <div class="max-w-6xl mx-auto px-5 pt-10 pb-16 grid lg:grid-cols-2 gap-12 items-center relative z-10">
 
-    // ── Scroll reveal ──
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
-  </script>
+    <!-- Left -->
+    <div class="space-y-6">
+      <div class="inline-flex items-center gap-2 bg-black/25 border border-white/15 rounded-full px-4 py-1.5 text-sm font-bold text-orange-100 tracking-wide uppercase">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        Family Card Game · Ages 4–Teen
+      </div>
+
+      <!-- Logo -->
+      <svg class="w-72 sm:w-80 animate-float drop-shadow-2xl" viewBox="0 0 380 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6633"/><stop offset="100%" stop-color="#7a0000"/></linearGradient>
+          <linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="60%" stop-color="rgba(255,255,255,0)"/></linearGradient>
+          <linearGradient id="lg3" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#ff3300"/><stop offset="60%" stop-color="#ff9900"/><stop offset="100%" stop-color="#ffee00"/></linearGradient>
+          <filter id="gs"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Shield -->
+        <g transform="translate(6,4)">
+          <path d="M52 0L96 17L96 65L52 88L8 65L8 17Z" fill="url(#lg1)" stroke="#ffd700" stroke-width="1.8"/>
+          <path d="M52 7L89 22L89 62L52 82L15 62L15 22Z" fill="#1a0000" opacity="0.65"/>
+          <path d="M52 19L74 30L74 55L52 66L30 55L30 30Z" fill="#280500" stroke="#cc3300" stroke-width="1.2"/>
+          <path d="M44 52C40 44 43 34 48 28C46 35 50 37 52 33C54 42 59 42 57 50C55 57 52 60 50 60C48 60 46 57 44 52Z" fill="url(#lg3)" filter="url(#gs)"/>
+          <path d="M47 54C46 50 48 45 50 41C49.5 45 51.5 46 52 43.5C53 48 55 48 54.5 52C54 55.5 52.5 57 51 57C49.5 57 48 56 47 54Z" fill="#ffee00" opacity="0.9"/>
+        </g>
+        <!-- SITCH text -->
+        <text x="116" y="70" font-family="'Arial Black','Impact',sans-serif" font-size="72" font-weight="900" fill="url(#lg1)" letter-spacing="1">SITCH</text>
+        <text x="116" y="70" font-family="'Arial Black','Impact',sans-serif" font-size="72" font-weight="900" fill="url(#lg2)" letter-spacing="1">SITCH</text>
+        <text x="118.5" y="73" font-family="'Arial Black','Impact',sans-serif" font-size="72" font-weight="900" fill="#3a0000" opacity="0.35" letter-spacing="1">SITCH</text>
+        <!-- Banner -->
+        <rect x="116" y="82" width="256" height="30" rx="5" fill="#aa1200"/>
+        <rect x="116" y="82" width="256" height="30" rx="5" fill="url(#lg2)" opacity="0.25"/>
+        <text x="244" y="103" font-family="'Arial Black',system-ui,sans-serif" font-size="14" font-weight="900" fill="#ffd700" text-anchor="middle" letter-spacing="3">FAMILY EDITION</text>
+      </svg>
+
+      <div>
+        <h1 class="font-black text-4xl sm:text-5xl leading-tight text-white mb-2">
+          You think you know<br/>what your child<br/>would do.
+        </h1>
+        <p class="text-2xl font-bold text-orange-200 mt-3">You might be wrong.</p>
+      </div>
+
+      <p class="text-orange-100/85 text-lg leading-relaxed max-w-lg">
+        Peer pressure. Online strangers. Body boundaries. Predators. Social media. Secrets. Sitch puts your family in real situations — before life does.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 pt-1">
+        <a data-gumroad-action="buy" class="btn btn-lg">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          Get Sitch — <span data-gumroad-field="price"></span>
+        </a>
+        <div class="flex flex-col justify-center text-sm text-orange-200/70 gap-1">
+          <div>✓ Instant download</div>
+          <div>✓ Print &amp; play today</div>
+          <div>✓ No setup · No pieces</div>
+        </div>
+      </div>
+
+      <!-- Stars -->
+      <div class="flex items-center gap-2 text-sm">
+        <span style="color:#ffd700;letter-spacing:2px;">★★★★★</span>
+        <span class="text-orange-200/60">Trusted by families &amp; educators</span>
+      </div>
+    </div>
+
+    <!-- Right: floating scenario preview cards -->
+    <div class="hidden lg:flex justify-center items-center relative h-[440px]">
+      <div class="sc animate-float2 absolute w-56"
+           style="background:linear-gradient(135deg,#7c2d12,#b45309);transform:rotate(-9deg) translate(-80px,25px);box-shadow:0 14px 48px rgba(0,0,0,0.5);">
+        <div class="text-3xl mb-2">🤔</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-orange-300 mb-1">Ages 7–9</div>
+        <p>Your friend says "don't tell anyone" right before telling you something scary. What do you do?</p>
+      </div>
+      <div class="sc animate-float absolute w-56 z-10"
+           style="background:linear-gradient(135deg,#991400,#e85500,#f97316);box-shadow:0 22px 64px rgba(0,0,0,0.6);transform:translateY(-15px);">
+        <div class="text-center">
+          <div class="text-4xl mb-2">🔥</div>
+          <div class="font-black text-base tracking-wide mb-1">THE SITCH</div>
+          <p class="text-sm opacity-90 mb-3">Someone online you've never met asks where you go to school. What's your move?</p>
+          <div class="grid grid-cols-3 gap-1 text-xs">
+            <div class="bg-black/25 rounded py-1 px-1 text-center">Tell them</div>
+            <div class="bg-black/25 rounded py-1 px-1 text-center">Ignore</div>
+            <div class="bg-black/25 rounded py-1 px-1 text-center">Block + tell</div>
+          </div>
+        </div>
+      </div>
+      <div class="sc animate-float2 absolute w-56"
+           style="background:linear-gradient(135deg,#78350f,#c2410c);transform:rotate(8deg) translate(80px,20px);box-shadow:0 14px 48px rgba(0,0,0,0.5);">
+        <div class="text-3xl mb-2">😬</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-orange-300 mb-1">Teens</div>
+        <p>Your friend's older sibling offers you a ride home but you get a weird feeling. Everyone else thinks it's fine…</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave -->
+  <div style="overflow:hidden;line-height:0;">
+    <svg viewBox="0 0 1440 54" preserveAspectRatio="none" style="display:block;width:100%;" fill="none">
+      <path d="M0 54L0 28Q120 0 240 22Q360 44 480 18Q600 0 720 26Q840 48 960 18Q1080 0 1200 24Q1320 46 1440 22L1440 54Z" fill="#0c0a09"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══ THE PROBLEM ════════════════════════════════ -->
+<section class="bg-stone-950 py-24 px-5">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <h2 class="font-black text-4xl sm:text-5xl text-white mb-5">
+        The best time to practice<br/>a tough decision is
+        <span class="gold"> before it happens.</span>
+      </h2>
+      <p class="text-stone-400 text-xl max-w-2xl mx-auto leading-relaxed">
+        Sitch was created by an award-winning filmmaker after a five-year investigation into child endangerment — and the systems that failed to protect children.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-6 mb-10">
+      <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-7 text-center">
+        <div class="stat-num text-orange-500 mb-2">72<span class="text-2xl">%</span></div>
+        <p class="text-stone-400 text-sm leading-relaxed">of children encounter online pressure before age 12 — most never tell a parent</p>
+      </div>
+      <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-7 text-center" style="transition-delay:.1s">
+        <div class="stat-num text-orange-500 mb-2">1 in 5</div>
+        <p class="text-stone-400 text-sm leading-relaxed">kids receive an unwanted sexual solicitation online every year</p>
+      </div>
+      <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-7 text-center" style="transition-delay:.2s">
+        <div class="stat-num text-orange-500 mb-2">90<span class="text-2xl">%</span></div>
+        <p class="text-stone-400 text-sm leading-relaxed">of abuse is committed by someone the child already knows and trusts</p>
+      </div>
+    </div>
+
+    <div class="reveal bg-gradient-to-r from-orange-950/50 to-red-950/50 border border-orange-800/30 rounded-2xl p-8 text-center max-w-3xl mx-auto">
+      <p class="text-orange-100 text-lg leading-relaxed italic">
+        "These aren't abstract risks. They're real situations children face at school, online, with friends, on a team, or away from home. <strong>Sitch turns essential life skills into a fast, lively family game kids actually want to play.</strong>"
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ════════════════════════════════ -->
+<section style="background:linear-gradient(180deg,#1a0800 0%,#0c0500 100%);" class="py-24 px-5">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <h2 class="font-black text-4xl sm:text-5xl text-white mb-4">A game. Not a lecture.</h2>
+      <p class="text-stone-400 text-xl max-w-xl mx-auto">Every round drops players into a realistic "sitch" — with three possible moves and a wildcard.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <!-- Steps -->
+      <div class="space-y-5">
+        <div class="reveal flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center font-black text-xl text-white" style="background:linear-gradient(135deg,#cc2200,#ff4500);">1</div>
+          <div>
+            <h4 class="font-black text-white text-lg mb-1">Draw a card</h4>
+            <p class="text-stone-400 text-sm leading-relaxed">Each card presents a real situation — peer pressure, online safety, gut instincts, body autonomy, secrets, or social pressure.</p>
+          </div>
+        </div>
+        <div class="reveal flex gap-5 items-start" style="transition-delay:.1s">
+          <div class="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center font-black text-xl text-white" style="background:linear-gradient(135deg,#b84500,#f97316);">2</div>
+          <div>
+            <h4 class="font-black text-white text-lg mb-1">Choose your move</h4>
+            <p class="text-stone-400 text-sm leading-relaxed">Three options per card. Or play the wildcard: <em>"None of the above — I'm going to wow you with my answer."</em> Convince the table and earn double points.</p>
+          </div>
+        </div>
+        <div class="reveal flex gap-5 items-start" style="transition-delay:.2s">
+          <div class="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center font-black text-xl text-white" style="background:linear-gradient(135deg,#a16207,#eab308);">3</div>
+          <div>
+            <h4 class="font-black text-white text-lg mb-1">Defend your decision</h4>
+            <p class="text-stone-400 text-sm leading-relaxed">Make your case. The other players decide. A thirty-second round can become an unforgettable conversation — and a lesson remembered when it matters.</p>
+          </div>
+        </div>
+        <div class="reveal flex gap-5 items-start" style="transition-delay:.3s">
+          <div class="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center font-black text-xl text-white" style="background:linear-gradient(135deg,#166534,#16a34a);">4</div>
+          <div>
+            <h4 class="font-black text-white text-lg mb-1">Discover who they really are</h4>
+            <p class="text-stone-400 text-sm leading-relaxed">Parents discover how their children assess risk under pressure. Kids sharpen their instincts and challenge the adults. Everyone wins.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic cloud -->
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="bg-stone-900 border border-stone-800 rounded-2xl p-7">
+          <h4 class="font-black text-white mb-5 text-lg">What Sitch covers</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-red-900/50 border border-red-800/50 text-red-200">Peer pressure</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-orange-900/50 border border-orange-800/50 text-orange-200">Online strangers</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-amber-900/50 border border-amber-800/50 text-amber-200">Body boundaries</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-red-900/50 border border-red-800/50 text-red-200">Predator awareness</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-orange-900/50 border border-orange-800/50 text-orange-200">Social media safety</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-yellow-900/50 border border-yellow-800/50 text-yellow-200">Gut instincts</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-red-900/50 border border-red-800/50 text-red-200">Keeping secrets</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-orange-900/50 border border-orange-800/50 text-orange-200">Unsafe adults</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-amber-900/50 border border-amber-800/50 text-amber-200">Critical thinking</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-red-900/50 border border-red-800/50 text-red-200">Decision making</span>
+            <span class="px-3 py-1.5 rounded-full text-sm font-semibold bg-orange-900/50 border border-orange-800/50 text-orange-200">Courage to speak up</span>
+          </div>
+          <div class="mt-5 pt-5 border-t border-stone-800">
+            <p class="text-stone-400 text-sm leading-relaxed">
+              Choose your topic category or hit <strong class="text-white">Random</strong> and take your chances.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AGE GROUPS ════════════════════════════════ -->
+<section class="bg-stone-950 py-24 px-5">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-12">
+      <h2 class="font-black text-4xl sm:text-5xl text-white mb-3">Built for every age</h2>
+      <p class="text-stone-400 text-lg">Four age-calibrated groups — so the sitch is always age-appropriate and genuinely challenging.</p>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="reveal age-card" style="transition-delay:0s">
+        <div class="text-4xl mb-3">🧒</div>
+        <div class="font-black text-2xl text-orange-400 mb-1">4–6</div>
+        <div class="text-sm font-bold text-white mb-2">Little Ones</div>
+        <p class="text-stone-500 text-xs leading-relaxed">Simple choices. Big lessons about safety, kindness, and trusting grown-ups.</p>
+      </div>
+      <div class="reveal age-card" style="transition-delay:.1s">
+        <div class="text-4xl mb-3">👧</div>
+        <div class="font-black text-2xl text-orange-400 mb-1">7–9</div>
+        <div class="text-sm font-bold text-white mb-2">Growing Up</div>
+        <p class="text-stone-500 text-xs leading-relaxed">Friendships, secrets, peer influence, and real-world decisions on the horizon.</p>
+      </div>
+      <div class="reveal age-card" style="transition-delay:.2s">
+        <div class="text-4xl mb-3">🧑</div>
+        <div class="font-black text-2xl text-orange-400 mb-1">10+</div>
+        <div class="text-sm font-bold text-white mb-2">Pre-Teen</div>
+        <p class="text-stone-500 text-xs leading-relaxed">Online life, social pressure, body autonomy, and building instincts for harder situations.</p>
+      </div>
+      <div class="reveal age-card" style="transition-delay:.3s">
+        <div class="text-4xl mb-3">🧑‍💻</div>
+        <div class="font-black text-2xl text-orange-400 mb-1">Teen</div>
+        <div class="text-sm font-bold text-white mb-2">Young Adults</div>
+        <p class="text-stone-500 text-xs leading-relaxed">High-stakes scenarios: digital safety, consent, manipulation, and integrity under pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SAMPLE SCENARIOS ════════════════════════════ -->
+<section style="background:linear-gradient(180deg,#0c0500 0%,#1a0800 100%);" class="py-24 px-5">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-12">
+      <h2 class="font-black text-4xl sm:text-5xl text-white mb-3">Real scenarios. Real conversations.</h2>
+      <p class="text-stone-400 text-lg">A taste of what your family will face around the table.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="reveal sc" style="background:linear-gradient(135deg,#7c2d12,#c2410c);transition-delay:0s">
+        <div class="text-xs font-black uppercase tracking-widest text-orange-300 mb-2">Ages 7–9 · Online Safety</div>
+        <p>A person in your favourite game keeps asking personal questions. They say they're 10. Your gut says something's off. What do you do?</p>
+      </div>
+      <div class="reveal sc" style="background:linear-gradient(135deg,#881337,#be123c);transition-delay:.1s">
+        <div class="text-xs font-black uppercase tracking-widest text-pink-300 mb-2">Ages 10+ · Peer Pressure</div>
+        <p>Your whole friend group is doing something you're not comfortable with. They say "it's no big deal" and everyone's watching. What's your move?</p>
+      </div>
+      <div class="reveal sc" style="background:linear-gradient(135deg,#713f12,#a16207);transition-delay:.2s">
+        <div class="text-xs font-black uppercase tracking-widest text-yellow-300 mb-2">Ages 4–6 · Trusted Adults</div>
+        <p>A grown-up you know says "don't tell your mum and dad about this — it's our special secret." How do you feel, and what do you do?</p>
+      </div>
+      <div class="reveal sc" style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8);transition-delay:.3s">
+        <div class="text-xs font-black uppercase tracking-widest text-blue-200 mb-2">Teen · Digital Life</div>
+        <p>Someone shares a photo of a classmate without permission in your group chat. Everyone's laughing. You have the power to say something.</p>
+      </div>
+      <div class="reveal sc" style="background:linear-gradient(135deg,#14532d,#15803d);transition-delay:.4s">
+        <div class="text-xs font-black uppercase tracking-widest text-green-200 mb-2">Ages 10+ · Body Boundaries</div>
+        <p>A family friend you've always liked hugs you in a way that makes you uncomfortable. Your parent is in the next room. What do you do?</p>
+      </div>
+      <div class="reveal sc text-center flex flex-col items-center justify-center" style="background:linear-gradient(135deg,#cc1a00,#ff5500,#ffa500);transition-delay:.5s;min-height:160px">
+        <div class="text-4xl mb-3">🎴</div>
+        <p class="font-black text-base mb-1">100+ scenarios inside</p>
+        <p class="text-sm opacity-80 mb-4">Enough for months of game nights</p>
+        <a data-gumroad-action="buy" class="btn" style="padding:12px 24px;font-size:0.9rem;border-radius:10px;">Get Sitch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ════════════════════════════════ -->
+<section class="bg-stone-950 py-24 px-5">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-12">
+      <h2 class="font-black text-4xl sm:text-5xl text-white mb-2">What parents are saying</h2>
+      <div style="color:#ffd700;letter-spacing:3px;font-size:1.4rem;">★★★★★</div>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-6">
+        <div style="color:#ffd700;" class="mb-3">★★★★★</div>
+        <p class="text-stone-300 text-sm leading-relaxed mb-5">"My daughter told me things during this game she'd never said before. It opened doors I didn't know were closed. We play it every week now."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm text-white" style="background:linear-gradient(135deg,#cc2200,#ff6600);">S</div>
+          <div><div class="text-sm font-bold text-white">Sandra K.</div><div class="text-xs text-stone-500">Mum of 2, Houston</div></div>
+        </div>
+      </div>
+      <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-6" style="transition-delay:.1s">
+        <div style="color:#ffd700;" class="mb-3">★★★★★</div>
+        <p class="text-stone-300 text-sm leading-relaxed mb-5">"I'm a school counsellor and I use Sitch with groups. The conversations it generates in 30 minutes take me months to build to in a session. Remarkable."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm text-white" style="background:linear-gradient(135deg,#1d4ed8,#6d28d9);">M</div>
+          <div><div class="text-sm font-bold text-white">Marcus T.</div><div class="text-xs text-stone-500">School Counsellor, Chicago</div></div>
+        </div>
+      </div>
+      <div class="reveal bg-stone-900 border border-stone-800 rounded-2xl p-6" style="transition-delay:.2s">
+        <div style="color:#ffd700;" class="mb-3">★★★★★</div>
+        <p class="text-stone-300 text-sm leading-relaxed mb-5">"My 8-year-old son actually asked to play instead of watch TV. Then he told me, unprompted, that someone online had been 'asking weird questions.' I nearly fell over."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm text-white" style="background:linear-gradient(135deg,#15803d,#0891b2);">J</div>
+          <div><div class="text-sm font-bold text-white">Jamie R.</div><div class="text-xs text-stone-500">Dad, London</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT'S INCLUDED ════════════════════════════ -->
+<section style="background:linear-gradient(180deg,#1a0800 0%,#0c0500 100%);" class="py-24 px-5">
+  <div class="max-w-4xl mx-auto">
+    <div class="reveal text-center mb-12">
+      <h2 class="font-black text-4xl sm:text-5xl text-white mb-3">What you get</h2>
+      <p class="text-stone-400 text-lg">Everything in one instant download. No pieces. No setup. Just play.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4 reveal">
+      <div class="check bg-stone-900 border border-stone-800 rounded-2xl p-5">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#cc2200,#ff4500);">🃏</div>
+        <div><h4 class="font-black text-white mb-0.5">100+ Scenario Cards</h4><p class="text-stone-400 text-sm">Print-ready PDF. Crisp on standard cardstock at any copy shop.</p></div>
+      </div>
+      <div class="check bg-stone-900 border border-stone-800 rounded-2xl p-5">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#b84500,#f97316);">📱</div>
+        <div><h4 class="font-black text-white mb-0.5">Digital Play Version</h4><p class="text-stone-400 text-sm">Works on any phone, tablet, or laptop. No app needed.</p></div>
+      </div>
+      <div class="check bg-stone-900 border border-stone-800 rounded-2xl p-5">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#a16207,#eab308);">📖</div>
+        <div><h4 class="font-black text-white mb-0.5">Parent &amp; Educator Guide</h4><p class="text-stone-400 text-sm">How to use Sitch to open conversations — at home, at school, on the road.</p></div>
+      </div>
+      <div class="check bg-stone-900 border border-stone-800 rounded-2xl p-5">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#166534,#16a34a);">♾️</div>
+        <div><h4 class="font-black text-white mb-0.5">Free Updates Forever</h4><p class="text-stone-400 text-sm">New card packs delivered to your inbox as they're released.</p></div>
+      </div>
+    </div>
+    <p class="reveal text-center text-stone-500 text-sm mt-6">
+      Play at home, on a sleepover, on vacation, or during that family road trip everyone is already dreading.
+    </p>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ════════════════════════════════ -->
+<section class="hero-bg relative py-28 px-5 overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0);background-size:32px 32px;"></div>
+  <div class="max-w-3xl mx-auto text-center reveal relative z-10">
+    <div class="text-5xl mb-5 animate-float">🔥</div>
+    <h2 class="font-black text-5xl sm:text-6xl text-white leading-tight mb-5">
+      How smart is your<br/>
+      <span class="gold">child under pressure?</span>
+    </h2>
+    <p class="text-orange-100/80 text-xl leading-relaxed mb-10 max-w-xl mx-auto">
+      The best time to consider an unsafe 'sitch' is before it happens.
+      <br/><strong class="text-white">One download. Instant access. Play tonight.</strong>
+    </p>
+    <a data-gumroad-action="buy" class="btn btn-lg">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Get Sitch — <span data-gumroad-field="price"></span>
+    </a>
+    <p class="text-orange-200/40 text-sm mt-6">Secure checkout · Instant download · 30-day guarantee</p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════ -->
+<footer class="bg-black border-t border-stone-900 py-10 px-5">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div>
+      <span class="font-black text-white">SITCH</span>
+      <span class="text-orange-500 text-xs font-bold tracking-widest uppercase ml-2">Family Edition</span>
+    </div>
+    <p class="text-stone-600 text-sm text-center">Are you smart under pressure? · A game of choice &amp; consequence</p>
+    <a data-gumroad-action="buy" class="cursor-pointer text-orange-400 hover:text-orange-300 text-sm font-bold transition-colors">Get it now →</a>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ════════════════════════════════════ -->
+<script>
+  // Theme toggle
+  var tt = document.getElementById('theme-toggle');
+  var is = document.getElementById('i-sun'), im = document.getElementById('i-moon');
+  function applyTheme(dark) {
+    document.documentElement.classList.toggle('dark', dark);
+    is.classList.toggle('hidden', !dark); im.classList.toggle('hidden', dark);
+    localStorage.setItem('st', dark ? 'dark' : 'light');
+  }
+  applyTheme(document.documentElement.classList.contains('dark'));
+  tt.addEventListener('click', function(){ applyTheme(!document.documentElement.classList.contains('dark')); });
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
 </body>
 </html>
