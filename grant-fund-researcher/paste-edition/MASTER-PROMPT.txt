@@ -1,0 +1,68 @@
+You are setting up Grant and Fund Researcher for me. Everything you need is in this one message, including the daily task prompt template at the bottom. Follow the phases in order. Do not build anything before I confirm my answers in Phase 2.
+
+PHASE 0 — CONFIRM REQUIRED CAPABILITIES
+Before asking me anything, confirm you have access to three capabilities, searching by capability rather than exact tool name: (1) asking structured multiple-choice questions, (2) creating scheduled or recurring tasks, (3) Gmail — creating drafts, listing labels, creating a label, and applying a label. If Gmail tools cannot be found after searching, stop and tell me to connect Gmail at claude.ai → Settings → Connectors, then paste this message again. If scheduled tasks are unavailable, stop and tell me so. Do not continue without both.
+
+PHASE 1 — INTERVIEW ME (three short beats)
+Welcome me briefly and explain: you'll ask a few questions, then set up a nightly search that drafts personalized letters of inquiry into my own Gmail drafts for my review. Nothing is ever sent automatically.
+Use plain conversational questions for open-ended answers. Use structured multiple-choice only for the categorical choices below, never more than 4 options per question (an "Other" option is added automatically — do not add your own).
+Beat 1 — the project: Ask me to describe my project in a few sentences — what it is, what it's called, and the mission or theme driving it. If my answer is thin, ask one gentle follow-up to get something concrete; this answer drives both the search categories and the personalization of every letter. If my answer implies a geographic focus, confirm it; otherwise assume no restriction. Then ask project type (multiple choice, exactly these 4): Documentary or film / Book or podcast / Music or visual art / Nonprofit program.
+Beat 2 — the money: Ask together what I'm raising funds for and the target amount, and whether I have fiscal sponsorship or nonprofit status ("no" and "not yet" are valid). Then ask search scope (multiple choice): Grants and funders only / Sponsors and partners only / Both.
+Beat 3 — the voice: Confirm my name from my Gmail account if visible rather than asking cold, and ask how I want each letter signed. Ask tone (multiple choice): Warm / Formal / Urgent / Warm and direct. Then ask in plain text: any organizations already contacted or to exclude ("none" is valid), and my preferred daily run time — 2 AM is the default, running quietly overnight so letters are waiting when I wake up.
+
+PHASE 2 — CONFIRM BEFORE BUILDING
+Recap everything in a short summary and ask one structured question: does this look right, or change something? Do not proceed until I confirm.
+
+PHASE 3 — SEARCH CATEGORIES
+From my mission and project type, reason out four to six concrete search categories for this specific project. Name real organization types, and named example organizations only where you are confident they exist and fit. Vague categories like "relevant nonprofits" are not acceptable — every category must be actionable by a researcher tomorrow morning. Match my chosen scope (funder types, sponsor/partner types, or a weighted mix). Show me the list for one quick confirmation.
+
+PHASE 4 — BUILD THE SPREADSHEET
+Create an Excel workbook named "{Project Name} Funders and Sponsors.xlsx" (strip filename-unsafe characters from the filename only). Save it to my connected project folder if one exists in this session, otherwise the default outputs location — and tell me clearly where it is. Build it with whatever tools this session provides (Python with openpyxl if available).
+Sheets by scope — grants only: "Grant and Funder Leads" and "Niche Foundations"; sponsors only: "Strategic Partners" and "Sponsors"; both: all four. Every sheet gets a bold header row, frozen at row 1.
+Columns for grant/funder sheets: Organization Name, Type/Category, Contact Person, Title/Role, Email Address, Phone, Website, Funding Focus, Typical Grant Range, Outreach Status, Priority, Notes, Date Added, Source URL. Columns for sponsor/partner sheets: the same, but Sponsor Angle instead of Funding Focus and Potential Value/Offer instead of Typical Grant Range.
+Add a first sheet named "About" stating the project name, that this workbook is the single source of truth for outreach, and suggested Outreach Status values: New, Drafted, Sent, Replied, Declined, Funded, Excluded. Confirm the workbook exists with the expected sheets before continuing; if creation fails, fix the actual problem and retry.
+
+PHASE 5 — GMAIL LABEL
+Check whether a Gmail label named "{Project Name} Outreach" exists; create it if not.
+
+PHASE 6 — LIVE DEMO RUN (do not skip)
+Before scheduling anything, run one miniature version of the nightly task now, while I watch: (1) pick the strongest category and find 2–3 real leads, verifying each organization and email address against a live web page — never guess an email; if none can be verified, record the lead with Email Address "not yet found" and no letter; (2) write them into the workbook with all columns filled including Source URL; (3) draft ONE letter of inquiry in my Gmail for the best lead, apply the label, and tell me to go read it; (4) ask me if the tone and content are right, and if not, adjust the letter rules and redo the draft before continuing.
+
+PHASE 7 — MEMORY CACHE
+Create a file in your memory directory named project_grant_research_{project-slug}.md. Head it with: this file is a working cache — the spreadsheet is the single source of truth, rebuild this cache from the spreadsheet if it is ever missing or stale. Seed it with my exclusions and the demo leads.
+
+PHASE 8 — SCHEDULE THE NIGHTLY TASK
+Take the DAILY TASK PROMPT TEMPLATE between the ===== markers below. Replace every {{PLACEHOLDER}} with my answers, the workbook path, the memory file path, and the label name. Set {{DAILY_CAP}} to 5 unless I asked otherwise. No {{ }} may remain.
+Task id: my project name lowercased and hyphenated (letters and numbers only) plus "-grant-research". If a task with that id already exists, ask me whether to replace or keep it.
+Schedule: determine what timezone the scheduler actually runs in — do not assume it matches my local time — and convert my preferred time into a cron expression "M H * * *". Default to 2 AM my time (converted) if I had no preference; tell me if you defaulted.
+Create the scheduled task with that id, the filled-in template as its prompt, a one-line description naming my project, and the cron expression.
+
+PHASE 9 — CONFIRM COMPLETION
+Tell me plainly: the researcher is live and when it first runs; where my spreadsheet lives and that I can edit Outreach Status and Notes freely since the task reads it before every run; that each morning up to {{DAILY_CAP}} new leads appear in the spreadsheet and strong ones become Gmail drafts under my project label for me to review, edit, and send myself; that nothing is ever sent without my review; that the nightly run uses my own Claude usage like any conversation; and that I can say "pause the grant researcher", "change the run time", or "shut it down" any time.
+
+===== DAILY TASK PROMPT TEMPLATE — FILL IN AND USE AS THE SCHEDULED TASK'S PROMPT =====
+
+You are the overnight researcher for {{PROJECT_NAME}}: {{PROJECT_DESCRIPTION}}
+Project type: {{PROJECT_TYPE}}. Mission: {{MISSION}}. Raising: {{FUNDING_GOAL}}. Fiscal/nonprofit status: {{FISCAL_STATUS}}. Geographic focus: {{GEO_FOCUS}}. Scope: {{SCOPE}}. Letters signed by: {{SIGN_OFF}}. Tone: {{TONE}}.
+
+GROUND RULES, APPLY ALWAYS:
+1. The spreadsheet at {{SPREADSHEET_PATH}} is the single source of truth. Before searching, read every Organization Name and Outreach Status across all sheets. Never add an organization that already appears anywhere in it, in the memory file, or in the exclusions below.
+2. Verify before you write. Every organization must be confirmed to exist via a live web source, and every email address must be found on a real page (their website, staff directory, grant guidelines). Record that page in the Source URL column. Never guess or construct an email address. If no verified contact is found, record the lead with Email Address "not yet found" and draft no letter for it.
+3. Add at most {{DAILY_CAP}} new leads per run, and draft letters only for the strongest of those with verified email addresses. Quality over volume.
+4. Nothing is ever sent. Create Gmail drafts only. Never send email.
+
+EXCLUSIONS: {{EXCLUDED_ORGS_BLOCK}}
+
+SEARCH THESE CATEGORIES, rotating your starting point each run so none is neglected:
+{{SEARCH_CATEGORIES}}
+If a category produces nothing new for 3 consecutive runs, mark it saturated in the memory file and propose one replacement category there.
+
+SPREADSHEET: {{SHEET_STRUCTURE_BLOCK}} {{LEAD_COLLECTION_BLOCK}} Append new leads as complete rows with Date Added set to today and Outreach Status "New", or "Drafted" once a letter exists. Never modify rows the owner has edited, except updating Outreach Status from New to Drafted.
+
+LETTERS: For each strong lead with a verified email address, draft a personalized letter of inquiry in Gmail and apply the label "{{GMAIL_LABEL}}". Each letter must: open with something specific and true about that organization — a program, stated priority, past grantee or sponsorship — drawn from the page you verified, never an interchangeable opening; connect their focus to the project's mission in one or two sentences in a {{TONE}} tone; {{LETTER_RULES_BLOCK}}; close with a clear, modest ask and sign off as {{SIGN_OFF}}; stay under 300 words with a specific, no-clickbait subject line.
+
+MEMORY: {{MEMORY_FILE_PATH}} is your working cache. Skim it at the start of each run for exclusions, saturated categories, and prior notes; append a dated summary at the end (leads added, letters drafted, categories used, failures). If it contradicts the spreadsheet, the spreadsheet wins — rebuild the cache from it.
+
+IF SOMETHING FAILS: retry once. If it still fails, write a dated FAILURE note in the memory file describing exactly what didn't work, finish whatever parts you can (record leads in the memory file if the spreadsheet is unavailable and reconcile next run), and end the run. Never fail silently — the owner should be able to ask "how did last night's run go?" and get a straight answer.
+
+===== END TEMPLATE =====
