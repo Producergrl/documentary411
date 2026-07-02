@@ -11,14 +11,17 @@ until you send it.
 
 ## What you need
 
-- A Claude account with **Skills** and **scheduled tasks** available
+- A paid Claude plan with the **Claude desktop app** — setup and the
+  nightly runs happen in **Cowork mode**, which is where Claude can
+  create your spreadsheet and schedule tasks
 - The **Gmail connector** enabled (claude.ai → Settings → Connectors → Gmail)
 
 ## Install
 
 1. Go to claude.ai → Settings → Capabilities → Skills and upload this folder
    (SKILL.md, task-template.md, build_workbook.py) as a skill.
-2. Start a new conversation and say: **"Set up Grant and Fund Researcher."**
+2. Open the Claude desktop app in **Cowork mode**, start a new session,
+   and say: **"Set up Grant and Fund Researcher."**
 3. Answer a short interview about your project (about 5 minutes). Before
    anything is scheduled, the skill runs a live demo — it finds 2–3 real
    leads and drafts one sample letter into your Gmail so you can approve the

@@ -12,7 +12,10 @@ No installation. No files to upload. No API keys. Nothing technical.
 2. **Open the file `MASTER-PROMPT.txt`** that came with this purchase.
    Select everything in it (Ctrl+A / Cmd+A), and copy it.
 
-3. **Start a new conversation with Claude** and paste the whole thing in.
+3. **Open the Claude desktop app, switch to Cowork mode, start a new
+   session, and paste the whole thing in.** (Cowork matters: it's the
+   mode where Claude can create your spreadsheet and schedule the
+   nightly run. Regular chat can't do either.)
    Claude takes over from there: it interviews you about your project,
    builds your funder-tracking spreadsheet, drafts a sample letter into
    your Gmail for your approval, and schedules the nightly research run.
@@ -21,8 +24,9 @@ That's the entire setup. About five minutes of answering questions.
 
 ## What you need
 
-- A paid Claude plan (the researcher runs as scheduled tasks on your
-  own account — there are no extra fees, subscriptions, or API keys)
+- A paid Claude plan with the **Claude desktop app** (the setup runs in
+  Cowork mode; the researcher runs as scheduled tasks on your own
+  account — there are no extra fees, subscriptions, or API keys)
 - Gmail connected, per step 1
 
 ## Every night after that
