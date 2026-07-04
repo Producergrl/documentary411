@@ -1,0 +1,11 @@
+{
+  "_comment": "External links used by purchase/download buttons. No secret keys — payment is handled entirely by external Stripe Payment Links. Buttons on the pages use these URLs as plain links.",
+  "stripePaymentLinks": {
+    "fundingLabSystem": "https://buy.stripe.com/8x2cN4abZ9IB32C55F6J200"
+  },
+  "placeholders": {
+    "tallyFormUrl": "[TALLY_FORM_URL]",
+    "reportPdfUrl": "[REPORT_PDF_URL]",
+    "physicalAddress": "[PHYSICAL_ADDRESS]"
+  }
+}
