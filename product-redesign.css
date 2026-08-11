@@ -103,13 +103,7 @@ a:hover{color:#c84e0d}
   background:
     linear-gradient(110deg,rgba(251,247,240,1) 0%,rgba(251,247,240,1) 64%,rgba(245,239,230,.96) 100%);
 }
-.hero::after{
-  content:'';
-  position:absolute;
-  top:0;right:0;
-  width:11px;height:100%;
-  background:linear-gradient(var(--teal) 0 25%,var(--teal2) 25% 50%,var(--orange) 50% 75%,var(--gold) 75% 100%);
-}
+.hero::after{display:none}
 .hero .wrap{position:relative;z-index:2}
 .hero h1{max-width:850px;margin-bottom:.32em}
 .hero .subhead{max-width:820px}
@@ -226,7 +220,6 @@ a:hover{color:#c84e0d}
   body{font-size:16px}
   section{padding:52px 0}
   .hero{padding:62px 0 50px}
-  .hero::after{width:7px}
   .wrap{padding:0 18px}
   .btn{display:block;text-align:center}
 }
