@@ -1,15 +1,27 @@
 const fs = require('fs');
 const path = require('path');
 
-const file = path.join(__dirname, 'index.html');
-let html = fs.readFileSync(file, 'utf8');
+function injectStyles(fileName, styleTags) {
+  const file = path.join(__dirname, fileName);
+  let html = fs.readFileSync(file, 'utf8');
+  for (const tag of styleTags) {
+    if (!html.includes(tag)) {
+      html = html.replace('</head>', `  ${tag}\n</head>`);
+    }
+  }
+  fs.writeFileSync(file, html);
+  return html;
+}
 
-const styles = [
+/* Homepage */
+const homeFile = path.join(__dirname, 'index.html');
+let html = fs.readFileSync(homeFile, 'utf8');
+
+const homeStyles = [
   '<link rel="stylesheet" href="/redesign.css">',
   '<link rel="stylesheet" href="/redesign-v2.css">'
 ];
-
-for (const tag of styles) {
+for (const tag of homeStyles) {
   if (!html.includes(tag)) {
     html = html.replace('</head>', `  ${tag}\n</head>`);
   }
@@ -32,6 +44,12 @@ html = html.replace(
 );
 
 html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
+fs.writeFileSync(homeFile, html);
 
-fs.writeFileSync(file, html);
-console.log('Documentary411 refined redesign injected into index.html');
+/* Product / strategy pages: visual layer only. */
+const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
+['funding-lab.html', 'festival-strategy.html'].forEach(fileName => {
+  injectStyles(fileName, [productStyle]);
+});
+
+console.log('Documentary411 redesign applied to homepage and product pages');
