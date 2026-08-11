@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
+  <meta name="robots" content="noindex,nofollow">
   <title>Welcome — The 90-Day Festival Strategy — Documentary411</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/product-redesign.css">
+  <style>
+    .access-panel{max-width:760px;margin:28px 0 0;padding:24px 26px;background:#fff;border:1px solid rgba(7,63,69,.12);border-left:5px solid #f36a16;border-radius:12px;box-shadow:0 12px 34px rgba(7,63,69,.06)}
+    .access-panel p{margin:0 0 12px}.access-panel p:last-child{margin-bottom:0}
+    .access-error{color:#9c3c2b}.access-wait{color:#526a6d}
+  </style>
 </head>
 <body>
 
@@ -21,13 +27,19 @@
 
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow">You're in</p>
+      <p class="eyebrow">Payment received</p>
       <h1>Start the clock. You have 90 days.</h1>
-      <p class="subhead">The 90-Day Festival Strategy is yours. Your download is below.</p>
-      <p class="lead">A receipt is on its way to your inbox. Bookmark this page so you can come back to your download any time.</p>
+      <p class="subhead">We're confirming your Stripe payment now. Your PDF will appear below as soon as verification completes.</p>
 
-      <div class="cta-row">
-        <a class="btn btn-primary" href="/downloads/festival-strategy-90-days-fs90k4t7.pdf" download>Download the Strategy (PDF)</a>
+      <div id="access-panel" class="access-panel">
+        <p id="access-status" class="access-wait"><strong>Confirming your purchase…</strong></p>
+        <div id="download-area" style="display:none">
+          <p><strong>Your Festival Strategy is ready.</strong> Save the PDF somewhere easy to find before you begin.</p>
+          <div class="cta-row">
+            <a id="festival-download" class="btn btn-primary" href="#" download>Download the Strategy (PDF)</a>
+          </div>
+          <p id="receipt-note" class="muted"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -68,5 +80,37 @@
     </div>
   </footer>
 
+  <script>
+    async function verifyPurchase() {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+      const status = document.getElementById('access-status');
+      const downloadArea = document.getElementById('download-area');
+      const downloadLink = document.getElementById('festival-download');
+      const receiptNote = document.getElementById('receipt-note');
+
+      if (!sessionId) {
+        status.className = 'access-error';
+        status.innerHTML = '<strong>We could not verify a purchase on this page.</strong> If you just paid, email admin@documentary411.com and we’ll help immediately.';
+        return;
+      }
+
+      try {
+        const response = await fetch('/.netlify/functions/verify-festival-purchase?session_id=' + encodeURIComponent(sessionId));
+        const data = await response.json();
+        if (!response.ok || !data.paid) throw new Error('Payment not verified');
+
+        status.style.display = 'none';
+        downloadLink.href = '/downloads/festival-strategy-90-days-fs90k4t7.pdf';
+        downloadArea.style.display = 'block';
+        if (data.email) receiptNote.textContent = 'Stripe will send the purchase receipt to ' + data.email + '.';
+      } catch (error) {
+        status.className = 'access-error';
+        status.innerHTML = '<strong>Your download is not unlocked yet.</strong> If payment completed, refresh this page once. If it still does not unlock, email admin@documentary411.com.';
+      }
+    }
+
+    verifyPurchase();
+  </script>
 </body>
 </html>
