@@ -7,24 +7,12 @@ const TIERS = {
     description: 'One specific question, written answer within 2 business days.',
     amount: 5000,
     mode: 'payment' as const,
-    successPath: '/?ask=success&tier=question',
-    cancelPath: '/?ask=cancelled#ask-a-pro',
   },
   consult: {
     name: 'Ask a Pro — Professional Consult (1 hour)',
     description: '60-minute one-on-one Zoom consult with pre-call prep and written follow-up.',
     amount: 50000,
     mode: 'payment' as const,
-    successPath: '/?ask=success&tier=consult',
-    cancelPath: '/?ask=cancelled#ask-a-pro',
-  },
-  'festival-strategy': {
-    name: 'The 90-Day Festival Strategy',
-    description: 'The complete 90-day festival preparation playbook for documentary and independent filmmakers.',
-    amount: 9900,
-    mode: 'payment' as const,
-    successPath: '/welcome-festival.html?session_id={CHECKOUT_SESSION_ID}',
-    cancelPath: '/festival-strategy.html?checkout=cancelled',
   },
 }
 
@@ -33,12 +21,10 @@ export default async (req: Request, context: Context) => {
     return Response.json({ error: 'Method not allowed' }, { status: 405 })
   }
 
-  // Netlify Functions v2 exposes runtime variables through Netlify.env.
-  // process.env is retained as a safe fallback for compatibility.
-  const secretKey = Netlify.env.get('STRIPE_SECRET_KEY') || process.env.STRIPE_SECRET_KEY
+  const secretKey = Netlify.env.get('STRIPE_SECRET_KEY')
   if (!secretKey) {
     return Response.json(
-      { error: 'STRIPE_SECRET_KEY is not available to this deploy. Check the Netlify Deploy Previews value and Functions scope, then redeploy.' },
+      { error: 'Payments are not yet configured. Set STRIPE_SECRET_KEY in Netlify environment variables.' },
       { status: 503 },
     )
   }
@@ -50,8 +36,7 @@ export default async (req: Request, context: Context) => {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  const tierKey = body.tier as keyof typeof TIERS
-  const tier = body.tier && TIERS[tierKey]
+  const tier = body.tier && TIERS[body.tier as keyof typeof TIERS]
   if (!tier) {
     return Response.json({ error: 'Unknown tier' }, { status: 400 })
   }
@@ -62,7 +47,6 @@ export default async (req: Request, context: Context) => {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: tier.mode,
-      payment_method_types: ['card'],
       line_items: [
         {
           price_data: {
@@ -76,15 +60,15 @@ export default async (req: Request, context: Context) => {
           quantity: 1,
         },
       ],
-      success_url: `${origin}${tier.successPath}`,
-      cancel_url: `${origin}${tier.cancelPath}`,
-      metadata: { tier: tierKey },
+      success_url: `${origin}/?ask=success&tier=${body.tier}`,
+      cancel_url: `${origin}/?ask=cancelled#ask-a-pro`,
+      metadata: { tier: body.tier as string },
     })
 
     return Response.json({ url: session.url })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Checkout could not be created.'
-    return Response.json({ error: `Stripe checkout error: ${message}` }, { status: 500 })
+    return Response.json({ error: message }, { status: 500 })
   }
 }
 
