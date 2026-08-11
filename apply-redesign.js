@@ -46,10 +46,19 @@ html = html.replace(
 html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
 fs.writeFileSync(homeFile, html);
 
-/* Product / strategy pages: visual layer only. */
+/* Shared Documentary411 product/support visual system. Presentation only. */
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
-['funding-lab.html', 'festival-strategy.html'].forEach(fileName => {
+[
+  'funding-lab.html',
+  'festival-strategy.html',
+  'funding-report.html',
+  'funding-sprint.html',
+  'thank-you.html',
+  'welcome-festival.html',
+  'welcome-sprint.html',
+  'welcome-system.html'
+].forEach(fileName => {
   injectStyles(fileName, [productStyle]);
 });
 
-console.log('Documentary411 redesign applied to homepage and product pages');
+console.log('Documentary411 redesign applied across homepage, products and support pages');
