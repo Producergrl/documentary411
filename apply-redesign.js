@@ -17,13 +17,13 @@ for (const tag of styles) {
 
 /* Copy refinements only — URLs, forms, calculators and JavaScript are untouched. */
 html = html.replace(
-  "The Documentary Filmmaker's Complete Resource Directory",
-  'Funding. Festivals. Tools. Community.'
+  /<p class="hero-eyebrow"[^>]*>.*?<\/p>/,
+  '<p class="hero-eyebrow">Funding. Festivals. Tools. Community.</p>'
 );
 
 html = html.replace(
-  '<h1>Every resource your <em>documentary</em> will ever need. All in one place.</h1>',
-  '<h1>Your Insider Advantage for Documentary Filmmaking<span class="hero-dot">.</span></h1>'
+  /<h1>.*?<\/h1>/,
+  '<h1>Your Insider<br>Advantage for<br>Documentary<br>Filmmaking<span class="hero-dot">.</span></h1>'
 );
 
 html = html.replace(
