@@ -33,10 +33,12 @@ export default async (req: Request, context: Context) => {
     return Response.json({ error: 'Method not allowed' }, { status: 405 })
   }
 
-  const secretKey = Netlify.env.get('STRIPE_SECRET_KEY')
+  // Netlify Functions v2 exposes runtime variables through Netlify.env.
+  // process.env is retained as a safe fallback for compatibility.
+  const secretKey = Netlify.env.get('STRIPE_SECRET_KEY') || process.env.STRIPE_SECRET_KEY
   if (!secretKey) {
     return Response.json(
-      { error: 'Payments are not yet configured. Set STRIPE_SECRET_KEY in Netlify environment variables.' },
+      { error: 'STRIPE_SECRET_KEY is not available to this deploy. Check the Netlify Deploy Previews value and Functions scope, then redeploy.' },
       { status: 503 },
     )
   }
@@ -82,7 +84,7 @@ export default async (req: Request, context: Context) => {
     return Response.json({ url: session.url })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Checkout could not be created.'
-    return Response.json({ error: message }, { status: 500 })
+    return Response.json({ error: `Stripe checkout error: ${message}` }, { status: 500 })
   }
 }
 
