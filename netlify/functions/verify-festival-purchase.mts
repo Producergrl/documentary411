@@ -6,9 +6,9 @@ export default async (req: Request, _context: Context) => {
     return Response.json({ error: 'Method not allowed' }, { status: 405 })
   }
 
-  const secretKey = Netlify.env.get('STRIPE_SECRET_KEY')
+  const secretKey = Netlify.env.get('STRIPE_SECRET_KEY') || process.env.STRIPE_SECRET_KEY
   if (!secretKey) {
-    return Response.json({ error: 'Payment verification is not configured.' }, { status: 503 })
+    return Response.json({ error: 'STRIPE_SECRET_KEY is not available to this deploy.' }, { status: 503 })
   }
 
   const url = new URL(req.url)
@@ -34,8 +34,9 @@ export default async (req: Request, _context: Context) => {
       amountTotal: session.amount_total || null,
       currency: session.currency || 'usd',
     })
-  } catch {
-    return Response.json({ paid: false, error: 'Unable to verify this checkout session.' }, { status: 400 })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unable to verify this checkout session.'
+    return Response.json({ paid: false, error: message }, { status: 400 })
   }
 }
 
