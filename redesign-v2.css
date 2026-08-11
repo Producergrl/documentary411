@@ -4,13 +4,12 @@
 .nav-links a:nth-child(6),
 .nav-links a:nth-child(7),
 .nav-links a:nth-child(8),
-.nav-links a:nth-child(9),
-.nav-links a:nth-child(11){display:none}
+.nav-links a:nth-child(9){display:none}
 
 .nav-inner{max-width:1280px}
 .nav-logo{margin-right:28px}
 .nav-links{gap:2px}
-.nav-links a{padding:0 10px;font-size:10.5px}
+.nav-links a{padding:0 8px;font-size:10.2px}
 .nav-cta{margin-left:14px}
 
 /* Hero: use a real cinematic filmmaking image while preserving every existing link/function. */
