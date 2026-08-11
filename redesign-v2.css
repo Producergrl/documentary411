@@ -1,0 +1,214 @@
+/* Documentary411 redesign — refinement pass */
+
+/* Keep the desktop navigation clean and closer to the approved mockup. */
+.nav-links a:nth-child(6),
+.nav-links a:nth-child(7),
+.nav-links a:nth-child(8),
+.nav-links a:nth-child(9){display:none}
+
+.nav-inner{max-width:1280px}
+.nav-logo{margin-right:28px}
+.nav-links{gap:2px;overflow:visible}
+.nav-links a{padding:0 8px;font-size:10.2px}
+.nav-cta{margin-left:14px}
+
+/* Festivals owns Fest Near Me as a secondary item instead of a second top-level tab. */
+.nav-dropdown{position:relative;display:flex;align-items:center;height:64px;flex-shrink:0}
+.nav-dropdown>.nav-parent{height:64px;display:flex;align-items:center;gap:4px}
+.nav-caret{font-size:11px;line-height:1;transform:translateY(-1px);opacity:.7}
+.nav-submenu{
+  position:absolute;
+  top:54px;
+  left:0;
+  min-width:150px;
+  padding:7px;
+  background:#fff;
+  border:1px solid rgba(7,63,69,.12);
+  border-radius:8px;
+  box-shadow:0 14px 34px rgba(7,63,69,.14);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-4px);
+  transition:opacity .16s ease,transform .16s ease,visibility .16s ease;
+  z-index:250;
+}
+.nav-submenu a{
+  display:flex!important;
+  height:auto!important;
+  min-height:34px;
+  padding:8px 10px!important;
+  color:var(--teal)!important;
+  border:0!important;
+  border-radius:5px;
+  font-size:10.5px!important;
+  white-space:nowrap;
+}
+.nav-submenu a:hover{background:rgba(243,106,22,.09);color:var(--orange)!important}
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown:focus-within .nav-submenu{opacity:1;visibility:visible;transform:translateY(0)}
+
+/* Hero: use a real cinematic filmmaking image while preserving every existing link/function. */
+.hero{
+  min-height:610px;
+  padding-top:84px;
+  background:var(--ivory);
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  z-index:0;
+  right:0;
+  top:0;
+  width:50%;
+  height:calc(100% - 124px);
+  background-image:
+    linear-gradient(90deg,rgba(7,63,69,.05),rgba(7,63,69,0) 25%),
+    url('https://images.unsplash.com/photo-1492146433370-dea32142adc3?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=72&w=1800');
+  background-size:cover;
+  background-position:center 56%;
+  clip-path:none;
+  opacity:1;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  z-index:1;
+  top:0;
+  right:46.2%;
+  width:74px;
+  height:calc(100% - 124px);
+  background:linear-gradient(90deg,var(--teal) 0 25%,#0d6b6c 25% 50%,var(--orange) 50% 75%,var(--amber) 75% 100%);
+  transform:skewX(18deg);
+  opacity:.98;
+  box-shadow:9px 0 22px rgba(7,63,69,.10);
+}
+
+.hero-eyebrow{
+  max-width:470px;
+  white-space:normal;
+  font-size:11px!important;
+  line-height:1.4;
+}
+.hero h1{
+  max-width:455px;
+  font-size:clamp(45px,4.55vw,62px);
+  line-height:.99;
+}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero .hero-dot{color:var(--orange)}
+.hero-sub{max-width:465px;font-size:15.5px}
+.hero-btns{max-width:500px}
+
+/* Make the proof band read as a deliberate design element, not part of the hero image. */
+.hero-stats{
+  position:relative;
+  z-index:4;
+  min-height:124px;
+  margin-top:46px;
+}
+.stat{padding:10px 48px}
+
+/* Slight refinement to the content sections after seeing the live render. */
+.section{padding-top:72px;padding-bottom:72px}
+.cards{gap:16px}
+.card{padding:22px}
+.card-title{font-size:18.5px;line-height:1.25}
+.card-desc{line-height:1.62}
+
+.fest-finder{border-radius:12px}
+.calc-compact{max-width:820px}
+.newsletter{max-width:1160px;margin-left:auto;margin-right:auto}
+
+/* Desktop calculator: preserve every cost field, but make the tool feel like a single dashboard. */
+@media(min-width:1000px){
+  #festival-calculator{padding-top:52px;padding-bottom:60px}
+  #festival-calculator .section-header{margin-bottom:6px}
+  #festival-calculator .section-desc{margin-bottom:14px}
+  .calc-compact{
+    max-width:1020px;
+    padding:12px;
+    border-radius:10px;
+  }
+  .cc-top{
+    gap:8px;
+    margin-bottom:8px;
+  }
+  .cc-top input[type=text]{padding:5px 8px;font-size:11px}
+  .cc-lbl{font-size:10px;margin-bottom:2px}
+  .cc-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:8px;
+    margin-bottom:8px;
+    align-items:stretch;
+  }
+  .cc-grid>.cc-group:not(.cc-span2){grid-column:span 2}
+  .cc-grid>.cc-span2{grid-column:span 2}
+  .cc-group{
+    padding:7px 9px;
+    border-radius:5px;
+  }
+  .cc-gh{
+    font-size:9px;
+    padding-bottom:4px;
+    margin-bottom:4px;
+    gap:4px;
+  }
+  .cc-sub{font-size:10.5px}
+  .cc-row{padding:1px 0;gap:6px;min-height:27px}
+  .cc-row span{font-size:10px;line-height:1.2}
+  .cc-row input[type=number]{width:68px;padding:3px 5px;font-size:10.5px}
+  .cc-triple{gap:6px;margin-bottom:2px}
+  .cc-triple input[type=number]{padding:3px 5px;font-size:10.5px}
+  .cc-calc{font-size:9.5px;line-height:1.2}
+  .cc-miss,.cc-warn{font-size:7.5px;padding:1px 3px}
+  .cc-results{
+    padding:10px 12px;
+    border-radius:5px;
+  }
+  .cc-totals{
+    margin-bottom:7px;
+    padding-bottom:7px;
+    gap:6px;
+  }
+  .cc-total-main strong{font-size:22px}
+  .cc-total-main span{font-size:10.5px}
+  .cc-total-subs span{font-size:9.5px;line-height:1.2}
+  .cc-breakdown{gap:3px;margin-bottom:6px}
+  .ccb{padding:4px 6px}
+  .ccb span:first-child{font-size:7.5px}
+  .ccbv{font-size:9.5px}
+  .cc-grand span:first-child{font-size:9.5px}
+  .cc-grand span:last-child{font-size:14px}
+  .cc-verdict{font-size:10px;padding:5px 7px;margin-bottom:6px}
+  .cc-dl-btn{padding:8px;font-size:9.5px}
+}
+
+@media(max-width:1050px){
+  .nav-links>a:nth-of-type(4){display:none}
+  .hero::before{width:47%}
+  .hero::after{right:43.2%}
+  .hero h1{max-width:430px;font-size:clamp(42px,5.0vw,56px)}
+  .hero-sub{max-width:430px}
+}
+
+@media(max-width:800px){
+  .nav-links{overflow-x:auto;overflow-y:visible}
+  .nav-submenu{position:fixed;top:58px;left:118px}
+  .hero{
+    padding-top:58px;
+    min-height:auto;
+    background:linear-gradient(145deg,#fbf7f0,#eef5f3);
+  }
+  .hero::before{
+    position:relative;
+    display:block;
+    width:calc(100% + 36px);
+    height:300px;
+    margin:36px -18px 0;
+    background-position:center 55%;
+  }
+  .hero::after{display:none}
+  .hero h1,.hero-sub,.hero-eyebrow,.hero-btns{max-width:100%}
+  .hero h1{font-size:clamp(40px,11vw,54px)}
+  .hero-stats{margin-top:0}
+}
