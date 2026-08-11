@@ -1,0 +1,108 @@
+/* Documentary411 redesign — refinement pass */
+
+/* Keep the desktop navigation clean and closer to the approved mockup. */
+.nav-links a:nth-child(6),
+.nav-links a:nth-child(7),
+.nav-links a:nth-child(8),
+.nav-links a:nth-child(9),
+.nav-links a:nth-child(11){display:none}
+
+.nav-inner{max-width:1280px}
+.nav-logo{margin-right:28px}
+.nav-links{gap:2px}
+.nav-links a{padding:0 10px;font-size:10.5px}
+.nav-cta{margin-left:14px}
+
+/* Hero: use a real cinematic filmmaking image while preserving every existing link/function. */
+.hero{
+  min-height:610px;
+  padding-top:84px;
+  background:var(--ivory);
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  z-index:0;
+  right:0;
+  top:0;
+  width:50%;
+  height:calc(100% - 124px);
+  background-image:
+    linear-gradient(90deg,rgba(7,63,69,.05),rgba(7,63,69,0) 25%),
+    url('https://images.unsplash.com/photo-1492146433370-dea32142adc3?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=72&w=1800');
+  background-size:cover;
+  background-position:center 56%;
+  clip-path:none;
+  opacity:1;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  z-index:1;
+  top:0;
+  right:46.2%;
+  width:74px;
+  height:calc(100% - 124px);
+  background:linear-gradient(90deg,var(--teal) 0 25%,#0d6b6c 25% 50%,var(--orange) 50% 75%,var(--amber) 75% 100%);
+  transform:skewX(18deg);
+  opacity:.98;
+  box-shadow:9px 0 22px rgba(7,63,69,.10);
+}
+
+.hero-eyebrow{max-width:520px}
+.hero h1{
+  max-width:545px;
+  font-size:clamp(45px,5vw,67px);
+  line-height:1.01;
+}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero .hero-dot{color:var(--orange)}
+.hero-sub{max-width:515px;font-size:15.5px}
+.hero-btns{max-width:535px}
+
+/* Make the proof band read as a deliberate design element, not part of the hero image. */
+.hero-stats{
+  position:relative;
+  z-index:4;
+  min-height:124px;
+  margin-top:46px;
+}
+.stat{padding:10px 48px}
+
+/* Slight refinement to the content sections after seeing the live render. */
+.section{padding-top:72px;padding-bottom:72px}
+.cards{gap:16px}
+.card{padding:22px}
+.card-title{font-size:18.5px;line-height:1.25}
+.card-desc{line-height:1.62}
+
+.fest-finder{border-radius:12px}
+.calc-compact{max-width:820px}
+.newsletter{max-width:1160px;margin-left:auto;margin-right:auto}
+
+@media(max-width:1050px){
+  .nav-links a:nth-child(4){display:none}
+  .hero::before{width:47%}
+  .hero::after{right:43.2%}
+  .hero h1{max-width:510px;font-size:clamp(43px,5.4vw,61px)}
+  .hero-sub{max-width:490px}
+}
+
+@media(max-width:800px){
+  .hero{
+    padding-top:58px;
+    min-height:auto;
+    background:linear-gradient(145deg,#fbf7f0,#eef5f3);
+  }
+  .hero::before{
+    position:relative;
+    display:block;
+    width:calc(100% + 36px);
+    height:300px;
+    margin:36px -18px 0;
+    background-position:center 55%;
+  }
+  .hero::after{display:none}
+  .hero h1,.hero-sub,.hero-eyebrow,.hero-btns{max-width:100%}
+  .hero-stats{margin-top:0}
+}
