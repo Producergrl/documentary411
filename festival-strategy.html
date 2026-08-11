@@ -30,10 +30,9 @@
       <p>The difference between those two outcomes is not talent. <strong>It is preparation.</strong> This guide is the tried and tested strategy, phase by phase, week by week, from a producing team that has stood on festival stages accepting awards 75+ times, domestically and internationally.</p>
 
       <div class="cta-row">
-        <a class="btn btn-primary festival-checkout" href="#">Get the Strategy — $99</a>
-        <span class="btn-sub">Secure checkout. Immediate PDF access after payment.</span>
+        <a class="btn btn-primary" href="https://buy.stripe.com/5kQ9AS0Bp5sl6eO69J6J205">Get the Strategy — $99</a>
+        <span class="btn-sub">Secure Stripe checkout. Immediate PDF access after payment.</span>
       </div>
-      <p class="muted checkout-message" style="display:none;margin-top:10px"></p>
     </div>
   </section>
 
@@ -128,12 +127,11 @@
     <div class="wrap">
       <p class="eyebrow">Current price</p>
       <p class="price-line">$99</p>
-      <p class="muted">One payment. Your PDF access page opens immediately after Stripe confirms payment.</p>
+      <p class="muted">One payment through Stripe. Your download page opens immediately after successful payment.</p>
 
       <div class="cta-row">
-        <a class="btn btn-primary festival-checkout" href="#">Get the Strategy — $99</a>
+        <a class="btn btn-primary" href="https://buy.stripe.com/5kQ9AS0Bp5sl6eO69J6J205">Get the Strategy — $99</a>
       </div>
-      <p class="muted checkout-message" style="display:none;margin-top:10px"></p>
     </div>
   </section>
 
@@ -158,7 +156,7 @@
         </details>
         <details>
           <summary>How do I get it?</summary>
-          <p>Immediately after Stripe confirms payment, you'll be taken to your private access page where you can download the full PDF. Questions: <a href="mailto:admin@documentary411.com">admin@documentary411.com</a>.</p>
+          <p>Immediately after successful Stripe checkout, you'll be redirected to your Documentary411 access page where you can download the full PDF. Questions: <a href="mailto:admin@documentary411.com">admin@documentary411.com</a>.</p>
         </details>
         <details>
           <summary>Why is this credible?</summary>
@@ -175,9 +173,8 @@
       <h2>Start the clock. You have 90 days.</h2>
       <p class="lead">The best festival strategy is the one you execute.</p>
       <div class="cta-row">
-        <a class="btn btn-primary festival-checkout" href="#">Get the Strategy — $99</a>
+        <a class="btn btn-primary" href="https://buy.stripe.com/5kQ9AS0Bp5sl6eO69J6J205">Get the Strategy — $99</a>
       </div>
-      <p class="muted checkout-message" style="display:none;margin-top:10px"></p>
       <p class="muted" style="margin-top:18px">Funding your film is the other half of the journey. See <a href="/funding-lab">the Funding Lab</a>.</p>
     </div>
   </section>
@@ -193,41 +190,5 @@
     </div>
   </footer>
 
-  <script>
-    async function startFestivalCheckout(event) {
-      event.preventDefault();
-      const buttons = document.querySelectorAll('.festival-checkout');
-      const messages = document.querySelectorAll('.checkout-message');
-      buttons.forEach(button => {
-        button.style.pointerEvents = 'none';
-        button.textContent = 'Opening secure checkout…';
-      });
-      messages.forEach(message => message.style.display = 'none');
-
-      try {
-        const response = await fetch('/.netlify/functions/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tier: 'festival-strategy' })
-        });
-        const data = await response.json();
-        if (!response.ok || !data.url) throw new Error(data.error || 'Checkout could not be opened.');
-        window.location.href = data.url;
-      } catch (error) {
-        buttons.forEach(button => {
-          button.style.pointerEvents = '';
-          button.textContent = 'Get the Strategy — $99';
-        });
-        messages.forEach(message => {
-          message.textContent = 'Checkout could not be opened. Please try again or email admin@documentary411.com.';
-          message.style.display = 'block';
-        });
-      }
-    }
-
-    document.querySelectorAll('.festival-checkout').forEach(button => {
-      button.addEventListener('click', startFestivalCheckout);
-    });
-  </script>
 </body>
 </html>
