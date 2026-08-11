@@ -44,6 +44,15 @@ html = html.replace(
 );
 
 html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
+
+/* Navigation hierarchy: Festivals is the parent; Fest Near Me sits beneath it.
+   Festival Strategy remains a top-level product tab. */
+html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
+html = html.replace(
+  /<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/,
+  '<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>'
+);
+
 fs.writeFileSync(homeFile, html);
 
 /* Shared Documentary411 product/support visual system. Presentation only. */
