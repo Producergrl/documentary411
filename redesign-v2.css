@@ -8,9 +8,44 @@
 
 .nav-inner{max-width:1280px}
 .nav-logo{margin-right:28px}
-.nav-links{gap:2px}
+.nav-links{gap:2px;overflow:visible}
 .nav-links a{padding:0 8px;font-size:10.2px}
 .nav-cta{margin-left:14px}
+
+/* Festivals owns Fest Near Me as a secondary item instead of a second top-level tab. */
+.nav-dropdown{position:relative;display:flex;align-items:center;height:64px;flex-shrink:0}
+.nav-dropdown>.nav-parent{height:64px;display:flex;align-items:center;gap:4px}
+.nav-caret{font-size:11px;line-height:1;transform:translateY(-1px);opacity:.7}
+.nav-submenu{
+  position:absolute;
+  top:54px;
+  left:0;
+  min-width:150px;
+  padding:7px;
+  background:#fff;
+  border:1px solid rgba(7,63,69,.12);
+  border-radius:8px;
+  box-shadow:0 14px 34px rgba(7,63,69,.14);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-4px);
+  transition:opacity .16s ease,transform .16s ease,visibility .16s ease;
+  z-index:250;
+}
+.nav-submenu a{
+  display:flex!important;
+  height:auto!important;
+  min-height:34px;
+  padding:8px 10px!important;
+  color:var(--teal)!important;
+  border:0!important;
+  border-radius:5px;
+  font-size:10.5px!important;
+  white-space:nowrap;
+}
+.nav-submenu a:hover{background:rgba(243,106,22,.09);color:var(--orange)!important}
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown:focus-within .nav-submenu{opacity:1;visibility:visible;transform:translateY(0)}
 
 /* Hero: use a real cinematic filmmaking image while preserving every existing link/function. */
 .hero{
@@ -149,7 +184,7 @@
 }
 
 @media(max-width:1050px){
-  .nav-links a:nth-child(4){display:none}
+  .nav-links>a:nth-of-type(4){display:none}
   .hero::before{width:47%}
   .hero::after{right:43.2%}
   .hero h1{max-width:430px;font-size:clamp(42px,5.0vw,56px)}
@@ -157,6 +192,8 @@
 }
 
 @media(max-width:800px){
+  .nav-links{overflow-x:auto;overflow-y:visible}
+  .nav-submenu{position:fixed;top:58px;left:118px}
   .hero{
     padding-top:58px;
     min-height:auto;
