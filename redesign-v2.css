@@ -49,16 +49,21 @@
   box-shadow:9px 0 22px rgba(7,63,69,.10);
 }
 
-.hero-eyebrow{max-width:520px}
+.hero-eyebrow{
+  max-width:470px;
+  white-space:normal;
+  font-size:11px!important;
+  line-height:1.4;
+}
 .hero h1{
-  max-width:545px;
-  font-size:clamp(45px,5vw,67px);
-  line-height:1.01;
+  max-width:455px;
+  font-size:clamp(45px,4.55vw,62px);
+  line-height:.99;
 }
 .hero h1 em{font-style:normal;color:var(--teal)}
 .hero .hero-dot{color:var(--orange)}
-.hero-sub{max-width:515px;font-size:15.5px}
-.hero-btns{max-width:535px}
+.hero-sub{max-width:465px;font-size:15.5px}
+.hero-btns{max-width:500px}
 
 /* Make the proof band read as a deliberate design element, not part of the hero image. */
 .hero-stats{
@@ -84,8 +89,8 @@
   .nav-links a:nth-child(4){display:none}
   .hero::before{width:47%}
   .hero::after{right:43.2%}
-  .hero h1{max-width:510px;font-size:clamp(43px,5.4vw,61px)}
-  .hero-sub{max-width:490px}
+  .hero h1{max-width:430px;font-size:clamp(42px,5.0vw,56px)}
+  .hero-sub{max-width:430px}
 }
 
 @media(max-width:800px){
@@ -104,5 +109,6 @@
   }
   .hero::after{display:none}
   .hero h1,.hero-sub,.hero-eyebrow,.hero-btns{max-width:100%}
+  .hero h1{font-size:clamp(40px,11vw,54px)}
   .hero-stats{margin-top:0}
 }
