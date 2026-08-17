@@ -53,6 +53,14 @@ html = html.replace(
   '<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>'
 );
 
+/* Advertising is a top-level business tab. Remove duplicates on repeat builds,
+   then place it immediately after Funding Lab. */
+html = html.replace(/\s*<a href="\/advertise(?:\.html)?">Advertise<\/a>/g, '');
+html = html.replace(
+  /(<a href="\/funding-lab">Funding Lab<\/a>)/,
+  '$1\n      <a href="/advertise.html">Advertise</a>'
+);
+
 /* Functional homepage fixes. */
 const homeScript = '<script src="/site-fixes.js" defer></script>';
 if (!html.includes(homeScript)) {
@@ -71,9 +79,11 @@ const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
   'thank-you.html',
   'welcome-festival.html',
   'welcome-sprint.html',
-  'welcome-system.html'
+  'welcome-system.html',
+  'advertise.html',
+  'advertise-thank-you.html'
 ].forEach(fileName => {
   injectStyles(fileName, [productStyle]);
 });
 
-console.log('Documentary411 redesign and homepage functionality applied');
+console.log('Documentary411 redesign, advertising navigation and homepage functionality applied');
