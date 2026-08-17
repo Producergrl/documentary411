@@ -53,6 +53,12 @@ html = html.replace(
   '<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>'
 );
 
+/* Functional homepage fixes. */
+const homeScript = '<script src="/site-fixes.js" defer></script>';
+if (!html.includes(homeScript)) {
+  html = html.replace('</body>', `  ${homeScript}\n</body>`);
+}
+
 fs.writeFileSync(homeFile, html);
 
 /* Shared Documentary411 product/support visual system. Presentation only. */
@@ -70,4 +76,4 @@ const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
   injectStyles(fileName, [productStyle]);
 });
 
-console.log('Documentary411 redesign applied across homepage, products and support pages');
+console.log('Documentary411 redesign and homepage functionality applied');
