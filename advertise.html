@@ -39,11 +39,21 @@
     .tier-option strong{display:block;color:#073f45;font-size:.9rem}.tier-option small{display:block;color:#718486;margin-top:2px}
     .estimate{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#f4eee5;border-radius:9px;padding:16px 18px;margin-top:4px}
     .estimate span{color:#526a6d;font-size:.88rem}.estimate strong{font-family:'DM Serif Display',Georgia,serif;font-size:1.55rem;color:#f36a16}
+    .upload-box{border:1.5px dashed rgba(7,63,69,.24);background:#fbf7f0;border-radius:10px;padding:20px}
+    .upload-box input[type=file]{background:#fff;border:1px solid rgba(7,63,69,.14);padding:11px;margin-bottom:14px;cursor:pointer}
+    .upload-title{font-size:.9rem;font-weight:700;color:#073f45;margin-bottom:5px}
+    .upload-copy{font-size:.82rem;color:#63777a;margin:0 0 12px;line-height:1.55}
+    .creative-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+    .spec{background:#fff;border:1px solid rgba(7,63,69,.10);border-radius:7px;padding:10px 12px;font-size:.78rem;color:#63777a}
+    .spec strong{display:block;color:#073f45;font-size:.76rem;margin-bottom:2px}
+    .upload-status{font-size:.78rem;margin-top:10px;color:#63777a}
+    .upload-status.error{color:#b84d39;font-weight:600}
+    .upload-status.ok{color:#18765d;font-weight:600}
     .checkline{display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:#63777a}.checkline input{margin-top:4px;accent-color:#f36a16}
     .submit-btn{border:0;background:#f36a16;color:#fff;border-radius:7px;padding:15px 24px;font:700 .85rem/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 20px rgba(243,106,22,.15)}
     .submit-btn:hover{background:#d8560f}
     .fine{font-size:.8rem;color:#819092;margin-top:12px}
-    @media(max-width:760px){.plans,.tier-options,.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.form-shell{padding:22px 18px}.estimate{align-items:flex-start}}
+    @media(max-width:760px){.plans,.tier-options,.form-grid,.creative-specs{grid-template-columns:1fr}.field.full{grid-column:auto}.form-shell{padding:22px 18px}.estimate{align-items:flex-start}}
   </style>
 </head>
 <body>
@@ -101,7 +111,7 @@
       <h2>Tell us what you want to promote.</h2>
       <p class="lead">Submitting this form does not obligate you to purchase. We review the fit first, confirm availability, and send payment instructions if approved.</p>
 
-      <form class="form-shell" name="advertise-request" method="POST" action="/advertise-thank-you.html" data-netlify="true">
+      <form class="form-shell" name="advertise-request" method="POST" action="/advertise-thank-you.html" data-netlify="true" enctype="multipart/form-data">
         <input type="hidden" name="form-name" value="advertise-request">
         <div class="form-grid">
           <div class="field">
@@ -173,6 +183,24 @@
             <label for="description">What should filmmakers know about you? *</label>
             <textarea id="description" name="listing_description" maxlength="700" required placeholder="Describe your service, product, opportunity or organization and why it is useful to documentary filmmakers."></textarea>
           </div>
+
+          <div class="field full">
+            <label for="ad-image">Upload your ad image for approval</label>
+            <div class="upload-box">
+              <input id="ad-image" name="ad_image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+              <div class="upload-title">Ad image specs</div>
+              <p class="upload-copy">Upload one polished master image. We may crop it slightly to fit different directory placements, so keep important logos, faces and text away from the outer edges.</p>
+              <div class="creative-specs">
+                <div class="spec"><strong>Recommended size</strong>1600 × 1000 px landscape or larger</div>
+                <div class="spec"><strong>File type</strong>JPG, PNG or WebP</div>
+                <div class="spec"><strong>Maximum file size</strong>5 MB</div>
+                <div class="spec"><strong>Safe area</strong>Keep key text/logos at least 100 px from edges</div>
+              </div>
+              <p class="upload-copy" style="margin-top:12px;margin-bottom:0">Please use high-quality artwork with minimal small text. By uploading, you confirm you have permission to use the image and any logos, photography or artwork it contains.</p>
+              <div id="upload-status" class="upload-status" aria-live="polite"></div>
+            </div>
+          </div>
+
           <div class="field full">
             <label for="notes">Anything else we should know?</label>
             <textarea id="notes" name="notes" maxlength="1000" placeholder="Timing, campaign details, special deadlines, questions, etc."></textarea>
@@ -209,6 +237,30 @@
     }
     tiers.forEach(t => t.addEventListener('change', updateEstimate));
     weeks.addEventListener('input', updateEstimate);
+
+    const adImage = document.getElementById('ad-image');
+    const uploadStatus = document.getElementById('upload-status');
+    adImage.addEventListener('change', function(){
+      uploadStatus.className = 'upload-status';
+      uploadStatus.textContent = '';
+      const file = this.files && this.files[0];
+      if(!file) return;
+      const allowed = ['image/jpeg','image/png','image/webp'];
+      if(!allowed.includes(file.type)){
+        uploadStatus.classList.add('error');
+        uploadStatus.textContent = 'Please upload a JPG, PNG or WebP image.';
+        this.value = '';
+        return;
+      }
+      if(file.size > 5 * 1024 * 1024){
+        uploadStatus.classList.add('error');
+        uploadStatus.textContent = 'That file is larger than 5 MB. Please upload a smaller image.';
+        this.value = '';
+        return;
+      }
+      uploadStatus.classList.add('ok');
+      uploadStatus.textContent = 'Image attached: ' + file.name;
+    });
   </script>
 </body>
 </html>
