@@ -1,5 +1,6 @@
 (() => {
-  const icon = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>';
+  const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>';
+  const modalIcon = '<svg class="d411-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>';
   let searchIndex = null;
 
   function esc(s){ return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -65,7 +66,7 @@
     overlay.innerHTML = `
       <div class="d411-search-panel">
         <div class="d411-search-head">
-          ${icon.replace('class="','class="d411-search-icon ')}
+          ${modalIcon}
           <input class="d411-search-input" type="search" autocomplete="off" placeholder="Search grants, festivals, legal, funding, tools…" aria-label="Search Documentary411">
           <button class="d411-search-close" type="button" aria-label="Close search">×</button>
         </div>
