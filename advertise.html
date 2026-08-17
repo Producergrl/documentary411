@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Request an advertising placement in the Documentary411 filmmaker resource directory.">
+  <title>Advertise on Documentary411</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/product-redesign.css">
+  <style>
+    .adv-hero{padding-bottom:58px}
+    .adv-intro{max-width:760px}
+    .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+    .plan{background:#fff;border:1px solid rgba(7,63,69,.12);border-radius:12px;padding:25px;box-shadow:0 10px 28px rgba(7,63,69,.05);position:relative}
+    .plan.featured{border-color:rgba(243,106,22,.32)}
+    .plan.spotlight{background:linear-gradient(180deg,#073f45,#0b5d61);border-color:#073f45}
+    .plan-label{font:700 .7rem/1 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#f36a16;margin-bottom:11px}
+    .plan.spotlight .plan-label{color:#f5a623}
+    .plan h3{font-size:1.75rem;margin:0 0 4px}
+    .plan.spotlight h3,.plan.spotlight p,.plan.spotlight li{color:#fff}
+    .price{font-family:'DM Serif Display',Georgia,serif;font-size:2.15rem;color:#073f45;line-height:1;margin:10px 0 18px}
+    .price span{font:500 .78rem/1 'Inter',sans-serif;color:#7c8c8d}
+    .plan.spotlight .price{color:#fff}.plan.spotlight .price span{color:rgba(255,255,255,.68)}
+    .plan ul{list-style:none;padding:0;margin:0}.plan li{font-size:.9rem;color:#526a6d;padding:5px 0 5px 18px;position:relative}.plan li:before{content:'•';position:absolute;left:0;color:#f36a16}.plan.spotlight li:before{color:#f5a623}
+    .form-shell{max-width:900px;margin:0 auto;background:#fff;border:1px solid rgba(7,63,69,.12);border-radius:14px;padding:34px;box-shadow:0 14px 36px rgba(7,63,69,.06)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}
+    .field label,.tier-title{font-size:.78rem;font-weight:700;color:#073f45;letter-spacing:.03em}
+    .field input,.field select,.field textarea{width:100%;border:1px solid rgba(7,63,69,.18);background:#fff;color:#073f45;border-radius:7px;padding:12px 13px;font:400 .95rem/1.4 'Inter',sans-serif}
+    .field textarea{min-height:125px;resize:vertical}
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#f36a16;box-shadow:0 0 0 3px rgba(243,106,22,.08)}
+    .tier-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px}
+    .tier-option{border:1px solid rgba(7,63,69,.14);border-radius:8px;padding:13px;background:#fbf7f0;cursor:pointer;display:flex;gap:9px;align-items:flex-start}
+    .tier-option:has(input:checked){border-color:#f36a16;background:#fff7ef}
+    .tier-option input{margin-top:3px;accent-color:#f36a16}
+    .tier-option strong{display:block;color:#073f45;font-size:.9rem}.tier-option small{display:block;color:#718486;margin-top:2px}
+    .estimate{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#f4eee5;border-radius:9px;padding:16px 18px;margin-top:4px}
+    .estimate span{color:#526a6d;font-size:.88rem}.estimate strong{font-family:'DM Serif Display',Georgia,serif;font-size:1.55rem;color:#f36a16}
+    .checkline{display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:#63777a}.checkline input{margin-top:4px;accent-color:#f36a16}
+    .submit-btn{border:0;background:#f36a16;color:#fff;border-radius:7px;padding:15px 24px;font:700 .85rem/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 20px rgba(243,106,22,.15)}
+    .submit-btn:hover{background:#d8560f}
+    .fine{font-size:.8rem;color:#819092;margin-top:12px}
+    @media(max-width:760px){.plans,.tier-options,.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.form-shell{padding:22px 18px}.estimate{align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Documentary<span>411</span></a>
+      <span class="nav-note">Advertise</span>
+    </div>
+  </header>
+
+  <section class="hero adv-hero">
+    <div class="wrap">
+      <p class="eyebrow">Reach documentary filmmakers</p>
+      <h1>Put your company in front of filmmakers actively looking for resources.</h1>
+      <p class="subhead adv-intro">Documentary411 is a curated directory for independent and documentary filmmakers. Request a listing below. Every advertiser is reviewed before placement so the directory stays useful and trusted.</p>
+
+      <div class="plans">
+        <article class="plan">
+          <div class="plan-label">Standard</div>
+          <h3>Directory Listing</h3>
+          <div class="price">$125 <span>/ week</span></div>
+          <ul>
+            <li>Standard listing in the relevant directory category</li>
+            <li>Company description and destination link</li>
+            <li>Runs for the approved number of weeks</li>
+          </ul>
+        </article>
+        <article class="plan featured">
+          <div class="plan-label">Featured</div>
+          <h3>Featured Listing</h3>
+          <div class="price">$250 <span>/ week</span></div>
+          <ul>
+            <li>Featured badge on your directory card</li>
+            <li>Priority placement within the relevant category</li>
+            <li>Enhanced visual emphasis over standard listings</li>
+          </ul>
+        </article>
+        <article class="plan spotlight">
+          <div class="plan-label">Spotlight</div>
+          <h3>Spotlight Placement</h3>
+          <div class="price">$500 <span>/ week</span></div>
+          <ul>
+            <li>Highest-priority directory placement</li>
+            <li>Premium highlighted treatment</li>
+            <li>Designed for launches, deadlines and major campaigns</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-soft">
+    <div class="wrap">
+      <p class="eyebrow">Request a placement</p>
+      <h2>Tell us what you want to promote.</h2>
+      <p class="lead">Submitting this form does not obligate you to purchase. We review the fit first, confirm availability, and send payment instructions if approved.</p>
+
+      <form class="form-shell" name="advertise-request" method="POST" action="/advertise-thank-you.html" data-netlify="true">
+        <input type="hidden" name="form-name" value="advertise-request">
+        <div class="form-grid">
+          <div class="field">
+            <label for="contact-name">Contact name *</label>
+            <input id="contact-name" name="contact_name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="company">Company / organization *</label>
+            <input id="company" name="company" type="text" required autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field full">
+            <label for="website">Company website *</label>
+            <input id="website" name="website" type="url" placeholder="https://" required>
+          </div>
+          <div class="field">
+            <label for="category">Directory category *</label>
+            <select id="category" name="category" required>
+              <option value="">Choose a category</option>
+              <option>Grants & Funding</option>
+              <option>Festivals & Markets</option>
+              <option>Distribution & Sales</option>
+              <option>Legal & Clearances</option>
+              <option>Fiscal Sponsors</option>
+              <option>Music & Licensing</option>
+              <option>Equipment & Software</option>
+              <option>Other / Not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="start-date">Preferred start date</label>
+            <input id="start-date" name="preferred_start_date" type="date">
+          </div>
+
+          <div class="field full">
+            <div class="tier-title">Advertising level *</div>
+            <div class="tier-options">
+              <label class="tier-option"><input type="radio" name="advertising_level" value="Standard — $125/week" data-price="125" required><span><strong>Standard</strong><small>$125 / week</small></span></label>
+              <label class="tier-option"><input type="radio" name="advertising_level" value="Featured — $250/week" data-price="250"><span><strong>Featured</strong><small>$250 / week</small></span></label>
+              <label class="tier-option"><input type="radio" name="advertising_level" value="Spotlight — $500/week" data-price="500"><span><strong>Spotlight</strong><small>$500 / week</small></span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="weeks">Number of weeks *</label>
+            <input id="weeks" name="weeks" type="number" min="1" max="52" value="1" required>
+          </div>
+          <div class="field">
+            <label for="link">Listing destination URL *</label>
+            <input id="link" name="listing_url" type="url" placeholder="https://" required>
+          </div>
+
+          <div class="field full">
+            <div class="estimate"><span>Estimated placement cost</span><strong id="estimate">Choose a level</strong></div>
+          </div>
+
+          <div class="field full">
+            <label for="headline">Listing headline / company name *</label>
+            <input id="headline" name="listing_headline" type="text" maxlength="100" required>
+          </div>
+          <div class="field full">
+            <label for="description">What should filmmakers know about you? *</label>
+            <textarea id="description" name="listing_description" maxlength="700" required placeholder="Describe your service, product, opportunity or organization and why it is useful to documentary filmmakers."></textarea>
+          </div>
+          <div class="field full">
+            <label for="notes">Anything else we should know?</label>
+            <textarea id="notes" name="notes" maxlength="1000" placeholder="Timing, campaign details, special deadlines, questions, etc."></textarea>
+          </div>
+          <div class="field full">
+            <label class="checkline"><input type="checkbox" name="approval_acknowledgement" required><span>I understand this is a request for placement. All listings are subject to Documentary411 approval and availability, and payment is due before an approved listing goes live.</span></label>
+          </div>
+          <div class="field full">
+            <button class="submit-btn" type="submit">Request Advertising</button>
+            <p class="fine">Questions before submitting? Email <a href="mailto:admin@documentary411.com">admin@documentary411.com</a>.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div>&copy; 2026 Documentary411. All rights reserved.</div>
+      <div class="links"><a href="/">Directory</a><a href="/funding-lab">Funding Lab</a><a href="mailto:admin@documentary411.com">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const tiers = document.querySelectorAll('input[name="advertising_level"]');
+    const weeks = document.getElementById('weeks');
+    const estimate = document.getElementById('estimate');
+    function updateEstimate(){
+      const selected = document.querySelector('input[name="advertising_level"]:checked');
+      if(!selected){ estimate.textContent = 'Choose a level'; return; }
+      const count = Math.max(1, Number(weeks.value || 1));
+      const total = Number(selected.dataset.price) * count;
+      estimate.textContent = '$' + total.toLocaleString() + ' total';
+    }
+    tiers.forEach(t => t.addEventListener('change', updateEstimate));
+    weeks.addEventListener('input', updateEstimate);
+  </script>
+</body>
+</html>
