@@ -33,49 +33,24 @@ for (const tag of homeStyles) {
   if (!html.includes(tag)) html = html.replace('</head>', `  ${tag}\n</head>`);
 }
 
-html = html.replace(
-  /<p class="hero-eyebrow"[^>]*>.*?<\/p>/,
-  '<p class="hero-eyebrow">Funding. Festivals. Tools. Community.</p>'
-);
-html = html.replace(
-  /<h1>.*?<\/h1>/,
-  '<h1>Your Insider<br>Advantage for<br>Documentary<br>Filmmaking<span class="hero-dot">.</span></h1>'
-);
-html = html.replace(
-  'Verified grants, festivals, distributors, sales agents, legal resources, equipment, and software — curated for independent documentary filmmakers at every stage.',
-  'Funding opportunities, festivals, distribution, legal resources, equipment and practical tools — curated for independent documentary filmmakers by people who know the road.'
-);
+html = html.replace(/<p class="hero-eyebrow"[^>]*>.*?<\/p>/,'<p class="hero-eyebrow">Funding. Festivals. Tools. Community.</p>');
+html = html.replace(/<h1>.*?<\/h1>/,'<h1>Your Insider<br>Advantage for<br>Documentary<br>Filmmaking<span class="hero-dot">.</span></h1>');
+html = html.replace('Verified grants, festivals, distributors, sales agents, legal resources, equipment, and software — curated for independent documentary filmmakers at every stage.','Funding opportunities, festivals, distribution, legal resources, equipment and practical tools — curated for independent documentary filmmakers by people who know the road.');
 html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
 
 /* Navigation hierarchy */
 html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
-html = html.replace(
-  /<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/,
-  '<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>'
-);
-
-/* Advertising tab */
+html = html.replace(/<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/,'<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>');
 html = html.replace(/\s*<a href="\/advertise(?:\.html)?">Advertise<\/a>/g, '');
-html = html.replace(
-  /(<a href="\/funding-lab">Funding Lab<\/a>)/,
-  '$1\n      <a href="/advertise.html">Advertise</a>'
-);
+html = html.replace(/(<a href="\/funding-lab">Funding Lab<\/a>)/,'$1\n      <a href="/advertise.html">Advertise</a>');
 
-/* Directory growth navigation */
 const growthLinks = [
-  '<a href="/directory.html">Directory</a>',
-  '<a href="/open-now.html">Open Now</a>',
-  '<a href="/crew-jobs.html">Crew & Jobs</a>',
-  '<a href="/blog.html">Blog</a>',
-  '<a href="/submit-resource.html">Submit/Correct</a>'
+  '<a href="/directory.html">Directory</a>','<a href="/open-now.html">Open Now</a>','<a href="/crew-jobs.html">Crew & Jobs</a>','<a href="/documentary-grants.html">Grants+</a>','<a href="/documentary-markets.html">Markets+</a>','<a href="/blog.html">Blog</a>','<a href="/submit-resource.html">Submit/Correct</a>'
 ];
 for (const link of growthLinks) {
-  if (!html.includes(link)) {
-    html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/, `$1\n      ${link}`);
-  }
+  if (!html.includes(link)) html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/, `$1\n      ${link}`);
 }
 
-/* Homepage conversion panel for the new directory strategy. */
 const growthPanel = `<!-- HOME GROWTH UPGRADES -->
 <section class="home-growth-panel" id="home-growth-upgrades">
   <div class="home-growth-inner">
@@ -83,119 +58,48 @@ const growthPanel = `<!-- HOME GROWTH UPGRADES -->
       <p class="cat-label">Start here</p>
       <h2>Find what is open, useful, and worth your time.</h2>
       <p>Documentary411 is becoming a self-correcting filmmaker directory: search resources, check what is open or needs verification, report broken links, and stop treating every grant, festival, market, or member-only resource as if it were the same thing.</p>
-      <div class="home-growth-links">
-        <a href="/directory.html">Search Directory</a>
-        <a href="/open-now.html">Open Now</a>
-        <a href="/submit-resource.html" class="secondary">Submit a Correction</a>
-      </div>
+      <div class="home-growth-links"><a href="/directory.html">Search Directory</a><a href="/open-now.html">Open Now</a><a href="/submit-resource.html" class="secondary">Submit a Correction</a></div>
     </div>
     <div class="home-growth-card">
       <p class="cat-label">Free workbook</p>
       <h2>Festival Budget Workbook</h2>
       <p>Before filmmakers spend on submissions, travel, PR, badges, deliverables and follow-up, help them calculate what the festival run may actually cost.</p>
-      <div class="home-growth-links">
-        <a href="/festival-budget-workbook.html">Download Free</a>
-        <a href="/festival-strategy.html" class="secondary">90 Days Out</a>
-      </div>
+      <div class="home-growth-links"><a href="/festival-budget-workbook.html">Download Free</a><a href="/festival-strategy.html" class="secondary">90 Days Out</a></div>
     </div>
   </div>
 </section>`;
-if (!html.includes('id="home-growth-upgrades"')) {
-  html = html.replace('</section>\n\n<!-- FEST NEAR ME -->', `</section>\n\n${growthPanel}\n\n<!-- FEST NEAR ME -->`);
-}
+if (!html.includes('id="home-growth-upgrades"')) html = html.replace('</section>\n\n<!-- FEST NEAR ME -->', `</section>\n\n${growthPanel}\n\n<!-- FEST NEAR ME -->`);
 
 const homeScript = '<script src="/site-fixes.js" defer></script>';
 if (!html.includes(homeScript)) html = html.replace('</body>', `  ${homeScript}\n</body>`);
 fs.writeFileSync(homeFile, html);
 
-/* Shared product/support visual system */
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
 const directoryStyle = '<link rel="stylesheet" href="/directory-upgrades.css">';
-const styledPages = [
-  'funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html',
-  'thank-you.html','welcome-festival.html','welcome-sprint.html','welcome-system.html',
-  'advertise.html','advertise-thank-you.html','directory.html','open-now.html','crew-jobs.html',
-  'submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html'
-];
+const growthPages = ['directory.html','open-now.html','crew-jobs.html','submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html','documentary-grants.html','documentary-markets.html','fiscal-sponsorship.html'];
+const styledPages = ['funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html','thank-you.html','welcome-festival.html','welcome-sprint.html','welcome-system.html','advertise.html','advertise-thank-you.html',...growthPages];
 styledPages.forEach(fileName => injectStyles(fileName, [productStyle, directoryStyle]));
 
-/* Site-wide search: public pages only. */
 const searchStyle = '<link rel="stylesheet" href="/site-search.css">';
 const searchScript = '<script src="/site-search.js" defer></script>';
-const publicPages = [
-  'index.html','funding-lab.html','festival-strategy.html','funding-report.html',
-  'funding-sprint.html','advertise.html','directory.html','open-now.html','crew-jobs.html',
-  'submit-resource.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html'
-];
-publicPages.forEach(fileName => {
-  injectStyles(fileName, [searchStyle]);
-  injectScript(fileName, searchScript);
-});
+const publicPages = ['index.html','funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html','advertise.html',...growthPages];
+publicPages.forEach(fileName => {injectStyles(fileName, [searchStyle]);injectScript(fileName, searchScript);});
 
-function decodeEntities(s) {
-  return String(s || '')
-    .replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'")
-    .replace(/&nbsp;/g,' ').replace(/&ndash;/g,'–').replace(/&mdash;/g,'—')
-    .replace(/&lt;/g,'<').replace(/&gt;/g,'>');
-}
-function cleanText(source) {
-  return decodeEntities(String(source || '')
-    .replace(/<script[\s\S]*?<\/script>/gi,' ')
-    .replace(/<style[\s\S]*?<\/style>/gi,' ')
-    .replace(/<[^>]+>/g,' '))
-    .replace(/\s+/g,' ').trim();
-}
-function firstMatch(source, re, fallback='') {
-  const m = String(source || '').match(re);
-  return m ? cleanText(m[1]) : fallback;
-}
-function excerpt(text, max=220) {
-  const t = cleanText(text);
-  return t.length <= max ? t : t.slice(0,max).replace(/\s+\S*$/,'') + '…';
-}
-function fileUrl(fileName) {
-  return fileName === 'index.html' ? '/' : '/' + fileName;
-}
+function decodeEntities(s){return String(s||'').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&nbsp;/g,' ').replace(/&ndash;/g,'–').replace(/&mdash;/g,'—').replace(/&lt;/g,'<').replace(/&gt;/g,'>');}
+function cleanText(source){return decodeEntities(String(source||'').replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ')).replace(/\s+/g,' ').trim();}
+function firstMatch(source,re,fallback=''){const m=String(source||'').match(re);return m?cleanText(m[1]):fallback;}
+function excerpt(text,max=220){const t=cleanText(text);return t.length<=max?t:t.slice(0,max).replace(/\s+\S*$/,'')+'…';}
+function fileUrl(fileName){return fileName==='index.html'?'/':'/'+fileName;}
 
-const searchEntries = [];
-for (const fileName of publicPages) {
-  const file = path.join(__dirname, fileName);
-  if (!fs.existsSync(file)) continue;
-  const source = fs.readFileSync(file,'utf8');
-  const pageTitle = firstMatch(source, /<title[^>]*>([\s\S]*?)<\/title>/i, fileName);
-  const h1 = firstMatch(source, /<h1[^>]*>([\s\S]*?)<\/h1>/i, pageTitle.replace(/\s+[—|-]\s+Documentary411.*$/i,''));
-  const bodyText = cleanText(source);
-  searchEntries.push({
-    page: pageTitle.replace(/\s+[—|-]\s+Documentary411.*$/i,''),
-    title: h1 || pageTitle,
-    url: fileUrl(fileName),
-    excerpt: excerpt(bodyText),
-    searchText: bodyText
-  });
-
-  /* Homepage is a large directory, so index each named section separately. */
-  if (fileName === 'index.html') {
-    const sectionRe = /<section\b([^>]*)>([\s\S]*?)<\/section>/gi;
-    let section;
-    while ((section = sectionRe.exec(source))) {
-      const attrs = section[1];
-      const idMatch = attrs.match(/\bid=["']([^"']+)["']/i);
-      if (!idMatch) continue;
-      const id = idMatch[1];
-      const block = section[2];
-      const sectionTitle = firstMatch(block, /<h[23][^>]*>([\s\S]*?)<\/h[23]>/i, 'Documentary411 Resource');
-      const sectionText = cleanText(block);
-      if (!sectionText) continue;
-      searchEntries.push({
-        page: 'Documentary411 Directory',
-        title: sectionTitle,
-        url: '/#' + id,
-        excerpt: excerpt(sectionText),
-        searchText: sectionText
-      });
-    }
+const searchEntries=[];
+for(const fileName of publicPages){
+  const file=path.join(__dirname,fileName); if(!fs.existsSync(file)) continue;
+  const source=fs.readFileSync(file,'utf8'); const pageTitle=firstMatch(source,/<title[^>]*>([\s\S]*?)<\/title>/i,fileName); const h1=firstMatch(source,/<h1[^>]*>([\s\S]*?)<\/h1>/i,pageTitle.replace(/\s+[—|-]\s+Documentary411.*$/i,'')); const bodyText=cleanText(source);
+  searchEntries.push({page:pageTitle.replace(/\s+[—|-]\s+Documentary411.*$/i,''),title:h1||pageTitle,url:fileUrl(fileName),excerpt:excerpt(bodyText),searchText:bodyText});
+  if(fileName==='index.html'){
+    const sectionRe=/<section\b([^>]*)>([\s\S]*?)<\/section>/gi; let section;
+    while((section=sectionRe.exec(source))){const attrs=section[1]; const idMatch=attrs.match(/\bid=["']([^"']+)["']/i); if(!idMatch) continue; const id=idMatch[1]; const block=section[2]; const sectionTitle=firstMatch(block,/<h[23][^>]*>([\s\S]*?)<\/h[23]>/i,'Documentary411 Resource'); const sectionText=cleanText(block); if(!sectionText) continue; searchEntries.push({page:'Documentary411 Directory',title:sectionTitle,url:'/#'+id,excerpt:excerpt(sectionText),searchText:sectionText});}
   }
 }
 fs.writeFileSync(path.join(__dirname,'search-index.json'), JSON.stringify(searchEntries));
-
 console.log(`Documentary411 redesign, directory upgrades, advertising, homepage fixes and site search applied (${searchEntries.length} search entries)`);
