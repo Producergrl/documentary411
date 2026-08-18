@@ -26,7 +26,8 @@ let html = fs.readFileSync(homeFile, 'utf8');
 
 const homeStyles = [
   '<link rel="stylesheet" href="/redesign.css">',
-  '<link rel="stylesheet" href="/redesign-v2.css">'
+  '<link rel="stylesheet" href="/redesign-v2.css">',
+  '<link rel="stylesheet" href="/directory-upgrades.css">'
 ];
 for (const tag of homeStyles) {
   if (!html.includes(tag)) html = html.replace('</head>', `  ${tag}\n</head>`);
@@ -60,25 +61,71 @@ html = html.replace(
   '$1\n      <a href="/advertise.html">Advertise</a>'
 );
 
+/* Directory growth navigation */
+const growthLinks = [
+  '<a href="/directory.html">Directory</a>',
+  '<a href="/open-now.html">Open Now</a>',
+  '<a href="/crew-jobs.html">Crew & Jobs</a>',
+  '<a href="/blog.html">Blog</a>',
+  '<a href="/submit-resource.html">Submit/Correct</a>'
+];
+for (const link of growthLinks) {
+  if (!html.includes(link)) {
+    html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/, `$1\n      ${link}`);
+  }
+}
+
+/* Homepage conversion panel for the new directory strategy. */
+const growthPanel = `<!-- HOME GROWTH UPGRADES -->
+<section class="home-growth-panel" id="home-growth-upgrades">
+  <div class="home-growth-inner">
+    <div class="home-growth-card">
+      <p class="cat-label">Start here</p>
+      <h2>Find what is open, useful, and worth your time.</h2>
+      <p>Documentary411 is becoming a self-correcting filmmaker directory: search resources, check what is open or needs verification, report broken links, and stop treating every grant, festival, market, or member-only resource as if it were the same thing.</p>
+      <div class="home-growth-links">
+        <a href="/directory.html">Search Directory</a>
+        <a href="/open-now.html">Open Now</a>
+        <a href="/submit-resource.html" class="secondary">Submit a Correction</a>
+      </div>
+    </div>
+    <div class="home-growth-card">
+      <p class="cat-label">Free workbook</p>
+      <h2>Festival Budget Workbook</h2>
+      <p>Before filmmakers spend on submissions, travel, PR, badges, deliverables and follow-up, help them calculate what the festival run may actually cost.</p>
+      <div class="home-growth-links">
+        <a href="/festival-budget-workbook.html">Download Free</a>
+        <a href="/festival-strategy.html" class="secondary">90 Days Out</a>
+      </div>
+    </div>
+  </div>
+</section>`;
+if (!html.includes('id="home-growth-upgrades"')) {
+  html = html.replace('</section>\n\n<!-- FEST NEAR ME -->', `</section>\n\n${growthPanel}\n\n<!-- FEST NEAR ME -->`);
+}
+
 const homeScript = '<script src="/site-fixes.js" defer></script>';
 if (!html.includes(homeScript)) html = html.replace('</body>', `  ${homeScript}\n</body>`);
 fs.writeFileSync(homeFile, html);
 
 /* Shared product/support visual system */
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
+const directoryStyle = '<link rel="stylesheet" href="/directory-upgrades.css">';
 const styledPages = [
   'funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html',
   'thank-you.html','welcome-festival.html','welcome-sprint.html','welcome-system.html',
-  'advertise.html','advertise-thank-you.html'
+  'advertise.html','advertise-thank-you.html','directory.html','open-now.html','crew-jobs.html',
+  'submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html'
 ];
-styledPages.forEach(fileName => injectStyles(fileName, [productStyle]));
+styledPages.forEach(fileName => injectStyles(fileName, [productStyle, directoryStyle]));
 
 /* Site-wide search: public pages only. */
 const searchStyle = '<link rel="stylesheet" href="/site-search.css">';
 const searchScript = '<script src="/site-search.js" defer></script>';
 const publicPages = [
   'index.html','funding-lab.html','festival-strategy.html','funding-report.html',
-  'funding-sprint.html','advertise.html'
+  'funding-sprint.html','advertise.html','directory.html','open-now.html','crew-jobs.html',
+  'submit-resource.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html'
 ];
 publicPages.forEach(fileName => {
   injectStyles(fileName, [searchStyle]);
@@ -151,4 +198,4 @@ for (const fileName of publicPages) {
 }
 fs.writeFileSync(path.join(__dirname,'search-index.json'), JSON.stringify(searchEntries));
 
-console.log(`Documentary411 redesign, advertising, homepage fixes and site search applied (${searchEntries.length} search entries)`);
+console.log(`Documentary411 redesign, directory upgrades, advertising, homepage fixes and site search applied (${searchEntries.length} search entries)`);
