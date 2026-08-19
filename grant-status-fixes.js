@@ -4,39 +4,44 @@ const path = require('path');
 const AUDIT_DATE_TEXT = 'Aug. 19, 2026';
 const AUDIT_DATE_ISO = '2026-08-19';
 
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
 function updateGrantCard(html, title, updates) {
-  const titlePattern = escapeRegExp(title);
-  const cardRe = new RegExp(`(<div class="card">[\\s\\S]*?<div class="card-title">${titlePattern}<\\/div>[\\s\\S]*?<a class="card-link"[\\s\\S]*?<\\/a>\\s*<\\/div>)`);
-  return html.replace(cardRe, (card) => {
-    let next = card;
+  const titleMarker = `<div class="card-title">${title}</div>`;
+  const titleIndex = html.indexOf(titleMarker);
+  if (titleIndex === -1) return html;
 
-    if (updates.badge) {
-      next = next.replace(/<span class="card-badge [^"]+">[\s\S]*?<\/span>/, `<span class="card-badge ${updates.badgeClass || 'badge-listing'}">${updates.badge}</span>`);
-    }
+  const cardStart = html.lastIndexOf('<div class="card">', titleIndex);
+  if (cardStart === -1) return html;
 
-    if (updates.meta) {
-      next = next.replace(/<div class="card-meta">[\s\S]*?<\/div>/, `<div class="card-meta">${updates.meta} · Last verified ${AUDIT_DATE_TEXT}</div>`);
-    } else {
-      next = next.replace(/<div class="card-meta">([\s\S]*?)<\/div>/, (m, inner) => {
-        if (/Last verified/i.test(inner)) return m;
-        return `<div class="card-meta">${inner} · Last verified ${AUDIT_DATE_TEXT}</div>`;
-      });
-    }
+  const linkEnd = html.indexOf('</a>', titleIndex);
+  if (linkEnd === -1) return html;
+  const cardEnd = html.indexOf('</div>', linkEnd);
+  if (cardEnd === -1) return html;
 
-    if (updates.description) {
-      next = next.replace(/<div class="card-desc">[\s\S]*?<\/div>/, `<div class="card-desc">${updates.description}</div>`);
-    }
+  const end = cardEnd + '</div>'.length;
+  let card = html.slice(cardStart, end);
 
-    if (updates.tags) {
-      next = next.replace(/<div class="card-tags">[\s\S]*?<\/div>/, `<div class="card-tags">${updates.tags}</div>`);
-    }
+  if (updates.badge) {
+    card = card.replace(/<span class="card-badge [^"]+">[\s\S]*?<\/span>/, `<span class="card-badge ${updates.badgeClass || 'badge-listing'}">${updates.badge}</span>`);
+  }
 
-    return next;
-  });
+  if (updates.meta) {
+    card = card.replace(/<div class="card-meta">[\s\S]*?<\/div>/, `<div class="card-meta">${updates.meta} · Last verified ${AUDIT_DATE_TEXT}</div>`);
+  } else {
+    card = card.replace(/<div class="card-meta">([\s\S]*?)<\/div>/, (m, inner) => {
+      if (/Last verified/i.test(inner)) return m;
+      return `<div class="card-meta">${inner} · Last verified ${AUDIT_DATE_TEXT}</div>`;
+    });
+  }
+
+  if (updates.description) {
+    card = card.replace(/<div class="card-desc">[\s\S]*?<\/div>/, `<div class="card-desc">${updates.description}</div>`);
+  }
+
+  if (updates.tags) {
+    card = card.replace(/<div class="card-tags">[\s\S]*?<\/div>/, `<div class="card-tags">${updates.tags}</div>`);
+  }
+
+  return html.slice(0, cardStart) + card + html.slice(end);
 }
 
 function closeExpiredOpenBadges(html) {
