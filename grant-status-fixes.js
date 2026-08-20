@@ -163,7 +163,7 @@ function fixOpenNowFilter() {
 
   source = source.replace(
     "if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline || /rolling|verify/i.test(r.deadlineMonth||''));",
-    "if(config.openish) base = base.filter(r=>r.status === 'open' || r.rollingDeadline === true);"
+    "if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline === true);"
   );
 
   fs.writeFileSync(file, source);
