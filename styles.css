@@ -1,26 +1,26 @@
 /* ==========================================================================
    Documentary411 Funding Lab — shared styles
-   Palette: dark charcoal + off-white + amber (#E8A13D "spotlight") accent
-   Type: Archivo (grotesque headlines) + Source Serif 4 (readable body)
+   Palette: warm ivory + deep teal + orange/amber accent (approved light redesign)
+   Type: DM Serif Display (headlines) + Inter (readable body)
    ========================================================================== */
 
 :root {
-  --charcoal:        #1c1d1f;
-  --charcoal-soft:   #26282b;
-  --charcoal-line:   #3a3d41;
-  --offwhite:        #f4f1ea;
-  --offwhite-dim:    #c9c6bf;
-  --muted:           #9a978f;
-  --amber:           #E8A13D;
-  --amber-dark:      #c9861f;
-  --amber-ink:       #1c1d1f;
+  --charcoal:        #073f45;
+  --charcoal-soft:   #ffffff;
+  --charcoal-line:   rgba(7,63,69,.12);
+  --offwhite:        #fbf7f0;
+  --offwhite-dim:    #526a6d;
+  --muted:           #7c8c8d;
+  --amber:           #f36a16;
+  --amber-dark:      #d8560f;
+  --amber-ink:       #ffffff;
 
   --maxw:            920px;
   --radius:          10px;
-  --shadow:          0 12px 40px rgba(0,0,0,.35);
+  --shadow:          0 12px 40px rgba(7,63,69,.12);
 
-  --font-head: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-head: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -29,8 +29,8 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--charcoal);
-  color: var(--offwhite);
+  background: var(--offwhite);
+  color: var(--charcoal);
   font-family: var(--font-body);
   font-size: 18px;
   line-height: 1.65;
@@ -85,7 +85,7 @@ p.lead { font-size: 1.15rem; }
 a { color: var(--amber); text-decoration: underline; text-underline-offset: 3px; }
 a:hover { color: var(--amber-dark); }
 
-strong { color: #fff; font-weight: 700; }
+strong { color: var(--charcoal); font-weight: 700; }
 em { color: var(--offwhite); }
 
 .eyebrow {
@@ -198,7 +198,7 @@ em { color: var(--offwhite); }
   border-radius: var(--radius);
   padding: 26px 24px;
 }
-.card h3 { color: #fff; }
+.card h3 { color: var(--charcoal); }
 .card .num {
   font-family: var(--font-head);
   font-weight: 800;
@@ -266,7 +266,7 @@ em { color: var(--offwhite); }
   font-family: var(--font-head);
   font-weight: 800;
   font-size: clamp(2rem, 5vw, 2.8rem);
-  color: #fff;
+  color: var(--amber);
 }
 .price-line .strike { color: var(--muted); font-weight: 600; text-decoration: line-through; font-size: .6em; margin-left: .4em; }
 
@@ -353,7 +353,7 @@ em { color: var(--offwhite); }
   vertical-align: top;
 }
 .tl th { font-family: var(--font-head); color: var(--amber); font-weight: 700; }
-.tl td:first-child { font-family: var(--font-head); font-weight: 700; color: #fff; white-space: nowrap; }
+.tl td:first-child { font-family: var(--font-head); font-weight: 700; color: var(--charcoal); white-space: nowrap; }
 
 /* ---------- Utilities ---------- */
 .center { text-align: center; }
