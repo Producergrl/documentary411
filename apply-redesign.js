@@ -40,15 +40,15 @@ html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
 
 /* Navigation hierarchy */
 html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
-html = html.replace(/<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/,'<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>');
+html = html.replace(/<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/g,'<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>');
 html = html.replace(/\s*<a href="\/advertise(?:\.html)?">Advertise<\/a>/g, '');
-html = html.replace(/(<a href="\/funding-lab">Funding Lab<\/a>)/,'$1\n      <a href="/advertise.html">Advertise</a>');
+html = html.replace(/(<a href="\/funding-lab">Funding Lab<\/a>)/g,'$1\n      <a href="/advertise.html">Advertise</a>');
 
 const growthLinks = [
-  '<a href="/directory.html">Directory</a>','<a href="/open-now.html">Open Now</a>','<a href="/crew-jobs.html">Crew & Jobs</a>','<a href="/documentary-grants.html">Grants+</a>','<a href="/documentary-markets.html">Markets+</a>','<a href="/blog.html">Blog</a>','<a href="/submit-resource.html">Submit/Correct</a>'
+  '<a href="/directory.html">Directory</a>','<a href="/open-now.html">Open Now</a>','<a href="/crew-jobs.html">Crew & Jobs</a>','<a href="/documentary-grants.html">Grants+</a>','<a href="/documentary-markets.html">Markets+</a>','<a href="/fiscal-sponsorship.html">Fiscal Sponsorship</a>','<a href="/blog.html">Blog</a>','<a href="/submit-resource.html">Submit/Correct</a>'
 ];
 for (const link of growthLinks) {
-  if (!html.includes(link)) html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/, `$1\n      ${link}`);
+  if (!html.includes(link)) html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/g, `$1\n      ${link}`);
 }
 
 const growthPanel = `<!-- HOME GROWTH UPGRADES -->

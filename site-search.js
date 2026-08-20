@@ -48,9 +48,14 @@
     const homeNav = document.querySelector('.nav-inner');
     const navCta = homeNav?.querySelector('.nav-cta');
     const siteHeader = document.querySelector('.site-header .wrap');
+    const directoryNav = document.querySelector('.d411-nav-inner');
+    const directoryCta = directoryNav?.querySelector('.d411-cta');
     if (homeNav) {
       if (navCta) homeNav.insertBefore(toggle, navCta);
       else homeNav.appendChild(toggle);
+    } else if (directoryNav) {
+      if (directoryCta) directoryNav.insertBefore(toggle, directoryCta);
+      else directoryNav.appendChild(toggle);
     } else if (siteHeader) {
       siteHeader.appendChild(toggle);
     } else {

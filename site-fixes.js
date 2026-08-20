@@ -294,9 +294,28 @@
     };
   }
 
+  function initMobileNav() {
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    if (!toggle || !links) return;
+
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    links.addEventListener('click', (event) => {
+      if (event.target.tagName === 'A') {
+        links.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   function initAllFixes() {
     initGrantFilters();
     initFestivalNearMeFix();
+    initMobileNav();
   }
 
   if (document.readyState === 'loading') {
