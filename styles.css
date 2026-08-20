@@ -2,6 +2,9 @@
    Documentary411 Funding Lab — shared styles
    Palette: warm ivory + deep teal + orange/amber accent (approved light redesign)
    Type: DM Serif Display (headlines) + Inter (readable body)
+   These tokens must match product-redesign.css/redesign.css/directory-
+   upgrades.css. Do not reintroduce dark values -- verify-palette.js fails
+   the build if you do.
    ========================================================================== */
 
 :root {

@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* Documentary411 product-page visual system.
-   Presentation-only override for Funding Lab / Festival Strategy pages. */
+   Presentation-only override for Funding Lab / Festival Strategy pages.
+   Tokens must match styles.css/redesign.css/directory-upgrades.css. Do not
+   reintroduce dark values -- verify-palette.js fails the build if you do. */
 
 :root{
   --charcoal:#073f45;

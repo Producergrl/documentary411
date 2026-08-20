@@ -3,7 +3,10 @@
 /* Documentary411 — light redesign
    Visual direction: deep ocean teal + warm ivory + orange + amber.
    This file intentionally overrides presentation only. Existing markup,
-   links, forms, calculators, Stripe links and JavaScript remain untouched. */
+   links, forms, calculators, Stripe links and JavaScript remain untouched.
+   This is the canonical source palette -- product-redesign.css, styles.css,
+   and directory-upgrades.css must all match these token values. Do not
+   reintroduce dark values -- verify-palette.js fails the build if you do. */
 
 :root{
   --bg:#fbf7f0;
