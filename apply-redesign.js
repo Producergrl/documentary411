@@ -37,6 +37,7 @@ html = html.replace(/<p class="hero-eyebrow"[^>]*>.*?<\/p>/,'<p class="hero-eyeb
 html = html.replace(/<h1>.*?<\/h1>/,'<h1>Your Insider<br>Advantage for<br>Documentary<br>Filmmaking<span class="hero-dot">.</span></h1>');
 html = html.replace('Verified grants, festivals, distributors, sales agents, legal resources, equipment, and software — curated for independent documentary filmmakers at every stage.','Funding opportunities, festivals, distribution, legal resources, equipment and practical tools — curated for independent documentary filmmakers by people who know the road.');
 html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
+html = html.replace('<span class="stat-num">500+</span><span class="stat-label">Verified Resources</span>','<span class="stat-num">100+</span><span class="stat-label">Verified Resources</span>');
 
 /* Navigation hierarchy */
 html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
