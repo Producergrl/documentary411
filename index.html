@@ -300,8 +300,8 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <h3>Search 35+ Verified US Documentary Festivals</h3>
       <p>Find the right festival for your film. Type your city or state and we'll show you the closest festivals, distance included. Or search by genre, identity focus, or keyword to jump into the searchable database.</p>
       <div class="finder-row">
-        <input class="finder-input" id="qfsearch" type="text" placeholder="Your city or state (e.g. Chapel Hill, Texas) or a keyword (environmental, LGBTQ+)…" onkeydown="if(event.key==='Enter')quickFestSearch()">
-        <select class="finder-select" id="qfregion">
+        <input class="finder-input" id="qfsearch" type="text" aria-label="Your city, state, or a keyword" placeholder="Your city or state (e.g. Chapel Hill, Texas) or a keyword (environmental, LGBTQ+)…" onkeydown="if(event.key==='Enter')quickFestSearch()">
+        <select class="finder-select" id="qfregion" aria-label="Filter by region">
           <option value="">All US Regions</option>
           <option value="West">West</option>
           <option value="Southwest">Southwest</option>
@@ -437,8 +437,8 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <p class="section-desc">35+ verified US documentary festivals plus the world's most influential international stops — search and filter by genre, identity focus, entry fee, region, and Oscar-qualifying status to find the right home for your film.</p>
 
     <div class="fest-controls">
-      <input type="text" id="festSearch" placeholder="Search name, city, state, or keyword…" oninput="renderFests()">
-      <select id="festRegion" onchange="renderFests()">
+      <input type="text" id="festSearch" aria-label="Search festivals by name, city, state, or keyword" placeholder="Search name, city, state, or keyword…" oninput="renderFests()">
+      <select id="festRegion" aria-label="Filter by region" onchange="renderFests()">
         <option value="">All Regions</option>
         <option value="West">West</option>
         <option value="Southwest">Southwest</option>
@@ -447,7 +447,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <option value="Southeast">Southeast</option>
         <option value="International">International</option>
       </select>
-      <select id="festGenre" onchange="renderFests()">
+      <select id="festGenre" aria-label="Filter by genre" onchange="renderFests()">
         <option value="">All Genres</option>
         <option value="General">General Documentary</option>
         <option value="Environmental">Environmental / Climate</option>
@@ -461,14 +461,14 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <option value="Arts &amp; Culture">Arts &amp; Culture</option>
         <option value="Shorts">Shorts-Focused</option>
       </select>
-      <select id="festFee" onchange="renderFests()">
+      <select id="festFee" aria-label="Filter by entry fee" onchange="renderFests()">
         <option value="">Any Entry Fee</option>
         <option value="free">Free Submission</option>
         <option value="low">Low ($0–$30)</option>
         <option value="medium">Medium ($30–$60)</option>
         <option value="high">High ($60+)</option>
       </select>
-      <select id="festFocus" onchange="renderFests()">
+      <select id="festFocus" aria-label="Filter by audience or identity focus" onchange="renderFests()">
         <option value="">Any Audience / Identity</option>
         <option value="Women">Women Filmmakers</option>
         <option value="LGBTQ+">LGBTQ+</option>
@@ -735,12 +735,12 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       </div>
 
       <div class="card">
-        <span class="card-badge badge-listing">Free Listing</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Austin Film Society</div>
-        <div class="card-meta">Fiscal Sponsor · TX-Connected Filmmakers · Rolling · 7% Fee</div>
-        <div class="card-desc">Texas's flagship film nonprofit, founded by Richard Linklater. Offers fiscal sponsorship to films with a Texas connection — director, producer, subject, or shoot location. Pairs sponsorship with grant access via the AFS Grant program and a strong regional filmmaker network.</div>
+        <div class="card-meta">Fiscal Sponsor · TX-Connected Filmmakers · Program ending August 2026</div>
+        <div class="card-desc">Texas's flagship film nonprofit, founded by Richard Linklater. AFS has stopped accepting new fiscal sponsorship inquiries and applications; the program winds down in August 2026. Existing sponsored projects continue under AFS. Pairs sponsorship with grant access via the AFS Grant program and a strong regional filmmaker network.</div>
         <div class="card-tags"><span class="tag">Texas Connection</span><span class="tag">AFS Grants</span><span class="tag">Regional</span></div>
-        <a class="card-link" href="https://www.austinfilm.org/fiscal-sponsorship/" target="_blank" rel="noopener">View →</a>
+        <a class="card-link" href="https://www.austinfilm.org/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
@@ -749,7 +749,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <div class="card-meta">Fiscal Sponsor · Mid-Atlantic Docs · Rolling · 7% Fee</div>
         <div class="card-desc">Washington DC-area nonprofit specifically built for documentary filmmakers. Combines fiscal sponsorship with intensive editorial feedback programs, work-in-progress screenings, and peer mentorship. Strong fit for filmmakers who want craft support alongside the 501(c)(3) umbrella.</div>
         <div class="card-tags"><span class="tag">DC / Mid-Atlantic</span><span class="tag">Editorial Feedback</span><span class="tag">Mentorship</span></div>
-        <a class="card-link" href="https://www.docsinprogress.org/fiscal_sponsorship" target="_blank" rel="noopener">View →</a>
+        <a class="card-link" href="https://www.docsinprogress.org/fiscal" target="_blank" rel="noopener">View →</a>
       </div>
 
     </div>
@@ -997,40 +997,40 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <div class="calc-compact">
 
       <div class="cc-top">
-        <div><label class="cc-lbl">Festival name</label><input type="text" id="fn" placeholder="e.g. Sundance" oninput="crc()"></div>
-        <div><label class="cc-lbl">Dates</label><input type="text" id="fd" placeholder="e.g. Jan 2026"></div>
+        <div><label class="cc-lbl" for="fn">Festival name</label><input type="text" id="fn" placeholder="e.g. Sundance" oninput="crc()"></div>
+        <div><label class="cc-lbl" for="fd">Dates</label><input type="text" id="fd" placeholder="e.g. Jan 2026"></div>
       </div>
 
       <div class="cc-grid">
 
         <div class="cc-group">
           <div class="cc-gh">Submission<span class="cc-sub" id="cs1">$0</span></div>
-          <div class="cc-row"><span>Film submission fee</span><input type="number" id="f1" value="0" min="0" oninput="crc()"></div>
+          <div class="cc-row"><span>Film submission fee</span><input type="number" id="f1" value="0" min="0" oninput="crc()" aria-label="Film submission fee"></div>
         </div>
 
         <div class="cc-group">
           <div class="cc-gh">Passes &amp; credentials<span class="cc-sub" id="cs2">$0</span></div>
-          <div class="cc-row"><span>Filmmaker badge / pass</span><input type="number" id="f8" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Guest / cast / crew passes <span class="cc-miss">easy to miss</span></span><input type="number" id="f9" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Industry market badge <span class="cc-miss">easy to miss</span></span><input type="number" id="f10" value="0" min="0" oninput="crc()"></div>
+          <div class="cc-row"><span>Filmmaker badge / pass</span><input type="number" id="f8" value="0" min="0" oninput="crc()" aria-label="Filmmaker badge / pass"></div>
+          <div class="cc-row"><span>Guest / cast / crew passes <span class="cc-miss">easy to miss</span></span><input type="number" id="f9" value="0" min="0" oninput="crc()" aria-label="Guest / cast / crew passes"></div>
+          <div class="cc-row"><span>Industry market badge <span class="cc-miss">easy to miss</span></span><input type="number" id="f10" value="0" min="0" oninput="crc()" aria-label="Industry market badge"></div>
         </div>
 
         <div class="cc-group cc-span2">
           <div class="cc-gh">Travel<span class="cc-sub" id="cs3">$0</span></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px">
-            <div class="cc-row"><span>Flights (all travelers)</span><input type="number" id="f11" value="0" min="0" oninput="crc()"></div>
-            <div class="cc-row"><span>Airport transfers</span><input type="number" id="f12" value="0" min="0" oninput="crc()"></div>
-            <div class="cc-row"><span>Local ground transport</span><input type="number" id="f13" value="0" min="0" oninput="crc()"></div>
-            <div class="cc-row"><span>Car hire</span><input type="number" id="f27" value="0" min="0" oninput="crc()"></div>
+            <div class="cc-row"><span>Flights (all travelers)</span><input type="number" id="f11" value="0" min="0" oninput="crc()" aria-label="Flights (all travelers)"></div>
+            <div class="cc-row"><span>Airport transfers</span><input type="number" id="f12" value="0" min="0" oninput="crc()" aria-label="Airport transfers"></div>
+            <div class="cc-row"><span>Local ground transport</span><input type="number" id="f13" value="0" min="0" oninput="crc()" aria-label="Local ground transport"></div>
+            <div class="cc-row"><span>Car hire</span><input type="number" id="f27" value="0" min="0" oninput="crc()" aria-label="Car hire"></div>
           </div>
         </div>
 
         <div class="cc-group cc-span2">
           <div class="cc-gh">Accommodation<span class="cc-sub" id="cs4">$0</span></div>
           <div class="cc-triple">
-            <div><label class="cc-lbl">Nights</label><input type="number" id="ac1" value="0" min="0" oninput="crc()"></div>
-            <div><label class="cc-lbl">Rate/night ($)</label><input type="number" id="ac2" value="0" min="0" oninput="crc()"></div>
-            <div><label class="cc-lbl">Rooms</label><input type="number" id="ac3" value="1" min="1" oninput="crc()"></div>
+            <div><label class="cc-lbl" for="ac1">Nights</label><input type="number" id="ac1" value="0" min="0" oninput="crc()"></div>
+            <div><label class="cc-lbl" for="ac2">Rate/night ($)</label><input type="number" id="ac2" value="0" min="0" oninput="crc()"></div>
+            <div><label class="cc-lbl" for="ac3">Rooms</label><input type="number" id="ac3" value="1" min="1" oninput="crc()"></div>
           </div>
           <div class="cc-calc" id="acr">0 × $0 × 1 room = <strong>$0</strong></div>
         </div>
@@ -1038,37 +1038,37 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <div class="cc-group cc-span2">
           <div class="cc-gh">Meals &amp; per diem<span class="cc-sub" id="cs5">$0</span></div>
           <div class="cc-triple">
-            <div><label class="cc-lbl">$/person/day</label><input type="number" id="me1" value="0" min="0" oninput="crc()"></div>
-            <div><label class="cc-lbl">People</label><input type="number" id="me2" value="1" min="1" oninput="crc()"></div>
-            <div><label class="cc-lbl">Days</label><input type="number" id="me3" value="0" min="0" oninput="crc()"></div>
+            <div><label class="cc-lbl" for="me1">$/person/day</label><input type="number" id="me1" value="0" min="0" oninput="crc()"></div>
+            <div><label class="cc-lbl" for="me2">People</label><input type="number" id="me2" value="1" min="1" oninput="crc()"></div>
+            <div><label class="cc-lbl" for="me3">Days</label><input type="number" id="me3" value="0" min="0" oninput="crc()"></div>
           </div>
           <div class="cc-calc" id="mer">$0 × 1 × 0 days = <strong>$0</strong></div>
         </div>
 
         <div class="cc-group">
           <div class="cc-gh">Marketing materials <span class="cc-warn">easy to miss</span><span class="cc-sub" id="cs6">$0</span></div>
-          <div class="cc-row"><span>Postcards</span><input type="number" id="f14" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Poster shipping</span><input type="number" id="f15" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Film merch / swag <span class="cc-miss">easy to miss</span></span><input type="number" id="f17" value="0" min="0" oninput="crc()"></div>
+          <div class="cc-row"><span>Postcards</span><input type="number" id="f14" value="0" min="0" oninput="crc()" aria-label="Postcards"></div>
+          <div class="cc-row"><span>Poster shipping</span><input type="number" id="f15" value="0" min="0" oninput="crc()" aria-label="Poster shipping"></div>
+          <div class="cc-row"><span>Film merch / swag <span class="cc-miss">easy to miss</span></span><input type="number" id="f17" value="0" min="0" oninput="crc()" aria-label="Film merch / swag"></div>
         </div>
 
         <div class="cc-group">
           <div class="cc-gh">PR &amp; publicity <span class="cc-warn">easy to miss</span><span class="cc-sub" id="cs7">$0</span></div>
-          <div class="cc-row"><span>Publicist / PR firm</span><input type="number" id="f18" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Local ad spend <span class="cc-miss">easy to miss</span></span><input type="number" id="f20" value="0" min="0" oninput="crc()"></div>
+          <div class="cc-row"><span>Publicist / PR firm</span><input type="number" id="f18" value="0" min="0" oninput="crc()" aria-label="Publicist / PR firm"></div>
+          <div class="cc-row"><span>Local ad spend <span class="cc-miss">easy to miss</span></span><input type="number" id="f20" value="0" min="0" oninput="crc()" aria-label="Local ad spend"></div>
         </div>
 
         <div class="cc-group">
           <div class="cc-gh">Events &amp; Q&amp;As <span class="cc-warn">easy to miss</span><span class="cc-sub" id="cs8">$0</span></div>
-          <div class="cc-row"><span>Venue / Q&amp;A hire</span><input type="number" id="f21" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Catering / drinks</span><input type="number" id="f22" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Panel / moderator fee</span><input type="number" id="f23" value="0" min="0" oninput="crc()"></div>
+          <div class="cc-row"><span>Venue / Q&amp;A hire</span><input type="number" id="f21" value="0" min="0" oninput="crc()" aria-label="Venue / Q&amp;A hire"></div>
+          <div class="cc-row"><span>Catering / drinks</span><input type="number" id="f22" value="0" min="0" oninput="crc()" aria-label="Catering / drinks"></div>
+          <div class="cc-row"><span>Panel / moderator fee</span><input type="number" id="f23" value="0" min="0" oninput="crc()" aria-label="Panel / moderator fee"></div>
         </div>
 
         <div class="cc-group">
           <div class="cc-gh">Miscellaneous<span class="cc-sub" id="cs9">$0</span></div>
-          <div class="cc-row"><span>Travel insurance <span class="cc-miss">easy to miss</span></span><input type="number" id="f24" value="0" min="0" oninput="crc()"></div>
-          <div class="cc-row"><span>Contingency buffer</span><input type="number" id="f26" value="0" min="0" oninput="crc()"></div>
+          <div class="cc-row"><span>Travel insurance <span class="cc-miss">easy to miss</span></span><input type="number" id="f24" value="0" min="0" oninput="crc()" aria-label="Travel insurance"></div>
+          <div class="cc-row"><span>Contingency buffer</span><input type="number" id="f26" value="0" min="0" oninput="crc()" aria-label="Contingency buffer"></div>
         </div>
 
       </div><!-- end cc-grid -->
@@ -1107,11 +1107,11 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <form name="calculator-leads" method="POST" data-netlify="true" onsubmit="handleLeadSubmit(event)">
           <input type="hidden" name="form-name" value="calculator-leads">
           <div style="margin-bottom:12px">
-            <label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">Your name</label>
+            <label for="lead-name" style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">Your name</label>
             <input type="text" name="name" id="lead-name" required placeholder="First and last name" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:3px;font-size:13px;background:var(--bg3);color:var(--text);font-family:var(--sans)">
           </div>
           <div style="margin-bottom:20px">
-            <label style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">Email address</label>
+            <label for="lead-email" style="font-size:12px;color:var(--text2);display:block;margin-bottom:4px">Email address</label>
             <input type="email" name="email" id="lead-email" required placeholder="you@example.com" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:3px;font-size:13px;background:var(--bg3);color:var(--text);font-family:var(--sans)">
           </div>
           <input type="hidden" name="festival" id="lead-festival" value="">
@@ -1128,7 +1128,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <h3>Never miss a grant deadline.</h3>
       <p>New grants, open festival submissions, funding opportunities, and curated resources — delivered to documentary filmmakers every two weeks. Free. No spam.</p>
       <div class="nl-row">
-        <input class="nl-input" type="email" placeholder="Your email address">
+        <input class="nl-input" type="email" aria-label="Your email address" placeholder="Your email address">
         <button class="nl-btn">Subscribe</button>
       </div>
     </div>
@@ -1312,14 +1312,14 @@ window.FESTIVALS = [
   {name:"Aspen Shortsfest", url:"https://www.aspenfilm.org/shortsfest", city:"Aspen, CO", region:"West", dates:"April 7–12, 2026", fee:"~$40", feeLevel:"medium", oscar:true, market:false, genres:["Shorts"], focus:["General"], featured:false, desc:"Oscar-qualifying for live-action and animated shorts. One of the most prestigious shorts-only festivals in the US. Strong industry attendance and significant award purse."},
   {name:"Sebastopol Documentary Film Festival", url:"https://www.sebastopolfilm.org", city:"Sonoma County, CA", region:"West", dates:"April 9–12, 2026", fee:"~$35", feeLevel:"medium", oscar:true, market:false, genres:["General","Shorts"], focus:["General"], featured:false, desc:"Oscar-qualifying festival for short and mini-form docs. 700+ submissions from 62+ countries. Holistic, equity-driven screening process — every film passes through at least three screeners."},
   {name:"SF DocFest", url:"https://sfindie.com/festivals/sf-docfest", city:"San Francisco, CA", region:"West", dates:"May 28 – June 7, 2026", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["General","Music","Arts & Culture"], focus:["General"], featured:false, desc:"Filmmaker-friendly Bay Area showcase known for adventurous programming and rejecting conventional taste — strong fit for music, subculture, and fringe-subject documentaries."},
-  {name:"DocLands Documentary Film Festival", url:"https://docfilminstitute.org/doclands", city:"San Rafael, CA", region:"West", dates:"May 7–10, 2026", fee:"~$50", feeLevel:"medium", oscar:false, market:true, genres:["General","Environmental","Adventure"], focus:["General"], featured:false, desc:"Run by the California Film Institute. Strong Bay Area audience and West Coast industry attendance. DocPitch program offers funding opportunities for in-progress films."},
+  {name:"DocLands Documentary Film Festival", url:"https://cafilm.org/doclands", city:"San Rafael, CA", region:"West", dates:"May 7–10, 2026", fee:"~$50", feeLevel:"medium", oscar:false, market:true, genres:["General","Environmental","Adventure"], focus:["General"], featured:false, desc:"Run by the California Film Institute. Strong Bay Area audience and West Coast industry attendance. DocPitch program offers funding opportunities for in-progress films."},
   {name:"BendFilm Festival", url:"https://bendfilm.org", city:"Bend, OR", region:"West", dates:"October 8–12, 2026", fee:"~$45", feeLevel:"medium", oscar:true, market:false, genres:["General","Adventure","Environmental"], focus:["General"], featured:false, desc:"Oscar-qualifying festival with one of the most welcoming filmmaker hospitality programs in the US. Strong Pacific Northwest audience and outdoor/independent ethos."},
-  {name:"Mill Valley Film Festival", url:"https://www.cafilm.org/mill-valley-film-festival", city:"Mill Valley, CA", region:"West", dates:"October 8–18, 2026", fee:"~$60", feeLevel:"high", oscar:false, market:false, genres:["General","Arts & Culture"], focus:["General"], featured:false, desc:"Long-running, well-respected Bay Area festival with strong audience attendance and industry presence. Excellent launch pad for fall awards-season documentaries."},
+  {name:"Mill Valley Film Festival", url:"https://www.mvff.com/", city:"Mill Valley, CA", region:"West", dates:"October 8–18, 2026", fee:"~$60", feeLevel:"high", oscar:false, market:false, genres:["General","Arts & Culture"], focus:["General"], featured:false, desc:"Long-running, well-respected Bay Area festival with strong audience attendance and industry presence. Excellent launch pad for fall awards-season documentaries."},
   {name:"Hawaii International Film Festival", url:"https://hiff.org", city:"Honolulu, HI", region:"West", dates:"October–November 2026", fee:"~$50", feeLevel:"medium", oscar:true, market:false, genres:["General","Arts & Culture"], focus:["Asian","Indigenous"], featured:false, desc:"The premier festival for Pacific Rim and Asian-American cinema. Oscar-qualifying for shorts. Strong Indigenous Pacific Islander representation throughout the program."},
   {name:"Frameline — San Francisco LGBTQ+ Film Festival", url:"https://www.frameline.org", city:"San Francisco, CA", region:"West", dates:"June 17–27, 2026", fee:"~$45", feeLevel:"medium", oscar:false, market:false, genres:["General","Social Justice"], focus:["LGBTQ+"], featured:false, desc:"The world's longest-running and largest LGBTQ+ film festival. The premier US showcase for queer documentary. Strong distribution and broadcast pipeline for selected docs."},
   {name:"Outfest Los Angeles", url:"https://outfest.org", city:"Los Angeles, CA", region:"West", dates:"July 9–19, 2026", fee:"~$45", feeLevel:"medium", oscar:false, market:false, genres:["General","Arts & Culture"], focus:["LGBTQ+"], featured:false, desc:"Premier LGBTQ+ film festival on the West Coast, with strong industry and Hollywood attendance. Outfest Fusion adds focus on QTBIPOC filmmakers."},
   {name:"Pan African Film & Arts Festival (PAFF)", url:"https://www.paff.org", city:"Los Angeles, CA", region:"West", dates:"February 10–22, 2026", fee:"~$50", feeLevel:"medium", oscar:true, market:false, genres:["General","Arts & Culture","Social Justice"], focus:["Black","BIPOC"], featured:false, desc:"The largest Black film festival in the US. Oscar-qualifying for shorts. Centers Black, African, and Caribbean filmmakers and stories."},
-  {name:"American Indian Film Festival", url:"https://aifisf.com", city:"San Francisco, CA", region:"West", dates:"November 6–14, 2026", fee:"~$45", feeLevel:"medium", oscar:false, market:false, genres:["General","Social Justice","Arts & Culture"], focus:["Indigenous"], featured:false, desc:"The longest-running Indigenous film festival in the world (founded 1975). Centers Native American and First Nations filmmakers. American Indian Motion Picture Awards announced annually."},
+  {name:"American Indian Film Festival", url:"https://filmfreeway.com/AIFF", city:"San Francisco, CA", region:"West", dates:"November 6–14, 2026", fee:"~$45", feeLevel:"medium", oscar:false, market:false, genres:["General","Social Justice","Arts & Culture"], focus:["Indigenous"], featured:false, needsVerification:true, desc:"The longest-running Indigenous film festival in the world (founded 1975). Centers Native American and First Nations filmmakers. American Indian Motion Picture Awards announced annually. Note: the official aifisf.com site is currently unreachable; confirm current status before submitting or attending. Linked here to its FilmFreeway page instead."},
   {name:"Palm Springs International ShortFest", url:"https://www.psfilmfest.org/shortfest", city:"Palm Springs, CA", region:"West", dates:"June 23–29, 2026", fee:"~$40", feeLevel:"medium", oscar:true, market:true, genres:["Shorts"], focus:["General"], featured:false, desc:"The largest shorts festival in North America. Oscar-qualifying. ShortFest Forum adds an industry market for short-film distribution and financing conversations."},
 
   {name:"SXSW", url:"https://www.sxsw.com/festivals/film", city:"Austin, TX", region:"Southwest", dates:"March 13–22, 2026", fee:"~$85 doc feature", feeLevel:"high", oscar:true, market:true, genres:["General","Music","Arts & Culture","Politics"], focus:["General"], featured:true, desc:"Massive convergence of film, tech, and music. Documentary Feature Competition launches major theatrical and streaming docs. Industry-heavy market with strong distribution conversations."},
@@ -1483,7 +1483,8 @@ function renderFests(){
 
   const html=filtered.map(f=>{
     let badge;
-    if(f.featured) badge='<span class="card-badge badge-featured">★ Featured</span>';
+    if(f.needsVerification) badge='<span class="card-badge badge-listing">Verify Current Programs</span>';
+    else if(f.featured) badge='<span class="card-badge badge-featured">★ Featured</span>';
     else if(f.oscar) badge='<span class="card-badge badge-oscar">Oscar-Qualifying</span>';
     else if(f.feeLevel==='free') badge='<span class="card-badge badge-free">Free Submission</span>';
     else if(f.focus && f.focus.length && f.focus[0]!=='General') badge='<span class="card-badge badge-id">'+escHTML(f.focus[0])+' Focus</span>';
