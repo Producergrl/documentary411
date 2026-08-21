@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
 
@@ -33,7 +34,10 @@
       <p class="lead">The money didn't disappear. <strong>It moved.</strong> This is the system for following it.</p>
 
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://buy.stripe.com/8x2cN4abZ9IB32C55F6J200">Get the System — $297</a>
+        <stripe-buy-button
+          buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"
+          publishable-key="pk_live_DQt8td1GrN2j8Qr2KEzbroh4">
+        </stripe-buy-button>
         <span class="btn-sub">Founding price $297 <em>(goes to $397 on August 1, 2026)</em></span>
       </div>
     </div>
@@ -137,7 +141,10 @@
       <p class="muted">Founding price goes to $397 on August 1, 2026. The live Q&amp;A calls are a launch-cohort bonus.</p>
 
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://buy.stripe.com/8x2cN4abZ9IB32C55F6J200">Get the System — $297</a>
+        <stripe-buy-button
+          buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"
+          publishable-key="pk_live_DQt8td1GrN2j8Qr2KEzbroh4">
+        </stripe-buy-button>
       </div>
 
       <div class="guarantee" style="margin-top:32px">
@@ -192,7 +199,10 @@
     <div class="wrap">
       <h2>The founding price and the live Q&amp;A calls end August 1, 2026.</h2>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://buy.stripe.com/8x2cN4abZ9IB32C55F6J200">Get the System — $297</a>
+        <stripe-buy-button
+          buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"
+          publishable-key="pk_live_DQt8td1GrN2j8Qr2KEzbroh4">
+        </stripe-buy-button>
       </div>
       <p class="muted" style="margin-top:18px">Prefer the team to build it with you? See <a href="/funding-sprint">the Funding Package Sprint</a>.</p>
     </div>
