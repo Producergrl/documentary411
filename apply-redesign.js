@@ -166,4 +166,15 @@ for(const fileName of publicPages){
   }
 }
 fs.writeFileSync(path.join(__dirname,'search-index.json'), JSON.stringify(searchEntries));
-console.log(`Documentary411 redesign, directory upgrades, advertising, paid-offer safety, homepage fixes and site search applied (${searchEntries.length} search entries)`);
+
+/* Favicon: every real page gets the icon links. Skips the Google Search
+   Console verification file, which must stay untouched. */
+const faviconTags = [
+  '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
+  '<link rel="icon" href="/favicon.ico" sizes="any">',
+  '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
+];
+const allHtmlPages = fs.readdirSync(__dirname).filter(f => f.endsWith('.html') && !f.startsWith('google'));
+allHtmlPages.forEach(fileName => injectStyles(fileName, faviconTags));
+
+console.log(`Documentary411 redesign, directory upgrades, advertising, paid-offer safety, homepage fixes, site search, and favicon applied (${searchEntries.length} search entries, ${allHtmlPages.length} pages got favicon links)`);

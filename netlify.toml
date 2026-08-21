@@ -1,5 +1,5 @@
 [build]
-  command = "node apply-redesign.js && node grant-status-fixes.js"
+  command = "node verify-palette.js && node apply-redesign.js && node grant-status-fixes.js"
   publish = "."
   functions = "netlify/functions"
 
