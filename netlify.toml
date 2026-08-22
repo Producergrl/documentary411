@@ -1,7 +1,19 @@
 [build]
-  command = "node verify-palette.js && node apply-redesign.js && node grant-status-fixes.js"
+  command = "node verify-palette.js && node apply-redesign.js && node grant-status-fixes.js && node remove-crew-jobs.js"
   publish = "."
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "/crew-jobs.html"
+  to = "/directory.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/crew-jobs"
+  to = "/directory.html"
+  status = 301
+  force = true
 
 [[headers]]
   for = "/*"
