@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Request an advertising placement in the Documentary411 filmmaker resource directory.">
-  <title>Advertise on Documentary411</title>
+  <meta name="description" content="Request an annual Documentary411 directory listing, featured placement, or category spotlight to reach independent documentary filmmakers year-round.">
+  <title>Annual Advertising & Directory Listings — Documentary411</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,6 +55,11 @@
     .fine{font-size:.8rem;color:#819092;margin-top:12px}
     @media(max-width:760px){.plans,.tier-options,.form-grid,.creative-specs{grid-template-columns:1fr}.field.full{grid-column:auto}.form-shell{padding:22px 18px}.estimate{align-items:flex-start}}
   </style>
+  <link rel="stylesheet" href="/directory-upgrades.css">
+  <link rel="stylesheet" href="/site-search.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
   <header class="site-header">
@@ -74,31 +79,30 @@
         <article class="plan">
           <div class="plan-label">Standard</div>
           <h3>Directory Listing</h3>
-          <div class="price">$125 <span>/ week</span></div>
+          <div class="price">$99 <span>/ year</span></div>
           <ul>
-            <li>Standard listing in the relevant directory category</li>
-            <li>Company description and destination link</li>
-            <li>Runs for the approved number of weeks</li>
+            <li>Standard listing in category</li>
+            <li>Description</li>
+            <li>Destination link</li>
           </ul>
         </article>
         <article class="plan featured">
           <div class="plan-label">Featured</div>
           <h3>Featured Listing</h3>
-          <div class="price">$250 <span>/ week</span></div>
+          <div class="price">$299 <span>/ year</span></div>
           <ul>
-            <li>Featured badge on your directory card</li>
-            <li>Priority placement within the relevant category</li>
-            <li>Enhanced visual emphasis over standard listings</li>
+            <li>Featured badge</li>
+            <li>Priority placement in category</li>
           </ul>
         </article>
         <article class="plan spotlight">
           <div class="plan-label">Spotlight</div>
-          <h3>Spotlight Placement</h3>
-          <div class="price">$500 <span>/ week</span></div>
+          <h3>Category Spotlight</h3>
+          <div class="price">$599 <span>/ year</span></div>
           <ul>
-            <li>Highest-priority directory placement</li>
-            <li>Premium highlighted treatment</li>
-            <li>Designed for launches, deadlines and major campaigns</li>
+            <li>Highest placement</li>
+            <li>Premium treatment</li>
+            <li>Category association</li>
           </ul>
         </article>
       </div>
@@ -156,23 +160,19 @@
           <div class="field full">
             <div class="tier-title">Advertising level *</div>
             <div class="tier-options">
-              <label class="tier-option"><input type="radio" name="advertising_level" value="Standard — $125/week" data-price="125" required><span><strong>Standard</strong><small>$125 / week</small></span></label>
-              <label class="tier-option"><input type="radio" name="advertising_level" value="Featured — $250/week" data-price="250"><span><strong>Featured</strong><small>$250 / week</small></span></label>
-              <label class="tier-option"><input type="radio" name="advertising_level" value="Spotlight — $500/week" data-price="500"><span><strong>Spotlight</strong><small>$500 / week</small></span></label>
+              <label class="tier-option"><input type="radio" name="advertising_level" value="Directory Listing — $99/year" data-price="99" required><span><strong>Directory Listing</strong><small>$99 / year</small></span></label>
+              <label class="tier-option"><input type="radio" name="advertising_level" value="Featured Listing — $299/year" data-price="299"><span><strong>Featured Listing</strong><small>$299 / year</small></span></label>
+              <label class="tier-option"><input type="radio" name="advertising_level" value="Category Spotlight — $599/year" data-price="599"><span><strong>Category Spotlight</strong><small>$599 / year</small></span></label>
             </div>
           </div>
 
-          <div class="field">
-            <label for="weeks">Number of weeks *</label>
-            <input id="weeks" name="weeks" type="number" min="1" max="52" value="1" required>
-          </div>
-          <div class="field">
+          <div class="field full">
             <label for="link">Listing destination URL *</label>
             <input id="link" name="listing_url" type="url" placeholder="https://" required>
           </div>
 
           <div class="field full">
-            <div class="estimate"><span>Estimated placement cost</span><strong id="estimate">Choose a level</strong></div>
+            <div class="estimate"><span>Annual placement cost</span><strong id="estimate">Choose a level</strong></div>
           </div>
 
           <div class="field full">
@@ -226,17 +226,13 @@
 
   <script>
     const tiers = document.querySelectorAll('input[name="advertising_level"]');
-    const weeks = document.getElementById('weeks');
     const estimate = document.getElementById('estimate');
     function updateEstimate(){
       const selected = document.querySelector('input[name="advertising_level"]:checked');
       if(!selected){ estimate.textContent = 'Choose a level'; return; }
-      const count = Math.max(1, Number(weeks.value || 1));
-      const total = Number(selected.dataset.price) * count;
-      estimate.textContent = '$' + total.toLocaleString() + ' total';
+      estimate.textContent = '$' + Number(selected.dataset.price).toLocaleString() + ' / year';
     }
     tiers.forEach(t => t.addEventListener('change', updateEstimate));
-    weeks.addEventListener('input', updateEstimate);
 
     const adImage = document.getElementById('ad-image');
     const uploadStatus = document.getElementById('upload-status');
@@ -262,5 +258,6 @@
       uploadStatus.textContent = 'Image attached: ' + file.name;
     });
   </script>
+  <script src="/site-search.js" defer></script>
 </body>
 </html>

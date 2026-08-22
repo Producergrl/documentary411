@@ -2,7 +2,7 @@ window.D411_RESOURCES = [
   {
     name:'Sundance Institute Documentary Fund', resourceType:'Fund / Grant', category:'Documentary & Film Funds / Grants',
     description:'Non-recoupable documentary funding and support for nonfiction projects at multiple stages. One of the most important documentary funding resources to track.',
-    bestFor:'Feature documentaries seeking serious institutional support', officialUrl:'https://www.sundance.org/programs/documentary-film/', region:'International', deadlineMonth:'Verify', rollingDeadline:false, cost:'Free to review; application rules vary', isFree:'mixed', access:'Public information; application eligibility varies', documentarySpecific:'yes', filmType:'documentary', projectStage:'development / production / post-production', experienceLevel:'intermediate / advanced', firstTimeFilmmakerFriendly:'unknown', socialImpactFriendly:'yes', underrepresentedFilmmakerFriendly:'yes', status:'verify', lastVerified:'2026-08-18', notes:'High-value opportunity; verify current cycle before planning submissions.'
+    bestFor:'Feature documentaries seeking serious institutional support', officialUrl:'https://www.sundance.org/programs/documentary-film/', region:'International', deadlineMonth:'Closed; next open call announced early 2027', rollingDeadline:false, cost:'Free to review; application rules vary', isFree:'mixed', access:'Public information; application eligibility varies', documentarySpecific:'yes', filmType:'documentary', projectStage:'development / production / post-production', experienceLevel:'intermediate / advanced', firstTimeFilmmakerFriendly:'unknown', socialImpactFriendly:'yes', underrepresentedFilmmakerFriendly:'yes', status:'closed', lastVerified:'2026-08-19', notes:'High-value opportunity; verify current cycle before planning submissions.'
   },
   {
     name:'IDA Grants Directory', resourceType:'Member Resource', category:'Education / Filmmaker Resource Hubs',
@@ -17,7 +17,7 @@ window.D411_RESOURCES = [
   {
     name:'Catapult Film Fund', resourceType:'Fund / Grant', category:'Documentary & Film Funds / Grants',
     description:'Early-stage documentary development funding and mentorship designed to help filmmakers create proof of concept and fundraising materials.',
-    bestFor:'Early development documentary projects', officialUrl:'https://catapultfilmfund.org/', region:'International', deadlineMonth:'Verify', rollingDeadline:false, cost:'Verify current application fee/rules', isFree:'mixed', access:'Public information', documentarySpecific:'yes', filmType:'documentary', projectStage:'development', experienceLevel:'beginner / intermediate', firstTimeFilmmakerFriendly:'yes', socialImpactFriendly:'yes', underrepresentedFilmmakerFriendly:'yes', status:'verify', lastVerified:'2026-08-18', notes:'One of the few resources that can matter before a film is fully packaged.'
+    bestFor:'Early development documentary projects', officialUrl:'https://catapultfilmfund.org/', region:'International', deadlineMonth:'Closed', rollingDeadline:false, cost:'Verify current application fee/rules', isFree:'mixed', access:'Public information', documentarySpecific:'yes', filmType:'documentary', projectStage:'development', experienceLevel:'beginner / intermediate', firstTimeFilmmakerFriendly:'yes', socialImpactFriendly:'yes', underrepresentedFilmmakerFriendly:'yes', status:'closed', lastVerified:'2026-08-19', notes:'One of the few resources that can matter before a film is fully packaged.'
   },
   {
     name:'Chicken & Egg Pictures', resourceType:'Fund / Lab', category:'Documentary & Film Funds / Grants',
@@ -27,7 +27,7 @@ window.D411_RESOURCES = [
   {
     name:'Ford Foundation JustFilms', resourceType:'Fund / Grant', category:'Documentary & Film Funds / Grants',
     description:'Supports artist-driven film and media connected to social justice and the public interest.',
-    bestFor:'Social justice and impact documentaries', officialUrl:'https://www.fordfoundation.org/work/our-grants/justfilms/', region:'International', deadlineMonth:'Verify', rollingDeadline:false, cost:'Verify', isFree:'mixed', access:'Public information', documentarySpecific:'yes', filmType:'documentary / impact', projectStage:'development / production / impact', experienceLevel:'advanced', firstTimeFilmmakerFriendly:'unknown', socialImpactFriendly:'yes', underrepresentedFilmmakerFriendly:'yes', status:'verify', lastVerified:'2026-08-18', notes:'Excellent fit for high-impact work, but not a quick easy application.'
+    bestFor:'Social justice and impact documentaries', officialUrl:'https://www.fordfoundation.org/work/our-grants/justfilms/', region:'International', deadlineMonth:'Closed', rollingDeadline:false, cost:'Verify', isFree:'mixed', access:'Public information', documentarySpecific:'yes', filmType:'documentary / impact', projectStage:'development / production / impact', experienceLevel:'advanced', firstTimeFilmmakerFriendly:'unknown', socialImpactFriendly:'yes', underrepresentedFilmmakerFriendly:'yes', status:'closed', lastVerified:'2026-08-19', notes:'Excellent fit for high-impact work, but not a quick easy application.'
   },
   {
     name:'Women Make Movies Fiscal Sponsorship', resourceType:'Fiscal Sponsorship', category:'Fiscal Sponsorship',

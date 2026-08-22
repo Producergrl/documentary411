@@ -6,7 +6,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3213342697186484"
      crossorigin="anonymous"></script>
 <title>Documentary411 — The Documentary Filmmaker's Complete Resource Directory</title>
-<meta name="description" content="Verified grants, festivals, distributors, legal resources, and tools — curated for independent documentary filmmakers at every stage.">
+<meta name="description" content="Explore verified grants, festivals, markets, distributors, legal resources, gear, and practical tools curated for independent documentary filmmakers.">
 <style>
 /* Approved light palette (ivory/teal/orange/amber) -- must match redesign.css/
    product-redesign.css/styles.css/directory-upgrades.css. verify-palette.js
@@ -251,7 +251,14 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .pro-error{font-size:12px;color:#e87a68;background:rgba(220,80,60,0.07);border:1px solid rgba(220,80,60,0.2);padding:8px 10px;border-radius:3px;line-height:1.4}
 .pro-note{font-size:12px;color:var(--text3);margin-top:24px;text-align:center;letter-spacing:.02em}
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">  <link rel="stylesheet" href="/redesign.css">
+  <link rel="stylesheet" href="/redesign-v2.css">
+  <link rel="stylesheet" href="/directory-upgrades.css">
+  <link rel="stylesheet" href="/site-search.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
 <body>
 
 <!-- NAV -->
@@ -260,16 +267,27 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <a href="#" class="nav-logo">Documentary411</a>
     <div class="nav-links">
       <a href="#grants">Grants</a>
-      <a href="#festivals">Festivals</a>
-      <a href="#festfinder">Fest Near Me</a>
+      <div class="nav-dropdown">
+        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>
+        <div class="nav-submenu">
+          <a href="#festfinder">Fest Near Me</a>
+        </div>
+      </div>
       <a href="#distribution">Distribution</a>
       <a href="#legal">Legal</a>
       <a href="#fiscal">Fiscal Sponsors</a>
       <a href="#music">Music</a>
       <a href="#equipment">Equipment</a>
-      <a href="#ask-a-pro">Ask a Pro</a>
+      <a href="/ask-a-pro.html">Ask a Pro</a>
 <a href="/funding-lab">Funding Lab</a>
-<a href="/festival-strategy">Festival Strategy</a>
+      <a href="/advertise.html">Advertise</a>
+      <a href="/submit-resource.html">Submit/Correct</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/fiscal-sponsorship.html">Fiscal Sponsorship</a>
+      <a href="/documentary-markets.html">Markets+</a>
+      <a href="/documentary-grants.html">Grants+</a>
+      <a href="/open-now.html">Open Now</a>
+      <a href="/directory.html">Directory</a>
       <a href="#festival-calculator" class="nav-links-cta-mobile">Festival Calculator</a>
     </div>
     <a href="#festival-calculator" class="nav-cta">Festival Calculator</a>
@@ -279,18 +297,36 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:20px">The Documentary Filmmaker's Complete Resource Directory</p>
-  <h1>Every resource your <em>documentary</em> will ever need. All in one place.</h1>
-  <p class="hero-sub">Verified grants, festivals, distributors, sales agents, legal resources, equipment, and software — curated for independent documentary filmmakers at every stage.</p>
+  <p class="hero-eyebrow">Funding. Festivals. Tools. Community.</p>
+  <h1>Your Insider<br>Advantage for<br>Documentary<br>Filmmaking<span class="hero-dot">.</span></h1>
+  <p class="hero-sub">Funding opportunities, festivals, distribution, legal resources, equipment and practical tools — curated for independent documentary filmmakers by people who know the road.</p>
   <div class="hero-btns">
-    <a href="#grants" class="btn-primary">Explore Directory</a>
+    <a href="#grants" class="btn-primary">Explore Resources</a>
     <a href="#festival-calculator" class="btn-secondary">Festival Cost Calculator</a>
   </div>
   <div class="hero-stats">
-    <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Verified Resources</span></div>
+    <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Verified Resources</span></div>
     <div class="stat"><span class="stat-num">8</span><span class="stat-label">Categories</span></div>
     <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Basic Access</span></div>
     <div class="stat"><span class="stat-num">Updated</span><span class="stat-label">Weekly</span></div>
+  </div>
+</section>
+
+<!-- HOME GROWTH UPGRADES -->
+<section class="home-growth-panel" id="home-growth-upgrades">
+  <div class="home-growth-inner">
+    <div class="home-growth-card">
+      <p class="cat-label">Start here</p>
+      <h2>Find what is open, useful, and worth your time.</h2>
+      <p>Documentary411 is becoming a self-correcting filmmaker directory: search resources, check what is open or needs verification, report broken links, and stop treating every grant, festival, market, or member-only resource as if it were the same thing.</p>
+      <div class="home-growth-links"><a href="/directory.html">Search Directory</a><a href="/open-now.html">Open Now</a><a href="/submit-resource.html" class="secondary">Submit a Correction</a></div>
+    </div>
+    <div class="home-growth-card">
+      <p class="cat-label">Free workbook</p>
+      <h2>Festival Budget Workbook</h2>
+      <p>Before filmmakers spend on submissions, travel, PR, badges, deliverables and follow-up, help them calculate what the festival run may actually cost.</p>
+      <div class="home-growth-links"><a href="/festival-budget-workbook.html">Download Free</a><a href="/festival-strategy.html" class="secondary">90 Days Out</a></div>
+    </div>
   </div>
 </section>
 
@@ -329,7 +365,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
   <div class="section-inner">
     <p class="cat-label">Category 01 — Funding</p>
     <div class="section-header"><h2>Grants &amp; Funding</h2></div>
-    <p class="section-desc">Active, verified funding opportunities for documentaries — from early development through post-production and impact release.</p>
+    <p class="section-desc">Verified documentary funding programs with current application status — including open, closed, rolling, and upcoming cycles.</p>
     <div class="filter-row">
       <button class="filter-btn active">All Grants</button>
       <button class="filter-btn">Development</button>
@@ -341,82 +377,82 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <div class="cards">
 
       <div class="card">
-        <span class="card-badge badge-featured">★ Featured</span>
+        <span class="card-badge badge-listing">Closed · Next Call 2027</span>
         <div class="card-title">Sundance Documentary Fund</div>
-        <div class="card-meta">Grant · Development, Production, Post · International</div>
-        <div class="card-desc">Nonrecoupable grants of $40,000–$100,000 supporting feature docs worldwide at all stages. One of the most transformative programs in documentary filmmaking. Labs, mentorship, and strategic support included.</div>
+        <div class="card-meta">Grant · Development, Production, Post · International · 2026 cycle closed <time datetime="2026-06-15">June 15, 2026</time> · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">Nonrecoupable support for independent cinematic documentaries worldwide. The application closed <time datetime="2026-06-15">June 15, 2026</time>; Sundance says the next open call will be announced in early 2027.</div>
         <div class="card-tags"><span class="tag">Up to $100K</span><span class="tag">International</span></div>
         <a class="card-link" href="https://www.sundance.org/programs/documentary-film/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-featured">★ Featured</span>
+        <span class="card-badge badge-listing">Verify Current Programs</span>
         <div class="card-title">IDA Documentary Fund</div>
-        <div class="card-meta">Grant · Production &amp; Post · International</div>
-        <div class="card-desc">One of the most prestigious documentary grants in the world. Up to $35,000 for feature docs in production or post-production. Open to international applicants. IDA membership provides full directory access.</div>
+        <div class="card-meta">Funding resource · International · Program availability varies · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">IDA remains a major documentary funding resource, but individual funds and application windows change. Use the IDA Grants Directory to confirm which opportunities are currently accepting applications before preparing a submission.</div>
         <div class="card-tags"><span class="tag">Up to $35K</span><span class="tag">Feature Doc</span></div>
         <a class="card-link" href="https://www.documentary.org/grants-directory" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-open">Open Now</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Redford Center Grant</div>
-        <div class="card-meta">Grant · Environmental · Any Stage · Deadline May 14, 2026</div>
-        <div class="card-desc">$40,000 plus a year of mentorship, cohort support, and industry connections for environmental documentary projects. Must have sample footage. One of the most generous environmental film grants available.</div>
-        <div class="card-tags"><span class="tag">$40K</span><span class="tag">Environmental</span><span class="tag">Deadline May 14</span></div>
+        <div class="card-meta">Grant · Environmental · Any Stage · Deadline <time datetime="2026-05-14">May 14, 2026</time> · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">$40,000 plus mentorship and cohort support for environmental documentary projects. The 2026 application window closed <time datetime="2026-05-14">May 14, 2026</time>.</div>
+        <div class="card-tags"><span class="tag">$40K</span><span class="tag">Environmental</span><span class="tag">Deadline <time datetime="2026-05-14">May 14</time></span></div>
         <a class="card-link" href="https://www.redfordcenter.org/grantapplication/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-open">Open Now</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Ford Foundation JustFilms</div>
-        <div class="card-meta">Grant · Social Justice · Production · Deadline May–June 2026</div>
-        <div class="card-desc">$25,000–$100,000 for artist-driven feature documentaries with social justice themes aligned with Ford Foundation priorities. Emphasis on intersectional representation and production independence.</div>
+        <div class="card-meta">Grant · Social Justice · Feature Documentary · Applications currently closed · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">JustFilms supports artist-driven feature documentaries intersecting with Ford Foundation social justice priorities. Ford currently states that documentary film production grant submissions are closed.</div>
         <div class="card-tags"><span class="tag">Up to $100K</span><span class="tag">Social Justice</span><span class="tag">May–June 2026</span></div>
         <a class="card-link" href="https://www.fordfoundation.org/work/our-grants/justfilms/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-free">Free to Apply</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Berkeley Film Foundation</div>
-        <div class="card-meta">Grant · Production &amp; Post · East Bay CA</div>
-        <div class="card-desc">$5,000–$25,000 for documentary projects in production or post with social consciousness. East Bay-based filmmakers only. Application via Submittable. Competitive; 6–7 week review process.</div>
+        <div class="card-meta">Grant · Production, Post & Distribution · East Bay CA · Deadline <time datetime="2026-04-13">April 13, 2026</time> · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">$5,000–$25,000 documentary grants for eligible East Bay filmmakers. The 2026 Documentary Grant Program closed <time datetime="2026-04-13">April 13, 2026</time>.</div>
         <div class="card-tags"><span class="tag">$5K–$25K</span><span class="tag">Regional</span></div>
         <a class="card-link" href="https://berkeleyfilmfoundation.org/documentary-grant-program" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-free">Free to Apply</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">SFFILM Documentary Fund</div>
-        <div class="card-meta">Grant · Post-Production · International · Summer/Fall 2026</div>
-        <div class="card-desc">$10,000–$25,000 for feature docs within 3 months of beginning post. Open internationally. Supports 3–4 projects per year. Strong track record of advancing critically acclaimed films. Visually innovative work prioritized.</div>
+        <div class="card-meta">Grant · Post-Production · International · Final deadline <time datetime="2026-07-07">July 7, 2026</time> · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">Support for feature documentaries in post-production. The 2026 Documentary Film Fund closed after its final deadline on <time datetime="2026-07-07">July 7, 2026</time>.</div>
         <div class="card-tags"><span class="tag">Post Only</span><span class="tag">$10K–$25K</span></div>
         <a class="card-link" href="https://sffilm.org/documentary-film-fund/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-free">Free to Apply</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Mountainfilm Commitment Grant</div>
-        <div class="card-meta">Grant · Production &amp; Post · USA · Opens July 1, 2026</div>
-        <div class="card-desc">For non-fiction stories covering adventure, activism, social justice, culture, and environment. Open internationally to US-based filmmakers. Applications open July 1–16, 2026. Emerging Filmmaker Fellowship also available.</div>
+        <div class="card-meta">Grant · Production & Post · U.S.-resident filmmakers · Final deadline <time datetime="2026-07-16">July 16, 2026</time> · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">Funding for nonfiction stories covering adventure, activism, social justice, culture, and environment. The 2026 application window closed <time datetime="2026-07-16">July 16, 2026</time>.</div>
         <div class="card-tags"><span class="tag">Adventure/Environment</span><span class="tag">USA Resident</span><span class="tag">Opens July 1</span></div>
         <a class="card-link" href="https://www.mountainfilm.org/mountainfilm-initiatives/commitment-grants/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-open">Open Now</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Film Independent Documentary Producing Lab</div>
-        <div class="card-meta">Lab + Grant · Development · Non-Member Deadline May 4, 2026</div>
-        <div class="card-desc">Intensive lab for documentary producers at any stage. Combines mentorship, industry access, and professional development. Member extended deadline May 18. Applications currently open. Fee waived for members.</div>
-        <div class="card-tags"><span class="tag">Lab</span><span class="tag">Mentorship</span><span class="tag">Deadline May 18</span></div>
+        <div class="card-meta">Lab + Grant · Documentary Producing · Member deadline <time datetime="2026-05-18">May 18, 2026</time> · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">Intensive lab for documentary producers combining mentorship, industry access, and professional development. The 2026 Documentary Producing Lab application is currently closed.</div>
+        <div class="card-tags"><span class="tag">Lab</span><span class="tag">Mentorship</span><span class="tag">Deadline <time datetime="2026-05-18">May 18</time></span></div>
         <a class="card-link" href="https://www.filmindependent.org/programs/applications/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
-        <span class="card-badge badge-free">Free to Apply</span>
+        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Catapult Film Fund</div>
-        <div class="card-meta">Grant · Early Development · USA &amp; International</div>
-        <div class="card-desc">$10,000–$20,000 early development grants — one of the very few that supports filmmakers at the idea stage. Designed to help filmmakers create a fundraising piece and build proof of concept. Mentorship included.</div>
+        <div class="card-meta">Grant · Early Development · International · Applications not currently accepted · Last verified <time datetime="2026-08-19">August 19, 2026</time></div>
+        <div class="card-desc">Early-stage documentary development funding and mentorship. Catapult accepts applications in rounds and currently states that its grant programs are not accepting applications.</div>
         <div class="card-tags"><span class="tag">Development</span><span class="tag">Earliest Stage</span></div>
         <a class="card-link" href="https://catapultfilmfund.org" target="_blank" rel="noopener">View →</a>
       </div>
@@ -986,7 +1022,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
     </div>
 
-    <p class="pro-note">Payments are processed securely by Stripe. After checkout you'll be redirected to a confirmation page and receive scheduling instructions by email.</p>
+    <p class="pro-note">Payments are processed securely by Stripe. After checkout, the $50 question purchase continues to a short question form; the $500 consult continues to a short intake and scheduling form.</p>
   </div>
 </section>
 
@@ -1155,9 +1191,16 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <a href="#fiscal">Fiscal Sponsors</a>
       <a href="#music">Music</a>
       <a href="#equipment">Equipment</a>
-      <a href="#ask-a-pro">Ask a Pro</a>
+      <a href="/ask-a-pro.html">Ask a Pro</a>
 <a href="/funding-lab">Funding Lab</a>
-<a href="/festival-strategy">Festival Strategy</a>
+      <a href="/advertise.html">Advertise</a>
+      <a href="/submit-resource.html">Submit/Correct</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/fiscal-sponsorship.html">Fiscal Sponsorship</a>
+      <a href="/documentary-markets.html">Markets+</a>
+      <a href="/documentary-grants.html">Grants+</a>
+      <a href="/open-now.html">Open Now</a>
+      <a href="/directory.html">Directory</a>
       <a href="#">About</a>
     </div>
     <div class="footer-copy">© 2026 Documentary411. For documentary filmmakers, everywhere.</div>
@@ -1581,5 +1624,7 @@ async function startCheckout(tier, btn){
 }
 </script>
 
+  <script src="/site-fixes.js" defer></script>
+  <script src="/site-search.js" defer></script>
 </body>
 </html>

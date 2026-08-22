@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Brand-Funded Documentary System — Documentary411 Funding Lab</title>
-  <meta name="description" content="A step-by-step system for funding your documentary with brand and sponsor money — built by producers who've actually done it.">
+  <meta name="description" content="Learn a step-by-step system for funding documentaries with aligned brands and sponsors, including positioning, research, outreach, and pitch tools.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  <link rel="stylesheet" href="/product-redesign.css">
+  <link rel="stylesheet" href="/directory-upgrades.css">
+  <link rel="stylesheet" href="/site-search.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
 
@@ -38,7 +44,7 @@
           buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"
           publishable-key="pk_live_DQt8td1GrN2j8Qr2KEzbroh4">
         </stripe-buy-button>
-        <span class="btn-sub">Founding price $297 <em>(goes to $397 on August 1, 2026)</em></span>
+        <span class="btn-sub">Checkout is paused until every module and template is attached for immediate delivery.</span>
       </div>
     </div>
   </section>
@@ -138,7 +144,7 @@
     <div class="wrap">
       <p class="eyebrow">Founding price</p>
       <p class="price-line">$297 <span class="strike">$397</span></p>
-      <p class="muted">Founding price goes to $397 on August 1, 2026. The live Q&amp;A calls are a launch-cohort bonus.</p>
+      <p class="muted">Launch price: $297. Sales reopen when the complete seven-module system and all templates are ready for immediate access.</p>
 
       <div class="cta-row">
         <stripe-buy-button
@@ -147,12 +153,7 @@
         </stripe-buy-button>
       </div>
 
-      <div class="guarantee" style="margin-top:32px">
-        <span class="badge">14 days</span>
-        <div>
-          <p class="mb-0"><strong>Full refund, no questions.</strong> If the system isn't worth 10× the price to your film, send one email to <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>.</p>
-        </div>
-      </div>
+      <div class="honesty" style="margin-top:32px"><h3>Sales status</h3><p><strong>Checkout is paused.</strong> We will reopen sales only when the complete system can be delivered immediately after payment.</p></div>
     </div>
   </section>
 
@@ -182,11 +183,11 @@
         </details>
         <details>
           <summary>How do I get access?</summary>
-          <p>Instant. You'll receive login/access by email within 5 minutes of checkout. Questions: <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>.</p>
+          <p>Checkout is temporarily paused while the complete module and template delivery package is finalized. Join the waitlist below and we will email you when immediate access is ready.</p>
         </details>
         <details>
-          <summary>What's the refund policy?</summary>
-          <p>14-day full refund, any reason. Email <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>.</p>
+          <summary>Why is checkout paused?</summary>
+          <p>Because we will not accept payment until every promised module and template is attached and ready for immediate buyer access.</p>
         </details>
       </div>
     </div>
@@ -197,7 +198,7 @@
   <!-- FINAL CTA -->
   <section class="band-soft center">
     <div class="wrap">
-      <h2>The founding price and the live Q&amp;A calls end August 1, 2026.</h2>
+      <h2>Be first to know when the complete Funding Lab reopens.</h2>
       <div class="cta-row">
         <stripe-buy-button
           buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"
@@ -205,6 +206,24 @@
         </stripe-buy-button>
       </div>
       <p class="muted" style="margin-top:18px">Prefer the team to build it with you? See <a href="/funding-sprint">the Funding Package Sprint</a>.</p>
+    </div>
+  </section>
+
+
+  <section class="band-soft" id="funding-lab-waitlist">
+    <div class="wrap">
+      <p class="eyebrow">Funding Lab waitlist</p>
+      <h2>Get the reopening email.</h2>
+      <p class="lead">We will email you when the complete seven-module system and every promised template are attached and ready for immediate delivery.</p>
+      <form name="funding-lab-waitlist" method="POST" action="/funding-lab-waitlist-thank-you.html" data-netlify="true" style="max-width:620px;margin-top:24px">
+        <input type="hidden" name="form-name" value="funding-lab-waitlist">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <input name="name" type="text" required placeholder="Your name" style="padding:12px;border:1px solid rgba(7,63,69,.18);border-radius:7px;font:inherit">
+          <input name="email" type="email" required placeholder="Your email" style="padding:12px;border:1px solid rgba(7,63,69,.18);border-radius:7px;font:inherit">
+        </div>
+        <input name="film" type="text" placeholder="Film / project name (optional)" style="width:100%;padding:12px;border:1px solid rgba(7,63,69,.18);border-radius:7px;font:inherit;margin-top:12px">
+        <button class="btn btn-primary" type="submit" style="border:0;margin-top:14px;cursor:pointer">Join the Waitlist</button>
+      </form>
     </div>
   </section>
 
@@ -219,5 +238,6 @@
     </div>
   </footer>
 
+  <script src="/site-search.js" defer></script>
 </body>
 </html>

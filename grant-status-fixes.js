@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const vm = require('vm');
 
-const AUDIT_DATE_TEXT = 'Aug. 19, 2026';
+const AUDIT_DATE_TEXT = 'August 19, 2026';
 const AUDIT_DATE_ISO = '2026-08-19';
 
 function updateGrantCard(html, title, updates) {
@@ -63,6 +64,23 @@ function closeExpiredOpenBadges(html) {
   });
 }
 
+function addSemanticDates(html) {
+  const monthNumbers = {
+    January:'01',February:'02',March:'03',April:'04',May:'05',June:'06',
+    July:'07',August:'08',September:'09',October:'10',November:'11',December:'12'
+  };
+  const scriptBoundary = html.indexOf('<script src="https://cdnjs.cloudflare.com');
+  const contentEnd = scriptBoundary === -1 ? html.length : scriptBoundary;
+  const visibleHtml = html.slice(0, contentEnd);
+  const scripts = html.slice(contentEnd).replace(/<time\b[^>]*>([^<]*)<\/time>/gi, '$1');
+  const semanticHtml = visibleHtml.replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})\b/g, (match, month, day, year, offset, source) => {
+    const before = source.slice(Math.max(0, offset - 80), offset);
+    if (/<time\b[^>]*>[^<]*$/i.test(before)) return match;
+    return `<time datetime="${year}-${monthNumbers[month]}-${String(day).padStart(2, '0')}">${match}</time>`;
+  });
+  return semanticHtml + scripts;
+}
+
 function fixHomepage() {
   const file = path.join(__dirname, 'index.html');
   if (!fs.existsSync(file)) return;
@@ -77,8 +95,8 @@ function fixHomepage() {
     {
       title: 'Sundance Documentary Fund',
       badge: 'Closed · Next Call 2027',
-      meta: 'Grant · Development, Production, Post · International · 2026 cycle closed June 15',
-      description: 'Nonrecoupable support for independent cinematic documentaries worldwide. The 2026 application closed June 15; Sundance says the next open call will be announced in early 2027.'
+      meta: 'Grant · Development, Production, Post · International · 2026 cycle closed June 15, 2026',
+      description: 'Nonrecoupable support for independent cinematic documentaries worldwide. The application closed June 15, 2026; Sundance says the next open call will be announced in early 2027.'
     },
     {
       title: 'IDA Documentary Fund',
@@ -89,8 +107,9 @@ function fixHomepage() {
     {
       title: 'Redford Center Grant',
       badge: 'Closed',
-      meta: 'Grant · Environmental · Any Stage · 2026 deadline May 14',
-      description: '$40,000 plus mentorship and cohort support for environmental documentary projects. The 2026 application window closed May 14.'
+      meta: 'Grant · Environmental · Any Stage · Deadline May 14, 2026',
+      description: '$40,000 plus mentorship and cohort support for environmental documentary projects. The 2026 application window closed May 14, 2026.',
+      tags: '<span class="tag">$40K</span><span class="tag">Environmental</span><span class="tag">Deadline <time datetime="2026-05-14">May 14</time></span>'
     },
     {
       title: 'Ford Foundation JustFilms',
@@ -101,26 +120,27 @@ function fixHomepage() {
     {
       title: 'Berkeley Film Foundation',
       badge: 'Closed',
-      meta: 'Grant · Production, Post & Distribution · East Bay CA · 2026 deadline April 13',
-      description: '$5,000–$25,000 documentary grants for eligible East Bay filmmakers. The 2026 Documentary Grant Program closed April 13.'
+      meta: 'Grant · Production, Post & Distribution · East Bay CA · Deadline April 13, 2026',
+      description: '$5,000–$25,000 documentary grants for eligible East Bay filmmakers. The 2026 Documentary Grant Program closed April 13, 2026.'
     },
     {
       title: 'SFFILM Documentary Fund',
       badge: 'Closed',
-      meta: 'Grant · Post-Production · International · 2026 final deadline July 7',
-      description: 'Support for feature documentaries in post-production. The 2026 Documentary Film Fund opened March 3 and closed after its final deadline on July 7.'
+      meta: 'Grant · Post-Production · International · Final deadline July 7, 2026',
+      description: 'Support for feature documentaries in post-production. The 2026 Documentary Film Fund closed after its final deadline on July 7, 2026.'
     },
     {
       title: 'Mountainfilm Commitment Grant',
       badge: 'Closed',
-      meta: 'Grant · Production & Post · U.S.-resident filmmakers · 2026 window July 1–16',
-      description: 'Funding for nonfiction stories covering adventure, activism, social justice, culture, and environment. The 2026 application window ran July 1–16 and is now closed.'
+      meta: 'Grant · Production & Post · U.S.-resident filmmakers · Final deadline July 16, 2026',
+      description: 'Funding for nonfiction stories covering adventure, activism, social justice, culture, and environment. The 2026 application window closed July 16, 2026.'
     },
     {
       title: 'Film Independent Documentary Producing Lab',
       badge: 'Closed',
-      meta: 'Lab + Grant · Documentary Producing · 2026 member deadline May 18',
-      description: 'Intensive lab for documentary producers combining mentorship, industry access, and professional development. The 2026 Documentary Producing Lab application is currently closed.'
+      meta: 'Lab + Grant · Documentary Producing · Member deadline May 18, 2026',
+      description: 'Intensive lab for documentary producers combining mentorship, industry access, and professional development. The 2026 Documentary Producing Lab application is currently closed.',
+      tags: '<span class="tag">Lab</span><span class="tag">Mentorship</span><span class="tag">Deadline <time datetime="2026-05-18">May 18</time></span>'
     },
     {
       title: 'Catapult Film Fund',
@@ -132,7 +152,47 @@ function fixHomepage() {
 
   for (const update of updates) html = updateGrantCard(html, update.title, update);
   html = closeExpiredOpenBadges(html);
+  html = addSemanticDates(html);
   fs.writeFileSync(file, html);
+}
+
+function addItemListSchemas() {
+  const dataFile = path.join(__dirname, 'resources-data.js');
+  if (!fs.existsSync(dataFile)) return;
+  const sandbox = {window:{}};
+  vm.runInNewContext(fs.readFileSync(dataFile, 'utf8'), sandbox, {filename:dataFile});
+  const resources = sandbox.window.D411_RESOURCES || [];
+  const pages = {
+    'directory.html': resources,
+    'open-now.html': resources.filter(resource => resource.status === 'active' || resource.rollingDeadline === true),
+    'documentary-grants.html': resources.filter(resource => resource.category === 'Documentary & Film Funds / Grants'),
+    'documentary-markets.html': resources.filter(resource => resource.category === 'Documentary Markets'),
+    'fiscal-sponsorship.html': resources.filter(resource => resource.category === 'Fiscal Sponsorship')
+  };
+  for (const [fileName, items] of Object.entries(pages)) {
+    const file = path.join(__dirname, fileName);
+    if (!fs.existsSync(file)) continue;
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: fileName === 'directory.html' ? 'Documentary411 Filmmaker Resource Directory' : undefined,
+      numberOfItems: items.length,
+      itemListElement: items.map((resource, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {'@type':'Thing', name:resource.name, description:resource.description, url:resource.officialUrl}
+      }))
+    };
+    if (!schema.name) delete schema.name;
+    const block = `<!-- D411 ITEMLIST START -->\n<script type="application/ld+json">${JSON.stringify(schema)}</script>\n<!-- D411 ITEMLIST END -->`;
+    let html = fs.readFileSync(file, 'utf8');
+    if (/<!-- D411 ITEMLIST START -->[\s\S]*?<!-- D411 ITEMLIST END -->/.test(html)) {
+      html = html.replace(/<!-- D411 ITEMLIST START -->[\s\S]*?<!-- D411 ITEMLIST END -->/, block);
+    } else {
+      html = html.replace('</head>', `${block}\n</head>`);
+    }
+    fs.writeFileSync(file, html);
+  }
 }
 
 function fixResourceData() {
@@ -186,4 +246,5 @@ fixHomepage();
 fixResourceData();
 fixOpenNowFilter();
 fixOpenNowCopy();
+addItemListSchemas();
 console.log('Documentary411 grant status audit safeguards applied.');

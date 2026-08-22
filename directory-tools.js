@@ -24,7 +24,7 @@
       <div class="d411-meta">
         <span class="d411-pill">${res.projectStage}</span>
         <span class="d411-pill">${money(access)}</span>
-        <span class="d411-pill">Last verified ${res.lastVerified}</span>
+        <span class="d411-pill">Last verified <time datetime="${res.lastVerified}">${res.lastVerified}</time></span>
       </div>
       <p><strong>Why this matters:</strong> ${res.notes}</p>
       <a class="d411-link" href="${res.officialUrl}" target="_blank" rel="noopener">Visit Official Site →</a>
@@ -42,7 +42,7 @@
       let base = resources.slice();
       if(config.category) base = base.filter(r=>r.category === config.category);
       if(config.status) base = base.filter(r=>r.status === config.status);
-      if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline || /rolling|verify/i.test(r.deadlineMonth||''));
+      if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline === true);
       const state = {q:'',category:'',stage:'',status:'',access:'',doc:''};
       root.innerHTML = `<div class="d411-tools">
         <input class="d411-input" id="d411q" placeholder="Search grants, festivals, markets, fiscal sponsors…">
