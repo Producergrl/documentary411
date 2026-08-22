@@ -45,7 +45,7 @@
       if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline || /rolling|verify/i.test(r.deadlineMonth||''));
       const state = {q:'',category:'',stage:'',status:'',access:'',doc:''};
       root.innerHTML = `<div class="d411-tools">
-        <input class="d411-input" id="d411q" placeholder="Search grants, festivals, markets, crew, fiscal sponsors…">
+        <input class="d411-input" id="d411q" placeholder="Search grants, festivals, markets, fiscal sponsors…">
         <select class="d411-select" id="d411cat">${options(base.map(r=>r.category),'All categories')}</select>
         <select class="d411-select" id="d411stage">${options(['development','production','post-production','festival','market','distribution','impact'],'All stages')}</select>
         <select class="d411-select" id="d411access"><option value="">Free / paid / mixed</option><option value="free">Free</option><option value="mixed">Free + paid</option><option value="paid">Paid / member</option></select>
