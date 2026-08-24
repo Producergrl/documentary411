@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
-const AUDIT_DATE_TEXT = 'August 19, 2026';
-const AUDIT_DATE_ISO = '2026-08-19';
+const AUDIT_DATE_TEXT = 'August 24, 2026';
+const AUDIT_DATE_ISO = '2026-08-24';
 
 function updateGrantCard(html, title, updates) {
   const titleMarker = `<div class="card-title">${title}</div>`;
@@ -21,6 +21,10 @@ function updateGrantCard(html, title, updates) {
   const end = cardEnd + '</div>'.length;
   let card = html.slice(cardStart, end);
 
+  if (updates.newTitle) {
+    card = card.replace(titleMarker, `<div class="card-title">${updates.newTitle}</div>`);
+  }
+
   if (updates.badge) {
     card = card.replace(/<span class="card-badge [^"]+">[\s\S]*?<\/span>/, `<span class="card-badge ${updates.badgeClass || 'badge-listing'}">${updates.badge}</span>`);
   }
@@ -29,8 +33,8 @@ function updateGrantCard(html, title, updates) {
     card = card.replace(/<div class="card-meta">[\s\S]*?<\/div>/, `<div class="card-meta">${updates.meta} · Last verified ${AUDIT_DATE_TEXT}</div>`);
   } else {
     card = card.replace(/<div class="card-meta">([\s\S]*?)<\/div>/, (m, inner) => {
-      if (/Last verified/i.test(inner)) return m;
-      return `<div class="card-meta">${inner} · Last verified ${AUDIT_DATE_TEXT}</div>`;
+      const clean = inner.replace(/\s*·\s*Last verified[^<]*/i, '');
+      return `<div class="card-meta">${clean} · Last verified ${AUDIT_DATE_TEXT}</div>`;
     });
   }
 
@@ -87,6 +91,10 @@ function fixHomepage() {
   let html = fs.readFileSync(file, 'utf8');
 
   html = html.replace(
+    /Verified documentary funding programs with current application status[^<]*/,
+    'Verified documentary funding programs with current application status — including open, closed, rolling, and upcoming cycles.'
+  );
+  html = html.replace(
     'Active, verified funding opportunities for documentaries — from early development through post-production and impact release.',
     'Verified documentary funding programs with current application status — including open, closed, rolling, and upcoming cycles.'
   );
@@ -95,64 +103,157 @@ function fixHomepage() {
     {
       title: 'Sundance Documentary Fund',
       badge: 'Closed · Next Call 2027',
-      meta: 'Grant · Development, Production, Post · International · 2026 cycle closed June 15, 2026',
-      description: 'Nonrecoupable support for independent cinematic documentaries worldwide. The application closed June 15, 2026; Sundance says the next open call will be announced in early 2027.'
+      meta: 'Grant · Development, Production, Post · International · Deadline June 15, 2026',
+      description: 'The Sundance Institute Documentary Fund is not currently accepting applications. The 2026 call closed June 15, 2026, and Sundance says the next open call will be announced in early 2027.'
     },
     {
       title: 'IDA Documentary Fund',
-      badge: 'Verify Current Programs',
-      meta: 'Funding resource · International · Program availability varies',
-      description: 'IDA remains a major documentary funding resource, but individual funds and application windows change. Use the IDA Grants Directory to confirm which opportunities are currently accepting applications before preparing a submission.'
+      newTitle: 'IDA Grants & Funding Programs',
+      badge: 'Limited / Between Cycles',
+      meta: 'Funding programs · International · Pare Lorentz expected to reopen late 2026',
+      description: 'IDA says its Artist Services team is currently focused on Emergency Assistance. The Pare Lorentz Documentary Fund is expected to reopen in late 2026 with a new theme. IDA’s separate Grants Directory continues to list active third-party opportunities.'
+    },
+    {
+      title: 'IDA Grants & Funding Programs',
+      badge: 'Limited / Between Cycles',
+      meta: 'Funding programs · International · Pare Lorentz expected to reopen late 2026',
+      description: 'IDA says its Artist Services team is currently focused on Emergency Assistance. The Pare Lorentz Documentary Fund is expected to reopen in late 2026 with a new theme. IDA’s separate Grants Directory continues to list active third-party opportunities.'
     },
     {
       title: 'Redford Center Grant',
       badge: 'Closed',
-      meta: 'Grant · Environmental · Any Stage · Deadline May 14, 2026',
-      description: '$40,000 plus mentorship and cohort support for environmental documentary projects. The 2026 application window closed May 14, 2026.',
-      tags: '<span class="tag">$40K</span><span class="tag">Environmental</span><span class="tag">Deadline <time datetime="2026-05-14">May 14</time></span>'
+      meta: 'Grant · Environmental · Any Stage · Applications closed',
+      description: '$40,000 plus yearlong support for environmental documentary projects. Applications are closed. Redford Center’s current application page says the deadline closed May 17, 2026, while its published 2026 terms list May 14 at 5 p.m. PT; because the official materials conflict, Documentary411 does not present a single exact deadline.',
+      tags: '<span class="tag">$40K</span><span class="tag">Environmental</span><span class="tag">Closed</span>'
     },
     {
       title: 'Ford Foundation JustFilms',
       badge: 'Closed',
       meta: 'Grant · Social Justice · Feature Documentary · Applications currently closed',
-      description: 'JustFilms supports artist-driven feature documentaries intersecting with Ford Foundation social justice priorities. Ford currently states that documentary film production grant submissions are closed.'
+      description: 'JustFilms supports artist-driven feature documentaries that intersect with Ford Foundation social justice priorities. Ford currently states that documentary film production grant submissions are closed.'
     },
     {
       title: 'Berkeley Film Foundation',
       badge: 'Closed',
       meta: 'Grant · Production, Post & Distribution · East Bay CA · Deadline April 13, 2026',
-      description: '$5,000–$25,000 documentary grants for eligible East Bay filmmakers. The 2026 Documentary Grant Program closed April 13, 2026.'
+      description: '$5,000–$25,000 documentary grants for eligible East Bay filmmakers. The 2026 Documentary Grant Program is closed; the deadline was April 13, 2026 at 11:59 p.m. PT.'
     },
     {
       title: 'SFFILM Documentary Fund',
       badge: 'Closed',
       meta: 'Grant · Post-Production · International · Final deadline July 7, 2026',
-      description: 'Support for feature documentaries in post-production. The 2026 Documentary Film Fund closed after its final deadline on July 7, 2026.'
+      description: 'The SFFILM Documentary Film Fund supports feature documentaries in post-production with grants of $10,000–$20,000. Applications for the 2026 cycle are closed; the final deadline was July 7, 2026.',
+      tags: '<span class="tag">Post Only</span><span class="tag">$10K–$20K</span><span class="tag">Closed</span>'
     },
     {
       title: 'Mountainfilm Commitment Grant',
       badge: 'Closed',
-      meta: 'Grant · Production & Post · U.S.-resident filmmakers · Final deadline July 16, 2026',
-      description: 'Funding for nonfiction stories covering adventure, activism, social justice, culture, and environment. The 2026 application window closed July 16, 2026.'
+      meta: 'Grant · Post-Production · International · Deadline July 16, 2026',
+      description: 'Mountainfilm Commitment Grants support documentary projects in post-production, with awards of $3,000–$6,000. Applicants from any country are eligible. The 2026 application window closed July 16, 2026 at 11:59 p.m. MDT.',
+      tags: '<span class="tag">Post Only</span><span class="tag">$3K–$6K</span><span class="tag">International</span>'
     },
     {
       title: 'Film Independent Documentary Producing Lab',
       badge: 'Closed',
-      meta: 'Lab + Grant · Documentary Producing · Member deadline May 18, 2026',
-      description: 'Intensive lab for documentary producers combining mentorship, industry access, and professional development. The 2026 Documentary Producing Lab application is currently closed.',
-      tags: '<span class="tag">Lab</span><span class="tag">Mentorship</span><span class="tag">Deadline <time datetime="2026-05-18">May 18</time></span>'
+      meta: 'Lab · Documentary Producing · Member deadline May 18, 2026',
+      description: 'The 2026 Documentary Producing Lab application is currently closed. The non-member deadline was May 4, 2026 and the Film Independent member extended deadline was May 18, 2026.',
+      tags: '<span class="tag">Lab</span><span class="tag">Mentorship</span><span class="tag">Closed</span>'
     },
     {
       title: 'Catapult Film Fund',
       badge: 'Closed',
       meta: 'Grant · Early Development · International · Applications not currently accepted',
-      description: 'Early-stage documentary development funding and mentorship. Catapult accepts applications in rounds and currently states that its grant programs are not accepting applications.'
+      description: 'Catapult provides early-stage documentary development and research funding. Its official application page states that it is not accepting applications at this time; the 2026 Research Grant and Development Grant are both closed.'
     }
   ];
 
   for (const update of updates) html = updateGrantCard(html, update.title, update);
   html = closeExpiredOpenBadges(html);
   html = addSemanticDates(html);
+  fs.writeFileSync(file, html);
+}
+
+function updateResource(source, name, fields) {
+  const marker = `name:'${name}'`;
+  const idx = source.indexOf(marker);
+  if (idx === -1) return source;
+  const start = source.lastIndexOf('  {', idx);
+  const close = source.indexOf('\n  },', idx);
+  if (start === -1 || close === -1) return source;
+  const end = close + '\n  },'.length;
+  let entry = source.slice(start, end);
+
+  for (const [field, value] of Object.entries(fields)) {
+    const formatted = typeof value === 'boolean' ? String(value) : `'${String(value).replace(/'/g, "\\'")}'`;
+    const fieldRe = new RegExp(`${field}:(?:'[^']*'|true|false)`);
+    if (fieldRe.test(entry)) entry = entry.replace(fieldRe, `${field}:${formatted}`);
+  }
+  return source.slice(0, start) + entry + source.slice(end);
+}
+
+function fixResourceData() {
+  const file = path.join(__dirname, 'resources-data.js');
+  if (!fs.existsSync(file)) return;
+  let source = fs.readFileSync(file, 'utf8');
+
+  source = updateResource(source, 'Sundance Institute Documentary Fund', {
+    deadlineMonth:'Closed; next open call announced early 2027', rollingDeadline:false, status:'closed', lastVerified:AUDIT_DATE_ISO,
+    notes:'Official Sundance page confirms the Documentary Fund is not accepting applications; next open call will be announced in early 2027.'
+  });
+  source = updateResource(source, 'IDA Grants Directory', {
+    deadlineMonth:'Directory updated weekly; not an application window', rollingDeadline:false, status:'active', lastVerified:AUDIT_DATE_ISO,
+    notes:'IDA says the public directory displays active third-party opportunities only. It is a funding research resource, not itself an open grant.'
+  });
+  source = updateResource(source, 'ITVS Open Call', {
+    deadlineMonth:'Closed; no next deadline posted', rollingDeadline:false, status:'closed', lastVerified:AUDIT_DATE_ISO,
+    notes:'ITVS currently labels Open Call as not accepting applications. No new application deadline is posted on the official Open Call page.'
+  });
+  source = updateResource(source, 'Catapult Film Fund', {
+    deadlineMonth:'Closed; upcoming deadlines not yet posted', rollingDeadline:false, status:'closed', lastVerified:AUDIT_DATE_ISO,
+    notes:'Catapult states that it is not accepting applications at this time; its 2026 Research and Development grant rounds are closed.'
+  });
+  source = updateResource(source, 'Chicken & Egg Pictures', {
+    deadlineMonth:'Closed; R&D tentatively reopens Dec 2026; (Egg)celerator next cycle early 2027', rollingDeadline:false, status:'closed', lastVerified:AUDIT_DATE_ISO,
+    notes:'Current public grant calls are closed. The 2026 R&D Grant closed Feb 4; the 2027 (Egg)celerator Lab closed Apr 29; Project: Hatched is invite-only.'
+  });
+  source = updateResource(source, 'Ford Foundation JustFilms', {
+    deadlineMonth:'Closed; no reopening date posted', rollingDeadline:false, status:'closed', lastVerified:AUDIT_DATE_ISO,
+    notes:'Ford currently states that documentary film production grant submissions are closed.'
+  });
+  source = updateResource(source, 'Women Make Movies Fiscal Sponsorship', {
+    deadlineMonth:'Rolling', rollingDeadline:true, status:'open', lastVerified:AUDIT_DATE_ISO,
+    notes:'WMM accepts Production Assistance / fiscal sponsorship applications on a rolling basis. This is fiscal sponsorship, not a cash grant or loan.'
+  });
+  source = updateResource(source, 'International Documentary Association Fiscal Sponsorship', {
+    deadlineMonth:'Rolling / year-round', rollingDeadline:true, status:'open', lastVerified:AUDIT_DATE_ISO,
+    notes:'IDA accepts documentary fiscal sponsorship applications year-round. This enables fundraising through grants and donations; it is not itself a grant.'
+  });
+
+  fs.writeFileSync(file, source);
+}
+
+function fixOpenNowFilter() {
+  const file = path.join(__dirname, 'directory-tools.js');
+  if (!fs.existsSync(file)) return;
+  let source = fs.readFileSync(file, 'utf8');
+  source = source.replace(/if\(config\.openish\) base = base\.filter\([^;]+\);/, "if(config.openish) base = base.filter(r=>r.status === 'open');");
+  fs.writeFileSync(file, source);
+}
+
+function fixOpenNowCopy() {
+  const file = path.join(__dirname, 'open-now.html');
+  if (!fs.existsSync(file)) return;
+  let html = fs.readFileSync(file, 'utf8');
+
+  html = html.replace(/Open now, rolling, and <em>verify-before-applying<\/em> opportunities\./, 'Confirmed <em>open</em> opportunities.');
+  html = html.replace(/Confirmed open and <em>rolling<\/em> opportunities\./, 'Confirmed <em>open</em> opportunities.');
+  html = html.replace(/This page is built for repeat visits\.[\s\S]*?time\./, 'This page only surfaces opportunities whose official source currently confirms that applications are open, including verified rolling programs. Closed, upcoming, invitation-only, and unconfirmed programs stay out of this list.');
+  html = html.replace(/This page only surfaces opportunities confirmed as open or genuinely rolling\.[\s\S]*?list\./, 'This page only surfaces opportunities whose official source currently confirms that applications are open, including verified rolling programs. Closed, upcoming, invitation-only, and unconfirmed programs stay out of this list.');
+  html = html.replace('Open Now / Verify Before Applying', 'Confirmed Open Now');
+  html = html.replace('Open Now / Rolling', 'Confirmed Open Now');
+  html = html.replace(/A serious directory should not pretend every listing is free, current, or open\.[\s\S]*?walls\./, 'A listing appears here only after its official source confirms that applications are currently open. Other legitimate programs remain searchable in the full directory with their true status.');
+  html = html.replace(/A listing appears here only when it is confirmed open or genuinely rolling\.[\s\S]*?applications\./, 'A listing appears here only after its official source confirms that applications are currently open. Other legitimate programs remain searchable in the full directory with their true status.');
+
   fs.writeFileSync(file, html);
 }
 
@@ -164,7 +265,7 @@ function addItemListSchemas() {
   const resources = sandbox.window.D411_RESOURCES || [];
   const pages = {
     'directory.html': resources,
-    'open-now.html': resources.filter(resource => resource.status === 'active' || resource.rollingDeadline === true),
+    'open-now.html': resources.filter(resource => resource.status === 'open'),
     'documentary-grants.html': resources.filter(resource => resource.category === 'Documentary & Film Funds / Grants'),
     'documentary-markets.html': resources.filter(resource => resource.category === 'Documentary Markets'),
     'fiscal-sponsorship.html': resources.filter(resource => resource.category === 'Fiscal Sponsorship')
@@ -193,53 +294,6 @@ function addItemListSchemas() {
     }
     fs.writeFileSync(file, html);
   }
-}
-
-function fixResourceData() {
-  const file = path.join(__dirname, 'resources-data.js');
-  if (!fs.existsSync(file)) return;
-  let source = fs.readFileSync(file, 'utf8');
-
-  source = source.replace(
-    /name:'Sundance Institute Documentary Fund'([\s\S]*?)deadlineMonth:'[^']*'([\s\S]*?)status:'[^']*', lastVerified:'[^']*'/,
-    (m, a, b) => `name:'Sundance Institute Documentary Fund'${a}deadlineMonth:'Closed; next open call announced early 2027'${b}status:'closed', lastVerified:'${AUDIT_DATE_ISO}'`
-  );
-  source = source.replace(
-    /name:'Ford Foundation JustFilms'([\s\S]*?)deadlineMonth:'[^']*'([\s\S]*?)status:'[^']*', lastVerified:'[^']*'/,
-    (m, a, b) => `name:'Ford Foundation JustFilms'${a}deadlineMonth:'Closed'${b}status:'closed', lastVerified:'${AUDIT_DATE_ISO}'`
-  );
-  source = source.replace(
-    /name:'Catapult Film Fund'([\s\S]*?)deadlineMonth:'[^']*'([\s\S]*?)status:'[^']*', lastVerified:'[^']*'/,
-    (m, a, b) => `name:'Catapult Film Fund'${a}deadlineMonth:'Closed'${b}status:'closed', lastVerified:'${AUDIT_DATE_ISO}'`
-  );
-
-  fs.writeFileSync(file, source);
-}
-
-function fixOpenNowFilter() {
-  const file = path.join(__dirname, 'directory-tools.js');
-  if (!fs.existsSync(file)) return;
-  let source = fs.readFileSync(file, 'utf8');
-
-  source = source.replace(
-    "if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline || /rolling|verify/i.test(r.deadlineMonth||''));",
-    "if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline === true);"
-  );
-
-  fs.writeFileSync(file, source);
-}
-
-function fixOpenNowCopy() {
-  const file = path.join(__dirname, 'open-now.html');
-  if (!fs.existsSync(file)) return;
-  let html = fs.readFileSync(file, 'utf8');
-
-  html = html.replace('Open now, rolling, and <em>verify-before-applying</em> opportunities.', 'Confirmed open and <em>rolling</em> opportunities.');
-  html = html.replace('This page is built for repeat visits. It highlights resources that are active, rolling, or worth checking this week — while clearly flagging items that need verification before a filmmaker spends money or time.', 'This page only surfaces opportunities confirmed as open or genuinely rolling. Programs that are closed, between cycles, or merely need verification stay out of this list.');
-  html = html.replace('Open Now / Verify Before Applying', 'Open Now / Rolling');
-  html = html.replace('A serious directory should not pretend every listing is free, current, or open. “Verify” is a feature, not a weakness — it protects filmmakers from dead links, old deadlines, and surprise membership walls.', 'A listing appears here only when it is confirmed open or genuinely rolling. Closed and unverified opportunities remain searchable in the full directory without being presented as live applications.');
-
-  fs.writeFileSync(file, html);
 }
 
 fixHomepage();
