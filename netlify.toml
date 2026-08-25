@@ -4,6 +4,16 @@
   functions = "netlify/functions"
 
 [[redirects]]
+  from = "/festival-strategy"
+  to = "/festival-strategy.html"
+  status = 200
+
+[[redirects]]
+  from = "/festival-budget-workbook"
+  to = "/festival-budget-workbook.html"
+  status = 200
+
+[[redirects]]
   from = "/crew-jobs.html"
   to = "/directory.html"
   status = 301
