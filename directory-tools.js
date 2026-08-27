@@ -28,7 +28,7 @@
       </div>
       <p><strong>Why this matters:</strong> ${res.notes}</p>
       <a class="d411-link" href="${res.officialUrl}" target="_blank" rel="noopener">Visit Official Site →</a>
-      <a class="d411-link" href="/submit-resource.html?correction=${encodeURIComponent(res.name)}">Suggest correction →</a>
+      <a class="d411-link" href="/submit-resource?correction=${encodeURIComponent(res.name)}">Suggest correction →</a>
     </article>`;
   }
   function options(values, label){
