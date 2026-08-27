@@ -20,7 +20,7 @@ function assetOrigin() {
   return ORIGIN;
 }
 const SOCIAL_IMAGE = `${assetOrigin()}/documentary411-social-card.png`;
-const SOCIAL_IMAGE_ALT = 'Documentary411 — Funding. Festivals. Tools. Community.';
+const SOCIAL_IMAGE_ALT = 'Documentary411.com — Films. Insights. Resources.';
 const SEO_START = '<!-- D411 TECHNICAL SEO START -->';
 const SEO_END = '<!-- D411 TECHNICAL SEO END -->';
 
@@ -41,6 +41,7 @@ const pages = [
   { file: 'funding-report.html', route: '/funding-report', schemaType: 'WebPage' },
   { file: 'ask-a-pro.html', route: '/ask-a-pro', schemaType: 'WebPage' },
   { file: 'advertise.html', route: '/advertise', schemaType: 'WebPage' },
+  { file: 'shop.html', route: '/shop', schemaType: 'CollectionPage' },
 ];
 
 function decodeEntities(value) {

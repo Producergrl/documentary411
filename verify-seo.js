@@ -17,7 +17,7 @@ function assetOrigin() {
   return ORIGIN;
 }
 const SOCIAL_IMAGE = `${assetOrigin()}/documentary411-social-card.png`;
-const SOCIAL_IMAGE_ALT = 'Documentary411 — Funding. Festivals. Tools. Community.';
+const SOCIAL_IMAGE_ALT = 'Documentary411.com — Films. Insights. Resources.';
 
 const pages = [
   { file: 'index.html', route: '/', schemaType: 'WebPage', lastmod: '2026-08-20' },
@@ -36,6 +36,7 @@ const pages = [
   { file: 'funding-report.html', route: '/funding-report', schemaType: 'WebPage', lastmod: '2026-08-20' },
   { file: 'ask-a-pro.html', route: '/ask-a-pro', schemaType: 'WebPage', lastmod: '2026-08-22' },
   { file: 'advertise.html', route: '/advertise', schemaType: 'WebPage', lastmod: '2026-08-20' },
+  { file: 'shop.html', route: '/shop', schemaType: 'CollectionPage', lastmod: '2026-08-27' },
 ];
 
 const failures = [];
@@ -234,6 +235,12 @@ for (const file of htmlFiles) {
 
 const directoryTools = fs.readFileSync(path.join(__dirname, 'directory-tools.js'), 'utf8');
 check(!canonicalHtmlHref.test(directoryTools), 'directory-tools.js: generated internal anchor still points to a canonical page with .html.');
+
+const shop = fs.readFileSync(path.join(__dirname, 'shop.html'), 'utf8');
+for (const href of ['/festival-strategy', '/funding-sprint', '/advertise', '/#equipment']) {
+  check(new RegExp(`\\bhref=["']${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`).test(shop), `shop.html: missing verified purchase path ${href}.`);
+}
+check(!/buy\.stripe\.com\/(?:bJe00iabZbQJ0Uubu36J204|3cI14mck79IBbz8dCb6J203)/.test(shop), 'shop.html: Ask a Pro or Pro Consult checkout must not be included.');
 
 const searchIndex = JSON.parse(fs.readFileSync(path.join(__dirname, 'search-index.json'), 'utf8'));
 for (const entry of searchIndex) {
