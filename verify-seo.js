@@ -232,6 +232,9 @@ for (const file of htmlFiles) {
   check(!canonicalHtmlHref.test(html), `${file}: internal anchor still points to a canonical page with .html.`);
 }
 
+const directoryTools = fs.readFileSync(path.join(__dirname, 'directory-tools.js'), 'utf8');
+check(!canonicalHtmlHref.test(directoryTools), 'directory-tools.js: generated internal anchor still points to a canonical page with .html.');
+
 const searchIndex = JSON.parse(fs.readFileSync(path.join(__dirname, 'search-index.json'), 'utf8'));
 for (const entry of searchIndex) {
   const parsed = new URL(entry.url, ORIGIN);
