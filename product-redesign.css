@@ -96,6 +96,20 @@ a:hover{color:#c84e0d}
   font-size:.72rem;
   font-weight:600;
 }
+.site-shop-link{
+  margin-left:auto;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.34);
+  border-radius:3px;
+  padding:7px 12px;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-decoration:none;
+  text-transform:uppercase;
+}
+.site-shop-link:hover{background:#f36a16;border-color:#f36a16;color:#fff}
+.site-shop-link + .nav-note{margin-left:16px}
 
 /* Hero */
 .hero{

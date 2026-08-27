@@ -43,10 +43,10 @@ html = html.replace('<span class="stat-num">500+</span><span class="stat-label">
 html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
 html = html.replace(/<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/g,'<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>');
 html = html.replace(/\s*<a href="\/advertise(?:\.html)?">Advertise<\/a>/g, '');
-html = html.replace(/(<a href="\/funding-lab">Funding Lab<\/a>)/g,'$1\n      <a href="/advertise.html">Advertise</a>');
+html = html.replace(/(<a href="\/funding-lab">Funding Lab<\/a>)/g,'$1\n      <a href="/shop.html">Shop</a>\n      <a href="/advertise.html">Advertise</a>');
 
 const growthLinks = [
-  '<a href="/directory.html">Directory</a>','<a href="/open-now.html">Open Now</a>','<a href="/documentary-grants.html">Grants+</a>','<a href="/documentary-markets.html">Markets+</a>','<a href="/fiscal-sponsorship.html">Fiscal Sponsorship</a>','<a href="/blog.html">Blog</a>','<a href="/submit-resource.html">Submit/Correct</a>'
+  '<a href="/directory.html">Directory</a>','<a href="/open-now.html">Open Now</a>','<a href="/documentary-grants.html">Grants+</a>','<a href="/documentary-markets.html">Markets+</a>','<a href="/fiscal-sponsorship.html">Fiscal Sponsorship</a>','<a href="/blog.html">Blog</a>','<a href="/submit-resource.html">Submit/Correct</a>','<a href="/shop.html">Shop</a>'
 ];
 for (const link of growthLinks) {
   if (!html.includes(link)) html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/g, `$1\n      ${link}`);
@@ -136,7 +136,7 @@ if (fs.existsSync(fundingLabFile)) {
 
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
 const directoryStyle = '<link rel="stylesheet" href="/directory-upgrades.css">';
-const growthPages = ['directory.html','open-now.html','submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html','documentary-grants.html','documentary-markets.html','fiscal-sponsorship.html'];
+const growthPages = ['directory.html','open-now.html','submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html','documentary-grants.html','documentary-markets.html','fiscal-sponsorship.html','shop.html'];
 const styledPages = [
   'funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html','thank-you.html','welcome-festival.html','welcome-sprint.html','welcome-system.html','advertise.html','advertise-thank-you.html',
   'ask-a-pro.html','ask-a-pro-question.html','ask-a-pro-question-thank-you.html','ask-a-pro-consult.html','ask-a-pro-consult-thank-you.html','funding-report-thank-you.html','funding-lab-waitlist-thank-you.html',
@@ -148,6 +148,22 @@ const searchStyle = '<link rel="stylesheet" href="/site-search.css">';
 const searchScript = '<script src="/site-search.js" defer></script>';
 const publicPages = ['index.html','funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html','advertise.html','ask-a-pro.html',...growthPages];
 publicPages.forEach(fileName => {injectStyles(fileName, [searchStyle]);injectScript(fileName, searchScript);});
+
+/* Keep the requested Shop entry visible across the site's existing header variants. */
+for (const fileName of publicPages) {
+  const file = path.join(__dirname, fileName);
+  if (!fs.existsSync(file)) continue;
+  let source = fs.readFileSync(file, 'utf8');
+  if (/href=["']\/shop(?:\.html)?["'][^>]*>Shop<\/a>/i.test(source)) continue;
+  if (source.includes('class="d411-links"')) {
+    source = source.replace('<div class="d411-links">', '<div class="d411-links"><a href="/shop.html">Shop</a>');
+  } else if (source.includes('class="nav-links"')) {
+    source = source.replace('<div class="nav-links">', '<div class="nav-links"><a href="/shop.html">Shop</a>');
+  } else if (source.includes('class="nav-note"')) {
+    source = source.replace(/(<span class="nav-note")/, '<a class="site-shop-link" href="/shop.html">Shop</a>\n      $1');
+  }
+  fs.writeFileSync(file, source);
+}
 
 function decodeEntities(s){return String(s||'').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&nbsp;/g,' ').replace(/&ndash;/g,'–').replace(/&mdash;/g,'—').replace(/&lt;/g,'<').replace(/&gt;/g,'>');}
 function cleanText(source){return decodeEntities(String(source||'').replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ')).replace(/\s+/g,' ').trim();}

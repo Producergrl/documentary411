@@ -1,7 +1,109 @@
 [build]
-  command = "node verify-palette.js && node apply-redesign.js && node grant-status-fixes.js && node remove-crew-jobs.js && node festival-dollar-test.js"
+  command = "node verify-palette.js && node apply-redesign.js && node grant-status-fixes.js && node remove-crew-jobs.js && node festival-dollar-test.js && node apply-seo.js && node verify-seo.js"
   publish = "."
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/directory.html"
+  to = "/directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/open-now.html"
+  to = "/open-now"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/documentary-grants.html"
+  to = "/documentary-grants"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/documentary-markets.html"
+  to = "/documentary-markets"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fiscal-sponsorship.html"
+  to = "/fiscal-sponsorship"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/submit-resource.html"
+  to = "/submit-resource"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/blog"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-festival-wins.html"
+  to = "/blog-festival-wins"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/festival-budget-workbook.html"
+  to = "/festival-budget-workbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/festival-strategy.html"
+  to = "/festival-strategy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/funding-lab.html"
+  to = "/funding-lab"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/funding-sprint.html"
+  to = "/funding-sprint"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/funding-report.html"
+  to = "/funding-report"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ask-a-pro.html"
+  to = "/ask-a-pro"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/advertise.html"
+  to = "/advertise"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/shop.html"
+  to = "/shop"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/festival-strategy"
@@ -15,13 +117,13 @@
 
 [[redirects]]
   from = "/crew-jobs.html"
-  to = "/directory.html"
+  to = "/directory"
   status = 301
   force = true
 
 [[redirects]]
   from = "/crew-jobs"
-  to = "/directory.html"
+  to = "/directory"
   status = 301
   force = true
 
