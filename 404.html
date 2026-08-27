@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Documentary411</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/directory-upgrades.css">
+  <link rel="stylesheet" href="/site-search.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    button.d411-btn{background:transparent;cursor:pointer;font-family:var(--sans)}
+    button.d411-btn:focus-visible,.d411-btn:focus-visible,.d411-links a:focus-visible,.d411-logo:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <nav class="d411-nav" aria-label="Primary navigation">
+    <div class="d411-nav-inner">
+      <a class="d411-logo" href="/">Documentary411</a>
+      <div class="d411-links">
+        <a href="/directory">Directory</a>
+        <a href="/documentary-grants">Grants</a>
+        <a href="/open-now">Open Now</a>
+      </div>
+      <a class="d411-cta" href="/">Home</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="d411-hero">
+      <p class="d411-eyebrow">404 · Page not found</p>
+      <h1>That page isn’t here.</h1>
+      <p class="d411-sub">The address may be outdated or mistyped. Search Documentary411, or continue with one of the filmmaker resources below.</p>
+      <div class="d411-actions">
+        <a class="d411-btn primary" href="/">Go to Homepage</a>
+        <a class="d411-btn" href="/directory">Search the Directory</a>
+        <button class="d411-btn" type="button" data-open-search>Search Documentary411</button>
+      </div>
+    </header>
+
+    <section class="d411-section" aria-labelledby="popular-resources">
+      <div class="d411-inner">
+        <p class="d411-kicker">Useful next steps</p>
+        <h2 id="popular-resources">Popular filmmaker resources</h2>
+        <div class="d411-two">
+          <div class="d411-feature">
+            <h2>Documentary grants</h2>
+            <p class="d411-copy">Browse documentary film grants, funds, and the details to verify before applying.</p>
+            <a class="d411-btn primary" href="/documentary-grants">Browse Grants</a>
+          </div>
+          <div class="d411-feature">
+            <h2>Open Now</h2>
+            <p class="d411-copy">See opportunities whose official sources currently confirm that applications are open.</p>
+            <a class="d411-btn primary" href="/open-now">See Open Opportunities</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="d411-footer">Documentary411 — curated by working filmmakers.</footer>
+  <script src="/site-search.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const openSearch = document.querySelector('[data-open-search]');
+      openSearch?.addEventListener('click', () => document.querySelector('.d411-search-toggle')?.click());
+    });
+  </script>
+</body>
+</html>
