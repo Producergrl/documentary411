@@ -4,7 +4,19 @@ const fs = require('fs');
 const path = require('path');
 
 const ORIGIN = 'https://documentary411.com';
-const SOCIAL_IMAGE = `${ORIGIN}/documentary411-social-card.png`;
+function assetOrigin() {
+  if (process.env.CONTEXT !== 'deploy-preview' || !process.env.DEPLOY_PRIME_URL) return ORIGIN;
+  try {
+    const candidate = new URL(process.env.DEPLOY_PRIME_URL);
+    if (candidate.protocol === 'https:' && candidate.hostname.endsWith('.netlify.app')) {
+      return candidate.origin;
+    }
+  } catch (_error) {
+    // Fall back to the production asset origin when Netlify's value is absent or invalid.
+  }
+  return ORIGIN;
+}
+const SOCIAL_IMAGE = `${assetOrigin()}/documentary411-social-card.png`;
 const SOCIAL_IMAGE_ALT = 'Documentary411 — Funding. Festivals. Tools. Community.';
 
 const pages = [
