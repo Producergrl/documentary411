@@ -242,6 +242,15 @@ for (const href of ['/festival-strategy', '/funding-sprint', '/advertise', '/#eq
 }
 check(!/buy\.stripe\.com\/(?:bJe00iabZbQJ0Uubu36J204|3cI14mck79IBbz8dCb6J203)/.test(shop), 'shop.html: Ask a Pro or Pro Consult checkout must not be included.');
 
+const festivalStrategy = fs.readFileSync(path.join(__dirname, 'festival-strategy.html'), 'utf8');
+const festivalCheckoutUrl = 'https://buy.stripe.com/4gM5kC83RcUN5aK7dN6J206';
+const festivalCheckoutLinks = festivalStrategy.match(new RegExp(festivalCheckoutUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || [];
+check(festivalCheckoutLinks.length === 3, `festival-strategy.html: expected three verified $99 checkout links, found ${festivalCheckoutLinks.length}.`);
+check(!festivalStrategy.includes('https://buy.stripe.com/aFa28qgAn2g9bz869J6J209'), 'festival-strategy.html: temporary $1 Payment Link must not be present.');
+check(!/Test Checkout — \$1|Temporary \$1 live Stripe checkout|Temporary test price/.test(festivalStrategy), 'festival-strategy.html: temporary $1 checkout copy must not be present.');
+check(!fs.existsSync(path.join(__dirname, 'festival-dollar-test.js')), 'festival-dollar-test.js: temporary $1 build override must not exist.');
+check(!fs.existsSync(path.join(__dirname, 'netlify/functions/festival-test-checkout.mts')), 'festival-test-checkout.mts: temporary $1 checkout endpoint must not exist.');
+
 const searchIndex = JSON.parse(fs.readFileSync(path.join(__dirname, 'search-index.json'), 'utf8'));
 for (const entry of searchIndex) {
   const parsed = new URL(entry.url, ORIGIN);
