@@ -36,7 +36,7 @@
   }
 
   function buildUI(){
-    if (document.querySelector('.d411-search-toggle')) return;
+    if (document.querySelector('.d411-search-overlay')) return;
 
     const toggle = document.createElement('button');
     toggle.type = 'button';
@@ -82,10 +82,20 @@
       </div>`;
     document.body.appendChild(overlay);
 
+    const topSearch = document.createElement('div');
+    topSearch.className = 'd411-top-search';
+    topSearch.innerHTML = `<div class="d411-top-search-inner"><button class="d411-top-search-button" type="button" aria-label="Search Documentary411">${icon}<span>Search Documentary411 — grants, festivals, legal, funding, tools…</span><span class="d411-top-search-kbd">⌘K</span></button></div>`;
+    const primaryNav = document.querySelector('nav');
+    const primaryHeader = document.querySelector('.site-header');
+    if (primaryNav && primaryNav.parentNode) primaryNav.insertAdjacentElement('afterend', topSearch);
+    else if (primaryHeader && primaryHeader.parentNode) primaryHeader.insertAdjacentElement('afterend', topSearch);
+    else document.body.insertBefore(topSearch, document.body.firstChild);
+
     const input = overlay.querySelector('.d411-search-input');
     const results = overlay.querySelector('.d411-search-results');
     const hint = overlay.querySelector('.d411-search-hint');
     const closeBtn = overlay.querySelector('.d411-search-close');
+    const topSearchButton = topSearch.querySelector('.d411-top-search-button');
 
     async function openSearch(){
       overlay.classList.add('open');
@@ -94,7 +104,11 @@
       try { await loadIndex(); }
       catch(e){ hint.textContent = 'Search is temporarily unavailable. Please try again shortly.'; }
     }
-    function closeSearch(){ overlay.classList.remove('open'); document.body.classList.remove('d411-search-lock'); toggle.focus(); }
+    function closeSearch(){
+      overlay.classList.remove('open');
+      document.body.classList.remove('d411-search-lock');
+      if (document.activeElement === closeBtn || overlay.contains(document.activeElement)) topSearchButton.focus();
+    }
 
     function render(query){
       const q = query.trim();
@@ -113,6 +127,7 @@
     }
 
     toggle.addEventListener('click', openSearch);
+    topSearchButton.addEventListener('click', openSearch);
     closeBtn.addEventListener('click', closeSearch);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
     input.addEventListener('input', async () => { if (!searchIndex) { try{ await loadIndex(); }catch(e){} } render(input.value); });
