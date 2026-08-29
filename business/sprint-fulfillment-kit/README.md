@@ -17,6 +17,15 @@ client, don't hand them over as-is.
 | `04-brand-category-target-map.md` | Days 3–6 deliverable — 25-brand target list, drawn from this 60+ category map |
 | `05-brand-outreach-email-sequence-template.md` | Days 8–10 deliverable — 4-email outreach sequence |
 
-A visual, on-brand starting version of the deck and one-pager (built via Gamma) is linked
-from `30-DAY-REVENUE-SPRINT.md` once generated — use those as the design starting point,
-these markdown files as the content/structure source of truth.
+## Visual starting templates (Gamma)
+
+- **Pitch deck template (12 slides):** https://gamma.app/docs/xq9r9emy2960zux
+- **Positioning one-pager template:** https://gamma.app/docs/fs9604bjhpuaxkl
+
+Both use Gamma's "Editoria" theme (charcoal/warm gray/cream, editorial serif tone) as a
+professional starting point distinct from Documentary411's own site branding — appropriate
+since each client deck should carry *their* film's identity, not Documentary411's. Open
+either link in Gamma, duplicate it per client, then replace the bracketed placeholder text
+with that film's actual content (see the matching `.md` file in this folder for the
+full copy to drop in) and swap the AI-generated placeholder imagery for the film's own
+key art, stills, or trailer frames.
