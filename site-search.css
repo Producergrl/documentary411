@@ -42,3 +42,58 @@ body.d411-search-lock{overflow:hidden}
   .nav-inner .nav-logo{margin-right:0!important;min-width:0;overflow:hidden;text-overflow:ellipsis}
   .nav-inner .nav-toggle{margin-left:auto!important;margin-right:0!important;flex:0 0 40px!important;width:40px!important;height:40px!important;justify-content:center!important;align-items:center!important}
 }
+
+
+/* Mobile navigation must stay above the site-wide search strip. */
+@media(max-width:640px){
+  nav{z-index:1000!important}
+  .nav-inner{position:relative!important}
+  .nav-inner .nav-toggle{position:relative;z-index:1002}
+  .nav-inner .nav-links{
+    position:absolute!important;
+    top:100%!important;
+    bottom:auto!important;
+    left:50%!important;
+    right:auto!important;
+    width:100vw!important;
+    max-height:calc(100vh - 58px)!important;
+    max-height:calc(100dvh - 58px)!important;
+    transform:translateX(-50%)!important;
+    z-index:1001!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-y;
+    background:#fbf7f0!important;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom))!important;
+    box-shadow:0 18px 36px rgba(7,63,69,.16);
+  }
+  .nav-inner .nav-links.nav-open{display:flex!important}
+  .nav-inner .nav-links>a{display:flex!important;flex:0 0 auto}
+  .nav-inner .nav-dropdown{display:block!important;height:auto!important;flex:0 0 auto}
+  .nav-inner .nav-dropdown>.nav-parent{height:auto!important;padding:14px 24px!important}
+  .nav-inner .nav-dropdown .nav-caret{display:none}
+  .nav-inner .nav-dropdown .nav-submenu{
+    position:static!important;
+    min-width:0!important;
+    padding:0!important;
+    background:transparent!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    opacity:1!important;
+    visibility:visible!important;
+    transform:none!important;
+  }
+  .nav-inner .nav-dropdown .nav-submenu a{
+    display:flex!important;
+    min-height:0!important;
+    padding:12px 24px 12px 42px!important;
+    background:#f3ede4!important;
+    border-bottom:1px solid rgba(7,63,69,.12)!important;
+    border-radius:0!important;
+    color:#073f45!important;
+  }
+  .d411-top-search{z-index:1}
+}
