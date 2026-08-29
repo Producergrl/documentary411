@@ -48,7 +48,8 @@ body.d411-search-lock{overflow:hidden}
 @media(max-width:640px){
   nav{z-index:1000!important}
   .nav-inner{position:relative!important}
-  .nav-inner .nav-toggle{position:relative;z-index:1002}
+  .nav-inner .nav-toggle{position:relative;z-index:1002;color:#fff!important;border-color:rgba(255,255,255,.5)!important;background:rgba(255,255,255,.06)!important}
+  .nav-inner .nav-toggle:hover,.nav-inner .nav-toggle:focus{color:#fff!important;border-color:#fff!important;background:rgba(255,255,255,.14)!important;outline:none}
   .nav-inner .nav-links{
     position:absolute!important;
     top:100%!important;
