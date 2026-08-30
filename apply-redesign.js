@@ -37,7 +37,7 @@ html = html.replace(/<p class="hero-eyebrow"[^>]*>.*?<\/p>/,'<p class="hero-eyeb
 html = html.replace(/<h1>.*?<\/h1>/,'<h1>Your Insider<br>Advantage for<br>Documentary<br>Filmmaking<span class="hero-dot">.</span></h1>');
 html = html.replace('Verified grants, festivals, distributors, sales agents, legal resources, equipment, and software — curated for independent documentary filmmakers at every stage.','Funding opportunities, festivals, distribution, legal resources, equipment and practical tools — curated for independent documentary filmmakers by people who know the road.');
 html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
-html = html.replace('<span class="stat-num">500+</span><span class="stat-label">Verified Resources</span>','<span class="stat-num">100+</span><span class="stat-label">Verified Resources</span>');
+html = html.replace('<span class="stat-num">500+</span><span class="stat-label">Verified Resources</span>','<span class="stat-num" id="festivalStatCount">48</span><span class="stat-label">Verified Festivals</span>');
 
 /* Navigation hierarchy */
 html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
@@ -81,58 +81,8 @@ const homeScript = '<script src="/site-fixes.js" defer></script>';
 if (!html.includes(homeScript)) html = html.replace('</body>', `  ${homeScript}\n</body>`);
 fs.writeFileSync(homeFile, html);
 
-/* Funding Lab checkout safety: do not accept payment until the actual modules
-   and templates are attached to the buyer access page. */
-const fundingLabFile = path.join(__dirname, 'funding-lab.html');
-if (fs.existsSync(fundingLabFile)) {
-  let fundingLab = fs.readFileSync(fundingLabFile, 'utf8');
-  fundingLab = fundingLab.replace(/href="https:\/\/buy\.stripe\.com\/8x2cN4abZ9IB32C55F6J200"/g, 'href="#funding-lab-waitlist"');
-  fundingLab = fundingLab.replace(/>Get the System — \$297</g, '>Join the Waitlist<');
-  fundingLab = fundingLab.replace(
-    '<span class="btn-sub">Founding price $297 <em>(goes to $397 on August 1, 2026)</em></span>',
-    '<span class="btn-sub">Checkout is paused until every module and template is attached for immediate delivery.</span>'
-  );
-  fundingLab = fundingLab.replace(
-    '<p class="muted">Founding price goes to $397 on August 1, 2026. The live Q&amp;A calls are a launch-cohort bonus.</p>',
-    '<p class="muted">Launch price: $297. Sales reopen when the complete seven-module system and all templates are ready for immediate access.</p>'
-  );
-  fundingLab = fundingLab.replace(
-    '<h2>The founding price and the live Q&amp;A calls end August 1, 2026.</h2>',
-    '<h2>Be first to know when the complete Funding Lab reopens.</h2>'
-  );
-  fundingLab = fundingLab.replace(
-    '<p>Instant. You\'ll receive login/access by email within 5 minutes of checkout. Questions: <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>.</p>',
-    '<p>Checkout is temporarily paused while the complete module and template delivery package is finalized. Join the waitlist below and we will email you when immediate access is ready.</p>'
-  );
-  fundingLab = fundingLab.replace(
-    '<summary>What\'s the refund policy?</summary>\n          <p>14-day full refund, any reason. Email <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>.</p>',
-    '<summary>Why is checkout paused?</summary>\n          <p>Because we will not accept payment until every promised module and template is attached and ready for immediate buyer access.</p>'
-  );
-  fundingLab = fundingLab.replace(
-    /<div class="guarantee" style="margin-top:32px">[\s\S]*?<\/div>\s*<\/div>\s*<\/section>/,
-    '<div class="honesty" style="margin-top:32px"><h3>Sales status</h3><p><strong>Checkout is paused.</strong> We will reopen sales only when the complete system can be delivered immediately after payment.</p></div>\n    </div>\n  </section>'
-  );
-
-  const fundingWaitlist = `
-  <section class="band-soft" id="funding-lab-waitlist">
-    <div class="wrap">
-      <p class="eyebrow">Funding Lab waitlist</p>
-      <h2>Get the reopening email.</h2>
-      <p class="lead">We will email you when the complete seven-module system and every promised template are attached and ready for immediate delivery.</p>
-      <form name="funding-lab-waitlist" method="POST" action="/funding-lab-waitlist-thank-you.html" data-netlify="true" style="max-width:620px;margin-top:24px">
-        <input type="hidden" name="form-name" value="funding-lab-waitlist">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <input name="name" type="text" required placeholder="Your name" style="padding:12px;border:1px solid rgba(7,63,69,.18);border-radius:7px;font:inherit">
-          <input name="email" type="email" required placeholder="Your email" style="padding:12px;border:1px solid rgba(7,63,69,.18);border-radius:7px;font:inherit">
-        </div>
-        <input name="film" type="text" placeholder="Film / project name (optional)" style="width:100%;padding:12px;border:1px solid rgba(7,63,69,.18);border-radius:7px;font:inherit;margin-top:12px">
-        <button class="btn btn-primary" type="submit" style="border:0;margin-top:14px;cursor:pointer">Join the Waitlist</button>
-      </form>
-    </div>
-  </section>`;
-  if (!fundingLab.includes('id="funding-lab-waitlist"')) fundingLab = fundingLab.replace('<footer class="site-footer">', `${fundingWaitlist}\n\n  <footer class="site-footer">`);
-  fs.writeFileSync(fundingLabFile, fundingLab);
-}
+/* The Brand-Funded Documentary System is complete and available. The active
+   checkout and delivery copy in funding-lab.html must not be replaced at build. */
 
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
 const directoryStyle = '<link rel="stylesheet" href="/directory-upgrades.css">';

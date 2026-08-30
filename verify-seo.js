@@ -237,10 +237,27 @@ const directoryTools = fs.readFileSync(path.join(__dirname, 'directory-tools.js'
 check(!canonicalHtmlHref.test(directoryTools), 'directory-tools.js: generated internal anchor still points to a canonical page with .html.');
 
 const shop = fs.readFileSync(path.join(__dirname, 'shop.html'), 'utf8');
-for (const href of ['/festival-strategy', '/funding-sprint', '/advertise', '/#equipment']) {
+for (const href of ['/festival-strategy', '/funding-lab', '/funding-sprint', '/advertise', '/#equipment']) {
   check(new RegExp(`\\bhref=["']${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`).test(shop), `shop.html: missing verified purchase path ${href}.`);
 }
 check(!/buy\.stripe\.com\/(?:bJe00iabZbQJ0Uubu36J204|3cI14mck79IBbz8dCb6J203)/.test(shop), 'shop.html: Ask a Pro or Pro Consult checkout must not be included.');
+
+const home = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+const festivalBlock = home.match(/window\.FESTIVALS\s*=\s*\[([\s\S]*?)\n\];/);
+const festivalTotal = festivalBlock ? (festivalBlock[1].match(/\{name:/g) || []).length : 0;
+check(festivalTotal === 48, `index.html: expected 48 festival records, found ${festivalTotal}.`);
+check(/id="festivalStatCount">48<\/span><span class="stat-label">Verified Festivals/.test(home), 'index.html: hero must identify the verified festival total, not imply hundreds of festivals.');
+check(/id="festivalFinderCount">48<\/span> Verified Documentary Festivals/.test(home), 'index.html: festival finder count is stale.');
+check(/id="festivalDatabaseCount">48<\/span> verified documentary festivals/.test(home), 'index.html: festival database description count is stale.');
+
+const directoryPage = fs.readFileSync(path.join(__dirname, 'directory.html'), 'utf8');
+check(/<h1>Search funding, grants, festivals, markets, tools and <em>what to do next<\/em>\.<\/h1>/.test(directoryPage), 'directory.html: directory heading must not advertise crew or cast services.');
+
+const fundingLab = fs.readFileSync(path.join(__dirname, 'funding-lab.html'), 'utf8');
+const fundingCheckoutButtons = fundingLab.match(/buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"/g) || [];
+check(fundingCheckoutButtons.length === 3, `funding-lab.html: expected three active Stripe buy buttons, found ${fundingCheckoutButtons.length}.`);
+check(!/checkout is (?:currently |temporarily )?paused|why is checkout paused|funding lab waitlist/i.test(fundingLab), 'funding-lab.html: stale paused or waitlist copy remains.');
+check(!/checkout is (?:currently |temporarily )?paused|buyer library is being finalized|funding lab waitlist/i.test(shop + fs.readFileSync(path.join(__dirname, 'welcome-system.html'), 'utf8')), 'shop/welcome-system: stale Funding Lab pause copy remains.');
 
 const festivalStrategy = fs.readFileSync(path.join(__dirname, 'festival-strategy.html'), 'utf8');
 const festivalCheckoutUrl = 'https://buy.stripe.com/4gM5kC83RcUN5aK7dN6J206';

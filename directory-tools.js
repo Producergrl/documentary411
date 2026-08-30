@@ -98,7 +98,7 @@
       let base = resources.slice();
       if(config.category) base = base.filter(r=>r.category === config.category);
       if(config.status) base = base.filter(r=>r.status === config.status);
-      if(config.openish) base = base.filter(r=>r.status === 'active' || r.rollingDeadline === true);
+      if(config.openish) base = base.filter(r=>r.status === 'open');
       const state = {q:'',category:'',stage:'',status:'',access:'',doc:''};
       root.innerHTML = `<div class="d411-tools">
         <input class="d411-input" id="d411q" placeholder="Search grants, festivals, markets, insurance, fiscal sponsors…">
