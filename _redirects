@@ -1,13 +1,29 @@
 /crew-jobs.html   /directory   301
 /crew-jobs        /directory   301
 
-/about                      /about.html              200
-/privacy                    /privacy.html            200
-/terms                      /terms.html              200
-/contact                    /contact.html            200
-/affiliate-disclosure       /affiliate-disclosure.html  200
-/index.html                 /                        301
-
 /open-now.html              /directory                301
 /open-now                   /directory                301
 /open-now/                  /directory                301
+
+/index.html                 /                        301
+
+/directory                   /directory.html              200
+/documentary-grants          /documentary-grants.html              200
+/documentary-markets         /documentary-markets.html              200
+/fiscal-sponsorship          /fiscal-sponsorship.html              200
+/submit-resource             /submit-resource.html              200
+/blog                        /blog.html              200
+/blog-festival-wins          /blog-festival-wins.html              200
+/festival-budget-workbook    /festival-budget-workbook.html              200
+/festival-strategy           /festival-strategy.html              200
+/funding-lab                 /funding-lab.html              200
+/funding-sprint              /funding-sprint.html              200
+/funding-report              /funding-report.html              200
+/ask-a-pro                   /ask-a-pro.html              200
+/advertise                   /advertise.html              200
+/shop                        /shop.html              200
+/about                       /about.html              200
+/privacy                     /privacy.html              200
+/terms                       /terms.html              200
+/contact                     /contact.html              200
+/affiliate-disclosure        /affiliate-disclosure.html              200

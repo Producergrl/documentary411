@@ -318,7 +318,7 @@ function redirectRules(source) {
 
 const netlify = fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8');
 const redirects = redirectRules(netlify);
-const rewriteRoutes = new Set(['/about', '/privacy', '/terms', '/contact', '/affiliate-disclosure']);
+const rewriteRoutes = new Set(pages.filter((page) => page.route !== '/').map((page) => page.route));
 for (const page of pages) {
   if (rewriteRoutes.has(page.route)) {
     const matches = redirects.filter((rule) => rule.from === page.route && rule.status === 200);
@@ -343,6 +343,10 @@ for (const rule of permanentRedirects) {
 }
 check(redirects.some((rule) => rule.from === '/crew-jobs' && rule.to === '/directory' && rule.status === 301), 'netlify.toml: /crew-jobs must retain its redirect without a chain.');
 check(redirects.some((rule) => rule.from === '/crew-jobs.html' && rule.to === '/directory' && rule.status === 301), 'netlify.toml: /crew-jobs.html must retain its redirect without a chain.');
+check(redirects.some((rule) => rule.from === '/open-now' && rule.to === '/directory' && rule.status === 301), 'netlify.toml: /open-now must 301 to /directory.');
+check(redirects.some((rule) => rule.from === '/open-now.html' && rule.to === '/directory' && rule.status === 301), 'netlify.toml: /open-now.html must 301 to /directory.');
+check(redirects.some((rule) => rule.from === '/open-now/' && rule.to === '/directory' && rule.status === 301), 'netlify.toml: /open-now/ must 301 to /directory.');
+check(!fs.existsSync(path.join(__dirname, 'open-now.html')), 'open-now.html: Open Now product must stay deleted.');
 
 if (failures.length) {
   console.error(`\n✖ Documentary411 technical SEO verification failed (${failures.length} issue${failures.length === 1 ? '' : 's'}):\n`);

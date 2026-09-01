@@ -111,6 +111,17 @@ a:hover{color:#c84e0d}
 .site-shop-link:hover{background:#f36a16;border-color:#f36a16;color:#fff}
 .site-shop-link + .nav-note{margin-left:16px}
 
+/* Product-page primary nav (audit re-pass 2026-09-01) */
+.site-header .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0}
+.site-header-links{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;min-width:0;flex:1;justify-content:flex-end;margin:0}
+.site-header-links a{color:#fbf7f0;text-decoration:none;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.site-header-links a:hover,.site-header-links a:focus-visible{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.site-header .nav-note{margin-left:8px}
+@media(max-width:720px){
+  .site-header-links{justify-content:flex-start;width:100%;order:3;margin:4px 0 8px}
+}
+
+
 /* Hero */
 .hero{
   position:relative;
@@ -290,7 +301,7 @@ html,body{overflow-x:hidden;max-width:100%}
 .cc-grand{grid-column:1/-1!important}
 .stripe-buy-wrap{min-height:56px;display:flex;align-items:center}
 stripe-buy-button{min-height:48px;display:inline-block;min-width:220px}
-.embed-host,.embed,iframe.embed{min-height:640px;width:100%}
+.embed-host,.embed,iframe.embed{min-height:720px;width:100%}
 iframe.embed{border:0;display:block}
 @media(max-width:900px){
   .nav-toggle{display:flex!important}

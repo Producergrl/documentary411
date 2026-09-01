@@ -4,18 +4,6 @@
   functions = "netlify/functions"
 
 [[redirects]]
-  from = "/index.html"
-  to = "/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/directory.html"
-  to = "/directory"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/open-now.html"
   to = "/directory"
   status = 301
@@ -28,123 +16,31 @@
   force = true
 
 [[redirects]]
-  from = "/documentary-grants.html"
-  to = "/documentary-grants"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/documentary-markets.html"
-  to = "/documentary-markets"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/fiscal-sponsorship.html"
-  to = "/fiscal-sponsorship"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/submit-resource.html"
-  to = "/submit-resource"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/blog.html"
-  to = "/blog"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/blog-festival-wins.html"
-  to = "/blog-festival-wins"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/festival-budget-workbook.html"
-  to = "/festival-budget-workbook"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/festival-strategy.html"
-  to = "/festival-strategy"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/funding-lab.html"
-  to = "/funding-lab"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/funding-sprint.html"
-  to = "/funding-sprint"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/funding-report.html"
-  to = "/funding-report"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/ask-a-pro.html"
-  to = "/ask-a-pro"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/advertise.html"
-  to = "/advertise"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/shop.html"
-  to = "/shop"
-  status = 301
-  force = true
-
-
-[[redirects]]
-  from = "/about"
-  to = "/about.html"
-  status = 200
-
-[[redirects]]
-  from = "/privacy"
-  to = "/privacy.html"
-  status = 200
-
-[[redirects]]
-  from = "/terms"
-  to = "/terms.html"
-  status = 200
-
-[[redirects]]
-  from = "/contact"
-  to = "/contact.html"
-  status = 200
-
-[[redirects]]
-  from = "/affiliate-disclosure"
-  to = "/affiliate-disclosure.html"
-  status = 200
-
-[[redirects]]
-  from = "/directory/"
+  from = "/open-now/"
   to = "/directory"
   status = 301
   force = true
 
 [[redirects]]
-  from = "/open-now/"
+  from = "/crew-jobs.html"
+  to = "/directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/crew-jobs"
+  to = "/directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/directory/"
   to = "/directory"
   status = 301
   force = true
@@ -264,8 +160,38 @@
   force = true
 
 [[redirects]]
-  from = "/festival-strategy"
-  to = "/festival-strategy.html"
+  from = "/directory"
+  to = "/directory.html"
+  status = 200
+
+[[redirects]]
+  from = "/documentary-grants"
+  to = "/documentary-grants.html"
+  status = 200
+
+[[redirects]]
+  from = "/documentary-markets"
+  to = "/documentary-markets.html"
+  status = 200
+
+[[redirects]]
+  from = "/fiscal-sponsorship"
+  to = "/fiscal-sponsorship.html"
+  status = 200
+
+[[redirects]]
+  from = "/submit-resource"
+  to = "/submit-resource.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog-festival-wins"
+  to = "/blog-festival-wins.html"
   status = 200
 
 [[redirects]]
@@ -274,16 +200,65 @@
   status = 200
 
 [[redirects]]
-  from = "/crew-jobs.html"
-  to = "/directory"
-  status = 301
-  force = true
+  from = "/festival-strategy"
+  to = "/festival-strategy.html"
+  status = 200
 
 [[redirects]]
-  from = "/crew-jobs"
-  to = "/directory"
-  status = 301
-  force = true
+  from = "/funding-lab"
+  to = "/funding-lab.html"
+  status = 200
+
+[[redirects]]
+  from = "/funding-sprint"
+  to = "/funding-sprint.html"
+  status = 200
+
+[[redirects]]
+  from = "/funding-report"
+  to = "/funding-report.html"
+  status = 200
+
+[[redirects]]
+  from = "/ask-a-pro"
+  to = "/ask-a-pro.html"
+  status = 200
+
+[[redirects]]
+  from = "/advertise"
+  to = "/advertise.html"
+  status = 200
+
+[[redirects]]
+  from = "/shop"
+  to = "/shop.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/affiliate-disclosure"
+  to = "/affiliate-disclosure.html"
+  status = 200
+
 
 [[headers]]
   for = "/*"

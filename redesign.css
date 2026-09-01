@@ -451,7 +451,7 @@ html,body{overflow-x:hidden;max-width:100%}
 .cc-grand{grid-column:1/-1!important}
 .stripe-buy-wrap{min-height:56px;display:flex;align-items:center}
 stripe-buy-button{min-height:48px;display:inline-block;min-width:220px}
-.embed-host,.embed,iframe.embed{min-height:640px;width:100%}
+.embed-host,.embed,iframe.embed{min-height:720px;width:100%}
 iframe.embed{border:0;display:block}
 @media(max-width:900px){
   .nav-toggle{display:flex!important}

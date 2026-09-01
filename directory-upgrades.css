@@ -54,7 +54,7 @@ html,body{overflow-x:hidden;max-width:100%}
 .cc-grand{grid-column:1/-1!important}
 .stripe-buy-wrap{min-height:56px;display:flex;align-items:center}
 stripe-buy-button{min-height:48px;display:inline-block;min-width:220px}
-.embed-host,.embed,iframe.embed{min-height:640px;width:100%}
+.embed-host,.embed,iframe.embed{min-height:720px;width:100%}
 iframe.embed{border:0;display:block}
 @media(max-width:900px){
   .nav-toggle{display:flex!important}
@@ -68,3 +68,6 @@ iframe.embed{border:0;display:block}
   .cc-breakdown{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .cc-grand{grid-column:1/-1!important}
 }
+
+.d411-noscript-list{margin:12px 0 0;padding-left:1.2em;color:var(--text2);font-size:14px;line-height:1.7}
+.d411-noscript-list a{color:#c4550f}

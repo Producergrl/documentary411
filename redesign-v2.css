@@ -4,7 +4,7 @@
 
 .nav-inner{max-width:1280px}
 .nav-logo{margin-right:28px}
-.nav-links{gap:2px;overflow:visible}
+.nav-links{gap:2px;overflow:hidden;min-width:0;flex-wrap:wrap}
 .nav-links a{padding:0 8px;font-size:10.2px}
 .nav-cta{margin-left:14px}
 
