@@ -323,7 +323,7 @@ function writeLlmsTxt(resources) {
     '',
     '> A directory for independent filmmakers, with a documentary niche — grants, festivals, fiscal sponsors, markets, and practical tools. Not a watch catalog and not a streaming guide.',
     '',
-    'Created by Kerry David of KDC and Films (admin@kdcandfilms.com). 25-year film veteran; 75+ festival awards; about $90 million box office; work with traditional distributors. IMDb: https://imdb.me/kerrydavid. LinkedIn: https://www.linkedin.com/in/kerrydavid.',
+    'Founded by Kerry David of KDC and Films (admin@kdcandfilms.com). 25-year film veteran; credits and campaigns associated with that work have earned her projects, 75+ film festival awards and over $90 million in cumulative box office receipts. IMDb: https://imdb.me/kerrydavid. LinkedIn: https://www.linkedin.com/in/kerrydavid.',
     '',
     'Maker queries this site is built to answer: documentary grants, fiscal sponsorship, and festival-budget planning. Confirm every deadline on the official resource URL.',
     '',
