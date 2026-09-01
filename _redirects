@@ -1,11 +1,11 @@
 /crew-jobs.html   /directory   301
 /crew-jobs        /directory   301
 
-/about.html                 /about                   301
-/privacy.html               /privacy                 301
-/terms.html                 /terms                   301
-/contact.html               /contact                 301
-/affiliate-disclosure.html  /affiliate-disclosure    301
+/about                      /about.html              200
+/privacy                    /privacy.html            200
+/terms                      /terms.html              200
+/contact                    /contact.html            200
+/affiliate-disclosure       /affiliate-disclosure.html  200
 /index.html                 /                        301
 
 /open-now.html              /directory                301

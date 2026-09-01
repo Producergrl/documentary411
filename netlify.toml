@@ -113,34 +113,29 @@
 
 
 [[redirects]]
-  from = "/about.html"
-  to = "/about"
-  status = 301
-  force = true
+  from = "/about"
+  to = "/about.html"
+  status = 200
 
 [[redirects]]
-  from = "/privacy.html"
-  to = "/privacy"
-  status = 301
-  force = true
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
 
 [[redirects]]
-  from = "/terms.html"
-  to = "/terms"
-  status = 301
-  force = true
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
 
 [[redirects]]
-  from = "/contact.html"
-  to = "/contact"
-  status = 301
-  force = true
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
 
 [[redirects]]
-  from = "/affiliate-disclosure.html"
-  to = "/affiliate-disclosure"
-  status = 301
-  force = true
+  from = "/affiliate-disclosure"
+  to = "/affiliate-disclosure.html"
+  status = 200
 
 [[redirects]]
   from = "/directory/"
