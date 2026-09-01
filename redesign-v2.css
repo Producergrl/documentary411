@@ -1,10 +1,6 @@
 /* Documentary411 redesign — refinement pass */
 
-/* Keep the desktop navigation clean and closer to the approved mockup. */
-.nav-links a:nth-child(6),
-.nav-links a:nth-child(7),
-.nav-links a:nth-child(8),
-.nav-links a:nth-child(9){display:none}
+/* Nav item count is authored in HTML; do not hide later children. */
 
 .nav-inner{max-width:1280px}
 .nav-logo{margin-right:28px}
@@ -184,7 +180,6 @@
 }
 
 @media(max-width:1050px){
-  .nav-links>a:nth-of-type(4){display:none}
   .hero::before{width:47%}
   .hero::after{right:43.2%}
   .hero h1{max-width:430px;font-size:clamp(42px,5.0vw,56px)}
@@ -192,7 +187,7 @@
 }
 
 @media(max-width:800px){
-  .nav-links{overflow-x:auto;overflow-y:visible}
+  .nav-links{overflow:hidden}
   .nav-submenu{position:fixed;top:58px;left:118px}
   .hero{
     padding-top:58px;

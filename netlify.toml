@@ -17,7 +17,13 @@
 
 [[redirects]]
   from = "/open-now.html"
-  to = "/open-now"
+  to = "/directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/open-now"
+  to = "/directory"
   status = 301
   force = true
 
@@ -102,6 +108,163 @@
 [[redirects]]
   from = "/shop.html"
   to = "/shop"
+  status = 301
+  force = true
+
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/affiliate-disclosure.html"
+  to = "/affiliate-disclosure"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/directory/"
+  to = "/directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/open-now/"
+  to = "/directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/documentary-grants/"
+  to = "/documentary-grants"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/documentary-markets/"
+  to = "/documentary-markets"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fiscal-sponsorship/"
+  to = "/fiscal-sponsorship"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/submit-resource/"
+  to = "/submit-resource"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/"
+  to = "/blog"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-festival-wins/"
+  to = "/blog-festival-wins"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/festival-budget-workbook/"
+  to = "/festival-budget-workbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/festival-strategy/"
+  to = "/festival-strategy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/funding-lab/"
+  to = "/funding-lab"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/funding-sprint/"
+  to = "/funding-sprint"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/funding-report/"
+  to = "/funding-report"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ask-a-pro/"
+  to = "/ask-a-pro"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/advertise/"
+  to = "/advertise"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/shop/"
+  to = "/shop"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about/"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy/"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms/"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/affiliate-disclosure/"
+  to = "/affiliate-disclosure"
   status = 301
   force = true
 

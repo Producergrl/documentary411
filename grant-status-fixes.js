@@ -236,25 +236,8 @@ function fixOpenNowFilter() {
   const file = path.join(__dirname, 'directory-tools.js');
   if (!fs.existsSync(file)) return;
   let source = fs.readFileSync(file, 'utf8');
-  source = source.replace(/if\(config\.openish\) base = base\.filter\([^;]+\);/, "if(config.openish) base = base.filter(r=>r.status === 'open');");
+  source = source.replace(/if\(config\.openish\) base = base\.filter\([^;]+\);/, "if(config.openish) base = base.filter(r=>r.status === 'open' || r.status === 'rolling');");
   fs.writeFileSync(file, source);
-}
-
-function fixOpenNowCopy() {
-  const file = path.join(__dirname, 'open-now.html');
-  if (!fs.existsSync(file)) return;
-  let html = fs.readFileSync(file, 'utf8');
-
-  html = html.replace(/Open now, rolling, and <em>verify-before-applying<\/em> opportunities\./, 'Confirmed <em>open</em> opportunities.');
-  html = html.replace(/Confirmed open and <em>rolling<\/em> opportunities\./, 'Confirmed <em>open</em> opportunities.');
-  html = html.replace(/This page is built for repeat visits\.[\s\S]*?time\./, 'This page only surfaces opportunities whose official source currently confirms that applications are open, including verified rolling programs. Closed, upcoming, invitation-only, and unconfirmed programs stay out of this list.');
-  html = html.replace(/This page only surfaces opportunities confirmed as open or genuinely rolling\.[\s\S]*?list\./, 'This page only surfaces opportunities whose official source currently confirms that applications are open, including verified rolling programs. Closed, upcoming, invitation-only, and unconfirmed programs stay out of this list.');
-  html = html.replace('Open Now / Verify Before Applying', 'Confirmed Open Now');
-  html = html.replace('Open Now / Rolling', 'Confirmed Open Now');
-  html = html.replace(/A serious directory should not pretend every listing is free, current, or open\.[\s\S]*?walls\./, 'A listing appears here only after its official source confirms that applications are currently open. Other legitimate programs remain searchable in the full directory with their true status.');
-  html = html.replace(/A listing appears here only when it is confirmed open or genuinely rolling\.[\s\S]*?applications\./, 'A listing appears here only after its official source confirms that applications are currently open. Other legitimate programs remain searchable in the full directory with their true status.');
-
-  fs.writeFileSync(file, html);
 }
 
 function addItemListSchemas() {
@@ -265,7 +248,6 @@ function addItemListSchemas() {
   const resources = sandbox.window.D411_RESOURCES || [];
   const pages = {
     'directory.html': resources,
-    'open-now.html': resources.filter(resource => resource.status === 'open'),
     'documentary-grants.html': resources.filter(resource => resource.category === 'Documentary & Film Funds / Grants'),
     'documentary-markets.html': resources.filter(resource => resource.category === 'Documentary Markets'),
     'fiscal-sponsorship.html': resources.filter(resource => resource.category === 'Fiscal Sponsorship')
@@ -299,6 +281,5 @@ function addItemListSchemas() {
 fixHomepage();
 fixResourceData();
 fixOpenNowFilter();
-fixOpenNowCopy();
 addItemListSchemas();
 console.log('Documentary411 grant status audit safeguards applied.');

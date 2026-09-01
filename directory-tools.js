@@ -68,8 +68,18 @@
     if(state.doc && res.documentarySpecific !== state.doc) return false;
     return true;
   }
+  function isOpenish(res){
+    const s = String(res.status || '').toLowerCase();
+    return s === 'open' || s === 'rolling';
+  }
+  function statusClassName(status){
+    const s = String(status || '').toLowerCase();
+    if (s === 'open' || s === 'rolling') return 'green';
+    if (s === 'verify' || s === 'upcoming') return 'warn';
+    return '';
+  }
   function card(res){
-    const statusClass = res.status === 'active' ? 'green' : res.status === 'verify' ? 'warn' : '';
+    const statusClass = statusClassName(res.status);
     const access = res.access || (res.isFree === 'paid' ? 'Paid / membership may apply' : res.isFree === 'mixed' ? 'Free + paid elements' : 'Free');
     return `<article class="d411-card">
       <div class="d411-meta"><span class="d411-pill gold">${res.resourceType}</span><span class="d411-pill ${statusClass}">${res.status}</span></div>
@@ -98,13 +108,17 @@
       let base = resources.slice();
       if(config.category) base = base.filter(r=>r.category === config.category);
       if(config.status) base = base.filter(r=>r.status === config.status);
-      if(config.openish) base = base.filter(r=>r.status === 'open');
+      if(config.openish) base = base.filter(r=>r.status === 'open' || r.status === 'rolling');
       const state = {q:'',category:'',stage:'',status:'',access:'',doc:''};
       root.innerHTML = `<div class="d411-tools">
-        <input class="d411-input" id="d411q" placeholder="Search grants, festivals, markets, insurance, fiscal sponsors…">
-        <select class="d411-select" id="d411cat">${options(base.map(r=>r.category),'All categories')}</select>
-        <select class="d411-select" id="d411stage">${options(['development','production','post-production','festival','market','distribution','impact'],'All stages')}</select>
-        <select class="d411-select" id="d411access"><option value="">Free / paid / mixed</option><option value="free">Free</option><option value="mixed">Free + paid</option><option value="paid">Paid / member</option></select>
+        <label class="visually-hidden" for="d411q">Search the directory</label>
+        <input class="d411-input" id="d411q" type="search" aria-label="Search grants, festivals, markets, insurance, fiscal sponsors" placeholder="Search grants, festivals, markets, insurance, fiscal sponsors…">
+        <label class="visually-hidden" for="d411cat">Filter by category</label>
+        <select class="d411-select" id="d411cat" aria-label="Filter by category">${options(base.map(r=>r.category),'All categories')}</select>
+        <label class="visually-hidden" for="d411stage">Filter by project stage</label>
+        <select class="d411-select" id="d411stage" aria-label="Filter by project stage">${options(['development','production','post-production','festival','market','distribution','impact'],'All stages')}</select>
+        <label class="visually-hidden" for="d411access">Filter by access</label>
+        <select class="d411-select" id="d411access" aria-label="Filter by free, paid, or mixed access"><option value="">Free / paid / mixed</option><option value="free">Free</option><option value="mixed">Free + paid</option><option value="paid">Paid / member</option></select>
       </div><div id="d411count" class="d411-copy"></div><div id="d411cards" class="d411-grid"></div>`;
       function draw(){
         const filtered = base.filter(r=>matches(r,state));

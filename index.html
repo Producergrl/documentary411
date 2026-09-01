@@ -24,7 +24,7 @@ a{color:inherit;text-decoration:none}
 nav{position:sticky;top:0;z-index:100;background:rgba(19,17,13,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 24px}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:56px;gap:0}
 .nav-logo{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--gold2);margin-right:32px;white-space:nowrap}
-.nav-links{display:flex;gap:0;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-links{display:flex;gap:0;flex:1;min-width:0;overflow:hidden;scrollbar-width:none}
 .nav-links::-webkit-scrollbar{display:none}
 .nav-links a{font-size:12px;color:var(--text2);padding:0 11px;white-space:nowrap;height:56px;display:flex;align-items:center;letter-spacing:.02em;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
 .nav-links a:hover{color:var(--gold);border-bottom-color:var(--gold-border)}
@@ -196,19 +196,19 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .cc-total-subs{display:flex;flex-direction:column;gap:3px;text-align:right}
 .cc-total-subs span{font-size:11px;color:var(--text3)}
 .cc-total-subs b{color:var(--text2)}
-.cc-breakdown{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:10px}
+.cc-breakdown{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin-bottom:10px}
 .ccb{display:flex;flex-direction:column;gap:1px;padding:5px 7px;background:var(--bg2);border-radius:3px;border:1px solid var(--border)}
 .ccb span:first-child{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em}
 .ccbv{font-size:11px;font-weight:600;color:var(--text2)}
 .c-btz{color:var(--text3) !important}
-.cc-grand{grid-column:span 5;flex-direction:row;justify-content:space-between;align-items:center;background:var(--bg);border-color:rgba(237,149,39,0.35)}
+.cc-grand{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center;background:var(--bg);border-color:rgba(237,149,39,0.35);min-width:0}
 .cc-grand span:first-child{font-size:11px;font-weight:600;color:var(--text2);text-transform:none;letter-spacing:0}
 .cc-grand span:last-child{font-family:var(--serif);font-size:16px;color:var(--gold);font-weight:400}
 .cc-verdict{font-size:12px;padding:8px 10px;border-radius:3px;margin-bottom:10px;border:1px solid var(--gold-border);background:var(--gold-dim);color:var(--gold);display:none}
 .cc-verdict.show{display:block}
 .cc-dl-btn{width:100%;padding:10px;background:var(--gold);color:#fff;border:none;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .15s}
 .cc-dl-btn:hover{background:var(--gold2)}
-@media(max-width:640px){.calc-compact{padding:12px;border-radius:6px}.cc-grid{grid-template-columns:1fr;gap:8px;margin-bottom:12px}.cc-span2{grid-column:span 1}.cc-top{grid-template-columns:1fr;gap:8px;margin-bottom:12px}.cc-top input[type=text]{font-size:12px;padding:6px 9px}.cc-lbl{font-size:10px}.cc-group{padding:8px 10px;border-radius:4px}.cc-gh{font-size:9px;padding-bottom:5px;margin-bottom:5px;gap:4px}.cc-sub{font-size:11px}.cc-row{gap:6px;padding:1px 0}.cc-row span{font-size:10.5px;line-height:1.3}.cc-row input[type=number]{width:64px;padding:3px 6px;font-size:11px}.cc-triple{gap:6px;margin-bottom:4px}.cc-triple input[type=number]{padding:4px 6px;font-size:11px}.cc-calc{font-size:10px}.cc-miss,.cc-warn{font-size:8px;padding:1px 4px}.cc-results{padding:12px}.cc-totals{margin-bottom:10px;padding-bottom:10px;gap:6px}.cc-total-main strong{font-size:22px}.cc-total-main span{font-size:11px}.cc-total-subs span{font-size:10px}.cc-breakdown{grid-template-columns:repeat(2,1fr);gap:3px}.cc-grand{grid-column:span 2}.cc-grand span:last-child{font-size:14px}.cc-verdict{font-size:11px;padding:7px 9px}.cc-dl-btn{padding:9px;font-size:10.5px}}
+@media(max-width:640px){.calc-compact{padding:12px;border-radius:6px}.cc-grid{grid-template-columns:1fr;gap:8px;margin-bottom:12px}.cc-span2{grid-column:span 1}.cc-top{grid-template-columns:1fr;gap:8px;margin-bottom:12px}.cc-top input[type=text]{font-size:12px;padding:6px 9px}.cc-lbl{font-size:10px}.cc-group{padding:8px 10px;border-radius:4px}.cc-gh{font-size:9px;padding-bottom:5px;margin-bottom:5px;gap:4px}.cc-sub{font-size:11px}.cc-row{gap:6px;padding:1px 0}.cc-row span{font-size:10.5px;line-height:1.3}.cc-row input[type=number]{width:64px;padding:3px 6px;font-size:11px}.cc-triple{gap:6px;margin-bottom:4px}.cc-triple input[type=number]{padding:4px 6px;font-size:11px}.cc-calc{font-size:10px}.cc-miss,.cc-warn{font-size:8px;padding:1px 4px}.cc-results{padding:12px}.cc-totals{margin-bottom:10px;padding-bottom:10px;gap:6px}.cc-total-main strong{font-size:22px}.cc-total-main span{font-size:11px}.cc-total-subs span{font-size:10px}.cc-breakdown{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.cc-grand{grid-column:1/-1}.cc-grand span:last-child{font-size:14px}.cc-verdict{font-size:11px;padding:7px 9px}.cc-dl-btn{padding:9px;font-size:10.5px}}
 
 /* FESTIVAL SEARCH */
 .fest-controls{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px}
@@ -266,64 +266,41 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
   <meta property="og:url" content="https://documentary411.com/">
   <meta property="og:site_name" content="Documentary411">
   <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://documentary411.com/documentary411-social-card.png">
-  <meta property="og:image:secure_url" content="https://documentary411.com/documentary411-social-card.png">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image" content="https://documentary411.com/documentary411-social-card.jpg">
+  <meta property="og:image:secure_url" content="https://documentary411.com/documentary411-social-card.jpg">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Documentary411.com — Films. Insights. Resources.">
+  <meta property="og:image:alt" content="Documentary411.com — Grants. Festivals. Tools.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Documentary Filmmaking Resources Hub — Documentary411">
   <meta name="twitter:description" content="Explore verified grants, festivals, markets, distributors, legal resources, gear, and practical tools curated for independent documentary filmmakers.">
-  <meta name="twitter:image" content="https://documentary411.com/documentary411-social-card.png">
-  <meta name="twitter:image:alt" content="Documentary411.com — Films. Insights. Resources.">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://documentary411.com/#organization","name":"Documentary411","url":"https://documentary411.com/","logo":{"@type":"ImageObject","url":"https://documentary411.com/apple-touch-icon.png","width":180,"height":180}},{"@type":"WebSite","@id":"https://documentary411.com/#website","url":"https://documentary411.com/","name":"Documentary411","publisher":{"@id":"https://documentary411.com/#organization"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://documentary411.com/#webpage","url":"https://documentary411.com/","name":"Documentary Filmmaking Resources Hub — Documentary411","description":"Explore verified grants, festivals, markets, distributors, legal resources, gear, and practical tools curated for independent documentary filmmakers.","isPartOf":{"@id":"https://documentary411.com/#website"},"publisher":{"@id":"https://documentary411.com/#organization"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://documentary411.com/documentary411-social-card.png","width":1200,"height":630},"inLanguage":"en-US"}]}</script>
+  <meta name="twitter:image" content="https://documentary411.com/documentary411-social-card.jpg">
+  <meta name="twitter:image:alt" content="Documentary411.com — Grants. Festivals. Tools.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://documentary411.com/#organization","name":"Documentary411","url":"https://documentary411.com/","email":"admin@kdcandfilms.com","logo":{"@type":"ImageObject","url":"https://documentary411.com/apple-touch-icon.png","width":180,"height":180}},{"@type":"WebSite","@id":"https://documentary411.com/#website","url":"https://documentary411.com/","name":"Documentary411","publisher":{"@id":"https://documentary411.com/#organization"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://documentary411.com/#webpage","url":"https://documentary411.com/","name":"Documentary Filmmaking Resources Hub — Documentary411","description":"Explore verified grants, festivals, markets, distributors, legal resources, gear, and practical tools curated for independent documentary filmmakers.","isPartOf":{"@id":"https://documentary411.com/#website"},"publisher":{"@id":"https://documentary411.com/#organization"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://documentary411.com/documentary411-social-card.jpg","width":1200,"height":630},"inLanguage":"en-US"}]}</script>
 <!-- D411 TECHNICAL SEO END -->
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- D411 NAV START -->
+<nav aria-label="Primary navigation">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">Documentary411</a>
+    <a href="/" class="nav-logo">Documentary411</a>
     <div class="nav-links">
-      <a href="#grants">Grants</a>
-      <div class="nav-dropdown">
-        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>
-        <div class="nav-submenu">
-          <a href="#festfinder">Fest Near Me</a>
-        </div>
-      </div>
-      <a href="#distribution">Distribution</a>
-      <a href="#legal">Legal</a>
-      <a href="#fiscal">Fiscal Sponsors</a>
-      <a href="#music">Music</a>
-      <a href="#equipment">Equipment</a>
-      <a href="/ask-a-pro">Ask a Pro</a>
-<a href="/funding-lab">Funding Lab</a>
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
+      <a href="#festivals">Festivals</a>
       <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
       <a href="/advertise">Advertise</a>
-      <a href="/submit-resource">Submit/Correct</a>
-      <a href="/blog">Blog</a>
-      <a href="/fiscal-sponsorship">Fiscal Sponsorship</a>
-      <a href="/documentary-markets">Markets+</a>
-      <a href="/documentary-grants">Grants+</a>
-      <a href="/open-now">Open Now</a>
-      <a href="/directory">Directory</a>
-      <a href="/shop">Shop</a>
-      <a href="/submit-resource">Submit/Correct</a>
-      <a href="/blog">Blog</a>
-      <a href="/fiscal-sponsorship">Fiscal Sponsorship</a>
-      <a href="/documentary-markets">Markets+</a>
-      <a href="/documentary-grants">Grants+</a>
-      <a href="/open-now">Open Now</a>
-      <a href="/directory">Directory</a>
       <a href="#festival-calculator" class="nav-links-cta-mobile">Festival Calculator</a>
     </div>
     <a href="#festival-calculator" class="nav-cta">Festival Calculator</a>
     <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
   </div>
 </nav>
+<!-- D411 NAV END -->
+<main id="main">
 
 <!-- HERO -->
 <section class="hero">
@@ -347,9 +324,9 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
   <div class="home-growth-inner">
     <div class="home-growth-card">
       <p class="cat-label">Start here</p>
-      <h2>Find what is open, useful, and worth your time.</h2>
-      <p>Documentary411 is becoming a self-correcting filmmaker directory: search resources, check what is open or needs verification, report broken links, and stop treating every grant, festival, market, or member-only resource as if it were the same thing.</p>
-      <div class="home-growth-links"><a href="/directory">Search Directory</a><a href="/open-now">Open Now</a><a href="/submit-resource" class="secondary">Submit a Correction</a></div>
+      <h2>Find grants, festivals, and tools worth your time.</h2>
+      <p>Documentary411 is becoming a self-correcting filmmaker directory: search resources, report broken links, and stop treating every grant, festival, market, or member-only resource as if it were the same thing.</p>
+      <div class="home-growth-links"><a href="/directory">Search Directory</a><a href="/submit-resource" class="secondary">Submit a Correction</a></div>
     </div>
     <div class="home-growth-card">
       <p class="cat-label">Free workbook</p>
@@ -407,6 +384,49 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <div class="cards">
 
       <div class="card">
+        <span class="card-badge badge-open">Open · Sep 30, 2026</span>
+        <div class="card-title">Vision Maker Media Biomimicry Fund</div>
+        <div class="card-meta">Grant · Documentary short · Native filmmakers · Deadline <time datetime="2026-09-30">September 30, 2026</time> · Last verified <time datetime="2026-08-22">August 22, 2026</time></div>
+        <div class="card-desc">Funds short documentaries by Native filmmakers connecting Indigenous knowledge with land-based healing, ecology, and regenerative health. Up to $25,000. Official source currently lists the deadline as <time datetime="2026-09-30">September 30, 2026</time>.</div>
+        <div class="card-tags"><span class="tag">Open</span><span class="tag">Up to $25K</span><span class="tag">Native filmmakers</span></div>
+        <a class="card-link" href="https://visionmakermedia.org/fund-your-film/" target="_blank" rel="noopener">View →</a>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-open">Open · Sep 11, 2026</span>
+        <div class="card-title">Working Films Impact Kickstart</div>
+        <div class="card-meta">Grant / cohort · Impact · Deadline <time datetime="2026-09-11">September 11, 2026</time> · Last verified <time datetime="2026-08-22">August 22, 2026</time></div>
+        <div class="card-desc">Impact-campaign funding, mentorship, and a year-long cohort for underrepresented filmmakers with feature documentaries at fine-cut, release, or recently released stages. $10,000–$20,000. Application open through <time datetime="2026-09-11">September 11, 2026</time> at 11:59 p.m. ET.</div>
+        <div class="card-tags"><span class="tag">Open</span><span class="tag">$10K–$20K</span><span class="tag">Impact</span></div>
+        <a class="card-link" href="https://workingfilms.org/impactkickstart/" target="_blank" rel="noopener">View →</a>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-open">Open · Oct 1, 2026</span>
+        <div class="card-title">Black Public Media Open Call</div>
+        <div class="card-meta">Public media funding · United States · Opens <time datetime="2026-09-01">September 1, 2026</time> · Deadline <time datetime="2026-10-01">October 1, 2026</time> · Last verified <time datetime="2026-08-22">August 22, 2026</time></div>
+        <div class="card-desc">Selects feature-length nonfiction projects for talent development and a chance to compete for production funding at PitchBLACK. Official materials list this cycle as opening <time datetime="2026-09-01">September 1, 2026</time> and closing <time datetime="2026-10-01">October 1, 2026</time>.</div>
+        <div class="card-tags"><span class="tag">Open</span><span class="tag">Public media</span><span class="tag">Up to $150K</span></div>
+        <a class="card-link" href="https://blackpublicmedia.org/for-media-makers/bpm-open-call/" target="_blank" rel="noopener">View →</a>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-open">Rolling</span>
+        <div class="card-title">Perspective Fund</div>
+        <div class="card-meta">Grant · Production, post, distribution, impact · Rolling — no submission deadline · Last verified <time datetime="2026-08-22">August 22, 2026</time></div>
+        <div class="card-desc">Supports documentary production, post-production, distribution, and impact work addressing social, cultural, or political issues. Official FAQ: inquiry forms are reviewed on a rolling basis. Typical grants $25,000–$150,000.</div>
+        <div class="card-tags"><span class="tag">Rolling</span><span class="tag">$25K–$150K</span><span class="tag">Impact</span></div>
+        <a class="card-link" href="https://www.perspectivefund.org/documentaries" target="_blank" rel="noopener">View →</a>
+      </div>
+
+    </div>
+    <p class="section-desc" style="margin-top:18px">Also open (fiscal sponsorship, not cash grants): <a class="card-link" href="https://www.wmm.com/pa-program/fiscal-sponsorship/" target="_blank" rel="noopener">Women Make Movies</a> and <a class="card-link" href="https://www.documentary.org/fiscal-sponsorship" target="_blank" rel="noopener">IDA fiscal sponsorship</a> — both rolling. See <a class="card-link" href="/fiscal-sponsorship">fiscal sponsorship</a>.</p>
+
+    <details class="closed-grants">
+      <summary>Recently closed / next cycle</summary>
+      <div class="cards">
+
+      <div class="card">
         <span class="card-badge badge-listing">Closed · Next Call 2027</span>
         <div class="card-title">Sundance Documentary Fund</div>
         <div class="card-meta">Grant · Development, Production, Post · International · Deadline <time datetime="2026-06-15">June 15, 2026</time> · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
@@ -417,7 +437,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
       <div class="card">
         <span class="card-badge badge-listing">Limited / Between Cycles</span>
-        <div class="card-title">IDA Grants & Funding Programs</div>
+        <div class="card-title">IDA Grants &amp; Funding Programs</div>
         <div class="card-meta">Funding programs · International · Pare Lorentz expected to reopen late 2026 · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
         <div class="card-desc">IDA says its Artist Services team is currently focused on Emergency Assistance. The Pare Lorentz Documentary Fund is expected to reopen in late 2026 with a new theme. IDA’s separate Grants Directory continues to list active third-party opportunities.</div>
         <div class="card-tags"><span class="tag">Up to $35K</span><span class="tag">Feature Doc</span></div>
@@ -426,56 +446,11 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
       <div class="card">
         <span class="card-badge badge-listing">Closed</span>
-        <div class="card-title">Redford Center Grant</div>
-        <div class="card-meta">Grant · Environmental · Any Stage · Applications closed · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
-        <div class="card-desc">$40,000 plus yearlong support for environmental documentary projects. Applications are closed. Redford Center’s current application page says the deadline closed <time datetime="2026-05-17">May 17, 2026</time>, while its published 2026 terms list May 14 at 5 p.m. PT; because the official materials conflict, Documentary411 does not present a single exact deadline.</div>
-        <div class="card-tags"><span class="tag">$40K</span><span class="tag">Environmental</span><span class="tag">Closed</span></div>
-        <a class="card-link" href="https://www.redfordcenter.org/grantapplication/" target="_blank" rel="noopener">View →</a>
-      </div>
-
-      <div class="card">
-        <span class="card-badge badge-listing">Closed</span>
         <div class="card-title">Ford Foundation JustFilms</div>
         <div class="card-meta">Grant · Social Justice · Feature Documentary · Applications currently closed · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
         <div class="card-desc">JustFilms supports artist-driven feature documentaries that intersect with Ford Foundation social justice priorities. Ford currently states that documentary film production grant submissions are closed.</div>
-        <div class="card-tags"><span class="tag">Up to $100K</span><span class="tag">Social Justice</span><span class="tag">May–June 2026</span></div>
+        <div class="card-tags"><span class="tag">Up to $100K</span><span class="tag">Social Justice</span></div>
         <a class="card-link" href="https://www.fordfoundation.org/work/our-grants/justfilms/" target="_blank" rel="noopener">View →</a>
-      </div>
-
-      <div class="card">
-        <span class="card-badge badge-listing">Closed</span>
-        <div class="card-title">Berkeley Film Foundation</div>
-        <div class="card-meta">Grant · Production, Post & Distribution · East Bay CA · Deadline <time datetime="2026-04-13">April 13, 2026</time> · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
-        <div class="card-desc">$5,000–$25,000 documentary grants for eligible East Bay filmmakers. The 2026 Documentary Grant Program is closed; the deadline was <time datetime="2026-04-13">April 13, 2026</time> at 11:59 p.m. PT.</div>
-        <div class="card-tags"><span class="tag">$5K–$25K</span><span class="tag">Regional</span></div>
-        <a class="card-link" href="https://berkeleyfilmfoundation.org/documentary-grant-program" target="_blank" rel="noopener">View →</a>
-      </div>
-
-      <div class="card">
-        <span class="card-badge badge-listing">Closed</span>
-        <div class="card-title">SFFILM Documentary Fund</div>
-        <div class="card-meta">Grant · Post-Production · International · Final deadline <time datetime="2026-07-07">July 7, 2026</time> · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
-        <div class="card-desc">The SFFILM Documentary Film Fund supports feature documentaries in post-production with grants of $10,000–$20,000. Applications for the 2026 cycle are closed; the final deadline was <time datetime="2026-07-07">July 7, 2026</time>.</div>
-        <div class="card-tags"><span class="tag">Post Only</span><span class="tag">$10K–$20K</span><span class="tag">Closed</span></div>
-        <a class="card-link" href="https://sffilm.org/documentary-film-fund/" target="_blank" rel="noopener">View →</a>
-      </div>
-
-      <div class="card">
-        <span class="card-badge badge-listing">Closed</span>
-        <div class="card-title">Mountainfilm Commitment Grant</div>
-        <div class="card-meta">Grant · Post-Production · International · Deadline <time datetime="2026-07-16">July 16, 2026</time> · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
-        <div class="card-desc">Mountainfilm Commitment Grants support documentary projects in post-production, with awards of $3,000–$6,000. Applicants from any country are eligible. The 2026 application window closed <time datetime="2026-07-16">July 16, 2026</time> at 11:59 p.m. MDT.</div>
-        <div class="card-tags"><span class="tag">Post Only</span><span class="tag">$3K–$6K</span><span class="tag">International</span></div>
-        <a class="card-link" href="https://www.mountainfilm.org/mountainfilm-initiatives/commitment-grants/" target="_blank" rel="noopener">View →</a>
-      </div>
-
-      <div class="card">
-        <span class="card-badge badge-listing">Closed</span>
-        <div class="card-title">Film Independent Documentary Producing Lab</div>
-        <div class="card-meta">Lab · Documentary Producing · Member deadline <time datetime="2026-05-18">May 18, 2026</time> · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
-        <div class="card-desc">The 2026 Documentary Producing Lab application is currently closed. The non-member deadline was <time datetime="2026-05-04">May 4, 2026</time> and the Film Independent member extended deadline was <time datetime="2026-05-18">May 18, 2026</time>.</div>
-        <div class="card-tags"><span class="tag">Lab</span><span class="tag">Mentorship</span><span class="tag">Closed</span></div>
-        <a class="card-link" href="https://www.filmindependent.org/programs/applications/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <div class="card">
@@ -484,10 +459,29 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <div class="card-meta">Grant · Early Development · International · Applications not currently accepted · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
         <div class="card-desc">Catapult provides early-stage documentary development and research funding. Its official application page states that it is not accepting applications at this time; the 2026 Research Grant and Development Grant are both closed.</div>
         <div class="card-tags"><span class="tag">Development</span><span class="tag">Earliest Stage</span></div>
-        <a class="card-link" href="https://catapultfilmfund.org" target="_blank" rel="noopener">View →</a>
+        <a class="card-link" href="https://catapultfilmfund.org/" target="_blank" rel="noopener">View →</a>
       </div>
 
-    </div>
+      <div class="card">
+        <span class="card-badge badge-listing">Closed</span>
+        <div class="card-title">Chicken &amp; Egg Pictures</div>
+        <div class="card-meta">Fund / lab · Women and gender-expansive filmmakers · Closed · Last verified <time datetime="2026-08-24">August 24, 2026</time></div>
+        <div class="card-desc">Supports women and gender-expansive documentary filmmakers through grants, labs, and mentorship. Current public grant calls are closed. The 2026 R&amp;D Grant closed Feb 4; the 2027 (Egg)celerator Lab closed Apr 29.</div>
+        <div class="card-tags"><span class="tag">Closed</span><span class="tag">Labs</span></div>
+        <a class="card-link" href="https://chickeneggfilms.org/" target="_blank" rel="noopener">View →</a>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-listing">Upcoming · Sep 21, 2026</span>
+        <div class="card-title">Impact Partners</div>
+        <div class="card-meta">Equity financing · Feature social-issue documentaries · Opens <time datetime="2026-09-21">September 21, 2026</time> · Last verified <time datetime="2026-08-22">August 22, 2026</time></div>
+        <div class="card-desc">Provides equity financing—not grants—for feature-length social-issue documentaries with an experienced director or producer attached. LOI submissions reopen <time datetime="2026-09-21">September 21, 2026</time>.</div>
+        <div class="card-tags"><span class="tag">Upcoming</span><span class="tag">Equity</span></div>
+        <a class="card-link" href="https://impactpartnersfilm.com/submit/" target="_blank" rel="noopener">View →</a>
+      </div>
+
+      </div>
+    </details>
 
     <div style="margin-top:24px;padding:28px 24px;border:1px solid var(--gold-border);border-radius:8px;background:var(--gold-dim);text-align:center">
       <p style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Done-For-You Option</p>
@@ -916,7 +910,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       </a>
     </div>
 
-    <p class="affiliate-note">As an Amazon Associate, Documentary411 earns from qualifying purchases. Documentary411 also participates in affiliate programs with B&amp;H Photo, Sony, and Canon. This helps keep the directory free for filmmakers.</p>
+    <p class="affiliate-note"><strong>Affiliate disclosure:</strong> As an Amazon Associate, Documentary411 earns from qualifying purchases (tag Kerry-David-20). Documentary411 also participates in affiliate programs with B&amp;H Photo, Sony, and Canon. This helps keep the directory free for filmmakers. <a href="/affiliate-disclosure">Read the full affiliate disclosure</a>.</p>
 
     <div class="gear-grid">
       <div class="gear-card">
@@ -1025,7 +1019,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 <!-- ASK A PRO -->
 <section class="section" id="ask-a-pro">
   <div class="section-inner">
-    <p class="cat-label">Category 09 — Expert Help</p>
+    <p class="cat-label">Category 08 — Expert Help</p>
     <div class="section-header"><h2>Ask a Pro</h2></div>
     <p class="section-desc">Get direct, personalized guidance from a working documentary professional. Pick a quick answer or a deep-dive consult — secure checkout via Stripe.</p>
 
@@ -1041,7 +1035,6 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
           <li>Reference links and next steps included</li>
         </ul>
         <a class="pro-btn" href="https://buy.stripe.com/bJe00iabZbQJ0Uubu36J204">Ask for $50</a>
-        <div class="pro-error" data-error="question" style="display:none"></div>
       </div>
 
       <div class="pro-card pro-card-feature">
@@ -1056,7 +1049,6 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
           <li>Two weeks of email follow-up included</li>
         </ul>
         <a class="pro-btn pro-btn-primary" href="https://buy.stripe.com/3cI14mck79IBbz8dCb6J203">Book for $500</a>
-        <div class="pro-error" data-error="consult" style="display:none"></div>
       </div>
 
     </div>
@@ -1204,16 +1196,21 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
     <div class="newsletter" style="margin-top:48px">
       <h3>Never miss a grant deadline.</h3>
-      <p>New grants, open festival submissions, funding opportunities, and curated resources — delivered to documentary filmmakers every two weeks. Free. No spam.</p>
-      <div class="nl-row">
-        <input class="nl-input" type="email" aria-label="Your email address" placeholder="Your email address">
-        <button class="nl-btn">Subscribe</button>
-      </div>
+      <p>Leave your email if you want occasional Documentary411 notes when we publish new grant, festival, or resource updates. Free. No promised send cadence yet — unsubscribe anytime.</p>
+      <form class="nl-row" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/newsletter-thank-you">
+        <input type="hidden" name="form-name" value="newsletter">
+        <p class="visually-hidden"><label>Do not fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <label class="visually-hidden" for="nl-email">Email address</label>
+        <input class="nl-input" id="nl-email" name="email" type="email" autocomplete="email" required placeholder="Your email address">
+        <button class="nl-btn" type="submit">Subscribe</button>
+        <label class="nl-consent"><input type="checkbox" name="privacy_consent" value="yes" required> I agree to the <a href="/privacy">Privacy Policy</a>.</label>
+      </form>
     </div>
 
   </div>
 </section>
 
+</main>
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1222,41 +1219,23 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <div class="footer-tagline">For documentary filmmakers, everywhere.</div>
     </div>
     <div class="footer-links">
-      <a href="#grants">Grants</a>
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
       <a href="#festivals">Festivals</a>
-      <a href="#festival-calculator">Festival Calculator</a>
-      <a href="#distribution">Distribution</a>
-      <a href="#legal">Legal</a>
-      <a href="#fiscal">Fiscal Sponsors</a>
-      <a href="#music">Music</a>
-      <a href="#equipment">Equipment</a>
-      <a href="/ask-a-pro">Ask a Pro</a>
-<a href="/funding-lab">Funding Lab</a>
       <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
       <a href="/advertise">Advertise</a>
-      <a href="/submit-resource">Submit/Correct</a>
-      <a href="/blog">Blog</a>
-      <a href="/fiscal-sponsorship">Fiscal Sponsorship</a>
-      <a href="/documentary-markets">Markets+</a>
-      <a href="/documentary-grants">Grants+</a>
-      <a href="/open-now">Open Now</a>
-      <a href="/directory">Directory</a>
-      <a href="/shop">Shop</a>
-      <a href="/submit-resource">Submit/Correct</a>
-      <a href="/blog">Blog</a>
-      <a href="/fiscal-sponsorship">Fiscal Sponsorship</a>
-      <a href="/documentary-markets">Markets+</a>
-      <a href="/documentary-grants">Grants+</a>
-      <a href="/open-now">Open Now</a>
-      <a href="/directory">Directory</a>
-      <a href="#">About</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
+      <a href="/affiliate-disclosure">Affiliate Disclosure</a>
     </div>
     <div class="footer-copy">© 2026 Documentary411. For documentary filmmakers, everywhere.</div>
   </div>
 </footer>
 
 <!-- CALCULATOR JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 function cv(id){return parseFloat(document.getElementById(id).value)||0}
 function cfmt(n){return '$'+Math.round(n).toLocaleString()}
@@ -1327,10 +1306,30 @@ document.addEventListener('click',function(e){
   const modal=document.getElementById('email-modal');
   if(e.target===modal)closeModal();
 });
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape') return;
+  const modal=document.getElementById('email-modal');
+  if(modal && modal.style.display==='flex'){ e.preventDefault(); closeModal(); }
+});
 
+function loadJsPdf(){
+  if(window.jspdf) return Promise.resolve(window.jspdf);
+  if(window.__d411JsPdfLoading) return window.__d411JsPdfLoading;
+  window.__d411JsPdfLoading = new Promise((resolve,reject)=>{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.async=true;
+    s.onload=()=>resolve(window.jspdf);
+    s.onerror=()=>reject(new Error('Could not load the PDF library.'));
+    document.head.appendChild(s);
+  });
+  return window.__d411JsPdfLoading;
+}
 function cdlPDF(){
-  if(!window.jspdf){setTimeout(cdlPDF,600);return;}
-  const {jsPDF}=window.jspdf,doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  loadJsPdf().then(function(jspdf){ d411WritePdf(jspdf); }).catch(function(err){ alert(err.message || 'Could not load the PDF library.'); });
+}
+function d411WritePdf(jspdf){
+  const {jsPDF}=jspdf,doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   const fn=document.getElementById('fn').value||'Festival Cost Estimate';
   const fd=document.getElementById('fd').value||'';
   const vp=id=>parseFloat(document.getElementById(id).value)||0;
@@ -1393,7 +1392,7 @@ function cdlPDF(){
 <script>
 /* SEARCHABLE FESTIVAL DATABASE */
 window.FESTIVALS = [
-  {name:"Hot Docs", url:"https://hotdocs.ca", city:"Toronto, Canada", region:"International", dates:"April 30 – May 10, 2026", fee:"~$60–$100", feeLevel:"high", oscar:false, market:true, genres:["General"], focus:["General"], featured:true, desc:"The largest documentary festival in North America. The Hot Docs Forum is a co-production and pitch market connecting filmmakers directly with international broadcasters and financiers."},
+  {name:"Hot Docs", url:"https://hotdocs.ca", city:"Toronto, Canada", region:"International", dates:"April 30 – <time datetime="2026-05-10">May 10, 2026</time>", fee:"~$60–$100", feeLevel:"high", oscar:false, market:true, genres:["General"], focus:["General"], featured:true, desc:"The largest documentary festival in North America. The Hot Docs Forum is a co-production and pitch market connecting filmmakers directly with international broadcasters and financiers."},
   {name:"IDFA — International Documentary Film Festival Amsterdam", url:"https://www.idfa.nl", city:"Amsterdam, Netherlands", region:"International", dates:"November 12–22, 2026", fee:"Free submission", feeLevel:"free", oscar:false, market:true, genres:["General"], focus:["General"], featured:true, desc:"The world's largest documentary festival. The IDFA Forum is one of the most powerful co-production and financing markets in existence — over 200 projects connected with funders annually. Submission is free."},
   {name:"CPH:DOX Copenhagen", url:"https://cphdox.dk", city:"Copenhagen, Denmark", region:"International", dates:"March 11–22, 2026", fee:"~$50", feeLevel:"medium", oscar:false, market:true, genres:["General","Arts & Culture"], focus:["General"], featured:true, desc:"One of the biggest documentary festivals in the world. Strong industry programme, competitive sections, and a reputation for bold, formally innovative work. Strong European press presence."},
   {name:"Sheffield DocFest", url:"https://www.sheffdocfest.com", city:"Sheffield, UK", region:"International", dates:"June 10–15, 2026", fee:"~$50", feeLevel:"medium", oscar:false, market:true, genres:["General"], focus:["General"], featured:false, desc:"The UK's premier documentary festival. Meetmarket — a structured pitching event — connects filmmakers with international commissioning editors, distributors, and financiers."},
@@ -1405,7 +1404,7 @@ window.FESTIVALS = [
   {name:"Mountainfilm", url:"https://www.mountainfilm.org", city:"Telluride, CO", region:"West", dates:"May 22–25, 2026 (Memorial Day)", fee:"~$50", feeLevel:"medium", oscar:false, market:false, genres:["Adventure","Environmental","Social Justice","Human Rights"], focus:["General"], featured:false, desc:"Adventure, activism, social justice, culture, and environment — all on film, in the mountains. Intimate, curated, beloved by filmmakers. Pairs with the Mountainfilm Commitment Grant."},
   {name:"Aspen Shortsfest", url:"https://www.aspenfilm.org/shortsfest", city:"Aspen, CO", region:"West", dates:"April 7–12, 2026", fee:"~$40", feeLevel:"medium", oscar:true, market:false, genres:["Shorts"], focus:["General"], featured:false, desc:"Oscar-qualifying for live-action and animated shorts. One of the most prestigious shorts-only festivals in the US. Strong industry attendance and significant award purse."},
   {name:"Sebastopol Documentary Film Festival", url:"https://www.sebastopolfilm.org", city:"Sonoma County, CA", region:"West", dates:"April 9–12, 2026", fee:"~$35", feeLevel:"medium", oscar:true, market:false, genres:["General","Shorts"], focus:["General"], featured:false, desc:"Oscar-qualifying festival for short and mini-form docs. 700+ submissions from 62+ countries. Holistic, equity-driven screening process — every film passes through at least three screeners."},
-  {name:"SF DocFest", url:"https://sfindie.com/festivals/sf-docfest", city:"San Francisco, CA", region:"West", dates:"May 28 – June 7, 2026", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["General","Music","Arts & Culture"], focus:["General"], featured:false, desc:"Filmmaker-friendly Bay Area showcase known for adventurous programming and rejecting conventional taste — strong fit for music, subculture, and fringe-subject documentaries."},
+  {name:"SF DocFest", url:"https://sfindie.com/festivals/sf-docfest", city:"San Francisco, CA", region:"West", dates:"May 28 – <time datetime="2026-06-07">June 7, 2026</time>", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["General","Music","Arts & Culture"], focus:["General"], featured:false, desc:"Filmmaker-friendly Bay Area showcase known for adventurous programming and rejecting conventional taste — strong fit for music, subculture, and fringe-subject documentaries."},
   {name:"DocLands Documentary Film Festival", url:"https://cafilm.org/doclands", city:"San Rafael, CA", region:"West", dates:"May 7–10, 2026", fee:"~$50", feeLevel:"medium", oscar:false, market:true, genres:["General","Environmental","Adventure"], focus:["General"], featured:false, desc:"Run by the California Film Institute. Strong Bay Area audience and West Coast industry attendance. DocPitch program offers funding opportunities for in-progress films."},
   {name:"BendFilm Festival", url:"https://bendfilm.org", city:"Bend, OR", region:"West", dates:"October 8–12, 2026", fee:"~$45", feeLevel:"medium", oscar:true, market:false, genres:["General","Adventure","Environmental"], focus:["General"], featured:false, desc:"Oscar-qualifying festival with one of the most welcoming filmmaker hospitality programs in the US. Strong Pacific Northwest audience and outdoor/independent ethos."},
   {name:"Mill Valley Film Festival", url:"https://www.mvff.com/", city:"Mill Valley, CA", region:"West", dates:"October 8–18, 2026", fee:"~$60", feeLevel:"high", oscar:false, market:false, genres:["General","Arts & Culture"], focus:["General"], featured:false, desc:"Long-running, well-respected Bay Area festival with strong audience attendance and industry presence. Excellent launch pad for fall awards-season documentaries."},
@@ -1426,9 +1425,9 @@ window.FESTIVALS = [
   {name:"Tribeca Festival", url:"https://tribecafilm.com/festival", city:"New York, NY", region:"Northeast", dates:"June 3–14, 2026", fee:"~$90 doc feature", feeLevel:"high", oscar:true, market:true, genres:["General","Politics","Arts & Culture","Social Justice"], focus:["General"], featured:true, desc:"NYC's flagship film festival. Major launching pad for theatrical documentaries and streaming acquisitions. Tribeca X for branded docs and Tribeca Audio Storytelling for podcasts."},
   {name:"DOC NYC", url:"https://docnyc.net", city:"New York, NY", region:"Northeast", dates:"November 12–23, 2026", fee:"~$75", feeLevel:"high", oscar:true, market:true, genres:["General"], focus:["General"], featured:true, desc:"America's largest documentary festival. Strong audience and press environment, competitive programming, industry panels, and the DOC NYC PRO industry conference. Essential for North American distribution conversations."},
   {name:"Camden International Film Festival", url:"https://pointsnorthinstitute.org/ciff", city:"Camden, ME", region:"Northeast", dates:"September 17–20, 2026", fee:"~$50", feeLevel:"medium", oscar:true, market:true, genres:["General"], focus:["General"], featured:false, desc:"One of the most respected industry-facing US doc festivals. Points North Forum is a structured pitch and feedback program — a major early-stage launch pad for ambitious nonfiction features."},
-  {name:"New York Film Festival", url:"https://www.filmlinc.org/nyff", city:"New York, NY", region:"Northeast", dates:"September 25 – October 11, 2026", fee:"~$90", feeLevel:"high", oscar:false, market:false, genres:["General","Arts & Culture"], focus:["General"], featured:false, desc:"Curated, prestigious, no competition. Run by Film at Lincoln Center. Documentaries selected for the Main Slate and Spotlight benefit from significant US press attention."},
+  {name:"New York Film Festival", url:"https://www.filmlinc.org/nyff", city:"New York, NY", region:"Northeast", dates:"September 25 – <time datetime="2026-10-11">October 11, 2026</time>", fee:"~$90", feeLevel:"high", oscar:false, market:false, genres:["General","Arts & Culture"], focus:["General"], featured:false, desc:"Curated, prestigious, no competition. Run by Film at Lincoln Center. Documentaries selected for the Main Slate and Spotlight benefit from significant US press attention."},
   {name:"Hamptons International Film Festival", url:"https://hamptonsfilmfest.org", city:"East Hampton, NY", region:"Northeast", dates:"October 9–13, 2026", fee:"~$60", feeLevel:"high", oscar:true, market:false, genres:["General"], focus:["General"], featured:false, desc:"Oscar-qualifying for shorts. Strong industry and press attendance from NYC. Significant awards-season visibility for fall-launch documentaries."},
-  {name:"Independent Film Festival Boston", url:"https://iffboston.org", city:"Boston, MA", region:"Northeast", dates:"April 22 – May 3, 2026", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["General"], focus:["General"], featured:false, desc:"New England's premier independent film festival. Strong audience for documentaries, especially those with social impact and music subjects."},
+  {name:"Independent Film Festival Boston", url:"https://iffboston.org", city:"Boston, MA", region:"Northeast", dates:"April 22 – <time datetime="2026-05-03">May 3, 2026</time>", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["General"], focus:["General"], featured:false, desc:"New England's premier independent film festival. Strong audience for documentaries, especially those with social impact and music subjects."},
   {name:"Maryland Film Festival", url:"https://mdfilmfest.com", city:"Baltimore, MD", region:"Northeast", dates:"May 7–10, 2026", fee:"~$50", feeLevel:"medium", oscar:false, market:false, genres:["General","Arts & Culture"], focus:["General"], featured:false, desc:"Long-running mid-Atlantic festival housed at the historic Parkway Theatre. Known for thoughtful programming and a strong filmmaker hospitality experience."},
   {name:"Athena Film Festival", url:"https://athenafilmfestival.com", city:"New York, NY (Barnard College)", region:"Northeast", dates:"March 5–8, 2026", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["Social Justice","Politics","Arts & Culture"], focus:["Women"], featured:false, desc:"The premier US festival celebrating women's leadership in film and on-screen. Documentaries about and by women receive primary curatorial focus."},
   {name:"Workers Unite Film Festival", url:"https://www.workersunitefilmfestival.org", city:"New York, NY", region:"Northeast", dates:"May 7–18, 2026", fee:"~$25", feeLevel:"low", oscar:false, market:false, genres:["Social Justice","Politics","Human Rights"], focus:["General"], featured:false, desc:"Annual festival celebrating films about labor, working-class lives, and economic justice. Low entry fee, mission-driven curation."},
@@ -1438,7 +1437,7 @@ window.FESTIVALS = [
   {name:"AFI Docs", url:"https://docs.afi.com", city:"Washington, DC + Silver Spring, MD", region:"Southeast", dates:"June 17–21, 2026", fee:"~$60", feeLevel:"high", oscar:true, market:false, genres:["General","Politics","Social Justice"], focus:["General"], featured:false, desc:"The American Film Institute's documentary festival in the nation's capital. Oscar-qualifying for shorts. Strong policy and political audience and significant national press coverage."},
   {name:"Full Frame Documentary Film Festival", url:"https://www.fullframefest.org", city:"Durham, NC", region:"Southeast", dates:"April 2–5, 2026", fee:"~$50", feeLevel:"medium", oscar:false, market:false, genres:["General","Arts & Culture","Social Justice"], focus:["General"], featured:false, desc:"One of the most respected doc-only festivals in the US. Curated, intimate, and beloved by filmmakers. The Full Frame Inspiration Award and Center for Documentary Studies partnerships add long-term value."},
   {name:"Hot Springs Documentary Film Festival", url:"https://hsdfi.org", city:"Hot Springs, AR", region:"Southeast", dates:"October 9–18, 2026", fee:"~$50", feeLevel:"medium", oscar:true, market:false, genres:["General"], focus:["General"], featured:false, desc:"One of only a handful of US festivals Oscar-qualifying for documentary FEATURES (not just shorts). Doc-only programming, decades of credibility, and a unique location in the Ouachita Mountains."},
-  {name:"Atlanta Film Festival", url:"https://www.atlantafilmfestival.com", city:"Atlanta, GA", region:"Southeast", dates:"April 23 – May 3, 2026", fee:"~$50", feeLevel:"medium", oscar:true, market:false, genres:["General"], focus:["General","BIPOC"], featured:false, desc:"One of the longest-running film festivals in the South. Oscar-qualifying for shorts. Strong fit for Southern stories and BIPOC documentary."},
+  {name:"Atlanta Film Festival", url:"https://www.atlantafilmfestival.com", city:"Atlanta, GA", region:"Southeast", dates:"April 23 – <time datetime="2026-05-03">May 3, 2026</time>", fee:"~$50", feeLevel:"medium", oscar:true, market:false, genres:["General"], focus:["General","BIPOC"], featured:false, desc:"One of the longest-running film festivals in the South. Oscar-qualifying for shorts. Strong fit for Southern stories and BIPOC documentary."},
   {name:"Florida Film Festival", url:"https://floridafilmfestival.com", city:"Maitland, FL", region:"Southeast", dates:"April 10–19, 2026", fee:"~$50", feeLevel:"medium", oscar:true, market:false, genres:["General"], focus:["General"], featured:false, desc:"Oscar-qualifying for shorts. Doc programming has launched many notable theatrical releases. Strong audience and respected curatorial team."},
   {name:"New Orleans Film Festival", url:"https://www.neworleansfilmfestival.org", city:"New Orleans, LA", region:"Southeast", dates:"November 4–11, 2026", fee:"~$45", feeLevel:"medium", oscar:true, market:false, genres:["General","Music","Arts & Culture"], focus:["General","Black"], featured:false, desc:"Oscar-qualifying for shorts. Strong programmatic focus on Southern stories and Black filmmakers, plus music and culture documentary."},
   {name:"Nashville Film Festival", url:"https://nashvillefilmfestival.org", city:"Nashville, TN", region:"Southeast", dates:"September 17–23, 2026", fee:"~$50", feeLevel:"medium", oscar:true, market:false, genres:["General","Music"], focus:["General"], featured:false, desc:"Oscar-qualifying for shorts. Strong music documentary programming track and a longstanding dedicated music industry audience."},
@@ -1446,7 +1445,7 @@ window.FESTIVALS = [
 
   {name:"Cine Las Americas International Film Festival", url:"https://cinelasamericas.org", city:"Austin, TX", region:"Southwest", dates:"September 23–27, 2026", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["General","Arts & Culture","Social Justice"], focus:["Latine","BIPOC"], featured:false, desc:"The Southwest's leading festival for Latin American, US Latine, and Indigenous Iberoamerican cinema. Strong community engagement and programming that elevates underrepresented filmmakers."},
   {name:"ReelAbilities Film Festival", url:"https://reelabilities.org/newyork", city:"New York, NY", region:"Northeast", dates:"April 9–15, 2026", fee:"~$40", feeLevel:"medium", oscar:false, market:false, genres:["General","Social Justice","Human Rights","Arts & Culture"], focus:["Disability"], featured:false, desc:"The largest film festival in the US dedicated to films by and about people with disabilities. Multi-city footprint, strong advocacy network, and accessible screening practices throughout."},
-  {name:"GI Film Festival San Diego", url:"https://gifilmfestivalsd.org", city:"San Diego, CA", region:"West", dates:"September 30 – October 4, 2026", fee:"~$30", feeLevel:"low", oscar:false, market:false, genres:["General","Politics","Social Justice","Human Rights"], focus:["Veterans"], featured:false, desc:"Premier US festival showcasing military, veteran, and service-member stories — both from documentary and narrative filmmakers. Strong fit for war, service, and post-service-life documentaries."}
+  {name:"GI Film Festival San Diego", url:"https://gifilmfestivalsd.org", city:"San Diego, CA", region:"West", dates:"September 30 – <time datetime="2026-10-04">October 4, 2026</time>", fee:"~$30", feeLevel:"low", oscar:false, market:false, genres:["General","Politics","Social Justice","Human Rights"], focus:["Veterans"], featured:false, desc:"Premier US festival showcasing military, veteran, and service-member stories — both from documentary and narrative filmmakers. Strong fit for war, service, and post-service-life documentaries."}
 ];
 
 function escAttr(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
@@ -1654,31 +1653,6 @@ function initializeFestivalDatabase(){
 if(document.readyState!=='loading') initializeFestivalDatabase();
 else document.addEventListener('DOMContentLoaded',initializeFestivalDatabase);
 
-async function startCheckout(tier, btn){
-  const errEl = document.querySelector('[data-error="'+tier+'"]');
-  const original = btn.textContent;
-  errEl.style.display = 'none';
-  errEl.textContent = '';
-  btn.disabled = true;
-  btn.textContent = 'Redirecting…';
-  try{
-    const res = await fetch('/.netlify/functions/create-checkout-session', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ tier })
-    });
-    const data = await res.json().catch(()=>({}));
-    if(!res.ok || !data.url){
-      throw new Error(data.error || 'Checkout is not available right now. Please try again in a moment.');
-    }
-    window.location.href = data.url;
-  }catch(err){
-    btn.disabled = false;
-    btn.textContent = original;
-    errEl.textContent = err.message;
-    errEl.style.display = 'block';
-  }
-}
 </script>
 
   <script src="/site-fixes.js" defer></script>

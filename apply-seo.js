@@ -19,15 +19,14 @@ function assetOrigin() {
   }
   return ORIGIN;
 }
-const SOCIAL_IMAGE = `${assetOrigin()}/documentary411-social-card.png`;
-const SOCIAL_IMAGE_ALT = 'Documentary411.com — Films. Insights. Resources.';
+const SOCIAL_IMAGE = `${assetOrigin()}/documentary411-social-card.jpg`;
+const SOCIAL_IMAGE_ALT = 'Documentary411.com — Grants. Festivals. Tools.';
 const SEO_START = '<!-- D411 TECHNICAL SEO START -->';
 const SEO_END = '<!-- D411 TECHNICAL SEO END -->';
 
 const pages = [
   { file: 'index.html', route: '/', schemaType: 'WebPage' },
   { file: 'directory.html', route: '/directory', schemaType: 'CollectionPage' },
-  { file: 'open-now.html', route: '/open-now', schemaType: 'CollectionPage' },
   { file: 'documentary-grants.html', route: '/documentary-grants', schemaType: 'CollectionPage' },
   { file: 'documentary-markets.html', route: '/documentary-markets', schemaType: 'CollectionPage' },
   { file: 'fiscal-sponsorship.html', route: '/fiscal-sponsorship', schemaType: 'CollectionPage' },
@@ -42,6 +41,11 @@ const pages = [
   { file: 'ask-a-pro.html', route: '/ask-a-pro', schemaType: 'WebPage' },
   { file: 'advertise.html', route: '/advertise', schemaType: 'WebPage' },
   { file: 'shop.html', route: '/shop', schemaType: 'CollectionPage' },
+  { file: 'about.html', route: '/about', schemaType: 'WebPage' },
+  { file: 'privacy.html', route: '/privacy', schemaType: 'WebPage' },
+  { file: 'terms.html', route: '/terms', schemaType: 'WebPage' },
+  { file: 'contact.html', route: '/contact', schemaType: 'WebPage' },
+  { file: 'affiliate-disclosure.html', route: '/affiliate-disclosure', schemaType: 'WebPage' },
 ];
 
 function decodeEntities(value) {
@@ -121,6 +125,7 @@ function pageSchema(page, canonical, title, description) {
         '@id': `${ORIGIN}/#organization`,
         name: 'Documentary411',
         url: `${ORIGIN}/`,
+        email: 'admin@kdcandfilms.com',
         logo: {
           '@type': 'ImageObject',
           url: `${ORIGIN}/apple-touch-icon.png`,
@@ -160,7 +165,7 @@ function metadataBlock(page, title, description) {
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="${imageAttr}">
   <meta property="og:image:secure_url" content="${imageAttr}">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="${imageAltAttr}">

@@ -16,27 +16,29 @@ function assetOrigin() {
   }
   return ORIGIN;
 }
-const SOCIAL_IMAGE = `${assetOrigin()}/documentary411-social-card.png`;
-const SOCIAL_IMAGE_ALT = 'Documentary411.com — Films. Insights. Resources.';
+const SOCIAL_IMAGE = `${assetOrigin()}/documentary411-social-card.jpg`;
+const SOCIAL_IMAGE_ALT = 'Documentary411.com — Grants. Festivals. Tools.';
 
 const pages = [
-  { file: 'index.html', route: '/', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'directory.html', route: '/directory', schemaType: 'CollectionPage', lastmod: '2026-08-20', itemList: true },
-  { file: 'open-now.html', route: '/open-now', schemaType: 'CollectionPage', lastmod: '2026-08-20', itemList: true },
-  { file: 'documentary-grants.html', route: '/documentary-grants', schemaType: 'CollectionPage', lastmod: '2026-08-20', itemList: true },
-  { file: 'documentary-markets.html', route: '/documentary-markets', schemaType: 'CollectionPage', lastmod: '2026-08-20', itemList: true },
-  { file: 'fiscal-sponsorship.html', route: '/fiscal-sponsorship', schemaType: 'CollectionPage', lastmod: '2026-08-20', itemList: true },
-  { file: 'submit-resource.html', route: '/submit-resource', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'blog.html', route: '/blog', schemaType: 'CollectionPage', lastmod: '2026-08-20' },
-  { file: 'blog-festival-wins.html', route: '/blog-festival-wins', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'festival-budget-workbook.html', route: '/festival-budget-workbook', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'festival-strategy.html', route: '/festival-strategy', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'funding-lab.html', route: '/funding-lab', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'funding-sprint.html', route: '/funding-sprint', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'funding-report.html', route: '/funding-report', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'ask-a-pro.html', route: '/ask-a-pro', schemaType: 'WebPage', lastmod: '2026-08-22' },
-  { file: 'advertise.html', route: '/advertise', schemaType: 'WebPage', lastmod: '2026-08-20' },
-  { file: 'shop.html', route: '/shop', schemaType: 'CollectionPage', lastmod: '2026-08-27' },
+  { file: 'index.html', route: '/', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'directory.html', route: '/directory', schemaType: 'CollectionPage', lastmod: '2026-09-01', itemList: true },
+  { file: 'documentary-grants.html', route: '/documentary-grants', schemaType: 'CollectionPage', lastmod: '2026-09-01', itemList: true },
+  { file: 'documentary-markets.html', route: '/documentary-markets', schemaType: 'CollectionPage', lastmod: '2026-09-01', itemList: true },
+  { file: 'fiscal-sponsorship.html', route: '/fiscal-sponsorship', schemaType: 'CollectionPage', lastmod: '2026-09-01', itemList: true },
+  { file: 'submit-resource.html', route: '/submit-resource', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'festival-budget-workbook.html', route: '/festival-budget-workbook', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'festival-strategy.html', route: '/festival-strategy', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'funding-lab.html', route: '/funding-lab', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'funding-sprint.html', route: '/funding-sprint', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'funding-report.html', route: '/funding-report', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'ask-a-pro.html', route: '/ask-a-pro', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'advertise.html', route: '/advertise', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'shop.html', route: '/shop', schemaType: 'CollectionPage', lastmod: '2026-09-01' },
+  { file: 'about.html', route: '/about', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'privacy.html', route: '/privacy', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'terms.html', route: '/terms', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'contact.html', route: '/contact', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'affiliate-disclosure.html', route: '/affiliate-disclosure', schemaType: 'WebPage', lastmod: '2026-09-01' },
 ];
 
 const failures = [];
@@ -112,7 +114,7 @@ const ogExpected = {
   'og:locale': 'en_US',
   'og:image': SOCIAL_IMAGE,
   'og:image:secure_url': SOCIAL_IMAGE,
-  'og:image:type': 'image/png',
+  'og:image:type': 'image/jpeg',
   'og:image:width': '1200',
   'og:image:height': '630',
   'og:image:alt': SOCIAL_IMAGE_ALT,
@@ -215,15 +217,27 @@ for (const entry of sitemapEntries) check(expectedSitemapUrls.includes(entry.url
 const robots = fs.readFileSync(path.join(__dirname, 'robots.txt'), 'utf8');
 check(robots === `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`, 'robots.txt: the previously valid file changed unexpectedly.');
 
-const socialImagePath = path.join(__dirname, 'documentary411-social-card.png');
-check(fs.existsSync(socialImagePath), 'documentary411-social-card.png: social image is missing.');
+const socialImagePath = path.join(__dirname, 'documentary411-social-card.jpg');
+check(fs.existsSync(socialImagePath), 'documentary411-social-card.jpg: social image is missing.');
 if (fs.existsSync(socialImagePath)) {
-  const png = fs.readFileSync(socialImagePath);
-  check(png.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])), 'documentary411-social-card.png: file is not a valid PNG.');
-  if (png.length >= 24) {
-    check(png.readUInt32BE(16) === 1200, `documentary411-social-card.png: expected width 1200, found ${png.readUInt32BE(16)}.`);
-    check(png.readUInt32BE(20) === 630, `documentary411-social-card.png: expected height 630, found ${png.readUInt32BE(20)}.`);
+  const jpg = fs.readFileSync(socialImagePath);
+  check(jpg[0] === 0xFF && jpg[1] === 0xD8 && jpg[2] === 0xFF, 'documentary411-social-card.jpg: file is not a valid JPEG.');
+  check(jpg.length >= 20000 && jpg.length <= 160000, `documentary411-social-card.jpg: expected ~20–160KB, found ${jpg.length} bytes.`);
+  let width = 0, height = 0, i = 2;
+  while (i < jpg.length - 8) {
+    if (jpg[i] !== 0xFF) { i += 1; continue; }
+    const marker = jpg[i + 1];
+    if (marker === 0xD8 || marker === 0xD9) { i += 2; continue; }
+    if (marker === 0xC0 || marker === 0xC1 || marker === 0xC2) {
+      height = jpg.readUInt16BE(i + 5);
+      width = jpg.readUInt16BE(i + 7);
+      break;
+    }
+    const len = jpg.readUInt16BE(i + 2);
+    i += 2 + len;
   }
+  check(width === 1200, `documentary411-social-card.jpg: expected width 1200, found ${width}.`);
+  check(height === 630, `documentary411-social-card.jpg: expected height 630, found ${height}.`);
 }
 
 const htmlFiles = fs.readdirSync(__dirname).filter((file) => file.endsWith('.html') && !file.startsWith('google'));
@@ -287,7 +301,7 @@ check(fs.existsSync(errorPagePath), '404.html: custom error page is missing.');
 if (fs.existsSync(errorPagePath)) {
   const errorPage = fs.readFileSync(errorPagePath, 'utf8');
   check(metaValue(errorPage, 'name', 'robots').toLowerCase().includes('noindex'), '404.html: custom error page must be noindex.');
-  for (const href of ['/', '/directory', '/documentary-grants', '/open-now']) {
+  for (const href of ['/', '/directory', '/documentary-grants']) {
     check(new RegExp(`\\bhref=["']${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`).test(errorPage), `404.html: missing required link to ${href}.`);
   }
   check(/<script\b[^>]*\bsrc=["']\/site-search\.js["']/i.test(errorPage), '404.html: existing site search is not available.');

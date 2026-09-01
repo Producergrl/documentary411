@@ -52,7 +52,7 @@ function enforceOpenNow(){
   const file = path.join(__dirname,'directory-tools.js');
   if(!fs.existsSync(file)) return;
   let source = fs.readFileSync(file,'utf8');
-  source = source.replace(/if\(config\.openish\) base = base\.filter\([^;]+\);/,"if(config.openish) base = base.filter(r=>r.status === 'open');");
+  source = source.replace(/if\(config\.openish\) base = base\.filter\([^;]+\);/,"if(config.openish) base = base.filter(r=>r.status === 'open' || r.status === 'rolling');");
   fs.writeFileSync(file,source);
 }
 

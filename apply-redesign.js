@@ -39,17 +39,19 @@ html = html.replace('Verified grants, festivals, distributors, sales agents, leg
 html = html.replace('>Explore Directory</a>', '>Explore Resources</a>');
 html = html.replace('<span class="stat-num">500+</span><span class="stat-label">Verified Resources</span>','<span class="stat-num" id="festivalStatCount">48</span><span class="stat-label">Verified Festivals</span>');
 
-/* Navigation hierarchy */
-html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
-html = html.replace(/<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/g,'<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>');
-html = html.replace(/\s*<a href="\/advertise(?:\.html)?">Advertise<\/a>/g, '');
-html = html.replace(/(<a href="\/funding-lab">Funding Lab<\/a>)/g,'$1\n      <a href="/shop.html">Shop</a>\n      <a href="/advertise.html">Advertise</a>');
-
-const growthLinks = [
-  '<a href="/directory.html">Directory</a>','<a href="/open-now.html">Open Now</a>','<a href="/documentary-grants.html">Grants+</a>','<a href="/documentary-markets.html">Markets+</a>','<a href="/fiscal-sponsorship.html">Fiscal Sponsorship</a>','<a href="/blog.html">Blog</a>','<a href="/submit-resource.html">Submit/Correct</a>','<a href="/shop.html">Shop</a>'
-];
-for (const link of growthLinks) {
-  if (!html.includes(link)) html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/g, `$1\n      ${link}`);
+/* Navigation is authored in index.html (D411 NAV START). Do not re-inject
+   growth links or Shop/Advertise clones on every build. */
+if (!html.includes('<!-- D411 NAV START -->')) {
+  html = html.replace(/\s*<a href="\/festival-strategy(?:\.html)?">Festival Strategy<\/a>/g, '');
+  html = html.replace(/<a href="#festivals">Festivals<\/a>\s*<a href="#festfinder">Fest Near Me<\/a>/g,'<div class="nav-dropdown">\n        <a href="#festivals" class="nav-parent">Festivals <span class="nav-caret" aria-hidden="true">⌄</span></a>\n        <div class="nav-submenu">\n          <a href="#festfinder">Fest Near Me</a>\n        </div>\n      </div>\n      <a href="/festival-strategy.html">Festival Strategy</a>');
+  html = html.replace(/\s*<a href="\/advertise(?:\.html)?">Advertise<\/a>/g, '');
+  html = html.replace(/(<a href="\/funding-lab">Funding Lab<\/a>)/g,'$1\n      <a href="/shop.html">Shop</a>\n      <a href="/advertise.html">Advertise</a>');
+  const growthLinks = [
+    '<a href="/directory.html">Directory</a>','<a href="/documentary-grants.html">Grants+</a>','<a href="/documentary-markets.html">Markets+</a>','<a href="/fiscal-sponsorship.html">Fiscal Sponsorship</a>','<a href="/blog.html">Blog</a>','<a href="/submit-resource.html">Submit/Correct</a>','<a href="/shop.html">Shop</a>'
+  ];
+  for (const link of growthLinks) {
+    if (!html.includes(link)) html = html.replace(/(<a href="\/advertise\.html">Advertise<\/a>)/g, `$1\n      ${link}`);
+  }
 }
 
 const growthPanel = `<!-- HOME GROWTH UPGRADES -->
@@ -57,9 +59,9 @@ const growthPanel = `<!-- HOME GROWTH UPGRADES -->
   <div class="home-growth-inner">
     <div class="home-growth-card">
       <p class="cat-label">Start here</p>
-      <h2>Find what is open, useful, and worth your time.</h2>
-      <p>Documentary411 is becoming a self-correcting filmmaker directory: search resources, check what is open or needs verification, report broken links, and stop treating every grant, festival, market, or member-only resource as if it were the same thing.</p>
-      <div class="home-growth-links"><a href="/directory.html">Search Directory</a><a href="/open-now.html">Open Now</a><a href="/submit-resource.html" class="secondary">Submit a Correction</a></div>
+      <h2>Find grants, festivals, and tools worth your time.</h2>
+      <p>Documentary411 is becoming a self-correcting filmmaker directory: search resources, report broken links, and stop treating every grant, festival, market, or member-only resource as if it were the same thing.</p>
+      <div class="home-growth-links"><a href="/directory.html">Search Directory</a><a href="/submit-resource.html" class="secondary">Submit a Correction</a></div>
     </div>
     <div class="home-growth-card">
       <p class="cat-label">Free workbook</p>
@@ -86,7 +88,7 @@ fs.writeFileSync(homeFile, html);
 
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
 const directoryStyle = '<link rel="stylesheet" href="/directory-upgrades.css">';
-const growthPages = ['directory.html','open-now.html','submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html','documentary-grants.html','documentary-markets.html','fiscal-sponsorship.html','shop.html'];
+const growthPages = ['directory.html','submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html','documentary-grants.html','documentary-markets.html','fiscal-sponsorship.html','shop.html','about.html','privacy.html','terms.html','contact.html','affiliate-disclosure.html','newsletter-thank-you.html'];
 const styledPages = [
   'funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html','thank-you.html','welcome-festival.html','welcome-sprint.html','welcome-system.html','advertise.html','advertise-thank-you.html',
   'ask-a-pro.html','ask-a-pro-question.html','ask-a-pro-question-thank-you.html','ask-a-pro-consult.html','ask-a-pro-consult-thank-you.html','funding-report-thank-you.html','funding-lab-waitlist-thank-you.html',
