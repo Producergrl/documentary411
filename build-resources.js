@@ -190,6 +190,83 @@ function homepageFestivalCard(res) {
     </div>`;
 }
 
+function homepagePartnerCard(res) {
+  const h = res.homepage || {};
+  return `      <a class="partner-card" href="${attr(res.officialUrl)}" target="_blank" rel="noopener">
+        <div class="partner-icon">${h.icon || ''}</div>
+        <div class="partner-name">${esc(h.title || res.name)}</div>
+        <div class="partner-sub">${esc(h.sub || h.meta || '')}</div>
+        <div class="partner-link">Shop →</div>
+      </a>`;
+}
+
+function homepageGearCard(res) {
+  const h = res.homepage || {};
+  const links = (h.shopLinks || []).map((link) => {
+    return `<a class="gear-link" href="${attr(link.href)}" target="_blank" rel="noopener">${esc(link.label)}</a>`;
+  }).join('\n          ');
+  return `      <div class="gear-card">
+        <div class="gear-icon">${h.icon || ''}</div>
+        <div class="gear-category">${esc(h.meta || res.resourceType || '')}</div>
+        <div class="gear-name">${esc(h.title || res.name)}</div>
+        <div class="gear-desc">${esc(h.description || res.description)}</div>
+        <div class="gear-price">${esc(h.price || res.cost || '')}</div>
+        <div class="gear-links">
+          ${links}
+        </div>
+      </div>`;
+}
+
+function findMatchingDivClose(html, contentStart, limit) {
+  let depth = 1;
+  let i = contentStart;
+  while (i < limit && depth > 0) {
+    const nextOpen = html.indexOf('<div', i);
+    const nextClose = html.indexOf('</div>', i);
+    if (nextClose === -1 || nextClose >= limit) return -1;
+    if (nextOpen !== -1 && nextOpen < nextClose && nextOpen < limit) {
+      depth += 1;
+      i = nextOpen + 4;
+    } else {
+      depth -= 1;
+      if (depth === 0) return nextClose;
+      i = nextClose + 6;
+    }
+  }
+  return -1;
+}
+
+function wrapClassInSection(html, sectionId, className, startMarker, endMarker, inner) {
+  const start = `<!-- ${startMarker} -->`;
+  const end = `<!-- ${endMarker} -->`;
+  if (html.includes(start) && html.includes(end)) {
+    return replaceBlock(html, start, end, inner);
+  }
+  const idNeedle = `id="${sectionId}"`;
+  let searchFrom = 0;
+  let secStart = -1;
+  while (secStart === -1) {
+    const idAt = html.indexOf(idNeedle, searchFrom);
+    if (idAt === -1) return html;
+    const tagStart = html.lastIndexOf('<section', idAt);
+    const tagEnd = html.indexOf('>', idAt);
+    if (tagStart !== -1 && tagEnd !== -1 && tagStart < idAt && idAt < tagEnd) {
+      secStart = tagStart;
+      break;
+    }
+    searchFrom = idAt + 1;
+  }
+  const secEnd = html.indexOf('</section>', secStart);
+  if (secEnd === -1) return html;
+  const openNeedle = `<div class="${className}">`;
+  const openAt = html.indexOf(openNeedle, secStart);
+  if (openAt === -1 || openAt > secEnd) return html;
+  const contentStart = openAt + openNeedle.length;
+  const closeAt = findMatchingDivClose(html, contentStart, secEnd);
+  if (closeAt === -1) return html;
+  return html.slice(0, contentStart) + `\n${start}\n${inner}\n${end}\n    ` + html.slice(closeAt);
+}
+
 function wrapHomeCards(html, startMarker, endMarker, cardsHtml, fallbackFind, fallbackWrap) {
   const start = `<!-- ${startMarker} -->`;
   const end = `<!-- ${endMarker} -->`;
@@ -216,6 +293,14 @@ const fiscal = resources.filter((r) => r.category === 'Fiscal Sponsorship');
 const grantsOpen = resources.filter((r) => r.homepage && r.homepage.section === 'grants-open');
 const grantsClosed = resources.filter((r) => r.homepage && r.homepage.section === 'grants-closed');
 const fiscalHome = resources.filter((r) => r.homepage && r.homepage.section === 'fiscal');
+function byHomeOrder(a, b) {
+  return ((a.homepage && a.homepage.order) || 0) - ((b.homepage && b.homepage.order) || 0);
+}
+const distributionHome = resources.filter((r) => r.homepage && r.homepage.section === 'distribution').sort(byHomeOrder);
+const legalHome = resources.filter((r) => r.homepage && r.homepage.section === 'legal').sort(byHomeOrder);
+const musicHome = resources.filter((r) => r.homepage && r.homepage.section === 'music').sort(byHomeOrder);
+const equipmentPartners = resources.filter((r) => r.homepage && r.homepage.section === 'equipment' && r.homepage.layout === 'partner').sort(byHomeOrder);
+const equipmentGear = resources.filter((r) => r.homepage && r.homepage.section === 'equipment' && r.homepage.layout === 'gear').sort(byHomeOrder);
 
 injectStaticApp('directory.html', 'directoryApp', resources, 'resources');
 injectStaticApp('documentary-grants.html', 'grantsApp', grantsPage, 'grant and funding listings');
@@ -256,6 +341,12 @@ if (!home.includes('<!-- D411 HOME FISCAL START -->')) {
 home = replaceBlock(home, '<!-- D411 HOME GRANTS OPEN START -->', '<!-- D411 HOME GRANTS OPEN END -->', grantsOpen.map(homepageGrantCard).join('\n\n'));
 home = replaceBlock(home, '<!-- D411 HOME GRANTS CLOSED START -->', '<!-- D411 HOME GRANTS CLOSED END -->', grantsClosed.map(homepageGrantCard).join('\n\n'));
 home = replaceBlock(home, '<!-- D411 HOME FISCAL START -->', '<!-- D411 HOME FISCAL END -->', fiscalHome.map(homepageGrantCard).join('\n\n'));
+
+home = wrapClassInSection(home, 'distribution', 'cards', 'D411 HOME DISTRIBUTION START', 'D411 HOME DISTRIBUTION END', distributionHome.map(homepageGrantCard).join('\n\n'));
+home = wrapClassInSection(home, 'legal', 'cards', 'D411 HOME LEGAL START', 'D411 HOME LEGAL END', legalHome.map(homepageGrantCard).join('\n\n'));
+home = wrapClassInSection(home, 'music', 'cards', 'D411 HOME MUSIC START', 'D411 HOME MUSIC END', musicHome.map(homepageGrantCard).join('\n\n'));
+home = wrapClassInSection(home, 'equipment', 'partners-row', 'D411 HOME EQUIPMENT PARTNERS START', 'D411 HOME EQUIPMENT PARTNERS END', equipmentPartners.map(homepagePartnerCard).join('\n'));
+home = wrapClassInSection(home, 'equipment', 'gear-grid', 'D411 HOME EQUIPMENT GEAR START', 'D411 HOME EQUIPMENT GEAR END', equipmentGear.map(homepageGearCard).join('\n'));
 
 if (!home.includes('<!-- D411 HOME FESTIVALS START -->')) {
   home = home.replace('<div id="festResults" class="cards"></div>', '<div id="festResults" class="cards"><!-- D411 HOME FESTIVALS START --><!-- D411 HOME FESTIVALS END --></div>');
@@ -323,4 +414,4 @@ if (fs.existsSync(grantsFile)) {
   fs.writeFileSync(grantsFile, g);
 }
 
-console.log(`Documentary411 resources built from resources.json (${resources.length} records; ${festivals.length} festivals; ${grantsPage.length} grants-page; ${markets.length} markets; ${fiscal.length} fiscal).`);
+console.log(`Documentary411 resources built from resources.json (${resources.length} records; ${festivals.length} festivals; ${grantsPage.length} grants-page; ${markets.length} markets; ${fiscal.length} fiscal; ${distributionHome.length} distribution; ${legalHome.length} legal; ${musicHome.length} music; ${equipmentPartners.length} gear partners; ${equipmentGear.length} gear products).`);

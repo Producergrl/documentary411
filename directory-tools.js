@@ -34,7 +34,7 @@
       <div class="d411-meta">
         <span class="d411-pill">${res.projectStage}</span>
         <span class="d411-pill">${money(access)}</span>
-        <span class="d411-pill">Last verified <time datetime="${res.lastVerified}">${res.lastVerified}</time></span>
+        ${res.lastVerified ? `<span class="d411-pill">Last verified <time datetime="${res.lastVerified}">${res.lastVerified}</time></span>` : '<span class="d411-pill">Confirm dates on the official site</span>'}
       </div>
       <p><strong>Why this matters:</strong> ${res.notes}</p>
       <a class="d411-link" href="${res.officialUrl}" target="_blank" rel="noopener">Visit Official Site →</a>
@@ -59,7 +59,7 @@
       const state = {q:'',category:'',stage:'',status:'',access:'',doc:''};
       root.innerHTML = `<div class="d411-tools">
         <label class="visually-hidden" for="d411q">Search the directory</label>
-        <input class="d411-input" id="d411q" type="search" aria-label="Search grants, festivals, markets, insurance, fiscal sponsors" placeholder="Search grants, festivals, markets, insurance, fiscal sponsors…">
+        <input class="d411-input" id="d411q" type="search" aria-label="Search grants, festivals, markets, insurance, fiscal sponsors, distribution, legal, music, gear" placeholder="Search grants, festivals, markets, insurance, fiscal sponsors, distribution, legal, music, gear…">
         <label class="visually-hidden" for="d411cat">Filter by category</label>
         <select class="d411-select" id="d411cat" aria-label="Filter by category">${options(base.map(r=>r.category),'All categories')}</select>
         <label class="visually-hidden" for="d411stage">Filter by project stage</label>
