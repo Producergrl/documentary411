@@ -316,10 +316,36 @@
     });
   }
 
+  function loadAdSense() {
+    const path = (location.pathname || '/').replace(/\/+$/, '') || '/';
+    if (path !== '/' && path !== '/index.html') return;
+    if (window.__d411AdsLoaded) return;
+    window.__d411AdsLoaded = true;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3213342697186484';
+    s.crossOrigin = 'anonymous';
+    document.head.appendChild(s);
+  }
+
+  function scheduleAdSense() {
+    const path = (location.pathname || '/').replace(/\/+$/, '') || '/';
+    if (path !== '/' && path !== '/index.html') return;
+    const run = () => loadAdSense();
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(run, { timeout: 2500 });
+    } else if (document.readyState === 'complete') {
+      setTimeout(run, 1);
+    } else {
+      window.addEventListener('load', () => setTimeout(run, 1));
+    }
+  }
+
   function initAllFixes() {
     initGrantFilters();
     initFestivalNearMeFix();
     initMobileNav();
+    scheduleAdSense();
   }
 
   if (document.readyState === 'loading') {

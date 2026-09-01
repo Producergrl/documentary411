@@ -3,8 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3213342697186484"
-     crossorigin="anonymous"></script>
+<!-- D411 FONTS START -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- D411 FONTS END -->
+
+<link rel="preload" as="image" href="/hero-cinematic.jpg" fetchpriority="high">
+
 <title>Documentary Filmmaking Resources Hub — Documentary411</title>
 <meta name="description" content="Documentary411 is a directory for independent filmmakers, with a documentary niche: verified grants, festivals, markets, fiscal sponsors, and tools. Created by Kerry David.">
 <style>
@@ -251,7 +257,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .pro-error{font-size:12px;color:#e87a68;background:rgba(220,80,60,0.07);border:1px solid rgba(220,80,60,0.2);padding:8px 10px;border-radius:3px;line-height:1.4}
 .pro-note{font-size:12px;color:var(--text3);margin-top:24px;text-align:center;letter-spacing:.02em}
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">  <link rel="stylesheet" href="/redesign.css">
+<link rel="stylesheet" href="/redesign.css">
   <link rel="stylesheet" href="/redesign-v2.css">
   <link rel="stylesheet" href="/directory-upgrades.css">
   <link rel="stylesheet" href="/site-search.css">
@@ -1922,34 +1928,37 @@ function d411WritePdf(jspdf){
 }
 </script>
 
-<script src="/resources-data.js"></script>
+<script src="/resources-data.js" defer></script>
 <script>
-/* SEARCHABLE FESTIVAL DATABASE */
-window.FESTIVALS = (window.D411_RESOURCES || []).filter(function(r){return r.category === 'Documentary Festivals';}).map(function(r){
-  var f = r.festival || {};
-  return {
-    name: r.name,
-    slug: r.slug,
-    url: r.officialUrl,
-    city: f.city,
-    region: f.region || r.region,
-    dates: f.dates,
-    fee: f.fee,
-    feeLevel: f.feeLevel,
-    oscar: !!f.oscar,
-    market: !!f.market,
-    genres: f.genres || [],
-    focus: f.focus || [],
-    featured: !!f.featured,
-    needsVerification: !!f.needsVerification,
-    desc: f.desc || r.description
-  };
-});
-window.FEST_LL = window.FEST_LL || {};
-(window.D411_RESOURCES || []).forEach(function(r){
-  var f = r.festival || {};
-  if (f.city && f.lat != null && f.lng != null) window.FEST_LL[f.city] = [f.lat, f.lng];
-});
+/* SEARCHABLE FESTIVAL DATABASE
+   resources-data.js is deferred; build FESTIVALS after D411_RESOURCES exists. */
+function d411BuildFestivalList(){
+  window.FESTIVALS = (window.D411_RESOURCES || []).filter(function(r){return r.category === 'Documentary Festivals';}).map(function(r){
+    var f = r.festival || {};
+    return {
+      name: r.name,
+      slug: r.slug,
+      url: r.officialUrl,
+      city: f.city,
+      region: f.region || r.region,
+      dates: f.dates,
+      fee: f.fee,
+      feeLevel: f.feeLevel,
+      oscar: !!f.oscar,
+      market: !!f.market,
+      genres: f.genres || [],
+      focus: f.focus || [],
+      featured: !!f.featured,
+      needsVerification: !!f.needsVerification,
+      desc: f.desc || r.description
+    };
+  });
+  window.FEST_LL = window.FEST_LL || {};
+  (window.D411_RESOURCES || []).forEach(function(r){
+    var f = r.festival || {};
+    if (f.city && f.lat != null && f.lng != null) window.FEST_LL[f.city] = [f.lat, f.lng];
+  });
+}
 
 function escAttr(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
 function escHTML(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -2147,6 +2156,7 @@ function quickFestSearch(){
 }
 
 function initializeFestivalDatabase(){
+  d411BuildFestivalList();
   const total=window.FESTIVALS.length;
   ['festivalStatCount','festivalFinderCount','festivalDatabaseCount'].forEach(id=>{
     const el=document.getElementById(id);

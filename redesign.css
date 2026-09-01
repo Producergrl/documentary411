@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
-
+/* Webfonts load once from HTML (DM Serif Display + Inter, display=swap). Do not @import fonts here — it delays the CSS file and duplicates Inter. */
 /* Documentary411 — light redesign
    Visual direction: deep ocean teal + warm ivory + orange + amber.
    This file intentionally overrides presentation only. Existing markup,

@@ -8,7 +8,7 @@
 
   async function loadIndex(){
     if (searchIndex) return searchIndex;
-    const res = await fetch('/search-index.json', {cache:'no-store'});
+    const res = await fetch('/search-index.json');
     if (!res.ok) throw new Error('Search index unavailable');
     searchIndex = await res.json();
     return searchIndex;

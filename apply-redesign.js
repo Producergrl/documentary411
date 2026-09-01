@@ -20,6 +20,31 @@ function injectScript(fileName, tag) {
   fs.writeFileSync(file, html);
 }
 
+const FONT_START = '<!-- D411 FONTS START -->';
+const FONT_END = '<!-- D411 FONTS END -->';
+const FONT_BLOCK = `${FONT_START}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+${FONT_END}`;
+
+function normalizeFonts(html) {
+  if (!html || /google17fed7e594a2d82e\.html/.test(html) && html.length < 80) return html;
+  html = html.replace(/<!-- D411 FONTS START -->[\s\S]*?<!-- D411 FONTS END -->\s*/g, '');
+  html = html.replace(/<link\b[^>]*fonts\.googleapis\.com\/css2[^>]*>\s*/gi, '');
+  html = html.replace(/<link\b[^>]*rel\s*=\s*["']preconnect["'][^>]*fonts\.(?:googleapis|gstatic)\.com[^>]*>\s*/gi, '');
+  html = html.replace(/<link\b[^>]*fonts\.(?:googleapis|gstatic)\.com[^>]*rel\s*=\s*["']preconnect["'][^>]*>\s*/gi, '');
+  if (html.includes(FONT_START)) return html;
+  if (/<meta\b[^>]*name\s*=\s*["']viewport["'][^>]*>/i.test(html)) {
+    return html.replace(/(<meta\b[^>]*name\s*=\s*["']viewport["'][^>]*>)/i, `$1\n${FONT_BLOCK}\n`);
+  }
+  if (/<\/title>/i.test(html)) {
+    return html.replace(/<\/title>/i, `</title>\n${FONT_BLOCK}\n`);
+  }
+  return html.replace(/<head[^>]*>/i, (m) => `${m}\n${FONT_BLOCK}\n`);
+}
+
+
 /* Homepage */
 const homeFile = path.join(__dirname, 'index.html');
 let html = fs.readFileSync(homeFile, 'utf8');
@@ -81,6 +106,11 @@ html = html.replace(
 
 const homeScript = '<script src="/site-fixes.js" defer></script>';
 if (!html.includes(homeScript)) html = html.replace('</body>', `  ${homeScript}\n</body>`);
+html = html.replace('<script src="/resources-data.js"></script>', '<script src="/resources-data.js" defer></script>');
+html = normalizeFonts(html);
+if (!html.includes('hero-cinematic.jpg')) {
+  html = html.replace(FONT_END, `${FONT_END}\n  <link rel="preload" as="image" href="/hero-cinematic.jpg" fetchpriority="high">`);
+}
 fs.writeFileSync(homeFile, html);
 
 /* The Brand-Funded Documentary System is complete and available. The active
@@ -272,5 +302,12 @@ const faviconTags = [
 ];
 const allHtmlPages = fs.readdirSync(__dirname).filter(f => f.endsWith('.html') && !f.startsWith('google'));
 allHtmlPages.forEach(fileName => injectStyles(fileName, faviconTags));
+
+allHtmlPages.forEach((fileName) => {
+  const file = path.join(__dirname, fileName);
+  const source = fs.readFileSync(file, 'utf8');
+  const next = normalizeFonts(source);
+  if (next !== source) fs.writeFileSync(file, next);
+});
 
 console.log(`Documentary411 redesign, shared chrome, directory upgrades, advertising, paid-offer safety, homepage fixes, site search, and favicon applied (${searchEntries.length} search entries, ${allHtmlPages.length} pages got favicon links)`);
