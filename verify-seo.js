@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { assignSlugs, resourceCanonical, resourcePath } = require('./resource-urls');
 
 const ORIGIN = 'https://documentary411.com';
 function assetOrigin() {
@@ -185,6 +186,49 @@ for (const page of pages) {
     check(schemaNodes.some((node) => typesOf(node).includes('WebSite') && node?.['@id'] === `${ORIGIN}/#website`), 'index.html: WebSite schema is missing.');
   }
 
+  const orgNode = schemaNodes.find((node) => typesOf(node).includes('Organization') && node?.['@id'] === `${ORIGIN}/#organization`);
+  check(Boolean(orgNode), `${page.file}: Organization schema is missing.`);
+  if (orgNode) {
+    const sameAs = Array.isArray(orgNode.sameAs) ? orgNode.sameAs : [];
+    check(sameAs.includes('https://imdb.me/kerrydavid'), `${page.file}: Organization sameAs must include IMDb.`);
+    check(sameAs.includes('https://www.linkedin.com/in/kerrydavid'), `${page.file}: Organization sameAs must include LinkedIn.`);
+  }
+  const person = schemaNodes.find((node) => typesOf(node).includes('Person') && node?.['@id'] === `${ORIGIN}/#person`);
+  check(Boolean(person), `${page.file}: Person schema is missing.`);
+  if (person) {
+    check(person.name === 'Kerry David', `${page.file}: Person name must be Kerry David.`);
+    const sameAs = Array.isArray(person.sameAs) ? person.sameAs : [];
+    check(sameAs.includes('https://imdb.me/kerrydavid'), `${page.file}: Person sameAs must include IMDb.`);
+    check(sameAs.includes('https://www.linkedin.com/in/kerrydavid'), `${page.file}: Person sameAs must include LinkedIn.`);
+  }
+
+  const visibleFaq = /<div class="faq">/i.test(html);
+  const faqPages = schemaNodes.filter((node) => typesOf(node).includes('FAQPage'));
+  if (visibleFaq) {
+    check(faqPages.length === 1, `${page.file}: visible FAQ must have one FAQPage schema block, found ${faqPages.length}.`);
+  } else {
+    check(faqPages.length === 0, `${page.file}: FAQPage schema must not be invented where no visible FAQ exists.`);
+  }
+
+  const products = schemaNodes.filter((node) => typesOf(node).includes('Product'));
+  const expectedProductPrices = {
+    'festival-strategy.html': ['99'],
+    'funding-lab.html': ['297'],
+    'funding-sprint.html': ['2500'],
+    'ask-a-pro.html': ['50', '500'],
+  };
+  if (expectedProductPrices[page.file]) {
+    const prices = products.flatMap((node) => {
+      const offers = Array.isArray(node.offers) ? node.offers : node.offers ? [node.offers] : [];
+      return offers.map((offer) => String(offer.price));
+    });
+    for (const price of expectedProductPrices[page.file]) {
+      check(prices.includes(price), `${page.file}: Product/Offer schema missing price ${price}.`);
+    }
+  } else {
+    check(products.length === 0, `${page.file}: Product schema must not be added on pages without a visible price.`);
+  }
+
   const itemLists = schemaNodes.filter((node) => typesOf(node).includes('ItemList'));
   check(itemLists.length === (page.itemList ? 1 : 0), `${page.file}: expected ${page.itemList ? 'one preserved' : 'no'} ItemList schema block, found ${itemLists.length}.`);
   for (const list of itemLists) {
@@ -198,11 +242,19 @@ for (const page of pages) {
   }
 }
 
+const catalog = assignSlugs(JSON.parse(fs.readFileSync(path.join(__dirname, 'resources.json'), 'utf8')).map((row) => {
+  const rec = { ...row };
+  delete rec._mergedFrom;
+  delete rec._mergeConflicts;
+  return rec;
+}));
+const resourceSitemapUrls = catalog.map((row) => resourceCanonical(row.slug));
+
 const sitemapPath = path.join(__dirname, 'sitemap.xml');
 const sitemap = fs.readFileSync(sitemapPath, 'utf8');
 const sitemapEntries = [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>(?:\s*<lastmod>([^<]+)<\/lastmod>)?\s*<\/url>/gi)].map((match) => ({ url: decodeEntities(match[1]), lastmod: match[2] || '' }));
-const expectedSitemapUrls = pages.map((page) => `${ORIGIN}${page.route}`);
-check(sitemapEntries.length === pages.length, `sitemap.xml: expected ${pages.length} URLs, found ${sitemapEntries.length}.`);
+const expectedSitemapUrls = pages.map((page) => `${ORIGIN}${page.route}`).concat(resourceSitemapUrls);
+check(sitemapEntries.length === expectedSitemapUrls.length, `sitemap.xml: expected ${expectedSitemapUrls.length} URLs (${pages.length} canonical + ${resourceSitemapUrls.length} resources), found ${sitemapEntries.length}.`);
 check(new Set(sitemapEntries.map((entry) => entry.url)).size === sitemapEntries.length, 'sitemap.xml: duplicate URL found.');
 check(sitemapEntries.every((entry) => !/\.html(?:$|[?#])/.test(entry.url)), 'sitemap.xml: .html URL found.');
 check(!/<(?:priority|changefreq)>/i.test(sitemap), 'sitemap.xml: priority or changefreq must not be added.');
@@ -211,6 +263,9 @@ for (const page of pages) {
   const entry = sitemapEntries.find((candidate) => candidate.url === expectedUrl);
   check(Boolean(entry), `sitemap.xml: missing ${expectedUrl}.`);
   if (entry) check(entry.lastmod === page.lastmod, `sitemap.xml: ${expectedUrl} lastmod changed without a content change.`);
+}
+for (const resourceUrl of resourceSitemapUrls) {
+  check(sitemapEntries.some((entry) => entry.url === resourceUrl), `sitemap.xml: missing ${resourceUrl}.`);
 }
 for (const entry of sitemapEntries) check(expectedSitemapUrls.includes(entry.url), `sitemap.xml: unexpected URL ${entry.url}.`);
 
@@ -257,7 +312,6 @@ for (const href of ['/festival-strategy', '/funding-lab', '/funding-sprint', '/a
 check(!/buy\.stripe\.com\/(?:bJe00iabZbQJ0Uubu36J204|3cI14mck79IBbz8dCb6J203)/.test(shop), 'shop.html: Ask a Pro or Pro Consult checkout must not be included.');
 
 const home = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources.json'), 'utf8'));
 const festivalTotal = catalog.filter((row) => row.category === 'Documentary Festivals').length;
 check(festivalTotal === 48, `resources.json: expected 48 festival records, found ${festivalTotal}.`);
 check(!/window\.FESTIVALS\s*=\s*\[/.test(home), 'index.html: must not inline a second festival array that can drift from resources.json.');
@@ -352,6 +406,71 @@ check(redirects.some((rule) => rule.from === '/open-now' && rule.to === '/direct
 check(redirects.some((rule) => rule.from === '/open-now.html' && rule.to === '/directory' && rule.status === 301), 'netlify.toml: /open-now.html must 301 to /directory.');
 check(redirects.some((rule) => rule.from === '/open-now/' && rule.to === '/directory' && rule.status === 301), 'netlify.toml: /open-now/ must 301 to /directory.');
 check(!fs.existsSync(path.join(__dirname, 'open-now.html')), 'open-now.html: Open Now product must stay deleted.');
+
+const advertisePage = fs.readFileSync(path.join(__dirname, 'advertise.html'), 'utf8');
+check(/\$99 <span>\/ week<\/span>/.test(advertisePage), 'advertise.html: directory listing price must stay weekly.');
+check(!/\$99 <span>\/ month<\/span>/.test(advertisePage), 'advertise.html: advertise prices must not revert to monthly.');
+check(/Plans start at \$99 per week/.test(shop), 'shop.html: advertise copy must stay weekly.');
+check(!/Plans start at \$99 per month/.test(shop), 'shop.html: advertise copy must not revert to monthly.');
+check(/weekly advertising placement request/.test(fs.readFileSync(path.join(__dirname, 'advertise-thank-you.html'), 'utf8')), 'advertise-thank-you.html: copy must stay weekly.');
+
+const aboutHtml = fs.readFileSync(path.join(__dirname, 'about.html'), 'utf8');
+check(/href=["']https:\/\/imdb\.me\/kerrydavid["']/.test(aboutHtml), 'about.html: visible IMDb link is missing.');
+check(/href=["']https:\/\/www\.linkedin\.com\/in\/kerrydavid["']/.test(aboutHtml), 'about.html: visible LinkedIn link is missing.');
+
+const gscPath = path.join(__dirname, 'google17fed7e594a2d82e.html');
+check(fs.existsSync(gscPath), 'google17fed7e594a2d82e.html: Search Console verification file is missing.');
+if (fs.existsSync(gscPath)) {
+  check(fs.readFileSync(gscPath, 'utf8').trim() === 'google-site-verification: google17fed7e594a2d82e.html', 'google17fed7e594a2d82e.html: Search Console verification file must remain untouched.');
+}
+
+const llms = fs.existsSync(path.join(__dirname, 'llms.txt')) ? fs.readFileSync(path.join(__dirname, 'llms.txt'), 'utf8') : '';
+check(Boolean(llms), 'llms.txt: missing at site root.');
+check(/resources\.md/.test(llms), 'llms.txt: must point at the markdown catalog dump.');
+check(fs.existsSync(path.join(__dirname, 'resources.md')), 'resources.md: markdown catalog dump is missing.');
+if (fs.existsSync(path.join(__dirname, 'resources.md'))) {
+  const markdown = fs.readFileSync(path.join(__dirname, 'resources.md'), 'utf8');
+  check(catalog.every((row) => markdown.includes(row.name)), 'resources.md: a resources.json name is missing from the markdown dump.');
+}
+
+const resourceRewrite = redirects.filter((rule) => rule.from === '/resources/:slug' && rule.status === 200);
+check(resourceRewrite.length === 1, `netlify.toml: expected one 200 rewrite for /resources/:slug, found ${resourceRewrite.length}.`);
+if (resourceRewrite.length) {
+  check(resourceRewrite[0].to === '/resources/:slug.html', 'netlify.toml: /resources/:slug must rewrite to /resources/:slug.html.');
+  check(!resourceRewrite[0].force, 'netlify.toml: resource pretty-URL rewrite must not be a forced 301.');
+}
+check(!redirects.some((rule) => rule.status === 301 && /\/resources\/.+\.html/.test(rule.from)), 'netlify.toml: do not force 301 html→pretty for resource pages.');
+
+const resourceDir = path.join(__dirname, 'resources');
+check(fs.existsSync(resourceDir), 'resources/: generated resource page directory is missing.');
+if (fs.existsSync(resourceDir)) {
+  const resourceFiles = fs.readdirSync(resourceDir).filter((name) => name.endsWith('.html'));
+  check(resourceFiles.length === catalog.length, `resources/: expected ${catalog.length} pages, found ${resourceFiles.length}.`);
+  for (const row of catalog) {
+    const file = path.join(resourceDir, `${row.slug}.html`);
+    check(fs.existsSync(file), `resources/${row.slug}.html: missing generated page for ${row.name}.`);
+    if (!fs.existsSync(file)) continue;
+    const html = fs.readFileSync(file, 'utf8');
+    const title = titleOf(html);
+    const h1 = decodeEntities(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]);
+    check(title.includes(row.name), `resources/${row.slug}.html: title must include the resource name.`);
+    check(h1 === row.name, `resources/${row.slug}.html: H1 must equal the resource name.`);
+    check(descriptionOf(html).length > 0, `resources/${row.slug}.html: meta description is missing.`);
+    const resourceCanonicals = canonicalTags(html);
+    check(resourceCanonicals.length === 1 && attributeOf(resourceCanonicals[0], 'href') === resourceCanonical(row.slug), `resources/${row.slug}.html: canonical must be the pretty resource URL.`);
+    const official = String(row.officialUrl || '');
+    const escapedOfficial = official.replace(/&/g, '&amp;');
+    check(Boolean(official) && (html.includes(official) || html.includes(escapedOfficial)), `resources/${row.slug}.html: official URL is missing.`);
+    check(html.includes('/directory'), `resources/${row.slug}.html: internal directory link is missing.`);
+  }
+}
+check(directoryPage.includes('View listing'), 'directory.html: resource cards must link to the resource URL.');
+check(home.includes('View listing'), 'index.html: homepage cards must link to the resource URL.');
+check(directoryTools.includes('/resources/'), 'directory-tools.js: filtered cards must link to resource URLs.');
+for (const file of htmlFiles) {
+  const html = fs.readFileSync(path.join(__dirname, file), 'utf8');
+  check(!/href\s*=\s*["']\/resources\/[^"']+\.html/i.test(html), `${file}: resource listing still uses .html.`);
+}
 
 if (failures.length) {
   console.error(`\n✖ Documentary411 technical SEO verification failed (${failures.length} issue${failures.length === 1 ? '' : 's'}):\n`);

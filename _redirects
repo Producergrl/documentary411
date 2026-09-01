@@ -27,3 +27,4 @@
 /terms                       /terms.html              200
 /contact                     /contact.html              200
 /affiliate-disclosure        /affiliate-disclosure.html              200
+/resources/:slug             /resources/:slug.html              200

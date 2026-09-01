@@ -21,7 +21,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
     "lastVerified": "2026-08-22",
-    "notes": "Feature projects may apply at development, production, or post-production; short and medium-length projects are eligible at production or post-production."
+    "notes": "Feature projects may apply at development, production, or post-production; short and medium-length projects are eligible at production or post-production.",
+    "slug": "afac-documentary-film-program"
   },
   {
     "name": "Alter-Ciné Foundation Documentary Film Grants",
@@ -45,7 +46,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
     "lastVerified": "2026-08-22",
-    "notes": "The foundation accepts applications each year through August 15 and announces selections by December 31."
+    "notes": "The foundation accepts applications each year through August 15 and announces selections by December 31.",
+    "slug": "alter-cine-foundation-documentary-film-grants"
   },
   {
     "name": "Bertha Film Fund",
@@ -69,7 +71,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
     "lastVerified": "2026-08-22",
-    "notes": "Bertha Foundation does not accept unsolicited proposals. Impact-campaign awards may be up to $10,000."
+    "notes": "Bertha Foundation does not accept unsolicited proposals. Impact-campaign awards may be up to $10,000.",
+    "slug": "bertha-film-fund"
   },
   {
     "name": "Black Public Media Open Call",
@@ -107,7 +110,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-open",
       "featured": false
-    }
+    },
+    "slug": "black-public-media-open-call"
   },
   {
     "name": "CAAM Building Bridges Documentary Fund",
@@ -131,7 +135,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
     "lastVerified": "2026-08-22",
-    "notes": "Funding ranges from $10,000–$25,000 for research and development to $50,000–$100,000 for production or post-production."
+    "notes": "Funding ranges from $10,000–$25,000 for research and development to $50,000–$100,000 for production or post-production.",
+    "slug": "caam-building-bridges-documentary-fund"
   },
   {
     "name": "Catapult Film Fund",
@@ -168,7 +173,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-closed",
       "featured": false
-    }
+    },
+    "slug": "catapult-film-fund"
   },
   {
     "name": "Chicken & Egg Pictures",
@@ -205,7 +211,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-closed",
       "featured": false
-    }
+    },
+    "slug": "chicken-and-egg-pictures"
   },
   {
     "name": "Ellis-Beauregard Foundation",
@@ -229,7 +236,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "closed",
     "lastVerified": "2026-08-22",
-    "notes": "The 2026 application closed April 16. The selected team also receives a Points North editing retreat."
+    "notes": "The 2026 application closed April 16. The selected team also receives a Points North editing retreat.",
+    "slug": "ellis-beauregard-foundation"
   },
   {
     "name": "Ford Foundation JustFilms",
@@ -266,7 +274,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-closed",
       "featured": false
-    }
+    },
+    "slug": "ford-foundation-justfilms"
   },
   {
     "name": "Impact Partners",
@@ -303,7 +312,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-closed",
       "featured": false
-    }
+    },
+    "slug": "impact-partners"
   },
   {
     "name": "Perspective Fund",
@@ -341,7 +351,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-open",
       "featured": false
-    }
+    },
+    "slug": "perspective-fund"
   },
   {
     "name": "Southern Documentary Fund Production Grant",
@@ -365,7 +376,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
     "lastVerified": "2026-08-22",
-    "notes": "Applicants must live in or have deep roots in one of twelve eligible Southern states; student projects are not eligible."
+    "notes": "Applicants must live in or have deep roots in one of twelve eligible Southern states; student projects are not eligible.",
+    "slug": "southern-documentary-fund-production-grant"
   },
   {
     "name": "Sundance Institute Documentary Fund",
@@ -402,7 +414,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-closed",
       "featured": false
-    }
+    },
+    "slug": "sundance-institute-documentary-fund"
   },
   {
     "name": "Vision Maker Media Biomimicry and Indigenous Knowledge Fund",
@@ -440,7 +453,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-open",
       "featured": false
-    }
+    },
+    "slug": "vision-maker-media-biomimicry-and-indigenous-knowledge-fund"
   },
   {
     "name": "ITVS Open Call",
@@ -464,7 +478,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
     "lastVerified": "2026-08-31",
-    "notes": "ITVS currently labels Open Call as not accepting applications. No new application deadline is posted on the official Open Call page."
+    "notes": "ITVS currently labels Open Call as not accepting applications. No new application deadline is posted on the official Open Call page.",
+    "slug": "itvs-open-call"
   },
   {
     "name": "IDA Grants Directory",
@@ -501,7 +516,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-closed",
       "featured": false
-    }
+    },
+    "slug": "ida-grants-directory"
   },
   {
     "name": "The D-Word",
@@ -525,7 +541,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Community resource, not a funding source."
+    "notes": "Community resource, not a funding source.",
+    "slug": "the-d-word"
   },
   {
     "name": "Film Independent",
@@ -549,7 +566,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Mark member-only benefits clearly when relevant."
+    "notes": "Mark member-only benefits clearly when relevant.",
+    "slug": "film-independent"
   },
   {
     "name": "Working Films",
@@ -587,7 +605,8 @@ window.D411_RESOURCES = [
       ],
       "section": "grants-open",
       "featured": false
-    }
+    },
+    "slug": "working-films"
   },
   {
     "name": "Austin Film Society",
@@ -625,7 +644,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "austin-film-society"
   },
   {
     "name": "Center for Independent Documentary (CID)",
@@ -663,7 +683,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "center-for-independent-documentary-cid"
   },
   {
     "name": "Docs In Progress",
@@ -701,7 +722,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "docs-in-progress"
   },
   {
     "name": "Documentary Educational Resources (DER)",
@@ -739,7 +761,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "documentary-educational-resources-der"
   },
   {
     "name": "Film Independent Fiscal Sponsorship",
@@ -777,7 +800,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": true
-    }
+    },
+    "slug": "film-independent-fiscal-sponsorship"
   },
   {
     "name": "Fractured Atlas",
@@ -815,7 +839,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "fractured-atlas"
   },
   {
     "name": "From the Heart Productions",
@@ -853,7 +878,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "from-the-heart-productions"
   },
   {
     "name": "International Documentary Association Fiscal Sponsorship",
@@ -891,7 +917,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": true
-    }
+    },
+    "slug": "international-documentary-association-fiscal-sponsorship"
   },
   {
     "name": "New York Foundation for the Arts (NYFA)",
@@ -929,7 +956,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "new-york-foundation-for-the-arts-nyfa"
   },
   {
     "name": "SIMA Studios Fiscal Sponsorship",
@@ -967,7 +995,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "sima-studios-fiscal-sponsorship"
   },
   {
     "name": "The Film Collaborative",
@@ -1005,7 +1034,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "the-film-collaborative"
   },
   {
     "name": "The Gotham Film & Media Institute",
@@ -1043,7 +1073,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "the-gotham-film-and-media-institute"
   },
   {
     "name": "Women Make Movies Fiscal Sponsorship",
@@ -1080,7 +1111,8 @@ window.D411_RESOURCES = [
       ],
       "section": "fiscal",
       "featured": false
-    }
+    },
+    "slug": "women-make-movies-fiscal-sponsorship"
   },
   {
     "name": "AFI Docs",
@@ -1126,7 +1158,8 @@ window.D411_RESOURCES = [
       "desc": "The American Film Institute's documentary festival in the nation's capital. Oscar-qualifying for shorts. Strong policy and political audience and significant national press coverage.",
       "lat": 38.91,
       "lng": -77.04
-    }
+    },
+    "slug": "afi-docs"
   },
   {
     "name": "American Indian Film Festival",
@@ -1172,7 +1205,8 @@ window.D411_RESOURCES = [
       "desc": "The longest-running Indigenous film festival in the world (founded 1975). Centers Native American and First Nations filmmakers. American Indian Motion Picture Awards announced annually. Note: the official aifisf.com site is currently unreachable; confirm current status before submitting or attending. Linked here to its FilmFreeway page instead.",
       "lat": 37.77,
       "lng": -122.42
-    }
+    },
+    "slug": "american-indian-film-festival"
   },
   {
     "name": "Aspen Shortsfest",
@@ -1216,7 +1250,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying for live-action and animated shorts. One of the most prestigious shorts-only festivals in the US. Strong industry attendance and significant award purse.",
       "lat": 39.19,
       "lng": -106.82
-    }
+    },
+    "slug": "aspen-shortsfest"
   },
   {
     "name": "Athena Film Festival",
@@ -1262,7 +1297,8 @@ window.D411_RESOURCES = [
       "desc": "The premier US festival celebrating women's leadership in film and on-screen. Documentaries about and by women receive primary curatorial focus.",
       "lat": 40.81,
       "lng": -73.96
-    }
+    },
+    "slug": "athena-film-festival"
   },
   {
     "name": "Atlanta Film Festival",
@@ -1307,7 +1343,8 @@ window.D411_RESOURCES = [
       "desc": "One of the longest-running film festivals in the South. Oscar-qualifying for shorts. Strong fit for Southern stories and BIPOC documentary.",
       "lat": 33.75,
       "lng": -84.39
-    }
+    },
+    "slug": "atlanta-film-festival"
   },
   {
     "name": "BendFilm Festival",
@@ -1353,7 +1390,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying festival with one of the most welcoming filmmaker hospitality programs in the US. Strong Pacific Northwest audience and outdoor/independent ethos.",
       "lat": 44.06,
       "lng": -121.31
-    }
+    },
+    "slug": "bendfilm-festival"
   },
   {
     "name": "Big Sky Documentary Film Festival",
@@ -1399,7 +1437,8 @@ window.D411_RESOURCES = [
       "desc": "Leading Oscar-qualifying nonfiction festival. DocShop industry programme offers pitch sessions and panels. 20,000+ attendees. Past industry guests include ESPN, Al Jazeera, BBC, NYT.",
       "lat": 46.87,
       "lng": -113.99
-    }
+    },
+    "slug": "big-sky-documentary-film-festival"
   },
   {
     "name": "Camden International Film Festival",
@@ -1443,7 +1482,8 @@ window.D411_RESOURCES = [
       "desc": "One of the most respected industry-facing US doc festivals. Points North Forum is a structured pitch and feedback program — a major early-stage launch pad for ambitious nonfiction features.",
       "lat": 44.21,
       "lng": -69.06
-    }
+    },
+    "slug": "camden-international-film-festival"
   },
   {
     "name": "Cine Las Americas International Film Festival",
@@ -1490,7 +1530,8 @@ window.D411_RESOURCES = [
       "desc": "The Southwest's leading festival for Latin American, US Latine, and Indigenous Iberoamerican cinema. Strong community engagement and programming that elevates underrepresented filmmakers.",
       "lat": 30.27,
       "lng": -97.74
-    }
+    },
+    "slug": "cine-las-americas-international-film-festival"
   },
   {
     "name": "Cleveland International Film Festival",
@@ -1535,7 +1576,8 @@ window.D411_RESOURCES = [
       "desc": "One of the largest and most diverse festivals in the US, with one of the most extensive social-impact programming tracks. Oscar-qualifying for shorts.",
       "lat": 41.5,
       "lng": -81.69
-    }
+    },
+    "slug": "cleveland-international-film-festival"
   },
   {
     "name": "CPH:DOX Copenhagen",
@@ -1580,7 +1622,8 @@ window.D411_RESOURCES = [
       "desc": "One of the biggest documentary festivals in the world. Strong industry programme, competitive sections, and a reputation for bold, formally innovative work. Strong European press presence.",
       "lat": 55.68,
       "lng": 12.57
-    }
+    },
+    "slug": "cph-dox-copenhagen"
   },
   {
     "name": "DOC NYC",
@@ -1624,7 +1667,8 @@ window.D411_RESOURCES = [
       "desc": "America's largest documentary festival. Strong audience and press environment, competitive programming, industry panels, and the DOC NYC PRO industry conference. Essential for North American distribution conversations.",
       "lat": 40.71,
       "lng": -74.01
-    }
+    },
+    "slug": "doc-nyc"
   },
   {
     "name": "DocLands Documentary Film Festival",
@@ -1670,7 +1714,8 @@ window.D411_RESOURCES = [
       "desc": "Run by the California Film Institute. Strong Bay Area audience and West Coast industry attendance. DocPitch program offers funding opportunities for in-progress films.",
       "lat": 37.97,
       "lng": -122.53
-    }
+    },
+    "slug": "doclands-documentary-film-festival"
   },
   {
     "name": "Florida Film Festival",
@@ -1714,7 +1759,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying for shorts. Doc programming has launched many notable theatrical releases. Strong audience and respected curatorial team.",
       "lat": 28.63,
       "lng": -81.36
-    }
+    },
+    "slug": "florida-film-festival"
   },
   {
     "name": "Frameline — San Francisco LGBTQ+ Film Festival",
@@ -1759,7 +1805,8 @@ window.D411_RESOURCES = [
       "desc": "The world's longest-running and largest LGBTQ+ film festival. The premier US showcase for queer documentary. Strong distribution and broadcast pipeline for selected docs.",
       "lat": 37.77,
       "lng": -122.42
-    }
+    },
+    "slug": "frameline-san-francisco-lgbtq-film-festival"
   },
   {
     "name": "Full Frame Documentary Film Festival",
@@ -1805,7 +1852,8 @@ window.D411_RESOURCES = [
       "desc": "One of the most respected doc-only festivals in the US. Curated, intimate, and beloved by filmmakers. The Full Frame Inspiration Award and Center for Documentary Studies partnerships add long-term value.",
       "lat": 35.99,
       "lng": -78.9
-    }
+    },
+    "slug": "full-frame-documentary-film-festival"
   },
   {
     "name": "GI Film Festival San Diego",
@@ -1852,7 +1900,8 @@ window.D411_RESOURCES = [
       "desc": "Premier US festival showcasing military, veteran, and service-member stories — both from documentary and narrative filmmakers. Strong fit for war, service, and post-service-life documentaries.",
       "lat": 32.72,
       "lng": -117.16
-    }
+    },
+    "slug": "gi-film-festival-san-diego"
   },
   {
     "name": "Hamptons International Film Festival",
@@ -1896,7 +1945,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying for shorts. Strong industry and press attendance from NYC. Significant awards-season visibility for fall-launch documentaries.",
       "lat": 40.96,
       "lng": -72.19
-    }
+    },
+    "slug": "hamptons-international-film-festival"
   },
   {
     "name": "Hawaii International Film Festival",
@@ -1942,7 +1992,8 @@ window.D411_RESOURCES = [
       "desc": "The premier festival for Pacific Rim and Asian-American cinema. Oscar-qualifying for shorts. Strong Indigenous Pacific Islander representation throughout the program.",
       "lat": 21.31,
       "lng": -157.86
-    }
+    },
+    "slug": "hawaii-international-film-festival"
   },
   {
     "name": "Heartland International Film Festival",
@@ -1986,7 +2037,8 @@ window.D411_RESOURCES = [
       "desc": "One of the largest film festivals in the Midwest. Oscar-qualifying for shorts. Truly Moving Picture Award and Heartland Indie Spirit Awards offer significant cash prizes.",
       "lat": 39.77,
       "lng": -86.16
-    }
+    },
+    "slug": "heartland-international-film-festival"
   },
   {
     "name": "Hot Docs",
@@ -2030,7 +2082,8 @@ window.D411_RESOURCES = [
       "desc": "The largest documentary festival in North America. The Hot Docs Forum is a co-production and pitch market connecting filmmakers directly with international broadcasters and financiers.",
       "lat": 43.65,
       "lng": -79.38
-    }
+    },
+    "slug": "hot-docs"
   },
   {
     "name": "Hot Springs Documentary Film Festival",
@@ -2074,7 +2127,8 @@ window.D411_RESOURCES = [
       "desc": "One of only a handful of US festivals Oscar-qualifying for documentary FEATURES (not just shorts). Doc-only programming, decades of credibility, and a unique location in the Ouachita Mountains.",
       "lat": 34.5,
       "lng": -93.05
-    }
+    },
+    "slug": "hot-springs-documentary-film-festival"
   },
   {
     "name": "IDFA — International Documentary Film Festival Amsterdam",
@@ -2118,7 +2172,8 @@ window.D411_RESOURCES = [
       "desc": "The world's largest documentary festival. The IDFA Forum is one of the most powerful co-production and financing markets in existence — over 200 projects connected with funders annually. Submission is free.",
       "lat": 52.37,
       "lng": 4.9
-    }
+    },
+    "slug": "idfa-international-documentary-film-festival-amsterdam"
   },
   {
     "name": "Independent Film Festival Boston",
@@ -2162,7 +2217,8 @@ window.D411_RESOURCES = [
       "desc": "New England's premier independent film festival. Strong audience for documentaries, especially those with social impact and music subjects.",
       "lat": 42.36,
       "lng": -71.06
-    }
+    },
+    "slug": "independent-film-festival-boston"
   },
   {
     "name": "Indie Memphis Film Festival",
@@ -2209,7 +2265,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying for shorts. Black filmmaker-friendly programming, strong Southern documentary track, and a thriving music doc community.",
       "lat": 35.15,
       "lng": -90.05
-    }
+    },
+    "slug": "indie-memphis-film-festival"
   },
   {
     "name": "Indy Shorts International Film Festival",
@@ -2253,7 +2310,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying shorts festival run by Heartland Film. $30,000+ in cash prizes. Strong fit for short documentary, animation, and live-action filmmaking.",
       "lat": 39.77,
       "lng": -86.16
-    }
+    },
+    "slug": "indy-shorts-international-film-festival"
   },
   {
     "name": "Margaret Mead Film Festival",
@@ -2300,7 +2358,8 @@ window.D411_RESOURCES = [
       "desc": "The longest-running documentary festival in the US, hosted at the American Museum of Natural History. Anthropological, cross-cultural, and human-rights documentary focus.",
       "lat": 40.71,
       "lng": -74.01
-    }
+    },
+    "slug": "margaret-mead-film-festival"
   },
   {
     "name": "Maryland Film Festival",
@@ -2345,7 +2404,8 @@ window.D411_RESOURCES = [
       "desc": "Long-running mid-Atlantic festival housed at the historic Parkway Theatre. Known for thoughtful programming and a strong filmmaker hospitality experience.",
       "lat": 39.29,
       "lng": -76.61
-    }
+    },
+    "slug": "maryland-film-festival"
   },
   {
     "name": "Mill Valley Film Festival",
@@ -2390,7 +2450,8 @@ window.D411_RESOURCES = [
       "desc": "Long-running, well-respected Bay Area festival with strong audience attendance and industry presence. Excellent launch pad for fall awards-season documentaries.",
       "lat": 37.91,
       "lng": -122.55
-    }
+    },
+    "slug": "mill-valley-film-festival"
   },
   {
     "name": "Mountainfilm",
@@ -2437,7 +2498,8 @@ window.D411_RESOURCES = [
       "desc": "Adventure, activism, social justice, culture, and environment — all on film, in the mountains. Intimate, curated, beloved by filmmakers. Pairs with the Mountainfilm Commitment Grant.",
       "lat": 37.94,
       "lng": -107.81
-    }
+    },
+    "slug": "mountainfilm"
   },
   {
     "name": "Nashville Film Festival",
@@ -2482,7 +2544,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying for shorts. Strong music documentary programming track and a longstanding dedicated music industry audience.",
       "lat": 36.16,
       "lng": -86.78
-    }
+    },
+    "slug": "nashville-film-festival"
   },
   {
     "name": "New Orleans Film Festival",
@@ -2529,7 +2592,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying for shorts. Strong programmatic focus on Southern stories and Black filmmakers, plus music and culture documentary.",
       "lat": 29.95,
       "lng": -90.07
-    }
+    },
+    "slug": "new-orleans-film-festival"
   },
   {
     "name": "New York Film Festival",
@@ -2574,7 +2638,8 @@ window.D411_RESOURCES = [
       "desc": "Curated, prestigious, no competition. Run by Film at Lincoln Center. Documentaries selected for the Main Slate and Spotlight benefit from significant US press attention.",
       "lat": 40.71,
       "lng": -74.01
-    }
+    },
+    "slug": "new-york-film-festival"
   },
   {
     "name": "NewFest",
@@ -2620,7 +2685,8 @@ window.D411_RESOURCES = [
       "desc": "New York's premier LGBTQ+ film festival. Strong distribution partner and broadcast pipeline for queer documentaries. NewFest Pride Film Festival adds a summer showcase.",
       "lat": 40.71,
       "lng": -74.01
-    }
+    },
+    "slug": "newfest"
   },
   {
     "name": "Outfest Los Angeles",
@@ -2665,7 +2731,8 @@ window.D411_RESOURCES = [
       "desc": "Premier LGBTQ+ film festival on the West Coast, with strong industry and Hollywood attendance. Outfest Fusion adds focus on QTBIPOC filmmakers.",
       "lat": 34.05,
       "lng": -118.24
-    }
+    },
+    "slug": "outfest-los-angeles"
   },
   {
     "name": "Palm Springs International ShortFest",
@@ -2709,7 +2776,8 @@ window.D411_RESOURCES = [
       "desc": "The largest shorts festival in North America. Oscar-qualifying. ShortFest Forum adds an industry market for short-film distribution and financing conversations.",
       "lat": 33.83,
       "lng": -116.55
-    }
+    },
+    "slug": "palm-springs-international-shortfest"
   },
   {
     "name": "Pan African Film & Arts Festival (PAFF)",
@@ -2756,7 +2824,8 @@ window.D411_RESOURCES = [
       "desc": "The largest Black film festival in the US. Oscar-qualifying for shorts. Centers Black, African, and Caribbean filmmakers and stories.",
       "lat": 34.05,
       "lng": -118.24
-    }
+    },
+    "slug": "pan-african-film-and-arts-festival-paff"
   },
   {
     "name": "ReelAbilities Film Festival",
@@ -2803,7 +2872,8 @@ window.D411_RESOURCES = [
       "desc": "The largest film festival in the US dedicated to films by and about people with disabilities. Multi-city footprint, strong advocacy network, and accessible screening practices throughout.",
       "lat": 40.71,
       "lng": -74.01
-    }
+    },
+    "slug": "reelabilities-film-festival"
   },
   {
     "name": "Sebastopol Documentary Film Festival",
@@ -2848,7 +2918,8 @@ window.D411_RESOURCES = [
       "desc": "Oscar-qualifying festival for short and mini-form docs. 700+ submissions from 62+ countries. Holistic, equity-driven screening process — every film passes through at least three screeners.",
       "lat": 38.46,
       "lng": -122.72
-    }
+    },
+    "slug": "sebastopol-documentary-film-festival"
   },
   {
     "name": "SF DocFest",
@@ -2894,7 +2965,8 @@ window.D411_RESOURCES = [
       "desc": "Filmmaker-friendly Bay Area showcase known for adventurous programming and rejecting conventional taste — strong fit for music, subculture, and fringe-subject documentaries.",
       "lat": 37.77,
       "lng": -122.42
-    }
+    },
+    "slug": "sf-docfest"
   },
   {
     "name": "Sheffield DocFest",
@@ -2938,7 +3010,8 @@ window.D411_RESOURCES = [
       "desc": "The UK's premier documentary festival. Meetmarket — a structured pitching event — connects filmmakers with international commissioning editors, distributors, and financiers.",
       "lat": 53.38,
       "lng": -1.47
-    }
+    },
+    "slug": "sheffield-docfest"
   },
   {
     "name": "Slamdance Film Festival",
@@ -2982,7 +3055,8 @@ window.D411_RESOURCES = [
       "desc": "The original by-filmmakers, for-filmmakers alternative running alongside Sundance. First-time directors only in main competition. Oscar-qualifying for shorts. Now based in Los Angeles.",
       "lat": 34.05,
       "lng": -118.24
-    }
+    },
+    "slug": "slamdance-film-festival"
   },
   {
     "name": "Sundance Film Festival",
@@ -3029,7 +3103,8 @@ window.D411_RESOURCES = [
       "desc": "The most influential US film festival. World Cinema Documentary and US Documentary Competition launch many of the year's biggest theatrical and streaming docs. Oscar-qualifying for short documentary.",
       "lat": 40.65,
       "lng": -111.5
-    }
+    },
+    "slug": "sundance-film-festival"
   },
   {
     "name": "SXSW",
@@ -3076,7 +3151,8 @@ window.D411_RESOURCES = [
       "desc": "Massive convergence of film, tech, and music. Documentary Feature Competition launches major theatrical and streaming docs. Industry-heavy market with strong distribution conversations.",
       "lat": 30.27,
       "lng": -97.74
-    }
+    },
+    "slug": "sxsw"
   },
   {
     "name": "Telluride Film Festival",
@@ -3121,7 +3197,8 @@ window.D411_RESOURCES = [
       "desc": "By-invitation curated festival — no public submission process. A confirmed Telluride premiere is one of the strongest validations a documentary can receive heading into awards season.",
       "lat": 37.94,
       "lng": -107.81
-    }
+    },
+    "slug": "telluride-film-festival"
   },
   {
     "name": "Tribeca Festival",
@@ -3168,7 +3245,8 @@ window.D411_RESOURCES = [
       "desc": "NYC's flagship film festival. Major launching pad for theatrical documentaries and streaming acquisitions. Tribeca X for branded docs and Tribeca Audio Storytelling for podcasts.",
       "lat": 40.71,
       "lng": -74.01
-    }
+    },
+    "slug": "tribeca-festival"
   },
   {
     "name": "True/False Film Fest",
@@ -3213,7 +3291,8 @@ window.D411_RESOURCES = [
       "desc": "A beloved, intimate documentary festival celebrating the best of international nonfiction. Known for community engagement, live music, and a genuinely supportive atmosphere. Curated, no competition.",
       "lat": 38.95,
       "lng": -92.33
-    }
+    },
+    "slug": "true-false-film-fest"
   },
   {
     "name": "Workers Unite Film Festival",
@@ -3259,7 +3338,8 @@ window.D411_RESOURCES = [
       "desc": "Annual festival celebrating films about labor, working-class lives, and economic justice. Low entry fee, mission-driven curation.",
       "lat": 40.71,
       "lng": -74.01
-    }
+    },
+    "slug": "workers-unite-film-festival"
   },
   {
     "name": "IDFA Forum",
@@ -3283,7 +3363,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Not a casual listing; filmmakers should be prepared before applying."
+    "notes": "Not a casual listing; filmmakers should be prepared before applying.",
+    "slug": "idfa-forum"
   },
   {
     "name": "Marché du Film / Cannes Docs",
@@ -3307,7 +3388,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Categorize as market/industry, not festival submission."
+    "notes": "Categorize as market/industry, not festival submission.",
+    "slug": "marche-du-film-cannes-docs"
   },
   {
     "name": "Aguila — Film Errors & Omissions",
@@ -3331,7 +3413,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "Useful for projects with international exploitation; Aguila explicitly addresses worldwide content-distribution exposure and Film E&O."
+    "notes": "Useful for projects with international exploitation; Aguila explicitly addresses worldwide content-distribution exposure and Film E&O.",
+    "slug": "aguila-film-errors-and-omissions"
   },
   {
     "name": "Aon Entertainment",
@@ -3355,7 +3438,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "Aon explicitly includes documentaries within motion-picture/television production and offers professional liability and errors & omissions including media liability."
+    "notes": "Aon explicitly includes documentaries within motion-picture/television production and offers professional liability and errors & omissions including media liability.",
+    "slug": "aon-entertainment"
   },
   {
     "name": "AXIS Media & Entertainment Liability",
@@ -3379,7 +3463,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "AXIS lists film and television production companies as target business and offers Film & Entertainment solutions, worldwide coverage, and policy periods up to 60 months for single film and television."
+    "notes": "AXIS lists film and television production companies as target business and offers Film & Entertainment solutions, worldwide coverage, and policy periods up to 60 months for single film and television.",
+    "slug": "axis-media-and-entertainment-liability"
   },
   {
     "name": "Boring Insurance — Media E&O",
@@ -3403,7 +3488,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "Especially relevant before delivery; the company explicitly notes documentary-subject, copyright, and clearance exposures and distributor requirements."
+    "notes": "Especially relevant before delivery; the company explicitly notes documentary-subject, copyright, and clearance exposures and distributor requirements.",
+    "slug": "boring-insurance-media-eando"
   },
   {
     "name": "Brown & Brown Entertainment",
@@ -3427,7 +3513,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "Useful for productions that need more than E&O alone; Brown & Brown specifically lists E&O for film and television productions."
+    "notes": "Useful for productions that need more than E&O alone; Brown & Brown specifically lists E&O for film and television productions.",
+    "slug": "brown-and-brown-entertainment"
   },
   {
     "name": "FilmIns / Frankel & Associates",
@@ -3451,7 +3538,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "FilmIns explicitly offers Producer’s E&O protecting against allegations including breach of contract, copyright infringement, invasion of privacy, libel and defamation."
+    "notes": "FilmIns explicitly offers Producer’s E&O protecting against allegations including breach of contract, copyright infringement, invasion of privacy, libel and defamation.",
+    "slug": "filmins-frankel-and-associates"
   },
   {
     "name": "Front Row Insurance Brokers",
@@ -3475,7 +3563,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "Front Row explicitly lists documentaries and Producer’s E&O and offers specialized IDA and DOC documentary programs."
+    "notes": "Front Row explicitly lists documentaries and Producer’s E&O and offers specialized IDA and DOC documentary programs.",
+    "slug": "front-row-insurance-brokers"
   },
   {
     "name": "HUB International / IDA E&O Program",
@@ -3499,7 +3588,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "Strong documentary-specific option. Coverage highlighted by IDA includes privacy, copyright, title/trademark, defamation, plagiarism and related content risks."
+    "notes": "Strong documentary-specific option. Coverage highlighted by IDA includes privacy, copyright, title/trademark, defamation, plagiarism and related content risks.",
+    "slug": "hub-international-ida-eando-program"
   },
   {
     "name": "Kelly Insurance Group — Film & Media E&O",
@@ -3523,7 +3613,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "The firm specifically addresses documentary risks such as copyright, trademark, defamation, privacy, publicity rights, music, footage, title and chain-of-title claims."
+    "notes": "The firm specifically addresses documentary risks such as copyright, trademark, defamation, privacy, publicity rights, music, footage, title and chain-of-title claims.",
+    "slug": "kelly-insurance-group-film-and-media-eando"
   },
   {
     "name": "Sutton Entertainment",
@@ -3547,7 +3638,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-29",
-    "notes": "Sutton states that Producers’ E&O protects against lawsuits stemming from content, including copyright infringement, defamation and unauthorized use of protected material."
+    "notes": "Sutton states that Producers’ E&O protects against lawsuits stemming from content, including copyright infringement, defamation and unauthorized use of protected material.",
+    "slug": "sutton-entertainment"
   },
   {
     "name": "Abramorama",
@@ -3584,7 +3676,8 @@ window.D411_RESOURCES = [
       "section": "distribution",
       "featured": false,
       "order": 4
-    }
+    },
+    "slug": "abramorama"
   },
   {
     "name": "Icarus Films",
@@ -3621,7 +3714,8 @@ window.D411_RESOURCES = [
       "section": "distribution",
       "featured": false,
       "order": 6
-    }
+    },
+    "slug": "icarus-films"
   },
   {
     "name": "Lightdox",
@@ -3659,7 +3753,8 @@ window.D411_RESOURCES = [
       "section": "distribution",
       "featured": true,
       "order": 2
-    }
+    },
+    "slug": "lightdox"
   },
   {
     "name": "Sideways Film",
@@ -3697,7 +3792,8 @@ window.D411_RESOURCES = [
       "section": "distribution",
       "featured": true,
       "order": 1
-    }
+    },
+    "slug": "sideways-film"
   },
   {
     "name": "The Cinema Guild",
@@ -3734,7 +3830,8 @@ window.D411_RESOURCES = [
       "section": "distribution",
       "featured": false,
       "order": 5
-    }
+    },
+    "slug": "the-cinema-guild"
   },
   {
     "name": "Together Films",
@@ -3771,7 +3868,8 @@ window.D411_RESOURCES = [
       "section": "distribution",
       "featured": true,
       "order": 3
-    }
+    },
+    "slug": "together-films"
   },
   {
     "name": "Amy E. Mitchell — Documentary Clearance Counsel",
@@ -3809,7 +3907,8 @@ window.D411_RESOURCES = [
       "section": "legal",
       "featured": true,
       "order": 1
-    }
+    },
+    "slug": "amy-e-mitchell-documentary-clearance-counsel"
   },
   {
     "name": "Documentary Legal Forms & Contracts Pack",
@@ -3847,7 +3946,8 @@ window.D411_RESOURCES = [
       "section": "legal",
       "featured": false,
       "order": 5
-    }
+    },
+    "slug": "documentary-legal-forms-and-contracts-pack"
   },
   {
     "name": "Frankfurt Kurnit — Content Review & Clearance",
@@ -3885,7 +3985,8 @@ window.D411_RESOURCES = [
       "section": "legal",
       "featured": false,
       "order": 4
-    }
+    },
+    "slug": "frankfurt-kurnit-content-review-and-clearance"
   },
   {
     "name": "Romano Law — IP Rights Clearance",
@@ -3923,7 +4024,8 @@ window.D411_RESOURCES = [
       "section": "legal",
       "featured": false,
       "order": 6
-    }
+    },
+    "slug": "romano-law-ip-rights-clearance"
   },
   {
     "name": "The Clearance Lab",
@@ -3961,7 +4063,8 @@ window.D411_RESOURCES = [
       "section": "legal",
       "featured": true,
       "order": 2
-    }
+    },
+    "slug": "the-clearance-lab"
   },
   {
     "name": "UCLA Documentary Film Legal Clinic",
@@ -3999,7 +4102,8 @@ window.D411_RESOURCES = [
       "section": "legal",
       "featured": false,
       "order": 3
-    }
+    },
+    "slug": "ucla-documentary-film-legal-clinic"
   },
   {
     "name": "Artlist",
@@ -4037,7 +4141,8 @@ window.D411_RESOURCES = [
       "section": "music",
       "featured": true,
       "order": 2
-    }
+    },
+    "slug": "artlist"
   },
   {
     "name": "Epidemic Sound",
@@ -4075,7 +4180,8 @@ window.D411_RESOURCES = [
       "section": "music",
       "featured": true,
       "order": 1
-    }
+    },
+    "slug": "epidemic-sound"
   },
   {
     "name": "Mobygratis",
@@ -4113,7 +4219,8 @@ window.D411_RESOURCES = [
       "section": "music",
       "featured": false,
       "order": 4
-    }
+    },
+    "slug": "mobygratis"
   },
   {
     "name": "Music Licensing Guide for Filmmakers",
@@ -4151,7 +4258,8 @@ window.D411_RESOURCES = [
       "section": "music",
       "featured": false,
       "order": 5
-    }
+    },
+    "slug": "music-licensing-guide-for-filmmakers"
   },
   {
     "name": "Musicbed",
@@ -4189,7 +4297,8 @@ window.D411_RESOURCES = [
       "section": "music",
       "featured": false,
       "order": 3
-    }
+    },
+    "slug": "musicbed"
   },
   {
     "name": "Amazon",
@@ -4224,7 +4333,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 4
-    }
+    },
+    "slug": "amazon"
   },
   {
     "name": "Aputure Amaran 60x LED",
@@ -4269,7 +4379,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 9
-    }
+    },
+    "slug": "aputure-amaran-60x-led"
   },
   {
     "name": "B&H Photo Video",
@@ -4304,7 +4415,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 1
-    }
+    },
+    "slug": "bandh-photo-video"
   },
   {
     "name": "Canon Cinema EOS",
@@ -4339,7 +4451,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 3
-    }
+    },
+    "slug": "canon-cinema-eos"
   },
   {
     "name": "Canon EOS C70",
@@ -4384,7 +4497,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 3
-    }
+    },
+    "slug": "canon-eos-c70"
   },
   {
     "name": "DaVinci Resolve Studio",
@@ -4429,7 +4543,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 5
-    }
+    },
+    "slug": "davinci-resolve-studio"
   },
   {
     "name": "DJI RS 4 Gimbal",
@@ -4474,7 +4589,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 6
-    }
+    },
+    "slug": "dji-rs-4-gimbal"
   },
   {
     "name": "iZotope RX 11",
@@ -4519,7 +4635,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 8
-    }
+    },
+    "slug": "izotope-rx-11"
   },
   {
     "name": "Rode Wireless PRO",
@@ -4564,7 +4681,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 4
-    }
+    },
+    "slug": "rode-wireless-pro"
   },
   {
     "name": "Samsung T9 Portable SSD",
@@ -4609,7 +4727,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 7
-    }
+    },
+    "slug": "samsung-t9-portable-ssd"
   },
   {
     "name": "Sony A7S III",
@@ -4654,7 +4773,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 2
-    }
+    },
+    "slug": "sony-a7s-iii"
   },
   {
     "name": "Sony FX3 Full-Frame",
@@ -4699,7 +4819,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 1
-    }
+    },
+    "slug": "sony-fx3-full-frame"
   },
   {
     "name": "Sony Official Store",
@@ -4734,7 +4855,8 @@ window.D411_RESOURCES = [
       "tags": [],
       "featured": false,
       "order": 2
-    }
+    },
+    "slug": "sony-official-store"
   },
   {
     "name": "Backstage / Mandy Network",
@@ -4758,7 +4880,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "verify",
     "lastVerified": "2026-08-18",
-    "notes": "Useful for some productions; verify fit before recommending strongly."
+    "notes": "Useful for some productions; verify fit before recommending strongly.",
+    "slug": "backstage-mandy-network"
   },
   {
     "name": "FilmFreeway",
@@ -4782,7 +4905,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Core platform, but fees add up fast. Pair with Festival Strategy: 90 Days Out."
+    "notes": "Core platform, but fees add up fast. Pair with Festival Strategy: 90 Days Out.",
+    "slug": "filmfreeway"
   },
   {
     "name": "ProductionHUB",
@@ -4806,7 +4930,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Good companion listing to Staff Me Up so the crew category does not look thin."
+    "notes": "Good companion listing to Staff Me Up so the crew category does not look thin.",
+    "slug": "productionhub"
   },
   {
     "name": "Seed&Spark",
@@ -4830,7 +4955,8 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Useful when filmmakers are ready to actively market, not just quietly fundraise."
+    "notes": "Useful when filmmakers are ready to actively market, not just quietly fundraise.",
+    "slug": "seedandspark"
   },
   {
     "name": "Staff Me Up",
@@ -4854,6 +4980,7 @@ window.D411_RESOURCES = [
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "active",
     "lastVerified": "2026-08-18",
-    "notes": "Useful now as a resource. Future sponsor target once Documentary411 can show traffic and outbound clicks."
+    "notes": "Useful now as a resource. Future sponsor target once Documentary411 can show traffic and outbound clicks.",
+    "slug": "staff-me-up"
   }
 ];

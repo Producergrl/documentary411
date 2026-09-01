@@ -3,15 +3,16 @@
    listing pages are not empty without JavaScript. */
 const fs = require('fs');
 const path = require('path');
+const { assignSlugs, resourcePath, resourceCanonical } = require('./resource-urls');
 
 const root = __dirname;
-const resources = JSON.parse(fs.readFileSync(path.join(root, 'resources.json'), 'utf8'))
+const resources = assignSlugs(JSON.parse(fs.readFileSync(path.join(root, 'resources.json'), 'utf8'))
   .map((row) => {
     const rec = { ...row };
     delete rec._mergedFrom;
     delete rec._mergeConflicts;
     return rec;
-  });
+  }));
 
 function esc(s) {
   return String(s == null ? '' : s)
@@ -58,7 +59,7 @@ function directoryCard(res) {
     : '<span class="d411-pill">Confirm dates on the official site</span>';
   return `<article class="d411-card">
       <div class="d411-meta"><span class="d411-pill gold">${esc(res.resourceType)}</span><span class="d411-pill ${statusClass}">${esc(res.status || 'verify')}</span></div>
-      <h3>${esc(res.name)}</h3>
+      <h3><a href="${attr(resourcePath(res.slug))}">${esc(res.name)}</a></h3>
       <small>${esc(res.category)} · ${esc(res.region || '')}</small>
       <p>${esc(res.description)}</p>
       <p><strong>Best for:</strong> ${esc(res.bestFor || '')}</p>
@@ -68,6 +69,7 @@ function directoryCard(res) {
         ${verified}
       </div>
       <p><strong>Why this matters:</strong> ${esc(res.notes || '')}</p>
+      <a class="d411-link" href="${attr(resourcePath(res.slug))}">View listing →</a>
       <a class="d411-link" href="${attr(res.officialUrl)}" target="_blank" rel="noopener">Visit Official Site →</a>
       <a class="d411-link" href="/submit-resource?correction=${encodeURIComponent(res.name)}">Suggest correction →</a>
     </article>`;
@@ -103,7 +105,7 @@ function itemListSchema(name, items) {
         '@type': 'Thing',
         name: resource.name,
         description: resource.description,
-        url: resource.officialUrl
+        url: resourceCanonical(resource.slug)
       }
     }))
   };
@@ -157,7 +159,8 @@ function homepageGrantCard(res) {
         <div class="card-meta">${wrapDates(esc(metaCore))}${verified}</div>
         <div class="card-desc">${desc}</div>
         <div class="card-tags">${tags}</div>
-        <a class="card-link" href="${attr(res.officialUrl)}" target="_blank" rel="noopener">View →</a>
+        <a class="card-link" href="${attr(resourcePath(res.slug))}">View listing →</a>
+        <a class="card-link" href="${attr(res.officialUrl)}" target="_blank" rel="noopener">Official site →</a>
         <a class="card-link" href="/submit-resource?correction=${encodeURIComponent(res.name)}">Suggest correction →</a>
       </div>`;
 }
@@ -185,14 +188,15 @@ function homepageFestivalCard(res) {
       <div class="card-meta">${wrapDates(esc(meta))}</div>
       <div class="card-desc">${esc(f.desc || res.description)}</div>
       <div class="card-tags">${tags.slice(0, 5).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
-      <a class="card-link" href="${attr(res.officialUrl)}" target="_blank" rel="noopener">View →</a>
+      <a class="card-link" href="${attr(resourcePath(res.slug))}">View listing →</a>
+      <a class="card-link" href="${attr(res.officialUrl)}" target="_blank" rel="noopener">Official site →</a>
       <a class="card-link" href="/submit-resource?correction=${encodeURIComponent(res.name)}">Suggest correction →</a>
     </div>`;
 }
 
 function homepagePartnerCard(res) {
   const h = res.homepage || {};
-  return `      <a class="partner-card" href="${attr(res.officialUrl)}" target="_blank" rel="noopener">
+  return `      <a class="partner-card" href="${attr(resourcePath(res.slug))}">
         <div class="partner-icon">${h.icon || ''}</div>
         <div class="partner-name">${esc(h.title || res.name)}</div>
         <div class="partner-sub">${esc(h.sub || h.meta || '')}</div>
@@ -212,6 +216,7 @@ function homepageGearCard(res) {
         <div class="gear-desc">${esc(h.description || res.description)}</div>
         <div class="gear-price">${esc(h.price || res.cost || '')}</div>
         <div class="gear-links">
+          <a class="gear-link" href="${attr(resourcePath(res.slug))}">View listing</a>
           ${links}
         </div>
       </div>`;
@@ -359,15 +364,11 @@ home = home.replace(/id="festivalFinderCount">\d+<\/span>/, `id="festivalFinderC
 home = home.replace(/id="festivalDatabaseCount">\d+<\/span>/, `id="festivalDatabaseCount">${festTotal}</span>`);
 
 /* Replace the inlined FESTIVALS array with a view over D411_RESOURCES. */
-const festScriptStart = home.indexOf('/* SEARCHABLE FESTIVAL DATABASE */');
-const festArrayStart = home.indexOf('window.FESTIVALS = [', festScriptStart);
-if (festArrayStart !== -1) {
-  const festArrayEnd = home.indexOf('\n];', festArrayStart);
-  if (festArrayEnd !== -1) {
-    const derived = `window.FESTIVALS = (window.D411_RESOURCES || []).filter(function(r){return r.category === 'Documentary Festivals';}).map(function(r){
+const derivedFestivals = `window.FESTIVALS = (window.D411_RESOURCES || []).filter(function(r){return r.category === 'Documentary Festivals';}).map(function(r){
   var f = r.festival || {};
   return {
     name: r.name,
+    slug: r.slug,
     url: r.officialUrl,
     city: f.city,
     region: f.region || r.region,
@@ -388,9 +389,17 @@ window.FEST_LL = window.FEST_LL || {};
   var f = r.festival || {};
   if (f.city && f.lat != null && f.lng != null) window.FEST_LL[f.city] = [f.lat, f.lng];
 });`;
-    // Keep original FEST_LL object as fallback geocodes; derived fills from JSON first.
-    // Remove only the literal array, not FEST_LL city table (US_CITIES still needed).
-    home = home.slice(0, festArrayStart) + derived + home.slice(festArrayEnd + 3);
+const derivedFestRe = /window\.FESTIVALS = \(window\.D411_RESOURCES[\s\S]*?if \(f\.city && f\.lat != null && f\.lng != null\) window\.FEST_LL\[f\.city\] = \[f\.lat, f\.lng\];\n\}\);/;
+if (derivedFestRe.test(home)) {
+  home = home.replace(derivedFestRe, derivedFestivals);
+} else {
+  const festScriptStart = home.indexOf('/* SEARCHABLE FESTIVAL DATABASE */');
+  const festArrayStart = home.indexOf('window.FESTIVALS = [', festScriptStart);
+  if (festArrayStart !== -1) {
+    const festArrayEnd = home.indexOf('\n];', festArrayStart);
+    if (festArrayEnd !== -1) {
+      home = home.slice(0, festArrayStart) + derivedFestivals + home.slice(festArrayEnd + 3);
+    }
   }
 }
 

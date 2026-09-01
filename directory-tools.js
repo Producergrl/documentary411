@@ -22,12 +22,16 @@
     if (s === 'verify' || s === 'upcoming') return 'warn';
     return '';
   }
+  function listingHref(res){
+    return res.slug ? '/resources/' + res.slug : res.officialUrl;
+  }
   function card(res){
     const statusClass = statusClassName(res.status);
     const access = res.access || (res.isFree === 'paid' ? 'Paid / membership may apply' : res.isFree === 'mixed' ? 'Free + paid elements' : 'Free');
+    const listing = listingHref(res);
     return `<article class="d411-card">
       <div class="d411-meta"><span class="d411-pill gold">${res.resourceType}</span><span class="d411-pill ${statusClass}">${res.status}</span></div>
-      <h3>${res.name}</h3>
+      <h3><a href="${listing}">${res.name}</a></h3>
       <small>${res.category} · ${res.region}</small>
       <p>${res.description}</p>
       <p><strong>Best for:</strong> ${res.bestFor}</p>
@@ -37,6 +41,7 @@
         ${res.lastVerified ? `<span class="d411-pill">Last verified <time datetime="${res.lastVerified}">${res.lastVerified}</time></span>` : '<span class="d411-pill">Confirm dates on the official site</span>'}
       </div>
       <p><strong>Why this matters:</strong> ${res.notes}</p>
+      <a class="d411-link" href="${listing}">View listing →</a>
       <a class="d411-link" href="${res.officialUrl}" target="_blank" rel="noopener">Visit Official Site →</a>
       <a class="d411-link" href="/submit-resource?correction=${encodeURIComponent(res.name)}">Suggest correction →</a>
     </article>`;

@@ -95,6 +95,42 @@ function safeJson(value) {
     .replace(/&/g, '\\u0026');
 }
 
+const SAME_AS = [
+  'https://imdb.me/kerrydavid',
+  'https://www.linkedin.com/in/kerrydavid',
+];
+
+function organizationNode() {
+  return {
+    '@type': 'Organization',
+    '@id': `${ORIGIN}/#organization`,
+    name: 'Documentary411',
+    url: `${ORIGIN}/`,
+    email: 'admin@kdcandfilms.com',
+    founder: { '@id': `${ORIGIN}/#person` },
+    sameAs: SAME_AS,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${ORIGIN}/apple-touch-icon.png`,
+      width: 180,
+      height: 180,
+    },
+  };
+}
+
+function personNode() {
+  return {
+    '@type': 'Person',
+    '@id': `${ORIGIN}/#person`,
+    name: 'Kerry David',
+    url: `${ORIGIN}/about`,
+    email: 'admin@kdcandfilms.com',
+    affiliation: { '@type': 'Organization', name: 'KDC and Films' },
+    worksFor: { '@id': `${ORIGIN}/#organization` },
+    sameAs: SAME_AS,
+  };
+}
+
 function pageSchema(page, canonical, title, description) {
   const pageNode = {
     '@type': page.schemaType,
@@ -112,41 +148,87 @@ function pageSchema(page, canonical, title, description) {
     },
     inLanguage: 'en-US',
   };
-
-  if (page.route !== '/') {
-    return { '@context': 'https://schema.org', ...pageNode };
+  if (page.route === '/about') {
+    pageNode.mainEntity = { '@id': `${ORIGIN}/#person` };
   }
 
+  const graph = [organizationNode(), personNode()];
+  if (page.route === '/') {
+    graph.push({
+      '@type': 'WebSite',
+      '@id': `${ORIGIN}/#website`,
+      url: `${ORIGIN}/`,
+      name: 'Documentary411',
+      publisher: { '@id': `${ORIGIN}/#organization` },
+      inLanguage: 'en-US',
+    });
+  }
+  graph.push(pageNode);
+  return { '@context': 'https://schema.org', '@graph': graph };
+}
+
+const PRODUCT_OFFERS = {
+  'festival-strategy.html': [
+    { name: 'The 90-Day Festival Strategy', price: '99' },
+  ],
+  'funding-lab.html': [
+    { name: 'The Brand-Funded Documentary System', price: '297' },
+  ],
+  'funding-sprint.html': [
+    { name: 'The Funding Package Sprint', price: '2500' },
+  ],
+  'ask-a-pro.html': [
+    { name: 'Ask a Pro — One Question', price: '50' },
+    { name: 'Ask a Pro — Professional Consult', price: '500' },
+  ],
+};
+
+function productSchemas(page, canonical, description) {
+  const offers = PRODUCT_OFFERS[page.file];
+  if (!offers) return [];
+  return offers.map((product) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description,
+    brand: { '@id': `${ORIGIN}/#organization` },
+    url: canonical,
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: canonical,
+      seller: { '@id': `${ORIGIN}/#organization` },
+    },
+  }));
+}
+
+function extractVisibleFaq(html) {
+  const faqs = [];
+  const block = String(html || '').match(/<div class="faq">([\s\S]*?)<\/div>/i);
+  if (!block) return faqs;
+  for (const match of block[1].matchAll(/<details>[\s\S]*?<summary>([\s\S]*?)<\/summary>[\s\S]*?<p>([\s\S]*?)<\/p>/gi)) {
+    const q = decodeEntities(match[1]);
+    const a = decodeEntities(match[2]);
+    if (q && a) faqs.push({ q, a });
+  }
+  return faqs;
+}
+
+function faqSchema(faqs) {
   return {
     '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${ORIGIN}/#organization`,
-        name: 'Documentary411',
-        url: `${ORIGIN}/`,
-        email: 'admin@kdcandfilms.com',
-        logo: {
-          '@type': 'ImageObject',
-          url: `${ORIGIN}/apple-touch-icon.png`,
-          width: 180,
-          height: 180,
-        },
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${ORIGIN}/#website`,
-        url: `${ORIGIN}/`,
-        name: 'Documentary411',
-        publisher: { '@id': `${ORIGIN}/#organization` },
-        inLanguage: 'en-US',
-      },
-      pageNode,
-    ],
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
   };
 }
 
-function metadataBlock(page, title, description) {
+function metadataBlock(page, title, description, html) {
   const canonical = `${ORIGIN}${page.route}`;
   const titleAttr = escapeAttribute(title);
   const descriptionAttr = escapeAttribute(description);
@@ -154,6 +236,12 @@ function metadataBlock(page, title, description) {
   const imageAttr = escapeAttribute(SOCIAL_IMAGE);
   const imageAltAttr = escapeAttribute(SOCIAL_IMAGE_ALT);
   const schema = pageSchema(page, canonical, title, description);
+  const extraScripts = [];
+  for (const product of productSchemas(page, canonical, description)) {
+    extraScripts.push(`  <script type="application/ld+json">${safeJson(product)}</script>`);
+  }
+  const faqs = extractVisibleFaq(html);
+  if (faqs.length) extraScripts.push(`  <script type="application/ld+json">${safeJson(faqSchema(faqs))}</script>`);
 
   return `${SEO_START}
   <link rel="canonical" href="${canonicalAttr}">
@@ -175,6 +263,7 @@ function metadataBlock(page, title, description) {
   <meta name="twitter:image" content="${imageAttr}">
   <meta name="twitter:image:alt" content="${imageAltAttr}">
   <script type="application/ld+json">${safeJson(schema)}</script>
+${extraScripts.join('\n')}
 ${SEO_END}`;
 }
 
@@ -204,7 +293,7 @@ function injectPageMetadata(page) {
   }
   if (!/<\/head>/i.test(html)) throw new Error(`${page.file} is missing </head>.`);
 
-  html = html.replace(/<\/head>/i, `${metadataBlock(page, title, description)}\n</head>`);
+  html = html.replace(/<\/head>/i, `${metadataBlock(page, title, description, html)}\n</head>`);
   fs.writeFileSync(filePath, html);
 }
 
