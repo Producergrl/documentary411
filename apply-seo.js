@@ -32,6 +32,7 @@ const pages = [
   { file: 'fiscal-sponsorship.html', route: '/fiscal-sponsorship', schemaType: 'CollectionPage' },
   { file: 'submit-resource.html', route: '/submit-resource', schemaType: 'WebPage' },
   { file: 'blog.html', route: '/blog', schemaType: 'CollectionPage' },
+  { file: 'blog-deauville.html', route: '/blog/deauville', schemaType: 'BlogPosting', datePublished: '2026-09-01' },
   { file: 'blog-festival-wins.html', route: '/blog-festival-wins', schemaType: 'WebPage' },
   { file: 'festival-budget-workbook.html', route: '/festival-budget-workbook', schemaType: 'WebPage' },
   { file: 'festival-strategy.html', route: '/festival-strategy', schemaType: 'WebPage' },
@@ -150,6 +151,12 @@ function pageSchema(page, canonical, title, description) {
   };
   if (page.route === '/about') {
     pageNode.mainEntity = { '@id': `${ORIGIN}/#person` };
+  }
+  if (page.schemaType === 'BlogPosting') {
+    pageNode.author = { '@id': `${ORIGIN}/#person` };
+    pageNode.datePublished = page.datePublished || '2026-09-01';
+    pageNode.headline = title;
+    pageNode.mainEntityOfPage = canonical;
   }
 
   const graph = [organizationNode(), personNode()];
@@ -339,6 +346,12 @@ function updateSearchIndex() {
     noindexPaths.add(`/${stem}`);
   }
 
+  const routeByPath = new Map();
+  for (const page of pages) {
+    routeByPath.set(`/${page.file}`, page.route);
+    routeByPath.set(`/${page.file.replace(/\.html$/i, '')}`, page.route);
+  }
+
   const entries = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   let removed = 0;
   let normalized = 0;
@@ -351,9 +364,9 @@ function updateSearchIndex() {
       continue;
     }
 
-    const slugMatch = parsed.pathname.match(/^\/([^/]+)\.html$/i);
-    if (slugMatch && canonicalSlugs.includes(slugMatch[1])) {
-      parsed.pathname = `/${slugMatch[1]}`;
+    const mappedRoute = routeByPath.get(parsed.pathname);
+    if (mappedRoute && parsed.pathname !== mappedRoute) {
+      parsed.pathname = mappedRoute;
       entry.url = `${parsed.pathname}${parsed.search}${parsed.hash}`;
       normalized += 1;
     } else if (parsed.pathname === '/index.html') {

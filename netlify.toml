@@ -76,6 +76,12 @@
   force = true
 
 [[redirects]]
+  from = "/blog/deauville/"
+  to = "/blog/deauville"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/blog-festival-wins/"
   to = "/blog-festival-wins"
   status = 301
@@ -187,6 +193,11 @@
 [[redirects]]
   from = "/blog"
   to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/deauville"
+  to = "/blog-deauville.html"
   status = 200
 
 [[redirects]]

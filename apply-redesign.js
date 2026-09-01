@@ -88,7 +88,7 @@ fs.writeFileSync(homeFile, html);
 
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
 const directoryStyle = '<link rel="stylesheet" href="/directory-upgrades.css">';
-const growthPages = ['directory.html','submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-festival-wins.html','documentary-grants.html','documentary-markets.html','fiscal-sponsorship.html','shop.html','about.html','privacy.html','terms.html','contact.html','affiliate-disclosure.html','newsletter-thank-you.html'];
+const growthPages = ['directory.html','submit-resource.html','resource-thank-you.html','festival-budget-workbook.html','blog.html','blog-deauville.html','blog-festival-wins.html','documentary-grants.html','documentary-markets.html','fiscal-sponsorship.html','shop.html','about.html','privacy.html','terms.html','contact.html','affiliate-disclosure.html','newsletter-thank-you.html'];
 const styledPages = [
   'funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html','thank-you.html','welcome-festival.html','welcome-sprint.html','welcome-system.html','advertise.html','advertise-thank-you.html',
   'ask-a-pro.html','ask-a-pro-question.html','ask-a-pro-question-thank-you.html','ask-a-pro-consult.html','ask-a-pro-consult-thank-you.html','funding-report-thank-you.html','funding-lab-waitlist-thank-you.html',

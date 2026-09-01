@@ -40,6 +40,8 @@ const CANONICAL_SITEMAP = [
   { loc: `${ORIGIN}/documentary-markets`, lastmod: '2026-09-01' },
   { loc: `${ORIGIN}/fiscal-sponsorship`, lastmod: '2026-09-01' },
   { loc: `${ORIGIN}/submit-resource`, lastmod: '2026-09-01' },
+  { loc: `${ORIGIN}/blog`, lastmod: '2026-09-01' },
+  { loc: `${ORIGIN}/blog/deauville`, lastmod: '2026-09-01' },
   { loc: `${ORIGIN}/festival-budget-workbook`, lastmod: '2026-09-01' },
   { loc: `${ORIGIN}/festival-strategy`, lastmod: '2026-09-01' },
   { loc: `${ORIGIN}/funding-lab`, lastmod: '2026-09-01' },

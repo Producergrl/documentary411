@@ -27,6 +27,8 @@ const pages = [
   { file: 'documentary-markets.html', route: '/documentary-markets', schemaType: 'CollectionPage', lastmod: '2026-09-01', itemList: true },
   { file: 'fiscal-sponsorship.html', route: '/fiscal-sponsorship', schemaType: 'CollectionPage', lastmod: '2026-09-01', itemList: true },
   { file: 'submit-resource.html', route: '/submit-resource', schemaType: 'WebPage', lastmod: '2026-09-01' },
+  { file: 'blog.html', route: '/blog', schemaType: 'CollectionPage', lastmod: '2026-09-01' },
+  { file: 'blog-deauville.html', route: '/blog/deauville', schemaType: 'BlogPosting', lastmod: '2026-09-01' },
   { file: 'festival-budget-workbook.html', route: '/festival-budget-workbook', schemaType: 'WebPage', lastmod: '2026-09-01' },
   { file: 'festival-strategy.html', route: '/festival-strategy', schemaType: 'WebPage', lastmod: '2026-09-01' },
   { file: 'funding-lab.html', route: '/funding-lab', schemaType: 'WebPage', lastmod: '2026-09-01' },

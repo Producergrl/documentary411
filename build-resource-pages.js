@@ -337,6 +337,8 @@ function writeLlmsTxt(resources) {
     `- [Documentary grants](${ORIGIN}/documentary-grants)`,
     `- [Fiscal sponsorship](${ORIGIN}/fiscal-sponsorship)`,
     `- [Festival budget workbook](${ORIGIN}/festival-budget-workbook)`,
+    `- [Blog](${ORIGIN}/blog)`,
+    `- [Was Deauville Worth the Trip?](${ORIGIN}/blog/deauville)`,
     `- [About](${ORIGIN}/about)`,
     '',
     '## Optional',

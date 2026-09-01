@@ -16,6 +16,8 @@ Maker queries this site is built to answer: documentary grants, fiscal sponsorsh
 - [Documentary grants](https://documentary411.com/documentary-grants)
 - [Fiscal sponsorship](https://documentary411.com/fiscal-sponsorship)
 - [Festival budget workbook](https://documentary411.com/festival-budget-workbook)
+- [Blog](https://documentary411.com/blog)
+- [Was Deauville Worth the Trip?](https://documentary411.com/blog/deauville)
 - [About](https://documentary411.com/about)
 
 ## Optional
