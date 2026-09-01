@@ -278,8 +278,8 @@ function addItemListSchemas() {
   }
 }
 
-fixHomepage();
-fixResourceData();
+/* Catalog HTML and ItemList are generated from resources.json by
+   build-resources.js. Do not re-split homepage grant cards or rewrite
+   resources-data.js here — that was the drift this unify removes. */
 fixOpenNowFilter();
-addItemListSchemas();
-console.log('Documentary411 grant status audit safeguards applied.');
+console.log('Documentary411 grant status audit safeguards applied (unified catalog; homepage cards owned by build-resources.js).');

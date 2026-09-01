@@ -298,17 +298,21 @@
     const toggle = document.querySelector('.nav-toggle');
     const links = document.querySelector('.nav-links');
     if (!toggle || !links) return;
+    const nav = toggle.closest('nav') || document.querySelector('nav');
+
+    function setOpen(open) {
+      links.classList.toggle('nav-open', open);
+      if (nav) nav.classList.toggle('nav-menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
 
     toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('nav-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      setOpen(!links.classList.contains('nav-open'));
     });
 
     links.addEventListener('click', (event) => {
-      if (event.target.tagName === 'A') {
-        links.classList.remove('nav-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
+      if (event.target.tagName === 'A') setOpen(false);
     });
   }
 

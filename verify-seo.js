@@ -257,12 +257,17 @@ for (const href of ['/festival-strategy', '/funding-lab', '/funding-sprint', '/a
 check(!/buy\.stripe\.com\/(?:bJe00iabZbQJ0Uubu36J204|3cI14mck79IBbz8dCb6J203)/.test(shop), 'shop.html: Ask a Pro or Pro Consult checkout must not be included.');
 
 const home = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-const festivalBlock = home.match(/window\.FESTIVALS\s*=\s*\[([\s\S]*?)\n\];/);
-const festivalTotal = festivalBlock ? (festivalBlock[1].match(/\{name:/g) || []).length : 0;
-check(festivalTotal === 48, `index.html: expected 48 festival records, found ${festivalTotal}.`);
+const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources.json'), 'utf8'));
+const festivalTotal = catalog.filter((row) => row.category === 'Documentary Festivals').length;
+check(festivalTotal === 48, `resources.json: expected 48 festival records, found ${festivalTotal}.`);
+check(!/window\.FESTIVALS\s*=\s*\[/.test(home), 'index.html: must not inline a second festival array that can drift from resources.json.');
+check(home.includes('src="/resources-data.js"') || home.includes("src='/resources-data.js'"), 'index.html: homepage must load the unified catalog.');
 check(/id="festivalStatCount">48<\/span><span class="stat-label">Verified Festivals/.test(home), 'index.html: hero must identify the verified festival total, not imply hundreds of festivals.');
 check(/id="festivalFinderCount">48<\/span> Verified Documentary Festivals/.test(home), 'index.html: festival finder count is stale.');
 check(/id="festivalDatabaseCount">48<\/span> verified documentary festivals/.test(home), 'index.html: festival database description count is stale.');
+check(/<!-- D411 STATIC CARDS START -->/.test(fs.readFileSync(path.join(__dirname, 'directory.html'), 'utf8')), 'directory.html: static resource cards are missing.');
+check(/class="d411-card"/.test(fs.readFileSync(path.join(__dirname, 'documentary-markets.html'), 'utf8')), 'documentary-markets.html: must contain real HTML cards without JS.');
+check(!fs.existsSync(path.join(__dirname, 'open-now.html')), 'open-now.html: Open Now product must stay deleted.');
 
 const directoryPage = fs.readFileSync(path.join(__dirname, 'directory.html'), 'utf8');
 check(/<h1>Search funding, grants, festivals, markets, tools and <em>what to do next<\/em>\.<\/h1>/.test(directoryPage), 'directory.html: directory heading must not advertise crew or cast services.');

@@ -1,5 +1,5 @@
 [build]
-  command = "node verify-palette.js && node apply-redesign.js && node grant-status-fixes.js && node weekly-grant-audit-2026-08-31.js && node remove-crew-jobs.js && node apply-seo.js && node verify-seo.js"
+  command = "node verify-palette.js && node apply-redesign.js && node build-resources.js && node grant-status-fixes.js && node weekly-grant-audit-2026-08-31.js && node remove-crew-jobs.js && node apply-seo.js && node verify-seo.js"
   publish = "."
   functions = "netlify/functions"
 
