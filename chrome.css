@@ -1,0 +1,202 @@
+/* Documentary411 shared chrome — header + footer + mobile menu.
+   Loaded last so filmmakers see the same link set/structure on every page.
+   Does not restyle Stripe Buy Buttons or Tally embeds. */
+
+nav.site-chrome{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(4,55,60,.98);
+  border-bottom:0;
+  box-shadow:0 8px 28px rgba(7,63,69,.10);
+  backdrop-filter:blur(12px);
+  padding:0 24px;
+}
+nav.site-chrome .nav-inner{
+  max-width:1240px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  height:64px;
+  gap:0;
+  overflow:visible;
+}
+nav.site-chrome .nav-logo{
+  color:#fff;
+  font-family:'DM Serif Display','Playfair Display',Georgia,serif;
+  font-size:0;
+  margin-right:28px;
+  letter-spacing:-.02em;
+  white-space:nowrap;
+  text-decoration:none;
+  flex:0 0 auto;
+}
+nav.site-chrome .nav-logo::before{content:'Documentary';font-size:22px;color:#fff}
+nav.site-chrome .nav-logo::after{content:'411';font-size:22px;color:#f5a623}
+nav.site-chrome .nav-links{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  flex:1;
+  min-width:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+}
+nav.site-chrome .nav-links::-webkit-scrollbar{display:none}
+nav.site-chrome .nav-links a{
+  color:rgba(255,255,255,.82);
+  height:64px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+  padding:0 10px;
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  border-bottom:2px solid transparent;
+  background:transparent;
+  font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+nav.site-chrome .nav-links a:hover,
+nav.site-chrome .nav-links a:focus-visible{
+  color:#fff;
+  border-bottom-color:#f36a16;
+}
+nav.site-chrome .nav-toggle{
+  display:none;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.5);
+  color:#fff;
+  width:40px;
+  height:40px;
+  border-radius:3px;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  flex-shrink:0;
+  margin-left:auto;
+  font-size:18px;
+  line-height:1;
+}
+nav.site-chrome .nav-toggle:hover,
+nav.site-chrome .nav-toggle:focus-visible{
+  color:#fff;
+  border-color:#fff;
+  background:rgba(255,255,255,.14);
+  outline:none;
+}
+
+footer.site-chrome-footer{
+  background:#fff;
+  border-top:1px solid rgba(7,63,69,.12);
+  padding:48px 24px;
+  color:#486166;
+}
+footer.site-chrome-footer .footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  gap:32px;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+footer.site-chrome-footer .footer-brand{
+  font-family:'DM Serif Display','Playfair Display',Georgia,serif;
+  font-size:18px;
+  color:#c2410c;
+  margin-bottom:5px;
+}
+footer.site-chrome-footer .footer-tagline{
+  font-size:13px;
+  color:#486166;
+  max-width:420px;
+  line-height:1.55;
+}
+footer.site-chrome-footer .footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 20px;
+  max-width:640px;
+}
+footer.site-chrome-footer .footer-links a{
+  font-size:14px;
+  color:#073f45;
+  font-weight:600;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+footer.site-chrome-footer .footer-links a:hover{
+  color:#c4550f;
+}
+footer.site-chrome-footer .footer-copy{
+  font-size:12px;
+  color:#486166;
+  margin-top:28px;
+  text-align:center;
+  width:100%;
+  border-top:1px solid rgba(7,63,69,.12);
+  padding-top:20px;
+}
+
+@media (max-width:900px){
+  nav.site-chrome,
+  nav.site-chrome.nav-menu-open,
+  nav.site-chrome .nav-inner{
+    overflow:visible !important;
+  }
+  nav.site-chrome .nav-toggle{display:flex !important}
+  nav.site-chrome .nav-inner{
+    height:58px;
+    width:100%;
+    max-width:none;
+    gap:8px;
+    position:relative;
+  }
+  nav.site-chrome .nav-logo{margin-right:0}
+  nav.site-chrome .nav-logo::before,
+  nav.site-chrome .nav-logo::after{font-size:19px}
+  nav.site-chrome .nav-links{
+    display:none;
+    position:fixed !important;
+    top:58px !important;
+    bottom:auto !important;
+    left:0 !important;
+    right:0 !important;
+    width:100% !important;
+    height:calc(100dvh - 58px) !important;
+    max-height:calc(100dvh - 58px) !important;
+    transform:none !important;
+    z-index:1001 !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-y;
+    background:#fbf7f0 !important;
+    flex-direction:column;
+    align-items:stretch;
+    padding:8px 0 calc(12px + env(safe-area-inset-bottom));
+    box-shadow:0 18px 36px rgba(7,63,69,.16);
+  }
+  nav.site-chrome .nav-links.nav-open{display:flex !important}
+  nav.site-chrome .nav-links a{
+    display:flex !important;
+    flex:0 0 auto;
+    height:auto;
+    padding:14px 24px;
+    border-bottom:1px solid rgba(7,63,69,.12);
+    color:#073f45 !important;
+    white-space:normal;
+    border-radius:0;
+  }
+  nav.site-chrome .nav-links a:hover,
+  nav.site-chrome .nav-links a:focus-visible{
+    color:#c4550f !important;
+    border-bottom-color:rgba(7,63,69,.12);
+    background:#f3ede4;
+  }
+}

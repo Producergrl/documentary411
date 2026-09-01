@@ -101,21 +101,149 @@ const searchScript = '<script src="/site-search.js" defer></script>';
 const publicPages = ['index.html','funding-lab.html','festival-strategy.html','funding-report.html','funding-sprint.html','advertise.html','ask-a-pro.html',...growthPages];
 publicPages.forEach(fileName => {injectStyles(fileName, [searchStyle]);injectScript(fileName, searchScript);});
 
-/* Keep the requested Shop entry visible across the site's existing header variants. */
+/* Shared chrome: one header + footer on every public HTML page.
+   Pages that already have D411 NAV START are rewritten in place (idempotent)
+   so this never re-injects the old 15-item growth nav. */
+const NAV_START = '<!-- D411 NAV START -->';
+const NAV_END = '<!-- D411 NAV END -->';
+const FOOTER_START = '<!-- D411 FOOTER START -->';
+const FOOTER_END = '<!-- D411 FOOTER END -->';
+
+function festivalsHrefFor(fileName) {
+  return fileName === 'index.html' ? '#festivals' : '/#festivals';
+}
+
+function chromeNav(festivalsHref) {
+  return `${NAV_START}
+<nav class="site-chrome" aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Documentary411</a>
+    <div class="nav-links">
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
+      <a href="${festivalsHref}">Festivals</a>
+      <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/directory" data-open-search>Search</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  </div>
+</nav>
+${NAV_END}`;
+}
+
+function chromeFooter(festivalsHref) {
+  return `${FOOTER_START}
+<footer class="site-chrome-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Documentary411</div>
+      <div class="footer-tagline">Created by Kerry David · KDC and Films · a directory for independent filmmakers.</div>
+    </div>
+    <div class="footer-links">
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
+      <a href="${festivalsHref}">Festivals</a>
+      <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/directory" data-open-search>Search</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
+      <a href="/affiliate-disclosure">Affiliate</a>
+      <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>
+    </div>
+    <div class="footer-copy">© 2026 Documentary411. Created by Kerry David, KDC and Films.</div>
+  </div>
+</footer>
+${FOOTER_END}`;
+}
+
+function replaceNav(html, nav) {
+  if (html.includes(NAV_START) && html.includes(NAV_END)) {
+    return html.replace(/<!-- D411 NAV START -->[\s\S]*?<!-- D411 NAV END -->/, nav);
+  }
+  if (/<header class="site-header">[\s\S]*?<\/header>/.test(html)) {
+    return html.replace(/<header class="site-header">[\s\S]*?<\/header>/, nav);
+  }
+  if (/<nav class="d411-nav"[^>]*>[\s\S]*?<\/nav>/.test(html)) {
+    return html.replace(/<nav class="d411-nav"[^>]*>[\s\S]*?<\/nav>/, nav);
+  }
+  if (/<nav[^>]*aria-label="Primary navigation"[^>]*>[\s\S]*?<\/nav>/.test(html)) {
+    return html.replace(/<nav[^>]*aria-label="Primary navigation"[^>]*>[\s\S]*?<\/nav>/, nav);
+  }
+  if (/<nav[^>]*aria-label="Primary"[^>]*>[\s\S]*?<\/nav>/.test(html)) {
+    return html.replace(/<nav[^>]*aria-label="Primary"[^>]*>[\s\S]*?<\/nav>/, nav);
+  }
+  if (/<a class="skip-link"[^>]*>[\s\S]*?<\/a>/.test(html)) {
+    return html.replace(/(<a class="skip-link"[^>]*>[\s\S]*?<\/a>)/, `$1\n${nav}`);
+  }
+  return null;
+}
+
+function replaceFooter(html, footer) {
+  if (html.includes(FOOTER_START) && html.includes(FOOTER_END)) {
+    return html.replace(/<!-- D411 FOOTER START -->[\s\S]*?<!-- D411 FOOTER END -->/, footer);
+  }
+  if (/<footer\b[\s\S]*?<\/footer>/.test(html)) {
+    return html.replace(/<footer\b[\s\S]*?<\/footer>/, footer);
+  }
+  if (/<\/body>/i.test(html)) {
+    return html.replace(/<\/body>/i, `${footer}\n</body>`);
+  }
+  return null;
+}
+
+const chromeStyle = '<link rel="stylesheet" href="/chrome.css">';
+const siteFixesScript = '<script src="/site-fixes.js" defer></script>';
+const chromePages = fs.readdirSync(__dirname).filter((f) => f.endsWith('.html') && !f.startsWith('google'));
+const chromeSkipped = [];
+for (const fileName of chromePages) {
+  const file = path.join(__dirname, fileName);
+  let html = fs.readFileSync(file, 'utf8');
+  const festivalsHref = festivalsHrefFor(fileName);
+  const nextNav = replaceNav(html, chromeNav(festivalsHref));
+  if (!nextNav) {
+    chromeSkipped.push(`${fileName}: no header/nav to convert`);
+    continue;
+  }
+  html = nextNav;
+  const nextFooter = replaceFooter(html, chromeFooter(festivalsHref));
+  if (!nextFooter) {
+    chromeSkipped.push(`${fileName}: no footer to convert`);
+    fs.writeFileSync(file, html);
+    continue;
+  }
+  fs.writeFileSync(file, nextFooter);
+  injectStyles(fileName, [chromeStyle, searchStyle]);
+  injectScript(fileName, siteFixesScript);
+  injectScript(fileName, searchScript);
+}
+if (chromeSkipped.length) {
+  console.warn('Chrome conversion skipped:\n  ' + chromeSkipped.join('\n  '));
+}
+
+/* Shop lives in the shared chrome. Do not clone it into leftover header variants
+   on pages that already have D411 NAV START. */
 for (const fileName of publicPages) {
   const file = path.join(__dirname, fileName);
   if (!fs.existsSync(file)) continue;
   let source = fs.readFileSync(file, 'utf8');
+  if (source.includes(NAV_START)) continue;
   if (/href=["']\/shop(?:\.html)?["'][^>]*>Shop<\/a>/i.test(source)) continue;
   if (source.includes('class="d411-links"')) {
-    source = source.replace('<div class="d411-links">', '<div class="d411-links"><a href="/shop.html">Shop</a>');
+    source = source.replace('<div class="d411-links">', '<div class="d411-links"><a href="/shop">Shop</a>');
   } else if (source.includes('class="nav-links"')) {
-    source = source.replace('<div class="nav-links">', '<div class="nav-links"><a href="/shop.html">Shop</a>');
+    source = source.replace('<div class="nav-links">', '<div class="nav-links"><a href="/shop">Shop</a>');
   } else if (source.includes('class="nav-note"')) {
-    source = source.replace(/(<span class="nav-note")/, '<a class="site-shop-link" href="/shop.html">Shop</a>\n      $1');
+    source = source.replace(/(<span class="nav-note")/, '<a class="site-shop-link" href="/shop">Shop</a>\n      $1');
   }
   fs.writeFileSync(file, source);
 }
+
 
 function decodeEntities(s){return String(s||'').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&nbsp;/g,' ').replace(/&ndash;/g,'–').replace(/&mdash;/g,'—').replace(/&lt;/g,'<').replace(/&gt;/g,'>');}
 function cleanText(source){return decodeEntities(String(source||'').replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ')).replace(/\s+/g,' ').trim();}
@@ -145,4 +273,4 @@ const faviconTags = [
 const allHtmlPages = fs.readdirSync(__dirname).filter(f => f.endsWith('.html') && !f.startsWith('google'));
 allHtmlPages.forEach(fileName => injectStyles(fileName, faviconTags));
 
-console.log(`Documentary411 redesign, directory upgrades, advertising, paid-offer safety, homepage fixes, site search, and favicon applied (${searchEntries.length} search entries, ${allHtmlPages.length} pages got favicon links)`);
+console.log(`Documentary411 redesign, shared chrome, directory upgrades, advertising, paid-offer safety, homepage fixes, site search, and favicon applied (${searchEntries.length} search entries, ${allHtmlPages.length} pages got favicon links)`);

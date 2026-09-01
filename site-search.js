@@ -38,6 +38,7 @@
   function buildUI(){
     if (document.querySelector('.d411-search-overlay')) return;
 
+    const chromeSearch = document.querySelector('nav [data-open-search]');
     const toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'd411-search-toggle';
@@ -50,17 +51,19 @@
     const siteHeader = document.querySelector('.site-header .wrap');
     const directoryNav = document.querySelector('.d411-nav-inner');
     const directoryCta = directoryNav?.querySelector('.d411-cta');
-    if (homeNav) {
-      if (navCta) homeNav.insertBefore(toggle, navCta);
-      else homeNav.appendChild(toggle);
-    } else if (directoryNav) {
-      if (directoryCta) directoryNav.insertBefore(toggle, directoryCta);
-      else directoryNav.appendChild(toggle);
-    } else if (siteHeader) {
-      siteHeader.appendChild(toggle);
-    } else {
-      toggle.style.position='fixed'; toggle.style.right='18px'; toggle.style.top='18px'; toggle.style.zIndex='9000'; toggle.style.background='#073f45';
-      document.body.appendChild(toggle);
+    if (!chromeSearch) {
+      if (homeNav) {
+        if (navCta) homeNav.insertBefore(toggle, navCta);
+        else homeNav.appendChild(toggle);
+      } else if (directoryNav) {
+        if (directoryCta) directoryNav.insertBefore(toggle, directoryCta);
+        else directoryNav.appendChild(toggle);
+      } else if (siteHeader) {
+        siteHeader.appendChild(toggle);
+      } else {
+        toggle.style.position='fixed'; toggle.style.right='18px'; toggle.style.top='18px'; toggle.style.zIndex='9000'; toggle.style.background='#073f45';
+        document.body.appendChild(toggle);
+      }
     }
 
     const overlay = document.createElement('div');
@@ -82,20 +85,23 @@
       </div>`;
     document.body.appendChild(overlay);
 
-    const topSearch = document.createElement('div');
-    topSearch.className = 'd411-top-search';
-    topSearch.innerHTML = `<div class="d411-top-search-inner"><button class="d411-top-search-button" type="button" aria-label="Search Documentary411">${icon}<span>Search Documentary411 — grants, festivals, legal, funding, tools…</span><span class="d411-top-search-kbd">⌘K</span></button></div>`;
-    const primaryNav = document.querySelector('nav');
-    const primaryHeader = document.querySelector('.site-header');
-    if (primaryNav && primaryNav.parentNode) primaryNav.insertAdjacentElement('afterend', topSearch);
-    else if (primaryHeader && primaryHeader.parentNode) primaryHeader.insertAdjacentElement('afterend', topSearch);
-    else document.body.insertBefore(topSearch, document.body.firstChild);
+    let topSearch = null;
+    if (!chromeSearch) {
+      topSearch = document.createElement('div');
+      topSearch.className = 'd411-top-search';
+      topSearch.innerHTML = `<div class="d411-top-search-inner"><button class="d411-top-search-button" type="button" aria-label="Search Documentary411">${icon}<span>Search Documentary411 — grants, festivals, legal, funding, tools…</span><span class="d411-top-search-kbd">⌘K</span></button></div>`;
+      const primaryNav = document.querySelector('nav');
+      const primaryHeader = document.querySelector('.site-header');
+      if (primaryNav && primaryNav.parentNode) primaryNav.insertAdjacentElement('afterend', topSearch);
+      else if (primaryHeader && primaryHeader.parentNode) primaryHeader.insertAdjacentElement('afterend', topSearch);
+      else document.body.insertBefore(topSearch, document.body.firstChild);
+    }
 
     const input = overlay.querySelector('.d411-search-input');
     const results = overlay.querySelector('.d411-search-results');
     const hint = overlay.querySelector('.d411-search-hint');
     const closeBtn = overlay.querySelector('.d411-search-close');
-    const topSearchButton = topSearch.querySelector('.d411-top-search-button');
+    const topSearchButton = topSearch ? topSearch.querySelector('.d411-top-search-button') : null;
 
     async function openSearch(){
       overlay.classList.add('open');
@@ -107,7 +113,8 @@
     function closeSearch(){
       overlay.classList.remove('open');
       document.body.classList.remove('d411-search-lock');
-      if (document.activeElement === closeBtn || overlay.contains(document.activeElement)) topSearchButton.focus();
+      const fallback = document.querySelector('nav [data-open-search]') || topSearchButton;
+      if (document.activeElement === closeBtn || overlay.contains(document.activeElement)) fallback && fallback.focus && fallback.focus();
     }
 
     function render(query){
@@ -126,8 +133,14 @@
         </a>`).join('');
     }
 
-    toggle.addEventListener('click', openSearch);
-    topSearchButton.addEventListener('click', openSearch);
+    if (!chromeSearch) toggle.addEventListener('click', openSearch);
+    if (topSearchButton) topSearchButton.addEventListener('click', openSearch);
+    document.addEventListener('click', e => {
+      const trigger = e.target.closest('[data-open-search]');
+      if (!trigger) return;
+      e.preventDefault();
+      openSearch();
+    });
     closeBtn.addEventListener('click', closeSearch);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
     input.addEventListener('input', async () => { if (!searchIndex) { try{ await loadIndex(); }catch(e){} } render(input.value); });

@@ -19,23 +19,29 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/chrome.css">
+  <link rel="stylesheet" href="/site-search.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="/">Documentary<span>411</span></a>
-      <nav class="site-header-links" aria-label="Primary">
-        <a href="/directory">Directory</a>
-        <a href="/documentary-grants">Grants</a>
-        <a href="/shop">Shop</a>
-        <a href="/blog">Blog</a>
-        <a href="/advertise">Advertise</a>
-      </nav>
-      <span class="nav-note">Ask a Pro</span>
+  <!-- D411 NAV START -->
+<nav class="site-chrome" aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Documentary411</a>
+    <div class="nav-links">
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
+      <a href="/#festivals">Festivals</a>
+      <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/directory" data-open-search>Search</a>
     </div>
-  </header>
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  </div>
+</nav>
+<!-- D411 NAV END -->
 <main id="main">
 
 <section class="hero"><div class="wrap"><p class="eyebrow">Your $50 question</p><h1>Tell us exactly what you need help with.</h1><p class="subhead">Submit one focused documentary question below. A thoughtful written response will be sent to the email on this form within 24 hours.</p></div></section>
@@ -59,6 +65,33 @@
 </div></section>
 </main>
 
-<footer class="site-footer"><div class="wrap foot-grid"><div>&copy; 2026 Documentary411.</div><div class="links"><a href="/directory">Directory</a><a href="mailto:admin@kdcandfilms.com">Contact</a><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a><a href="/affiliate-disclosure">Affiliate Disclosure</a></div></div></footer>
+<!-- D411 FOOTER START -->
+<footer class="site-chrome-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Documentary411</div>
+      <div class="footer-tagline">Created by Kerry David · KDC and Films · a directory for independent filmmakers.</div>
+    </div>
+    <div class="footer-links">
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
+      <a href="/#festivals">Festivals</a>
+      <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/directory" data-open-search>Search</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
+      <a href="/affiliate-disclosure">Affiliate</a>
+      <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>
+    </div>
+    <div class="footer-copy">© 2026 Documentary411. Created by Kerry David, KDC and Films.</div>
+  </div>
+</footer>
+<!-- D411 FOOTER END -->
+  <script src="/site-fixes.js" defer></script>
+  <script src="/site-search.js" defer></script>
 </body>
 </html>

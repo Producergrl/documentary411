@@ -295,8 +295,8 @@
   }
 
   function initMobileNav() {
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
+    const toggle = document.querySelector('nav.site-chrome .nav-toggle') || document.querySelector('.nav-toggle');
+    const links = document.querySelector('nav.site-chrome .nav-links') || document.querySelector('.nav-links');
     if (!toggle || !links) return;
     const nav = toggle.closest('nav') || document.querySelector('nav');
 
@@ -312,7 +312,7 @@
     });
 
     links.addEventListener('click', (event) => {
-      if (event.target.tagName === 'A') setOpen(false);
+      if (event.target.closest('a, [data-open-search]')) setOpen(false);
     });
   }
 

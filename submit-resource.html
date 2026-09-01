@@ -4,6 +4,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/chrome.css">
 <!-- D411 TECHNICAL SEO START -->
   <link rel="canonical" href="https://documentary411.com/submit-resource">
   <meta property="og:title" content="Submit or Correct a Documentary Resource — Documentary411">
@@ -28,7 +29,23 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
-<nav class="d411-nav"><div class="d411-nav-inner"><a class="d411-logo" href="/">Documentary411</a><div class="d411-links"><a href="/directory">Directory</a><a href="/documentary-grants">Grants</a><a href="/shop">Shop</a><a href="/blog">Blog</a><a href="/advertise">Advertise</a></div><a class="d411-cta" href="/directory">Directory</a></div></nav>
+<!-- D411 NAV START -->
+<nav class="site-chrome" aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Documentary411</a>
+    <div class="nav-links">
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
+      <a href="/#festivals">Festivals</a>
+      <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/directory" data-open-search>Search</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  </div>
+</nav>
+<!-- D411 NAV END -->
 <main id="main">
 
 <header class="d411-hero"><p class="d411-eyebrow">Self-correcting directory</p><h1>Help keep Documentary411 <em>accurate</em>.</h1><p class="d411-sub">Found a dead link, changed deadline, membership wall, paused program, or resource we should add? Send it here. This is how a living directory stays useful without becoming a closed membership site.</p></header>
@@ -36,14 +53,31 @@
 <form netlify netlify-honeypot="bot-field" class="d411-form" name="submit-resource" method="POST" data-netlify="true" action="/resource-thank-you.html"><p class="visually-hidden"><label>Do not fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p><input type="hidden" name="form-name" value="submit-resource"><p class="d411-kicker">Submit a resource</p><h2>Add something useful</h2><label>Your name<input class="d411-input" name="name"></label><label>Email<input class="d411-input" name="email" type="email"></label><label>Resource name<input class="d411-input" name="resource_name" required></label><label>Official URL<input class="d411-input" name="official_url" type="url" required></label><label>Category<select class="d411-select" name="category"><option>Documentary & Film Funds / Grants</option><option>Fiscal Sponsorship</option><option>Broadcaster / Public Media Opportunities</option><option>Documentary Festivals</option><option>General Film Festivals</option><option>Film Markets</option><option>Documentary Markets</option><option>Labs & Fellowships</option><option>Crew, Jobs & Production Hiring</option><option>Distribution Platforms</option><option>Submission Platforms</option><option>Crowdfunding Tools</option><option>AI Tools for Filmmakers</option><option>Legal / Business Resources</option><option>Impact Campaign Resources</option><option>Education / Filmmaker Resource Hubs</option></select></label><label>Why it matters<textarea class="d411-textarea" name="why_it_matters" required></textarea></label><button class="d411-btn primary" type="submit">Submit Resource</button></form></div></section>
 
 </main>
-<footer class="d411-footer">
-    <p>Submissions are reviewed before publication. Sponsored placements must be clearly labeled.</p>
-    <nav class="d411-footer-links" aria-label="Legal">
+<!-- D411 FOOTER START -->
+<footer class="site-chrome-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Documentary411</div>
+      <div class="footer-tagline">Created by Kerry David · KDC and Films · a directory for independent filmmakers.</div>
+    </div>
+    <div class="footer-links">
+      <a href="/directory">Directory</a>
+      <a href="/documentary-grants">Grants</a>
+      <a href="/#festivals">Festivals</a>
+      <a href="/shop">Shop</a>
+      <a href="/blog">Blog</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/directory" data-open-search>Search</a>
       <a href="/about">About</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/contact">Contact</a>
-      <a href="/affiliate-disclosure">Affiliate Disclosure</a>
-    </nav>
-  </footer><script>const p=new URLSearchParams(location.search);const c=p.get('correction');if(c)document.getElementById('resourceName').value=c;</script>  <script src="/site-search.js" defer></script>
+      <a href="/affiliate-disclosure">Affiliate</a>
+      <a href="mailto:admin@kdcandfilms.com">admin@kdcandfilms.com</a>
+    </div>
+    <div class="footer-copy">© 2026 Documentary411. Created by Kerry David, KDC and Films.</div>
+  </div>
+</footer>
+<!-- D411 FOOTER END --><script>const p=new URLSearchParams(location.search);const c=p.get('correction');if(c)document.getElementById('resourceName').value=c;</script>  <script src="/site-search.js" defer></script>
+  <script src="/site-fixes.js" defer></script>
 </body></html>
