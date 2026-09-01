@@ -318,7 +318,16 @@ function redirectRules(source) {
 
 const netlify = fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8');
 const redirects = redirectRules(netlify);
+const rewriteRoutes = new Set(['/about', '/privacy', '/terms', '/contact', '/affiliate-disclosure']);
 for (const page of pages) {
+  if (rewriteRoutes.has(page.route)) {
+    const matches = redirects.filter((rule) => rule.from === page.route && rule.status === 200);
+    check(matches.length === 1, `netlify.toml: expected one 200 rewrite for ${page.route}, found ${matches.length}.`);
+    if (matches.length) {
+      check(matches[0].to === `/${page.file}`, `netlify.toml: ${page.route} must rewrite to /${page.file}.`);
+    }
+    continue;
+  }
   const from = page.route === '/' ? '/index.html' : `${page.route}.html`;
   const matches = redirects.filter((rule) => rule.from === from && rule.status === 301);
   check(matches.length === 1, `netlify.toml: expected one 301 redirect for ${from}, found ${matches.length}.`);
