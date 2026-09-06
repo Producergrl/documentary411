@@ -1,0 +1,19 @@
+name: Funding data freshness
+
+on:
+  schedule:
+    # 9:15 a.m. New York during daylight-saving time; GitHub cron uses UTC.
+    - cron: '15 13 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run audit:funding
+      - run: npm run audit
