@@ -24,7 +24,6 @@ jobs:
           git apply --check /tmp/documentary411-source.patch
           git apply /tmp/documentary411-source.patch
           git rm .launch/documentary411-source.patch.gz.b64
-          git rm .github/workflows/apply-launch-patch.yml
           git config user.name "Documentary411 Launch Bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
