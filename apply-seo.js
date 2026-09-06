@@ -176,17 +176,17 @@ function pageSchema(page, canonical, title, description) {
 
 const PRODUCT_OFFERS = {
   'festival-strategy.html': [
-    { name: 'The 90-Day Festival Strategy', price: '99' },
+    { name: '90 Day Film Festival Strategy', price: '99' },
   ],
   'funding-lab.html': [
-    { name: 'The Brand-Funded Documentary System', price: '297' },
+    { name: 'Brand-Funded Documentary', price: '297', availability: 'https://schema.org/OutOfStock' },
   ],
   'funding-sprint.html': [
     { name: 'The Funding Package Sprint', price: '2500' },
   ],
   'ask-a-pro.html': [
-    { name: 'Ask a Pro — One Question', price: '50' },
-    { name: 'Ask a Pro — Professional Consult', price: '500' },
+    { name: 'Ask A Pro', price: '50' },
+    { name: 'Professional Consult', price: '500' },
   ],
 };
 
@@ -204,7 +204,7 @@ function productSchemas(page, canonical, description) {
       '@type': 'Offer',
       price: product.price,
       priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
+      availability: product.availability || 'https://schema.org/InStock',
       url: canonical,
       seller: { '@id': `${ORIGIN}/#organization` },
     },

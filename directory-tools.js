@@ -60,7 +60,6 @@
         base = base.filter(r => r.category === config.category || (r.homepage && sections.indexOf(r.homepage.section) !== -1));
       } else if(config.category) base = base.filter(r=>r.category === config.category);
       if(config.status) base = base.filter(r=>r.status === config.status);
-      if(config.openish) base = base.filter(r=>r.status === 'open' || r.status === 'rolling');
       const state = {q:'',category:'',stage:'',status:'',access:'',doc:''};
       root.innerHTML = `<div class="d411-tools">
         <label class="visually-hidden" for="d411q">Search the directory</label>

@@ -2,6 +2,13 @@
   "name": "documentary411",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "audit": "node scripts/audit-site.mjs",
+    "audit:freshness": "node scripts/audit-funding-freshness.mjs",
+    "audit:funding": "node scripts/apply-funding-audit.mjs && node scripts/audit-funding-freshness.mjs",
+    "audit:links": "node scripts/audit-external-links.mjs",
+    "audit:inventory": "node scripts/build-site-inventory.mjs"
+  },
   "dependencies": {
     "@netlify/functions": "^2.8.0",
     "stripe": "^17.0.0"

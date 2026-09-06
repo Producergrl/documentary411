@@ -20,7 +20,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "unknown",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "Feature projects may apply at development, production, or post-production; short and medium-length projects are eligible at production or post-production.",
     "slug": "afac-documentary-film-program"
   },
@@ -45,7 +45,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "unknown",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "The foundation accepts applications each year through August 15 and announces selections by December 31.",
     "slug": "alter-cine-foundation-documentary-film-grants"
   },
@@ -55,13 +55,13 @@ window.D411_RESOURCES = [
     "category": "Documentary & Film Funds / Grants",
     "description": "Supports social-justice films at development, production, and post-production stages, along with selected impact campaigns.",
     "bestFor": "Social-justice films and impact campaigns selected by the fund",
-    "officialUrl": "https://berthafoundation.org/story/bertha-film-fund/",
+    "officialUrl": "https://www.berthafoundation.org/",
     "region": "International",
-    "deadlineMonth": "Closed — invitation only",
+    "deadlineMonth": "No public application — unsolicited proposals are not accepted",
     "rollingDeadline": false,
     "cost": "Up to $25,000; impact campaigns up to $10,000",
     "isFree": "mixed",
-    "access": "Closed · up to $25,000 · invitation only",
+    "access": "No public application · invitation / relationship based",
     "documentarySpecific": "mixed",
     "filmType": "documentary / fiction / digital media",
     "projectStage": "development / production / post-production / impact",
@@ -70,8 +70,8 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-22",
-    "notes": "Bertha Foundation does not accept unsolicited proposals. Impact-campaign awards may be up to $10,000.",
+    "lastVerified": "2026-09-06",
+    "notes": "Bertha Foundation states that it does not accept unsolicited proposals. Documentary411 does not label this fund as publicly open.",
     "slug": "bertha-film-fund"
   },
   {
@@ -95,7 +95,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "open",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "Five projects will enter the talent-development program; one will receive the 2027 PitchBLACK Award. Funding is structured as a public-media licensing agreement, not a grant.",
     "homepage": {
       "title": "Black Public Media Open Call",
@@ -134,7 +134,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "Funding ranges from $10,000–$25,000 for research and development to $50,000–$100,000 for production or post-production.",
     "slug": "caam-building-bridges-documentary-fund"
   },
@@ -159,7 +159,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-31",
+    "lastVerified": "2026-09-06",
     "notes": "Catapult states that it is not accepting applications at this time; its 2026 Research and Development grant rounds are closed.",
     "homepage": {
       "title": "Catapult Film Fund",
@@ -197,7 +197,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-31",
+    "lastVerified": "2026-09-06",
     "notes": "Current public grant calls are closed. The 2026 R&D Grant closed Feb 4; the 2027 (Egg)celerator Lab closed Apr 29; Project: Hatched is invite-only.",
     "homepage": {
       "title": "Chicken & Egg Pictures",
@@ -235,7 +235,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "unknown",
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "closed",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "The 2026 application closed April 16. The selected team also receives a Points North editing retreat.",
     "slug": "ellis-beauregard-foundation"
   },
@@ -260,7 +260,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-31",
+    "lastVerified": "2026-09-06",
     "notes": "Ford currently states that documentary film production grant submissions are closed.",
     "homepage": {
       "title": "Ford Foundation JustFilms",
@@ -298,7 +298,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "upcoming",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "LOI submissions are temporarily closed and reopen September 21. When open, submissions are reviewed on a rolling basis.",
     "homepage": {
       "title": "Impact Partners",
@@ -336,7 +336,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "rolling",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "The official FAQ confirms that inquiry forms are reviewed on a rolling basis with no submission deadline.",
     "homepage": {
       "title": "Perspective Fund",
@@ -375,7 +375,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "Applicants must live in or have deep roots in one of twelve eligible Southern states; student projects are not eligible.",
     "slug": "southern-documentary-fund-production-grant"
   },
@@ -400,7 +400,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-31",
+    "lastVerified": "2026-09-06",
     "notes": "Official Sundance page confirms the Documentary Fund is not accepting applications; next open call will be announced in early 2027.",
     "homepage": {
       "title": "Sundance Documentary Fund",
@@ -438,7 +438,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "open",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "Four filmmakers will be selected. Rough cuts are due in February 2027 and final films are due June 14, 2027.",
     "homepage": {
       "title": "Vision Maker Media Biomimicry Fund",
@@ -477,7 +477,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-08-31",
+    "lastVerified": "2026-09-06",
     "notes": "ITVS currently labels Open Call as not accepting applications. No new application deadline is posted on the official Open Call page.",
     "slug": "itvs-open-call"
   },
@@ -502,7 +502,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "active",
-    "lastVerified": "2026-08-31",
+    "lastVerified": "2026-09-06",
     "notes": "IDA says the public directory displays active third-party opportunities only. It is a funding research resource, not itself an open grant.",
     "homepage": {
       "title": "IDA Grants & Funding Programs",
@@ -590,7 +590,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "open",
-    "lastVerified": "2026-08-22",
+    "lastVerified": "2026-09-06",
     "notes": "The current Impact Kickstart application is open through September 11, 2026 and includes a year-long peer cohort.",
     "homepage": {
       "title": "Working Films Impact Kickstart",
@@ -2553,7 +2553,7 @@ window.D411_RESOURCES = [
     "category": "Documentary Festivals",
     "description": "Oscar-qualifying for shorts. Strong programmatic focus on Southern stories and Black filmmakers, plus music and culture documentary.",
     "bestFor": "Oscar-qualifying for shorts. Strong programmatic focus on Southern stories and Black filmmakers, plus music and culture documentary.",
-    "officialUrl": "https://www.neworleansfilmfestival.org",
+    "officialUrl": "https://neworleansfilmsociety.org/attend/",
     "region": "Southeast",
     "deadlineMonth": "November 4–11, 2026",
     "rollingDeadline": false,
@@ -2927,7 +2927,7 @@ window.D411_RESOURCES = [
     "category": "Documentary Festivals",
     "description": "Filmmaker-friendly Bay Area showcase known for adventurous programming and rejecting conventional taste — strong fit for music, subculture, and fringe-subject documentaries.",
     "bestFor": "Filmmaker-friendly Bay Area showcase known for adventurous programming and rejecting conventional taste — strong fit for music, subculture, and fringe-subject documentaries.",
-    "officialUrl": "https://sfindie.com/festivals/sf-docfest",
+    "officialUrl": "https://filmfreeway.com/SanFranciscoDocumentaryFestival",
     "region": "West",
     "deadlineMonth": "May 28 – June 7, 2026",
     "rollingDeadline": false,
@@ -3112,7 +3112,7 @@ window.D411_RESOURCES = [
     "category": "Documentary Festivals",
     "description": "Massive convergence of film, tech, and music. Documentary Feature Competition launches major theatrical and streaming docs. Industry-heavy market with strong distribution conversations.",
     "bestFor": "Massive convergence of film, tech, and music. Documentary Feature Competition launches major theatrical and streaming docs. Industry-heavy market with strong distribution conversations.",
-    "officialUrl": "https://www.sxsw.com/festivals/film",
+    "officialUrl": "https://sxsw.com/film-tv-festival/",
     "region": "Southwest",
     "deadlineMonth": "March 13–22, 2026",
     "rollingDeadline": false,
@@ -4424,7 +4424,7 @@ window.D411_RESOURCES = [
     "category": "Equipment / Gear",
     "description": "C70 · C300 III · EOS R5 C",
     "bestFor": "C70 · C300 III · EOS R5 C",
-    "officialUrl": "https://www.usa.canon.com/cameras/cinema-eos",
+    "officialUrl": "https://www.usa.canon.com/pro/cameras/cinema-cameras",
     "region": "United States / International",
     "deadlineMonth": "Rolling",
     "rollingDeadline": true,
@@ -4736,7 +4736,7 @@ window.D411_RESOURCES = [
     "category": "Equipment / Gear",
     "description": "12.1MP full-frame sensor built for video. ISO 80–102,400 (expandable). The low-light king for docs in dark or unpredictable environments.",
     "bestFor": "12.1MP full-frame sensor built for video. ISO 80–102,400 (expandable). The low-light king for docs in dark or unpredictable environments.",
-    "officialUrl": "https://store.sony.com/products/sony-a7s-iii",
+    "officialUrl": "https://electronics.sony.com/imaging/interchangeable-lens-cameras/all-interchangeable-lens-cameras/p/ilce7sm3-b",
     "region": "United States / International",
     "deadlineMonth": "Rolling",
     "rollingDeadline": false,
@@ -4762,7 +4762,7 @@ window.D411_RESOURCES = [
       "price": "$3,499",
       "shopLinks": [
         {
-          "href": "https://store.sony.com/products/sony-a7s-iii",
+          "href": "https://electronics.sony.com/imaging/interchangeable-lens-cameras/all-interchangeable-lens-cameras/p/ilce7sm3-b",
           "label": "Sony"
         },
         {
@@ -4782,7 +4782,7 @@ window.D411_RESOURCES = [
     "category": "Equipment / Gear",
     "description": "The run-and-gun cinema standard. Compact body, dual-base ISO, exceptional low-light. Documentary filmmakers' top choice for narrative docs.",
     "bestFor": "The run-and-gun cinema standard. Compact body, dual-base ISO, exceptional low-light. Documentary filmmakers' top choice for narrative docs.",
-    "officialUrl": "https://store.sony.com/products/sony-fx3",
+    "officialUrl": "https://electronics.sony.com/imaging/interchangeable-lens-cameras/all-interchangeable-lens-cameras/p/ilmefx3a",
     "region": "United States / International",
     "deadlineMonth": "Rolling",
     "rollingDeadline": false,
@@ -4808,7 +4808,7 @@ window.D411_RESOURCES = [
       "price": "$3,799",
       "shopLinks": [
         {
-          "href": "https://store.sony.com/products/sony-fx3",
+          "href": "https://electronics.sony.com/imaging/interchangeable-lens-cameras/all-interchangeable-lens-cameras/p/ilmefx3a",
           "label": "Sony"
         },
         {
@@ -4828,7 +4828,7 @@ window.D411_RESOURCES = [
     "category": "Equipment / Gear",
     "description": "FX3 · A7S III · FX6 · ZV-E1",
     "bestFor": "FX3 · A7S III · FX6 · ZV-E1",
-    "officialUrl": "https://store.sony.com/collections/cameras",
+    "officialUrl": "https://electronics.sony.com/imaging/interchangeable-lens-cameras/c/all-interchangeable-lens-cameras",
     "region": "United States / International",
     "deadlineMonth": "Rolling",
     "rollingDeadline": true,

@@ -113,8 +113,8 @@ if (!html.includes('hero-cinematic.jpg')) {
 }
 fs.writeFileSync(homeFile, html);
 
-/* The Brand-Funded Documentary System is complete and available. The active
-   checkout and delivery copy in funding-lab.html must not be replaced at build. */
+/* Funding Lab availability and delivery language is maintained directly in
+   funding-lab.html and must not be replaced at build. */
 
 const productStyle = '<link rel="stylesheet" href="/product-redesign.css">';
 const directoryStyle = '<link rel="stylesheet" href="/directory-upgrades.css">';

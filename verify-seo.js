@@ -330,9 +330,10 @@ check(/<h1>Search funding, grants, festivals, markets, tools and <em>what to do 
 
 const fundingLab = fs.readFileSync(path.join(__dirname, 'funding-lab.html'), 'utf8');
 const fundingCheckoutButtons = fundingLab.match(/buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"/g) || [];
-check(fundingCheckoutButtons.length === 3, `funding-lab.html: expected three active Stripe buy buttons, found ${fundingCheckoutButtons.length}.`);
-check(!/checkout is (?:currently |temporarily )?paused|why is checkout paused|funding lab waitlist/i.test(fundingLab), 'funding-lab.html: stale paused or waitlist copy remains.');
-check(!/checkout is (?:currently |temporarily )?paused|buyer library is being finalized|funding lab waitlist/i.test(shop + fs.readFileSync(path.join(__dirname, 'welcome-system.html'), 'utf8')), 'shop/welcome-system: stale Funding Lab pause copy remains.');
+check(fundingCheckoutButtons.length === 0, `funding-lab.html: unverified Stripe buy button is public (${fundingCheckoutButtons.length} found).`);
+check(/Purchase is temporarily paused while post-payment delivery is independently verified/i.test(fundingLab), 'funding-lab.html: delivery-verification pause notice is missing.');
+check(/"availability":"https:\/\/schema.org\/OutOfStock"/.test(fundingLab), 'funding-lab.html: structured data must mark the paused offer unavailable.');
+check(/Purchase paused/.test(shop), 'shop.html: paused Funding Lab status is missing.');
 
 const festivalStrategy = fs.readFileSync(path.join(__dirname, 'festival-strategy.html'), 'utf8');
 const festivalCheckoutUrl = 'https://buy.stripe.com/4gM5kC83RcUN5aK7dN6J206';
