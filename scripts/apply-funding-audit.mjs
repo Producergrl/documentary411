@@ -3,7 +3,7 @@ import fs from 'node:fs';
 // This file is the deploy-time record of the most recent human-reviewed audit.
 // Update only after checking each controlling official source. The scheduled
 // freshness workflow fails when this evidence becomes stale.
-const AUDIT_DATE = '2026-09-06';
+const AUDIT_DATE = '2026-09-07';
 
 const updates = {
   'AFAC Documentary Film Program': { status: 'closed', lastVerified: AUDIT_DATE },
