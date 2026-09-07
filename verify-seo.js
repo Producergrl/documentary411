@@ -331,7 +331,7 @@ check(/<h1>Search funding, grants, festivals, markets, tools and <em>what to do 
 const fundingLab = fs.readFileSync(path.join(__dirname, 'funding-lab.html'), 'utf8');
 const fundingCheckoutUrl = 'https://buy.stripe.com/8x2cN4abZ9IB32C55F6J200';
 const fundingCheckoutLinks = fundingLab.match(new RegExp(fundingCheckoutUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || [];
-check(fundingCheckoutLinks.length === 2, `funding-lab.html: expected two verified $297 checkout links, found ${fundingCheckoutLinks.length}.`);
+check(fundingCheckoutLinks.length === 3, `funding-lab.html: expected three verified $297 checkout links, found ${fundingCheckoutLinks.length}.`);
 check(/"availability":"https:\/\/schema.org\/InStock"/.test(fundingLab), 'funding-lab.html: structured data must mark the live offer InStock.');
 check(/Start Here plus seven practical training modules/.test(shop), 'shop.html: Brand-Funded Documentary delivery summary is stale.');
 
