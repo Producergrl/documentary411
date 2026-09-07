@@ -329,11 +329,11 @@ const directoryPage = fs.readFileSync(path.join(__dirname, 'directory.html'), 'u
 check(/<h1>Search funding, grants, festivals, markets, tools and <em>what to do next<\/em>\.<\/h1>/.test(directoryPage), 'directory.html: directory heading must not advertise crew or cast services.');
 
 const fundingLab = fs.readFileSync(path.join(__dirname, 'funding-lab.html'), 'utf8');
-const fundingCheckoutButtons = fundingLab.match(/buy-button-id="buy_btn_1U6wImAPixlPEv1rpHBCkIdL"/g) || [];
-check(fundingCheckoutButtons.length === 0, `funding-lab.html: unverified Stripe buy button is public (${fundingCheckoutButtons.length} found).`);
-check(/Purchase is temporarily paused while post-payment delivery is independently verified/i.test(fundingLab), 'funding-lab.html: delivery-verification pause notice is missing.');
-check(/"availability":"https:\/\/schema.org\/OutOfStock"/.test(fundingLab), 'funding-lab.html: structured data must mark the paused offer unavailable.');
-check(/Purchase paused/.test(shop), 'shop.html: paused Funding Lab status is missing.');
+const fundingCheckoutUrl = 'https://buy.stripe.com/8x2cN4abZ9IB32C55F6J200';
+const fundingCheckoutLinks = fundingLab.match(new RegExp(fundingCheckoutUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || [];
+check(fundingCheckoutLinks.length === 2, `funding-lab.html: expected two verified $297 checkout links, found ${fundingCheckoutLinks.length}.`);
+check(/"availability":"https:\/\/schema.org\/InStock"/.test(fundingLab), 'funding-lab.html: structured data must mark the live offer InStock.');
+check(/Start Here plus seven practical training modules/.test(shop), 'shop.html: Brand-Funded Documentary delivery summary is stale.');
 
 const festivalStrategy = fs.readFileSync(path.join(__dirname, 'festival-strategy.html'), 'utf8');
 const festivalCheckoutUrl = 'https://buy.stripe.com/4gM5kC83RcUN5aK7dN6J206';

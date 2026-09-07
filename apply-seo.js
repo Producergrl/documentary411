@@ -179,7 +179,7 @@ const PRODUCT_OFFERS = {
     { name: '90 Day Film Festival Strategy', price: '99' },
   ],
   'funding-lab.html': [
-    { name: 'Brand-Funded Documentary', price: '297', availability: 'https://schema.org/OutOfStock' },
+    { name: 'Brand-Funded Documentary', price: '297', availability: 'https://schema.org/InStock' },
   ],
   'funding-sprint.html': [
     { name: 'The Funding Package Sprint', price: '2500' },
