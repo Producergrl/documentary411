@@ -8,7 +8,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed — 2026 deadline was April 2; annual program
 - Official URL: https://www.arabculturefund.org/Programs/7
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/afac-documentary-film-program
 
 ## Alter-Ciné Foundation Documentary Film Grants
@@ -17,16 +17,16 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed — annual deadline was August 15
 - Official URL: https://altercine.org/en/documentary-film-grants/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/alter-cine-foundation-documentary-film-grants
 
 ## Bertha Film Fund
 
 - Category: Documentary & Film Funds / Grants
 - Status: closed
-- Deadline: Closed — invitation only
-- Official URL: https://berthafoundation.org/story/bertha-film-fund/
-- Last verified: 2026-08-22
+- Deadline: No public application — unsolicited proposals are not accepted
+- Official URL: https://www.berthafoundation.org/
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/bertha-film-fund
 
 ## Black Public Media Open Call
@@ -35,7 +35,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: open
 - Deadline: Opens September 1, 2026 — deadline October 1, 2026
 - Official URL: https://blackpublicmedia.org/for-media-makers/bpm-open-call/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/black-public-media-open-call
 
 ## CAAM Building Bridges Documentary Fund
@@ -44,7 +44,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed — 2026 deadline was April 26; next cycle not announced
 - Official URL: https://caamedia.org/for-makers/building-bridges-documentary-fund/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/caam-building-bridges-documentary-fund
 
 ## Catapult Film Fund
@@ -53,7 +53,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed; upcoming deadlines not yet posted
 - Official URL: https://catapultfilmfund.org/
-- Last verified: 2026-08-31
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/catapult-film-fund
 
 ## Chicken & Egg Pictures
@@ -62,7 +62,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed; R&D tentatively reopens Dec 2026; (Egg)celerator next cycle early 2027
 - Official URL: https://chickeneggfilms.org/
-- Last verified: 2026-08-31
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/chicken-and-egg-pictures
 
 ## Ellis-Beauregard Foundation
@@ -71,7 +71,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed — 2026 applications closed April 16; next cycle not announced
 - Official URL: https://www.ellis-beauregardfoundation.org/documentaryfilmaward/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/ellis-beauregard-foundation
 
 ## Ford Foundation JustFilms
@@ -80,7 +80,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed; no reopening date posted
 - Official URL: https://www.fordfoundation.org/work/our-grants/justfilms/
-- Last verified: 2026-08-31
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/ford-foundation-justfilms
 
 ## Impact Partners
@@ -89,7 +89,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: upcoming
 - Deadline: Opens September 21, 2026
 - Official URL: https://impactpartnersfilm.com/submit/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/impact-partners
 
 ## Perspective Fund
@@ -98,7 +98,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: rolling
 - Deadline: Rolling — no submission deadline
 - Official URL: https://www.perspectivefund.org/documentaries
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/perspective-fund
 
 ## Southern Documentary Fund Production Grant
@@ -107,7 +107,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed — next grant cycle not announced
 - Official URL: https://southerndocumentaryfund.org/programs/filmmaking-grants-2/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/southern-documentary-fund-production-grant
 
 ## Sundance Institute Documentary Fund
@@ -116,7 +116,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed; next open call announced early 2027
 - Official URL: https://www.sundance.org/programs/documentary-film/
-- Last verified: 2026-08-31
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/sundance-institute-documentary-fund
 
 ## Vision Maker Media Biomimicry and Indigenous Knowledge Fund
@@ -125,7 +125,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: open
 - Deadline: Open — September 30, 2026
 - Official URL: https://visionmakermedia.org/fund-your-film/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/vision-maker-media-biomimicry-and-indigenous-knowledge-fund
 
 ## ITVS Open Call
@@ -134,7 +134,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: closed
 - Deadline: Closed; no next deadline posted
 - Official URL: https://itvs.org/funds/open-call/
-- Last verified: 2026-08-31
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/itvs-open-call
 
 ## IDA Grants Directory
@@ -143,7 +143,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: active
 - Deadline: Directory updated weekly; not an application window
 - Official URL: https://www.documentary.org/grants-directory
-- Last verified: 2026-08-31
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/ida-grants-directory
 
 ## The D-Word
@@ -170,7 +170,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Status: open
 - Deadline: Open — September 11, 2026 at 11:59 p.m. ET
 - Official URL: https://workingfilms.org/impactkickstart/
-- Last verified: 2026-08-22
+- Last verified: 2026-09-07
 - Documentary411 URL: https://documentary411.com/resources/working-films
 
 ## Austin Film Society
@@ -535,7 +535,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Category: Documentary Festivals
 - Status: active
 - Deadline: November 4–11, 2026
-- Official URL: https://www.neworleansfilmfestival.org
+- Official URL: https://neworleansfilmsociety.org/attend/
 - Documentary411 URL: https://documentary411.com/resources/new-orleans-film-festival
 
 ## New York Film Festival
@@ -599,7 +599,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Category: Documentary Festivals
 - Status: active
 - Deadline: May 28 – June 7, 2026
-- Official URL: https://sfindie.com/festivals/sf-docfest
+- Official URL: https://filmfreeway.com/SanFranciscoDocumentaryFestival
 - Documentary411 URL: https://documentary411.com/resources/sf-docfest
 
 ## Sheffield DocFest
@@ -631,7 +631,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Category: Documentary Festivals
 - Status: active
 - Deadline: March 13–22, 2026
-- Official URL: https://www.sxsw.com/festivals/film
+- Official URL: https://sxsw.com/film-tv-festival/
 - Documentary411 URL: https://documentary411.com/resources/sxsw
 
 ## Telluride Film Festival
@@ -939,7 +939,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Category: Equipment / Gear
 - Status: active
 - Deadline: Rolling
-- Official URL: https://www.usa.canon.com/cameras/cinema-eos
+- Official URL: https://www.usa.canon.com/pro/cameras/cinema-cameras
 - Documentary411 URL: https://documentary411.com/resources/canon-cinema-eos
 
 ## Canon EOS C70
@@ -995,7 +995,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Category: Equipment / Gear
 - Status: active
 - Deadline: Rolling
-- Official URL: https://store.sony.com/products/sony-a7s-iii
+- Official URL: https://electronics.sony.com/imaging/interchangeable-lens-cameras/all-interchangeable-lens-cameras/p/ilce7sm3-b
 - Documentary411 URL: https://documentary411.com/resources/sony-a7s-iii
 
 ## Sony FX3 Full-Frame
@@ -1003,7 +1003,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Category: Equipment / Gear
 - Status: active
 - Deadline: Rolling
-- Official URL: https://store.sony.com/products/sony-fx3
+- Official URL: https://electronics.sony.com/imaging/interchangeable-lens-cameras/all-interchangeable-lens-cameras/p/ilmefx3a
 - Documentary411 URL: https://documentary411.com/resources/sony-fx3-full-frame
 
 ## Sony Official Store
@@ -1011,7 +1011,7 @@ Generated from resources.json. Fields below are only name, category, status, dea
 - Category: Equipment / Gear
 - Status: active
 - Deadline: Rolling
-- Official URL: https://store.sony.com/collections/cameras
+- Official URL: https://electronics.sony.com/imaging/interchangeable-lens-cameras/c/all-interchangeable-lens-cameras
 - Documentary411 URL: https://documentary411.com/resources/sony-official-store
 
 ## Backstage / Mandy Network

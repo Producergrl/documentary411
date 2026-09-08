@@ -328,3 +328,57 @@
   for = "/*.json"
   [headers.values]
     Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[redirects]]
+  from = "/downloads/festival-strategy-90-days-fs90k4t7.pdf"
+  to = "/festival-strategy"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/module-1-funding-map.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/module-2-positioning.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/module-3-target-list.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/module-4-sponsor-deck.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/module-5-outreach.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/module-6-call-menu-number.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/module-7-paper.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloads/brand-funded-documentary/start-here.pdf"
+  to = "/funding-lab"
+  status = 302
+  force = true

@@ -20,7 +20,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "unknown",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Feature projects may apply at development, production, or post-production; short and medium-length projects are eligible at production or post-production.",
     "slug": "afac-documentary-film-program"
   },
@@ -45,7 +45,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "unknown",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "The foundation accepts applications each year through August 15 and announces selections by December 31.",
     "slug": "alter-cine-foundation-documentary-film-grants"
   },
@@ -70,7 +70,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Bertha Foundation states that it does not accept unsolicited proposals. Documentary411 does not label this fund as publicly open.",
     "slug": "bertha-film-fund"
   },
@@ -95,7 +95,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "open",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Five projects will enter the talent-development program; one will receive the 2027 PitchBLACK Award. Funding is structured as a public-media licensing agreement, not a grant.",
     "homepage": {
       "title": "Black Public Media Open Call",
@@ -134,7 +134,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Funding ranges from $10,000–$25,000 for research and development to $50,000–$100,000 for production or post-production.",
     "slug": "caam-building-bridges-documentary-fund"
   },
@@ -159,7 +159,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Catapult states that it is not accepting applications at this time; its 2026 Research and Development grant rounds are closed.",
     "homepage": {
       "title": "Catapult Film Fund",
@@ -197,7 +197,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Current public grant calls are closed. The 2026 R&D Grant closed Feb 4; the 2027 (Egg)celerator Lab closed Apr 29; Project: Hatched is invite-only.",
     "homepage": {
       "title": "Chicken & Egg Pictures",
@@ -235,7 +235,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "unknown",
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "The 2026 application closed April 16. The selected team also receives a Points North editing retreat.",
     "slug": "ellis-beauregard-foundation"
   },
@@ -260,7 +260,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Ford currently states that documentary film production grant submissions are closed.",
     "homepage": {
       "title": "Ford Foundation JustFilms",
@@ -298,7 +298,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "unknown",
     "status": "upcoming",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "LOI submissions are temporarily closed and reopen September 21. When open, submissions are reviewed on a rolling basis.",
     "homepage": {
       "title": "Impact Partners",
@@ -336,7 +336,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "rolling",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "The official FAQ confirms that inquiry forms are reviewed on a rolling basis with no submission deadline.",
     "homepage": {
       "title": "Perspective Fund",
@@ -375,7 +375,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Applicants must live in or have deep roots in one of twelve eligible Southern states; student projects are not eligible.",
     "slug": "southern-documentary-fund-production-grant"
   },
@@ -400,7 +400,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Official Sundance page confirms the Documentary Fund is not accepting applications; next open call will be announced in early 2027.",
     "homepage": {
       "title": "Sundance Documentary Fund",
@@ -438,7 +438,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "open",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "Four filmmakers will be selected. Rough cuts are due in February 2027 and final films are due June 14, 2027.",
     "homepage": {
       "title": "Vision Maker Media Biomimicry Fund",
@@ -477,7 +477,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "closed",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "ITVS currently labels Open Call as not accepting applications. No new application deadline is posted on the official Open Call page.",
     "slug": "itvs-open-call"
   },
@@ -502,7 +502,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "active",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "IDA says the public directory displays active third-party opportunities only. It is a funding research resource, not itself an open grant.",
     "homepage": {
       "title": "IDA Grants & Funding Programs",
@@ -590,7 +590,7 @@ window.D411_RESOURCES = [
     "socialImpactFriendly": "yes",
     "underrepresentedFilmmakerFriendly": "yes",
     "status": "open",
-    "lastVerified": "2026-09-06",
+    "lastVerified": "2026-09-07",
     "notes": "The current Impact Kickstart application is open through September 11, 2026 and includes a year-long peer cohort.",
     "homepage": {
       "title": "Working Films Impact Kickstart",
