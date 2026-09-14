@@ -467,7 +467,15 @@ iframe.embed{border:0;display:block}
   .cc-grand{grid-column:1/-1!important}
 }
 
-.hero-trust{max-width:560px;margin:0 auto 36px;font-size:13.5px;line-height:1.65;color:var(--text2);font-weight:300}
+.hero-trust{
+  max-width:465px;
+  margin:0 0 28px;
+  font-size:13.5px;
+  line-height:1.65;
+  color:var(--text2);
+  font-weight:300;
+}
 .hero-trust a{color:#c4550f;font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .hero-trust a:hover{color:#9a3412}
-@media(max-width:640px){.hero-trust{max-width:100%;text-align:left;margin-bottom:28px}}
+@media(max-width:1050px){.hero-trust{max-width:430px}}
+@media(max-width:800px){.hero-trust{max-width:100%;text-align:left}}
