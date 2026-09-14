@@ -49,8 +49,13 @@ function normalizeFonts(html) {
 const homeFile = path.join(__dirname, 'index.html');
 let html = fs.readFileSync(homeFile, 'utf8');
 
+html = html.replace(
+  /<link\\b[^>]*href=["']\\/redesign\\.css(?:\\?[^"']*)?["'][^>]*>/gi,
+  '<link rel="stylesheet" href="/redesign.css?v=20260914-1">'
+);
+
 const homeStyles = [
-  '<link rel="stylesheet" href="/redesign.css">',
+  '<link rel="stylesheet" href="/redesign.css?v=20260914-1">',
   '<link rel="stylesheet" href="/redesign-v2.css">',
   '<link rel="stylesheet" href="/directory-upgrades.css">'
 ];
